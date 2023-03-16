@@ -1,0 +1,253 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-auto bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        <!-- Loader -->
+        <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+            <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+        </div>
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">บันทึกการทำงาน</div>
+        <!-- Actions -->
+        <!-- <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+
+       
+            <a (click)="New()" class="ml-4" mat-flat-button [color]="'primary'">
+                <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                <span class="ml-2 mr-1">บันทึกรายละเอียดการติดต่อ</span>
+            </a>
+
+        </div> -->
+    </div>
+
+
+    <!-- Main -->
+    <div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
+
+        <div class="px-6 sm:px-10 grid md:grid-cols-2 xl:grid-cols-4 gap-6 mt-6">
+
+            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                <div
+                    class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
+                    <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </div>
+                <div>
+                    <span class="block text-2xl font-bold">{{ totalCustomerTelesale }}</span>
+                    <span class="block text-gray-500">งานทั้งหมด</span>
+                </div>
+            </div>
+
+            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                <div
+                    class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
+                    <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                </div>
+                <div>
+                    <span class="block text-2xl font-bold">10</span>
+                    <span class="block text-gray-500">ติตต่อสำเร็จ</span>
+                </div>
+            </div>
+
+
+            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                <div
+                    class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-red-600 bg-red-100 rounded-full mr-6">
+                    <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+                    </svg>
+                </div>
+                <div>
+                    <span class="inline-block text-2xl font-bold">5</span>
+                    <!-- <span class="inline-block text-xl text-gray-500 font-semibold">บาท</span> -->
+                    <span class="block text-gray-500">ติตต่อไม่สำเร็จ</span>
+                </div>
+            </div>
+
+
+            <!-- <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                <div
+                    class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
+                    <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                </div>
+                <div>
+                    <span class="block text-2xl font-bold">70</span>
+                    <span class="block text-gray-500">สรุปยอดโทรทั้งหมด</span>
+                </div>
+            </div> -->
+        </div>
+
+        <div class="flex flex-col p-3 sm:p-10">
+            <div class="overflow-auto  bg-white shadow sm:rounded-lg">
+                <!-- Products list -->
+                <div class="flex flex-auto p-5 sm:items-center sm:justify-between border-b">
+                    <div class="text-2xl font-extrabold ">ข้อมูลติดต่อลูกค้า</div>
+
+                    <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+
+
+                    </div>
+                </div>
+
+                <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll">
+                    <mat-tab-group animationDuration="0ms" coler="'primary'">
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                ข้อมูลติดต่อลูกค้า
+                                <div matBadge="{{totalCustomerTelesale}}" matBadgePosition="before" class="job-badge"></div>
+                            </ng-template>
+                            <!-- <a (click)="onTelCustomer()" class="ml-4" mat-flat-button [color]="'primary'">
+                                <mat-icon [svgIcon]="'phone'"></mat-icon>
+                                <span class="ml-2 mr-1">โทรหาลูกค้า</span>
+                            </a> -->
+                            <div class="table-responsive overflow-auto">
+                                <table datatable [dtOptions]="dtOptions"
+                                    class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                                    style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>จัดการ</th>
+                                            <th>บันทึกไฟล์</th>
+                                            <th>ลำดับ</th>
+                                            <th>ชื่อ-สกุล</th>
+                                            <th>อีเมล</th>
+                                            <!-- <th>เบอร์</th> -->
+                                            <!-- <th>รายละเอียดสินค้า</th> -->
+                                            <th>สถานะ</th>
+                                            <th>โทรติดต่อโดย</th>
+                                            <th>โทรติดต่อวันที่</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="dataRow?.length != 0">
+                                        <tr *ngFor="let item of dataRow; let i = index">
+                                            <td style="min-width: 60px;">
+                                                <button *ngIf="item.call_status == 'true'" mat-icon-button (click)="onTelCustomer(item)" title="เปลี่ยนสถานะติดต่อ" disabled>
+                                                    <mat-icon>phone</mat-icon>
+                                                </button>
+
+                                                <button *ngIf="item.call_status == 'false'" mat-icon-button color="warn" (click)="onTelCustomer(item)" title="เปลี่ยนสถานะติดต่อ">
+                                                    <mat-icon>phone</mat-icon>
+                                                </button>
+                                            </td>
+                                            <td style="min-width: 80px;">
+                                                <a mat-icon-button (click)="New(item.id)" class="" title="เพิ่มไฟล์เสียง">
+                                                    <mat-icon [svgIcon]="'heroicons_outline:music-note'"></mat-icon>
+                                                </a>
+                                            </td>
+                                            <td style="min-width: 80px;">{{ pages.begin + (i + 1) }}</td>
+                                            <td style="min-width: 200px;">{{ item.name }}</td>
+                                            <td style="min-width: 150px;">{{ item.email }}</td>
+                                            <!-- <td style="min-width: 150px;">{{ item.phone }}</td> -->
+                                            <!-- <td style="min-width: 150px;">{{ item.user_create ?
+                                                item.user_create.first_name : 'No data' }} {{ item.user_create ? item.user_create.last_name: '' }}
+                                            </td> -->
+                                            <td style="min-width: 120px;">
+                                                <div *ngIf="item.status === 1">
+                                                    <!-- เปิดการใช้งาน -->
+                                                    <span
+                                                        class="bg-green-100 text-green-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">เปิดการใช้งาน</span>
+                                                </div>
+                                                <div *ngIf="item.status === 0">
+                                                    <!-- ปิดการใช้งาน -->
+                                                    <span
+                                                        class="bg-red-100 text-red-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ปิดการใช้งาน</span>
+                                                </div>
+                                            </td>
+                                            <td style="min-width: 150px;">{{ item.call_by ? item.call_name.first_name : 'ยังไม่ได้โทร' }}</td>
+
+                                            <td style="min-width: 120px;">{{ item.call_date ? (item.call_date | date: 'dd/MM/yyyy ') : '' }}</td>
+                               
+                                        </tr>
+                                    </tbody>
+                                    <tbody *ngIf="dataRow?.length == 0">
+                                        <tr>
+                                            <td colspan="6" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </mat-tab>
+
+
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                ข้อมูลบันทึกไฟล์/บันทึกเสียง
+                            </ng-template>
+                            <div class="table-responsive overflow-auto">
+                                <table datatable [dtOptions]="dtOptionsList"
+                                    class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                                    style="width: 100%">
+                                    <thead
+                                        class="text-lg text-gray-700 uppercase bg-white-100 dark:bg-gray-700 dark:text-gray-400 text-center">
+                                        <tr>
+                                            <th>จัดการ</th>
+                                            <th>ไฟล์</th>
+                                            <th>ลำดับ</th>
+                                            <th>ชื่อ-สกุล</th>
+                                            <th>เบอร์โทร</th>
+                                            <th>รายละเอียด</th>
+                                            <th>สถานะ</th>
+                                            <th>สร้างโดย</th>
+                                            <th>สร้างวันที่</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="dataRow?.length != 0">
+                                        <tr *ngFor="let item of dataRow2; let i = index"
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md py-15">
+                                            <td style="min-width: 80px;">
+                                                <!-- <button mat-icon-button (click)="Edit(item.id)">
+                                                    <mat-icon>edit</mat-icon>
+                                                </button> -->
+                                                <button mat-icon-button (click)="Delete(item.id)">
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                            </td>
+                                            <td style="width: 60px; min-width: 60px;" *ngIf="!item.path"> </td>
+                                            <td *ngIf="item.path" style="min-width: 100px">
+                                                <a href="https://global-rich.dev-asha.com/{{item.path}}" target="_blank" color="primary" 
+                                                 mat-stroked-button type="button" title="คลิกโหลด/ดู">
+                                                 <mat-icon>insert_drive_file</mat-icon>&nbsp;File</a>
+                                            </td>
+                                            <td style="min-width: 80px;">{{ (i + 1) }}</td>
+                                            <td style="min-width: 150px;">{{ item.Customer[0].name }}</td>
+                                            <td style="min-width: 150px">{{ item.Customer[0].phone }}</td>
+                                            <td style="min-width: 250px">{{ item.remark }}</td>
+                                            <td style="min-width: 150px">
+                                                <span *ngIf="item.Customer[0].call_date" class="bg-green-100 text-green-800 text-md font-extrabold mr-2 
+                                                px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">โทรสำเร็จ</span>
+
+                                                <span *ngIf="!item.Customer[0].call_date" class="bg-red-100 text-red-800 text-md font-extrabold mr-2 
+                                                px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ยังไม่ได้โทร</span>
+                                            </td>
+                                            <td style="min-width: 120px;">{{ item.create_by ? item.create_by: '' }}</td>
+                                            <td style="min-width: 120px;">{{ item.created_at ? (item.created_at | date: 'dd/MM/yyyy hh:mm') : '' }}</td>
+     
+                                        </tr>
+                                    </tbody>
+                                    <tbody *ngIf="dataRow?.length == 0">
+                                        <tr>
+                                            <td colspan="7" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </mat-tab>
+
+                    </mat-tab-group>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

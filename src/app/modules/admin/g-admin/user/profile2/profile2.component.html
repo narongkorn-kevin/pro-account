@@ -1,0 +1,334 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <div class="flex">
+                    <div class="w-full">
+                        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                            โปรไฟล์ผู้ใช้งาน
+                        </h2>
+                    </div>
+                    <!-- <div class="w-full">
+                        <h2
+                            class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate text-right">
+                            เงินเดือน
+                        </h2>
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500 text-right">แผนก : Admin</p>
+                        <p class="mt-1 max-w-2xl text-sm text-gray-500 text-right">ตำแหน่ง: </p>
+                    </div> -->
+                    <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="CreateItem()">
+                        <mat-icon svgIcon="heroicons_solid:menu"></mat-icon>
+                        <mat-icon style="color: white!important;"></mat-icon>
+                        จัดการโปรไฟล์
+                    </button>
+
+                    <a href="user/profile3" class="ml-4" mat-flat-button [color]="'primary'">
+                        <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                        <span class="ml-2 mr-1">ตั้งค่ารายละเอียด</span>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex-auto p-3 sm:p-10">
+        <!-- This example requires Tailwind CSS v2.0+ -->
+        <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+
+            <div class="flex">
+                <div class="w-3/4">
+                    <div class="px-4 sm:px-6">
+                        <h3 class="text-4xl font-extrabold leading-6 text-gray-900">นาย สมคิด ทองดำ</h3>
+                        <p class="mt-1 max-w-2xl text-xl text-gray-500">ตำแหน่ง: Admin</p>
+                    </div>
+                </div>
+
+
+                <div class="w-1/4">
+                    <div class="flex justify-end">
+
+                    <div class="px-4 sm:px-6 text-right">
+                        <p class="mt-1 max-w-2xl text-xl text-gray-500">เงินเดือน</p>
+                        <h3 class="text-4xl font-extrabold leading-6 text-gray-900">20,000</h3>
+                    </div>
+
+                    <!-- <div class="px-4 sm:px-6 text-right">
+                        <p class="mt-1 max-w-2xl text-lg text-gray-500">ยอดจ่ายสุทธิ</p>
+                        <h3 class="text-4xl font-extrabold leading-6 text-red-500">19,000</h3>
+                    </div>
+                -->
+                 </div>
+
+                </div>
+            </div>
+
+            <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+                <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                    <div class="flex w-1/4">
+                        <button class="px-3 ml-3 mat-primary bottom-10 right-5" mat-flat-button (click)="CreateItem()">
+                            <mat-icon svgIcon="heroicons_outline:plus"></mat-icon>
+                            ดูเพิ่ม
+                        </button>
+                    </div>
+
+                    <div
+                        class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
+                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-10 w-10">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+
+                    <div>
+                        <span class="inline-block text-7xl font-bold">10</span>
+                        <span class="inline-block text-xl text-gray-500 font-semibold">(วัน)</span>
+                        <span class="block text-gray-500">ลาทั้งหมด</span>
+                    </div>
+
+                </div>
+
+                <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                        <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
+                            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                        </div>
+                     <div>
+                            <span class="inline-block text-7xl font-bold text-red-600">1</span>
+                            <span class="inline-block text-xl text-gray-500 font-semibold">(วัน)</span>
+                            <span class="block text-gray-500">ขาดงาน</span>
+                        </div>
+                </div>
+                <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                    <div
+                        class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-red-600 bg-red-100 rounded-full mr-6">
+                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="inline-block text-7xl font-bold text-red-600">2</span>
+                        <span class="inline-block text-xl text-gray-500 font-semibold">(วัน)</span>
+                        <span class="block text-gray-500">มาสาย</span>
+                    </div>
+                </div>
+                <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                    <div
+                        class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
+                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="inline-block text-7xl font-bold text-red-600">2</span>
+                        <span class="inline-block text-xl text-gray-500 font-semibold"> (ครั้ง)</span>
+                        <span class="block text-gray-500">ขนส่งผิดพลาด</span>
+                        <!-- <span class="block text-gray-500"></span>                         -->
+                    </div>
+                </div>
+            </section>
+
+            <form class="flex flex-col mt-3 p-8 pb-4 bg-card shadow overflow-hidden ng-valid" [formGroup]="formData">
+                <div class="flex">
+                    <div class="w-full">
+                        <div class="border-t border-gray-200">
+                            <dl>
+                                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ชื่อพนักงาน</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <input
+                                            class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                            placeholder="สมคิด ทองดำ" formControlName="name" />
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4  sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">เบอร์โทร</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <input
+                                            class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                            placeholder="0881133345" formControlName="brand" />
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">บัตรประชาชน/หนังสือเดือนทาง</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <input
+                                            class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                            placeholder="1334556743234" formControlName="unit_cost" />
+                                    </dd>
+                                </div>
+
+                                <div class="bg-white-50 px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">Username</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <input
+                                            class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                            placeholder="Username" formControlName="unit_cost" />
+                                    </dd>
+                                </div>
+
+                                <div class="bg-white-50 px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">Password</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <input
+                                            class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                            placeholder="Password" formControlName="unit_cost" />
+                                    </dd>
+                                </div>
+                                <!-- <div class="bg-white px-4  sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">หมวดหมู่สินค้า</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full pr-2">
+                                            <mat-select [formControlName]="'item_type_id'">
+                                                <mat-option [value]="''">
+                                                    กรุณาเลือกหมวดหมู่สินค้า
+                                                </mat-option>
+                                                <mat-option *ngFor="let item of itemtypeData" [value]="item.id">
+                                                    {{item.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </dd>
+                                </div> -->
+
+                                <!-- <div class="bg-white px-4  sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">จุดเก็บหมู่สินค้า</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full pr-2">
+                                            <mat-select [formControlName]="'location_id'">
+                                                <mat-option [value]="''">
+                                                    กรุณาเลือกจุดเก็บสินค้า
+                                                </mat-option>
+                                                <mat-option *ngFor="let loc of locationData" [value]="loc.id">
+                                                    {{loc.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </dd>
+                                </div> -->
+
+                                <!-- <div class="bg-white px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ซัพพลายเออร์</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full pr-2">
+                                            <mat-select [formControlName]="'vendor_id'">
+                                                <mat-option [value]="''">
+                                                    กรุณาเลือกซัพพลายเออร์
+                                                </mat-option>
+                                                <mat-option *ngFor="let ven of vendorData" [value]="ven.id">
+                                                    {{ven.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </dd>
+                                </div> -->
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="w-full">
+
+
+                        <div class="border-t border-gray-200">
+                            <dl>
+
+                                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ติดต่อสอบถาม</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <textarea matInput rows="4" [formControlName]="'description'"
+                                                placeholder="รายละเอียด"></textarea>
+                                        </mat-form-field>
+
+                                        <button class="px-6 ml-3 mat-primary " mat-flat-button (click)="CreateItem()">
+                                            <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                                            ยืนยัน
+                                        </button>
+
+                                    </dd>
+                                </div>
+
+                                <!-- <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"> -->
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ตาราง การขออนุญาตลาหยุด</dt>
+
+
+                                    <div class="p-4 flex-grow justify-center">
+
+                                        <tr>
+                                            <th class="py-3 px-6">
+                                                วันที่แจ้งความประสงค์
+                                            </th>
+                                            <th class="py-3 px-6">
+                                                ลาในวันที่
+                                            </th>
+                                            <th class="py-3 px-6">
+                                                สถานะ
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th class="py-3 px-6">
+                                                1/1/65
+                                            </th>
+                                            <th class="py-3 px-6">
+                                                20/1/65
+                                            </th>
+                                            <th class="py-3 px-6">
+                                                อนุมัติ
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th class="py-3 px-6">
+                                                4/1/65
+                                            </th>
+                                            <th class="py-3 px-6">
+                                                30/1/65
+                                            </th>
+                                            <th class="py-3 px-6">
+                                                ไม่อนุมัติ
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th class="py-3 px-6">
+                                                5/1/65
+                                            </th>
+                                            <th class="py-3 px-6">
+                                                24/2/65
+                                            </th>
+                                            <th class="py-3 px-6">
+                                                รอตรวจสอบ
+                                            </th>
+                                        </tr>
+
+
+                                    </div>
+
+                                <!-- </div> -->
+
+                            </dl>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="flex items-center justify-end w-full border-t px-8 py-4">
+        <div class="flex items-center justify-end">
+            <a class="ml-4" mat-flat-button href="item/list">
+                <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                ยกเลิก
+            </a>
+            <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="CreateItem()">
+                <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                ยืนยัน
+            </button>
+        </div>
+    </div>
+</div>

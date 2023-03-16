@@ -1,0 +1,390 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+
+    <div
+        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        <div class="text-3xl font-extrabold tracking-tight">โปรไฟล์ผู้ใช้งาน</div>
+        <div>
+            <button mat-stroked-button [matMenuTriggerFor]="menu"
+                class="mat-focus-indicator px-6 ml-3 mat-primary mat-flat-button mat-button-base py-2"
+                style="width: 85%;">
+                <mat-icon style="color: white!important;">menu</mat-icon> &nbsp;&nbsp;
+                <span>จัดการโปรไฟล์</span>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item appAddSpinnerOnClick (click)="edit(this.dataRow.id)">
+                    <mat-icon>edit</mat-icon>
+                    <span>แก้ไขโปรไฟล์</span>
+                </button>
+                <button mat-menu-item appAddSpinnerOnClick (click)="ChangePwd(this.dataRow.id)">
+                    <mat-icon>vpn_key</mat-icon>
+                    <span>เปลี่ยนรหัสผ่าน</span>
+                </button>
+            </mat-menu>
+
+        </div>
+    </div>
+
+    <div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
+        <div class="flex flex-col p-3 sm:px-10 sm:py-8">
+            <div class="overflow-auto  bg-white shadow sm:rounded-lg">
+                <div class="flex">
+                    <div class="my-4 mx-4">
+                        <img class="w-24 h-24 rounded-full" [src]=url_pro alt="">
+                    </div>
+                    <div class="w-3/6 mt-4">
+                        <div class="px-4 sm:px-6">
+                            <h3 class="text-4xl font-extrabold leading-6 text-gray-900">
+                                <div>{{this.dataRow.first_name}} {{this.dataRow.last_name}}</div>
+                            </h3>
+
+                            <p class="mt-1 max-w-2xl text-xl text-gray-500">ตำแหน่ง: <span>{{this.Pos}}</span></p>
+                        </div>
+                    </div>
+
+
+                    <div class="w-2/6 mt-4">
+                        <div class="flex justify-end">
+
+                            <div class="px-4 sm:px-6 text-right">
+                                <p class="mt-1 max-w-2xl text-lg text-gray-500">เงินเดือน</p>
+                                <h3 class="mt-1 text-4xl font-extrabold leading-6 text-gray-900">
+                                    {{this.dataRow.salary}}</h3>
+                            </div>
+
+                            <div class="px-4 sm:px-6 text-right">
+                                <p class="mt-1 max-w-2xl text-lg text-gray-500">ยอดจ่ายสุทธิ</p>
+                                <h3 class="mt-1 text-4xl font-extrabold leading-6 text-green-500">{{this.dataRow.total}}
+                                </h3>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6 mt-6">
+
+                <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                    <div
+                        class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
+                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-10 w-10">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="inline-block text-7xl font-bold">10</span>
+                        <span class="inline-block text-xl text-gray-500 font-semibold">(วัน)</span>
+                        <span class="block text-gray-500">ลาทั้งหมด</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                    <div
+                        class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
+                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="inline-block text-7xl font-bold text-red-600">1</span>
+                        <span class="inline-block text-xl text-gray-500 font-semibold">(วัน)</span>
+                        <span class="block text-gray-500">ขาดงาน</span>
+                    </div>
+                </div>
+                <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                    <div
+                        class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-red-600 bg-red-100 rounded-full mr-6">
+                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="inline-block text-7xl font-bold text-red-600">2</span>
+                        <span class="inline-block text-xl text-gray-500 font-semibold">(วัน)</span>
+                        <span class="block text-gray-500">มาสาย</span>
+                    </div>
+                </div>
+                <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                    <div
+                        class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
+                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="inline-block text-7xl font-bold text-red-600">2</span>
+                        <span class="inline-block text-xl text-gray-500 font-semibold"> (ครั้ง)</span>
+                        <span class="block text-gray-500">ขนส่งผิดพลาด</span>
+                        <!-- <span class="block text-gray-500"></span>                         -->
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+
+
+            <div class="flex mt-6">
+                <div class="w-full">
+                    <div class="flex flex-col sm:flex-row items-start justify-between">
+                        <div
+                            class="text-3xl  tracking-tight leading-6 truncate font-extrabold  text-decoration-line: underline">
+                            รายละเอียดการทำงาน</div>
+                        <div class="mt-3 sm:mt-0 sm:ml-2">
+                            <a (click)="openLeave()" class="ml-4" mat-flat-button [color]="'primary'">
+                                <!-- <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon> -->
+                                <span class="ml-2 mr-1">คลิกเพื่อแจ้งวันลา</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll ">
+                        <mat-tab-group animationDuration="0ms">
+                            <mat-tab>
+                                <ng-template mat-tab-label>
+                                    <div class="text-xl font-extrabold ">ข้อมูลการลา</div>
+                                </ng-template>
+
+                                <div class="overflow-auto  bg-white shadow sm:rounded-lg">
+
+                                                                  
+                                <div class="border-b border-gray-300 rounded-lg">
+                                    <div class="overflow-x-auto relative mt-4">
+                                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
+                                            <thead
+                                                class="text-base text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+                                                <tr>
+                                                    <th scope="col" class="py-3 px-6">ตั้งแต่วันที่</th>
+                                                    <th scope="col" class="py-3 px-6">ถึงวันที่</th>
+                                                    <th scope="col" class="py-3 px-6">ประเภทการลา</th>
+                                                    <th scope="col" class="py-3 px-6">รายละเอียด</th>
+                                                    <th scope="col" class="py-3 px-6">จำนวนวัน</th>
+                                                    <th scope="col" class="py-3 px-6">สถานะ</th>
+                                                    <th scope="col" class="py-3 px-6">จัดการ</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                    <td class="py-4 px-6">18/1/2023</td>
+                                                    <td class="py-4 px-6">19/1/2023</td>
+                                                    <td class="py-4 px-6">ลาป่วย</td>
+                                                    <td class="py-4 px-6">ปวดท้อง</td>
+                                                    <td class="py-4 px-6">1 วัน</td>
+                                                    <td class="py-4 px-6">อนุมัติ</td>
+                                                    <td class="py-4 px-6"><button
+                                                            mat-button><mat-icon>visibility</mat-icon></button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                </div>
+
+                            </mat-tab>
+                            <!-- ------------------------------------------------------------------------------------ -->
+
+
+                            <mat-tab>
+                                <ng-template mat-tab-label>
+                                    <div class="text-xl font-extrabold ">บันทึกการทำงาน</div>
+                                </ng-template>
+
+                                <div class="overflow-auto  bg-white shadow sm:rounded-lg">
+
+                                    <div class="flex flex-auto border-b grid sm:gap-4 sm:grid-cols-4">
+
+                                        <div class="col-auto px-6 sm:px-5 sm:pt-5">
+                                            <mat-label class="text-2xl font-bold ">เลือกปี</mat-label>
+                                            <mat-form-field class="w-full">
+                                                <mat-select [formControlName]="'year'">
+                                                    <mat-option value="2566">2566 </mat-option>
+                                                    <mat-option value="2567">2567</mat-option>
+                                                    <mat-option value="2568">2568</mat-option>
+                                                    <mat-option value="2569">2569 </mat-option>
+                                                    <mat-option value="2570">2570</mat-option>
+                                                    <mat-option value="2571">2571</mat-option>
+                                                    <mat-option value="2572">2572</mat-option>
+                                                    <mat-option value="2573">2573</mat-option>
+                                                    <mat-option value="2574">2574</mat-option>
+                                                    <mat-option value="2575">2575</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-auto px-6 sm:px-5 sm:pt-5">
+                                            <mat-label class="text-2xl font-bold ">เลือกเดือน</mat-label>
+                                            <mat-form-field class="w-full">
+                                                <mat-select [formControlName]="'month'">
+                                                    <mat-option value="01">มกราคม </mat-option>
+                                                    <mat-option value="02">กุมภาพันธ์</mat-option>
+                                                    <mat-option value="03">มีนาคม</mat-option>
+                                                    <mat-option value="04">เมษายน</mat-option>
+                                                    <mat-option value="05">พฤษภาคม</mat-option>
+                                                    <mat-option value="06">มิถุนายน</mat-option>
+                                                    <mat-option value="07">กรกฏาคม</mat-option>
+                                                    <mat-option value="08">สิงหาคม</mat-option>
+                                                    <mat-option value="09">กันยายน</mat-option>
+                                                    <mat-option value="10">ตุลาคม</mat-option>
+                                                    <mat-option value="11">พฤศจิกายน</mat-option>
+                                                    <mat-option value="12">ธันวาคม</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-auto py-2 px-6 sm:px-0 sm:pt-12">
+                                            <mat-label></mat-label>
+                                            <button class="mx-2" mat-flat-button (click)="resetForm()">
+                                                <mat-icon [svgIcon]="'heroicons_outline:search'"></mat-icon>
+                                                <span class="ml-2 mr-1">ค้นหา</span>
+                                            </button>
+                                            <button class="" mat-flat-button (click)="clearForm()">
+                                                <mat-icon [svgIcon]="'heroicons_outline:refresh'"></mat-icon>
+                                                <span class="ml-2 mr-1"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex">
+                                        <div class="w-full mt-4">
+                                            <div class="px-4 sm:px-6">
+                                                <table datatable [dtOptions]="dtOptions"
+                                                    class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                                    <thead
+                                                        class="text-base text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+                                                        <tr>
+                                                            <th scope="col" class="py-3 px-6">ลำดับ</th>
+                                                            <th scope="col" class="py-3 px-6">เครื่องลงเวลา</th>
+                                                            <th scope="col" class="py-3 px-6">วันที่</th>
+                                                            <th scope="col" class="py-3 px-6">เวลาเข้า</th>
+                                                            <th scope="col" class="py-3 px-6">เวลาออก</th>
+                                                            <!-- <th scope="col" class="py-3 px-6">จัดการ</th>                                                        -->
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody *ngIf="dataRow1?.length != 0">
+                                                        <tr *ngFor="let item of dataRow1; let i = index"
+                                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md">
+                                                            <td class="py-4 px-6">{{ pages.begin + (i + 1) }}</td>
+                                                            <td class="py-4 px-6">{{ item.machine }}</td>
+                                                            <td class="py-4 px-6">{{ item.date }}</td>
+                                                            <td class="py-4 px-6">{{ item.time_start.time }}น.</td>
+                                                            <td class="py-4 px-6">{{ item.time_end.time }}น.</td>
+                                                            <!-- <td class="py-4 px-6"><button mat-button><mat-icon>visibility</mat-icon></button></td> -->
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </mat-tab>
+
+                            <!-- ------------------------------------------------------------------------------------ -->
+
+
+                            <mat-tab>
+                                <ng-template mat-tab-label>
+                                    <div class="text-xl font-extrabold mr">รายได้-ค่าใช้จ่าย</div>
+                                </ng-template>
+
+                                <div class="overflow-auto  bg-white shadow sm:rounded-lg">
+
+                                    <!-- ------------------------------------------------------------------------------------ -->
+                                    <div
+                                        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+                                        <div
+                                            class="text-3xl font-extrabold tracking-tight text-green-700 text-3xl text-decoration-line: underline">
+                                            รายได้เพิ่ม</div>
+                                        <div>
+                                            <div
+                                                class="text-3xl font-extrabold tracking-tight text-red-700 text-3xl text-decoration-line: underline ">
+                                                ค่าใช้จ่าย</div>
+                                        </div>
+                                    </div>
+                                    <!-- ------------------------------------------------------------------------------------ -->
+                                    <div class="flex">
+                                        <div class="w-3/6 mt-4">
+                                            <div class="px-4 sm:px-6">
+                                                <table
+                                                    class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                                    <thead
+                                                        class="text-xl text-base text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400 ">
+                                                        <tr>
+                                                            <th scope="col" class="py-3 px-6">วันที่</th>
+                                                            <th scope="col" class="py-3 px-6">รายละเอียด</th>
+                                                            <th scope="col" class="py-3 px-6">จำนวนเงิน</th>
+                                                            <!-- <th scope="col" class="py-3 px-6">จัดการ</th> -->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr
+                                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                            <td class="py-4 px-6">{{this.dataRow.income[0].updated_at |
+                                                                date: 'dd/MM/yyyy'}}</td>
+                                                            <td class="py-4 px-6">{{this.dataRow.income[0].description}}
+                                                            </td>
+                                                            <td class="py-4 px-6 text-green-400">
+                                                                {{this.dataRow.income[0].price}}</td>
+                                                            <!-- <td class="py-4 px-6"><button
+                                                            mat-button><mat-icon>visibility</mat-icon></button></td> -->
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="w-3/6 mt-4">
+                                            <div class="flex justify-end">
+                                                <table
+                                                    class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                                    <thead
+                                                        class=" text-xl text-base text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400 ">
+                                                        <tr>
+                                                            <th scope="col" class="py-3 px-6">วันที่</th>
+                                                            <th scope="col" class="py-3 px-6">รายละเอียด</th>
+                                                            <th scope="col" class="py-3 px-6">จำนวน</th>
+                                                            <!-- <th scope="col" class="py-3 px-6">จัดการ</th> -->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr
+                                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
+                                                            <td class="py-4 px-6">{{this.dataRow.deduct[0].updated_at |
+                                                                date: 'dd/MM/yyyy'}}</td>
+                                                            <td class="py-4 px-6">{{this.dataRow.deduct[0].description}}
+                                                            </td>
+                                                            <td class="py-4 px-6 text-red-700">
+                                                                {{this.dataRow.deduct[0].price}}</td>
+                                                            <!-- <td class="py-4 px-6"><button
+                                                            mat-button><mat-icon>visibility</mat-icon></button></td> -->
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </mat-tab>
+                        </mat-tab-group>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

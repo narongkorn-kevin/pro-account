@@ -1,0 +1,77 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        <!-- Loader -->
+        <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+            <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+        </div>
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">ตารางวันทำงาน</div>
+        
+    </div>
+
+
+    <div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
+        <div class="flex flex-col p-3 sm:p-10">
+            <form [formGroup]="formData">
+                <div class="overflow-auto bg-white shadow sm:rounded-lg">
+                    <div class="flex flex-auto border-b grid sm:gap-4 sm:grid-cols-4">
+
+                        <div class="col-auto px-6 sm:px-5 sm:pt-5">
+                            <mat-label class="text-2xl">ค้นหาตารางการทำงาน</mat-label>
+                            <mat-form-field class="w-full">
+                                <mat-select [formControlName]="'year'">
+                                    <mat-option value="">เลือกปี</mat-option>
+                                    <mat-option *ngFor="let year of  this.DataYear; let i = index" [value]="year.years">
+                                        {{year.yearTH}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <!-- <div class="col-auto px-6 sm:px-0 sm:pt-12">
+                            <mat-label></mat-label>
+                            <mat-form-field class="w-full">
+                                <mat-select [formControlName]="'position_id'">
+                                    <mat-option [value]="''">
+                                        เลือกตำแหน่ง
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of positionData" [value]="item.id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div> -->
+
+                        <div class="col-auto py-2 px-6 sm:px-0 sm:pt-12">
+                            <mat-label></mat-label>
+                            <button class="mx-2" mat-flat-button (click)="getPlane()">
+                                <mat-icon [svgIcon]="'heroicons_outline:search'"></mat-icon>
+                                <span class="ml-2 mr-1">ค้นหา</span>
+                            </button>
+                            <!-- <button class="" mat-flat-button (click)="clearForm()">
+                                <mat-icon [svgIcon]="'heroicons_outline:refresh'"></mat-icon>
+                                <span class="ml-2 mr-1"></span>
+                            </button> -->
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row p-8 w-full">
+                        <div class="flex flex-auto flex-wrap">
+                            <div class="flex flex-col w-full overflow-auto">
+                                <!-- calendar -->
+                                <full-calendar [options]='calendarOptionsAds'>
+
+                                </full-calendar>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>

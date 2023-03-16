@@ -1,0 +1,426 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    สร้างคำสั่งซื้อ
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-3 sm:p-10">
+        <!-- This example requires Tailwind CSS v2.0+ -->
+        <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+            <div class="flex">
+                <div class="w-full">
+                    <div class="px-4 py-5 sm:px-6">
+                        <h3 class="text-lg font-extrabold leading-6 text-gray-900">รายละเอียดคำสั่งซื้อ</h3>
+                        <p class="mt-1 max-w-2xl text-l text-gray-500">กรุณากรอกข้อมูลคำสั่งซื้อ</p>
+                    </div>
+                </div>
+            </div>
+            <form class="flex flex-col mt-3 p-8 pb-4 bg-card shadow overflow-hidden ng-valid" [formGroup]="formData">
+                <div class="flex">
+                    <div class="w-full">
+                        <div class="border-t border-gray-200">
+                            <dl>
+                                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">วันที่</dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field appearance="fill" class="w-full">
+
+                                            <input matInput [matDatepicker]="picker" [formControlName]="'date_time'">
+
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker></mat-datepicker>
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ช่องทางการขาย</dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <mat-select [formControlName]="'channal'">
+                                                <mat-option value="">เลือกช่องทางการขาย</mat-option>
+                                                <mat-option *ngFor="let role of channelData" [value]="role.name">
+                                                    <!-- <div class="flex">    <img src="{{role.image}}" style="width: 5px; height: 5px;">  -->
+                                                    {{role.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">พนักงานขาย</dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <mat-select [formControlName]="'sale_id'">
+                                                <mat-option value="">เลือกพนักงานขาย</mat-option>
+                                                <mat-option *ngFor="let role of saleData" [value]="role.id">
+                                                    {{role.first_name }} : {{ role.last_name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <ng-container *ngIf="formData.value.channal === 'Other'">
+                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt class="text-l font-extrabold text-gray-500  mt-4"> ช่องทางการขายอื่นๆ</dt>
+                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <mat-form-field class="w-full">
+                                                <input matInput placeholder="ระบุช่องทางการขายอื่น"
+                                                    [formControlName]="'channal_remark'">
+                                            </mat-form-field>
+                                        </dd>
+                                    </div>
+                                </ng-container>
+
+                                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ชื่อลูกค้า</dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input type="text" placeholder="ชื่อลูกค้า" aria-label="Number" matInput
+                                                [formControl]="myControl" [matAutocomplete]="auto"
+                                                [formControlName]="'name'">
+                                            <mat-autocomplete #auto="matAutocomplete">
+                                                <mat-option *ngFor="let option of filteredOptions | async"
+                                                    [value]="option">
+                                                    {{option}}
+                                                </mat-option>
+                                            </mat-autocomplete>
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">เบอร์โทรศัพท์</dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full;" style="width: 100%;">
+                                            <input matInput placeholder="เบอร์โทรศัพท์" [formControlName]="'telephone'"
+                                                maxlength="10">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">อีเมลล์</dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full;" style="width: 100%;">
+                                            <input matInput placeholder="อีเมลล์" [formControlName]="'email'">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ที่อยู่</dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full;" style="width: 100%;">
+                                            <textarea matInput placeholder="ที่อยู่"
+                                                [formControlName]="'address'"></textarea>
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="w-full">
+                        <div class="border-t border-gray-200">
+                            <dl>
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">จัดส่งโดย</dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <mat-select [formControlName]="'delivery_by_id'">
+                                                <mat-option value="">เลือกการจัดส่ง</mat-option>
+                                                <mat-option *ngFor="let role of deliveryData" [value]="role.id">
+                                                    {{role.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ชำระโดย</dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <mat-select [formControlName]="'payment_type'">
+                                                <mat-option value="">เลือกวิธีการชำระเงิน</mat-option>
+                                                <mat-option *ngFor="let role of roleData" [value]="role.name">
+                                                    {{role.des}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <ng-container *ngIf="formData.value.payment_type === 'transfer'">
+                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt class="text-l font-extrabold text-gray-500  mt-4">เลือกสลิป</dt>
+                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <ngx-dropzone class="w-full" (change)="onSelect($event)">
+                                                <ngx-dropzone-label>เลือกสลิป</ngx-dropzone-label>
+                                                <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true"
+                                                    [file]="f" (removed)="onRemove(f)">
+                                                    <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                                                </ngx-dropzone-image-preview>
+                                            </ngx-dropzone>
+                                        </dd>
+                                    </div>
+                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt class="text-l font-extrabold text-gray-500  mt-4">เลือกธนาคาร</dt>
+                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <mat-form-field class="w-full">
+                                                <mat-select [formControlName]="'bank_id'">
+                                                    <mat-option value="">เลือกธนาคาร</mat-option>
+                                                    <mat-option *ngFor="let role of bankData" [value]="role.id">
+                                                        ธนาคาร{{role.name}} {{role.account_number}} :
+                                                        {{role.first_name}}
+                                                        {{role.last_name}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </dd>
+                                    </div>
+                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt class="text-l font-extrabold text-gray-500  mt-4">วันที่จ่ายเงิน</dt>
+                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <input class="form-control fc-datepicker hasDatepicker w-full"
+                                                placeholder="MM/DD/YYYY" type="datetime-local"
+                                                formControlName="payment_date" />
+
+                                            <!-- <input matInput type="datetime-local" [formControlName]="'payment_date'"> -->
+
+                                        </dd>
+                                    </div>
+                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt class="text-l font-extrabold text-gray-500  mt-4">จำนวนเงิน</dt>
+                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <mat-form-field class="w-full">
+                                                <input type="number" matInput placeholder="จำนวนเงิน"
+                                                    [formControlName]="'payment_qty'" (change)="sumPrice()">
+                                            </mat-form-field>
+                                        </dd>
+                                    </div>
+                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt class="text-l font-extrabold text-gray-500  mt-4">หมายเลขบัญชีผู้โอน</dt>
+                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <mat-form-field class="w-full">
+                                                <input matInput placeholder="หมายเลขบัญชีผู้โอน"
+                                                    [formControlName]="'account_number'">
+                                            </mat-form-field>
+                                        </dd>
+                                    </div>
+                                </ng-container>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="flex-none h-12 w-32">
+                        <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="addOrder()">
+                            <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
+                            เพิ่มสินค้า
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex flex-col" formArrayName="order">
+                        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                                <div class="overflow-hidden">
+                                    <table class="min-w-full">
+                                        <thead class="border-b">
+                                            <tr>
+                                                <th scope="col"
+                                                    class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    #
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    สินค้า
+                                                </th>
+
+                                                <th scope="col"
+                                                    class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    ราคา
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    ส่วนลด(%)
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-l font-extraboldtext-gray-900 px-6 py-4 text-left">
+                                                    จำนวน
+                                                </th>
+
+                                                <th scope="col"
+                                                    class="text-l font-extraboldtext-gray-900 px-6 py-4 text-left">
+                                                    ราคาทั้งหมด
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-l font-extraboldtext-gray-900 px-6 py-4 text-left">
+                                                    จัดการ
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="border-b" *ngFor="let depo; of: order().controls; let i = index"
+                                                [formGroupName]="i">
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                    {{i +1}}</td>
+
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <input matInput [formControlName]="'item_id'"
+                                                        placeholder="คลิกเพื่อเลือกสินค้า" hidden readonly>
+                                                    <input matInput [formControlName]="'item_name'"
+                                                        placeholder="คลิกเพื่อเลือกสินค้า" disabled readonly
+                                                        (click)="openDialog(i)" style="cursor: pointer;width: 200px;">
+                                                </td>
+
+
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <mat-form-field class="w-60 pr-2" style="width: 150px!important;">
+                                                        <input type="number" matInput [formControlName]="'unit_price'"
+                                                            readonly (keypr)="OnchangeQty($event.value)">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <mat-form-field class="w-60 pr-2" style="width: 150px!important;">
+                                                        <input type="number" matInput [formControlName]="'discount'"
+                                                            (change)="ChangeDiscount($event, i)">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <mat-form-field class="w-60 pr-2" style="width: 150px!important;">
+                                                        <input type="number" matInput [formControlName]="'qty'"
+                                                            (change)="onchangeTotal($event, i)">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <mat-form-field class="w-60 pr-2" style="width: 150px!important;">
+                                                        <input matInput [formControlName]="'total'">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <button class="px-6 ml-3" mat-flat-button (click)="removeOrder(i)">
+                                                        <mat-icon svgIcon="heroicons_solid:trash"> </mat-icon>&nbsp;
+                                                        ลบ
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-between">
+
+                    <div class="w-full ">
+                    </div>
+                    <div class="w-full">
+                        <div class="border-t border-gray-200">
+                            <dl>
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500 sm:col-span-2 ">ภาษีมูลค่าเพิ่ม</dt>
+
+                                    <dd class="mt-1 text-l text-gray-900  sm:mt-0">
+                                        <mat-form-field class="w-36">
+                                            <input type="number" matInput placeholder="ภาษีมูลค่าเพิ่ม"
+                                                [formControlName]="'vat'" (change)="sumPrice()">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <ng-container *ngIf="formData.value.payment_type === 'COD'">
+                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt class="text-l font-extrabold text-gray-500 sm:col-span-2">
+                                            ค่าบริการเก็บเงินปลายทาง(COD)</dt>
+                                        <dd class="mt-1 text-l text-gray-900 sm:mt-0">
+                                            <mat-form-field class="w-36">
+                                                <input type="number" matInput
+                                                    placeholder="ค่าบริการเก็บเงินปลายทาง(COD)"
+                                                    [formControlName]="'cod_price_surcharge'" (change)="sumPrice()">
+                                            </mat-form-field>
+                                        </dd>
+                                    </div>
+                                </ng-container>
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500 sm:col-span-2">ค่าขนส่ง</dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:mt-0">
+                                        <mat-form-field class="w-36">
+                                            <input type="number" matInput placeholder="ค่าขนส่ง"
+                                                [formControlName]="'shipping_price'" (change)="sumPrice()">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500 w-4">ส่วนลด
+                                    </dt>
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">
+                                        <mat-form-field class="flex-none h-12 w-32" style="width: 80px!important;"
+                                            (change)="sumPrice()">
+                                            <mat-select [(value)]="dis_type" (selectionChange)="sumPrice()">
+
+                                                <mat-option value="percent">
+                                                    %
+                                                </mat-option>
+                                                <mat-option value="bath">
+                                                    ฿
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:mt-0">
+                                        <mat-form-field class="w-36">
+                                            <input type="number" matInput placeholder="ค่าขนส่ง"
+                                                [formControlName]="'main_discount'" (change)="sumPrice()">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500 sm:col-span-2">ราคาทั้งหมด
+                                    </dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:mt-0">
+                                        <mat-form-field class="w-36">
+                                            <input type="number" matInput placeholder="ราคาทั้งหมด"
+                                                [formControlName]="'total'" readonly>
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+
+
+                            </dl>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-end w-ful px-8 py-4">
+                    <div class="flex items-center justify-end">
+                        <a class="ml-4" mat-flat-button href="sale-order/list">
+                            <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                            ยกเลิก
+                        </a>
+                        <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="newSaleOrder()">
+                            <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                            ยืนยัน
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

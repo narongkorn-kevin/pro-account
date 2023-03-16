@@ -1,0 +1,479 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+            class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+            <div class="flex-1 min-w-0">
+
+        <!-- Title -->
+        <div class="mt-2">
+            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                โปรไฟล์ผู้ใช้งาน
+            </h2>
+        </div>
+    </div>
+
+        <!-- Actions -->
+        <div>
+
+            <button mat-stroked-button [matMenuTriggerFor]="menu"
+                class="mat-focus-indicator px-6 ml-3 mat-primary mat-flat-button mat-button-base py-2"
+                style="width: 85%;">
+                <mat-icon style="color: white!important;">menu</mat-icon> &nbsp;&nbsp;
+                <span>จัดการโปรไฟล์</span>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item appAddSpinnerOnClick (click)="edit(this.dataRow.id)">
+                    <mat-icon>edit</mat-icon>
+                    <span>แก้ไขโปรไฟล์</span>
+                </button>
+                <button mat-menu-item appAddSpinnerOnClick (click)="ChangePwd(this.dataRow.id)">
+                    <mat-icon>vpn_key</mat-icon>
+                    <span>เปลี่ยนรหัสผ่าน</span>
+                </button>
+            </mat-menu>
+
+        </div>
+
+    </div>
+
+
+    <div class="flex-auto p-3 sm:p-10">
+
+                    <!-- This example requires Tailwind CSS v2.0+ -->
+                    <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+
+                        <div class="flex">
+                            <div class="w-3/4">
+                                <div class="px-4 sm:px-8">
+                                    <p class="mt-1 max-w-2xl text-xl text-gray-500"></p>
+                                    <h3 class="text-4xl font-extrabold leading-6 text-gray-900 " >{{this.dataRow.first_name}} {{this.dataRow.last_name}}</h3>
+                                    <p class="mt-1 max-w-2xl text-xl text-gray-500">ตำแหน่ง:  {{this.Pos}}</p>
+                                </div>
+                            </div>
+
+
+                            <div class="w-1/4">
+                                <div class="flex justify-end">
+
+                                <div class="px-4 sm:px-6 text-right">
+                                    <p class="mt-1 max-w-2xl text-xl text-gray-500">เงินเดือน</p>
+                                    <h3 class="text-3xl font-extrabold leading-6 text-gray-900">20,000</h3>
+                                </div>
+
+                                <div class="px-4 sm:px-6 text-right">
+                                    <p class="mt-1 max-w-2xl text-lg text-gray-500">ยอดจ่ายสุทธิ</p>
+                                    <h3 class="text-3xl font-extrabold leading-6 text-red-500">19,000</h3>
+                                </div>
+
+                            </div>
+
+                            </div>
+                        </div>
+
+                        <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+                            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                                <div class="flex w-4/4">
+                                    <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
+                                            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-10 w-10">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                            </svg>
+                                    </div>
+
+                                    <div>
+                                        <span class="inline-block text-7xl font-bold">10</span>
+                                        <span class="inline-block text-xl text-gray-500 font-semibold">(วัน)</span>
+                                        <span class="block text-gray-500">ลาทั้งหมด</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                                <div
+                                    class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
+                                    <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <span class="inline-block text-7xl font-bold text-red-600">1</span>
+                                    <span class="inline-block text-xl text-gray-500 font-semibold">(วัน)</span>
+                                    <span class="block text-gray-500">ขาดงาน</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                                <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-red-600 bg-red-100 rounded-full mr-6">
+                                    <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <span class="inline-block text-7xl font-bold text-red-600">2</span>
+                                    <span class="inline-block text-xl text-gray-500 font-semibold">(วัน)</span>
+                                    <span class="block text-gray-500">มาสาย</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                                <div
+                                    class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
+                                    <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <span class="inline-block text-7xl font-bold text-red-600">2</span>
+                                    <span class="inline-block text-xl text-gray-500 font-semibold"> (ครั้ง)</span>
+                                    <span class="block text-gray-500">ขนส่งผิดพลาด</span>
+                                    <!-- <span class="block text-gray-500"></span>                         -->
+                                </div>
+                            </div>
+
+                        </section>
+
+
+
+                        <!-- Main -->
+                <form class="flex flex-col" [formGroup]="formData">
+                        <div class="flex-auto p-3 sm:p-10">
+                            <!-- This example requires Tailwind CSS v2.0+ -->
+                            <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+
+                                <mat-tab-group animationDuration="0ms">
+                                    <mat-tab>
+                                        <ng-template mat-tab-label>
+
+                                            <mat-icon>description</mat-icon>&nbsp;&nbsp;&nbsp;
+                                            <span>ข้อมูลพนักงาน </span>
+
+
+                                        </ng-template>
+
+
+                                            <div class="flex">
+                                                <div class="w-full">
+                                                    <div class="border-t border-gray-00">
+                                                        <dl>
+
+                                                            <div class="ml-10 flex-5 w-2/1 rounded-md border-1 border-primary-600  sm:grid-cols-4">
+                                                                <!-- div class="bg-white-100 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6" -->
+                                                                <!-- <div class="ml-10  flex-5 w-1/2 rounded-md border-1 border-primary-600"></div> -->
+                                                                <ul class="text-l font-extrabold text-gray-500  mt-4 "
+                                                                            style="text-align: center;">
+                                                                    <li class="mt-1 text-6xl font-extrabold text-primary-900 underline underline-offset-8">
+                                                                        ข้อมูลพนักงาน
+                                                                    </li>
+                                                                        <div class="flex text-6xl items-center space-x-5 w-6/1 p-3 ">
+                                                                            <img class="w-30 h-30  rounded-full" [src]=url_pro alt="">
+                                                                            <div class="font-medium dark:text-white">
+
+                                                                                <div>{{this.dataRow.first_name}} {{this.dataRow.last_name}}</div>
+                                                                                <div class="text-2xl  text-gray-500 dark:text-gray-400">ตำแหน่ง {{this.Pos}} </div>
+                                                                            </div>
+                                                                         </div>
+
+                                                                         <div class="flex text-2xl items-center space-x-5 w-6/1 p-3 ">
+                                                                            <div class="font-medium dark:text-white">
+                                                                                <ul class="flex justify-content-around items-center p-3">
+                                                                                    <li>
+                                                                                        <span class="block text-2xl flex"><span class="font-bold mr-2">เบอร์โทร :</span>
+                                                                                            0946466901</span>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                         </div>
+
+                                                                         <div class="flex text-2xl items-center space-x-5 w-1/1 p-3 ">
+                                                                            <div class="font-medium dark:text-white">
+                                                                                <ul class="flex justify-content-around items-center p-3">
+                                                                                    <li>
+                                                                                        <span class="block text-2xl flex"><span class="font-bold mr-2">บัตรประชาชน/หนังสือเดินทาง : </span>
+                                                                                             1234567891234</span>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                         </div>
+
+                                                                         <div class="flex text-2xl items-center space-x-5 w-1/1 p-3 ">
+                                                                            <div class="font-medium dark:text-white">
+                                                                                <ul class="flex justify-content-around items-center p-3">
+                                                                                    <li>
+                                                                                        <span class="block text-2xl flex"><span class="font-bold mr-2">Username : </span>
+                                                                                        test@test.com</span>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                         </div>
+
+                                                                         <div class="flex text-2xl items-center space-x-5 w-1/1 p-3 ">
+                                                                            <div class="font-medium dark:text-white">
+                                                                                <ul class="flex justify-content-around items-center p-3">
+                                                                                    <li>
+                                                                                        <span class="block text-2xl flex"><span class="font-bold mr-2">Password : </span>
+                                                                                        12345678</span>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                         </div>
+                                                                </ul>
+                                                            </div>
+                                                        </dl>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </mat-tab>
+
+                                    <mat-tab>
+                                        <ng-template mat-tab-label>
+
+                                            <mat-icon>description</mat-icon>&nbsp;&nbsp;&nbsp;
+                                            <span>ตารางบันทึกการขาย </span>
+                                        </ng-template>
+
+                                        <div class="flex">
+                                            <div class="w-full">
+                                                <div class="border-t border-gray-00">
+                                                    <dl>
+
+                                                        <div class="ml-10 flex-5 w-2/1 rounded-md border-1 border-primary-600  sm:grid-cols-4">
+                                                            <!-- div class="bg-white-100 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6" -->
+                                                            <!-- <div class="ml-10  flex-5 w-1/2 rounded-md border-1 border-primary-600"></div> -->
+                                                            <ul class="text-l font-extrabold text-gray-500  mt-4 "
+                                                                        style="text-align: center;">
+                                                                <li class="mt-1 text-6xl font-extrabold text-primary-900 underline underline-offset-8">
+                                                                    ตารางบันทึกการขาย
+                                                                        <a (click)="openLeave()" class="ml-10" mat-flat-button [color]="'primary'">
+                                                                        <!-- <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon> -->
+                                                                        <span class="ml-2 mr-1">บันทึกการขาย</span>
+                                                                        </a>
+                                                                </li>
+                                                                <thead class="text-base text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                                                    <tr>
+                                                                        <th scope="col" class="py-3 text-3xl px-10">
+                                                                            วันที
+                                                                        </th>
+                                                                        <th scope="col" class="py-3 text-3xl px-10">
+                                                                            เวลา
+                                                                        </th>
+                                                                        <th scope="col" class="py-3 text-3xl px-14">
+                                                                            ชื่อ ลค
+                                                                        </th>
+                                                                        <th scope="col" class="py-3 text-3xl px-14">
+                                                                            ยอดขาย
+                                                                        </th>
+                                                                        <th scope="col" class="py-3 text-3xl px-14">
+                                                                            รูป
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                                        <td class="py-4 text-2xl px-10">
+                                                                            1/1/2565
+                                                                        </td>
+                                                                        <td class="py-4 text-2xl px-10">
+                                                                            12.13
+                                                                        </td>
+                                                                        <td class="py-4 text-2xl px-14">
+                                                                            ทองดี
+                                                                        </td>
+                                                                        <td class="py-4 text-2xl px-14">
+                                                                            5000 บาท
+                                                                        </td>
+                                                                        <td class="py-4  text-2xl px-18">
+                                                                            <img class="w-10 h-10 rounded-full" [src]=url_pro alt="">
+                                                                        </td>
+
+                                                                    </tr>
+                                                                </tbody>
+                                                            </ul>
+                                                        </div>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-tab>
+
+
+                                    <mat-tab>
+                                        <ng-template mat-tab-label>
+
+                                            <mat-icon>description</mat-icon>&nbsp;&nbsp;&nbsp;
+                                            <span>ตารางวันทำงาน </span>
+                                        </ng-template>
+
+                                        <div class="flex">
+                                            <div class="w-full">
+                                                <div class="border-t border-gray-00">
+                                                    <dl>
+
+                                                        <div class="ml-10 flex-5 w-2/1 rounded-md border-1 border-primary-600  sm:grid-cols-4">
+                                                            <!-- div class="bg-white-100 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6" -->
+                                                            <!-- <div class="ml-10  flex-5 w-1/2 rounded-md border-1 border-primary-600"></div> -->
+                                                            <ul class="text-l font-extrabold text-gray-500  mt-4 "
+                                                                        style="text-align: center;">
+                                                                <li class="mt-1 text-6xl font-extrabold text-primary-900 underline underline-offset-8">
+                                                                    ตารางวันทำงาน
+                                                                </li>
+                                                                <thead class="text-base text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                                                    <tr>
+                                                                        <th scope="col" class="py-3 text-3xl px-6">
+                                                                            วันที
+                                                                        </th>
+                                                                        <th scope="col" class="py-3 text-3xl px-6">
+                                                                            เวลาเข้างาน
+                                                                        </th>
+                                                                        <th scope="col" class="py-3 text-3xl px-6">
+                                                                            เวลาออก
+                                                                        </th>
+                                                                        <th scope="col" class="py-3 text-3xl px-6">
+                                                                            OT
+                                                                        </th>
+                                                                        <th scope="col" class="py-3 text-3xl px-6">
+                                                                            สถานะ
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                                            <td class="py-4 text-2xl px-6">
+                                                                                01/01/2556
+                                                                            </td>
+                                                                            <td class="py-4 text-2xl px-16">
+                                                                                08.00
+                                                                            </td>
+                                                                            <td class="py-4 text-2xl px-12">
+                                                                                17.00
+                                                                            </td>
+                                                                            <td class="py-4 text-2xl px-10">
+                                                                                0
+                                                                            </td>
+                                                                            <td class="py-4 text-2xl px-6">
+                                                                                มาทำงาน
+                                                                            </td>
+                                                                        </tr>
+                                                                </tbody>
+                                                            </ul>
+                                                        </div>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-tab>
+
+                                    <mat-tab>
+                                        <ng-template mat-tab-label>
+
+                                            <mat-icon>description</mat-icon>&nbsp;&nbsp;&nbsp;
+                                            <span>ตารางการลา</span>
+                                        </ng-template>
+
+                                        <div class="flex">
+                                            <div class="w-full">
+                                                <div class="border-t border-gray-00">
+                                                    <dl>
+
+                                                        <div class="ml-10 flex-5 w-2/1 rounded-md border-1 border-primary-600  sm:grid-cols-4">
+                                                            <!-- div class="bg-white-100 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6" -->
+                                                            <!-- <div class="ml-10  flex-5 w-1/2 rounded-md border-1 border-primary-600"></div> -->
+                                                            <ul class="text-l font-extrabold text-gray-500  mt-4 "
+                                                                        style="text-align: center;">
+                                                                <li class="mt-1 text-6xl font-extrabold text-primary-900 underline underline-offset-8">
+                                                                    ตารางการลา
+                                                                        <a (click)="openLeave()" class="ml-10" mat-flat-button [color]="'primary'">
+                                                                        <!-- <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon> -->
+                                                                        <span class="ml-2 mr-1">บันทึกการลา</span>
+                                                                        </a>
+                                                                </li>
+                                                                <thead class="text-base text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                                                    <tr>
+                                                                        <th scope="col" class="py-3 text-3xl px-6">
+                                                                            ลำดับ
+                                                                        </th>
+                                                                        <th scope="col" class="py-3 text-3xl px-6">
+                                                                            ตั้งแต่วันที่
+                                                                        </th>
+                                                                        <th scope="col" class="py-3 text-3xl px-6">
+                                                                            ถึงวันที่
+                                                                        </th>
+                                                                        <th scope="col" class="py-3 text-3xl px-6">
+                                                                            ประเภทการลา
+                                                                        </th>
+                                                                        <th scope="col" class="py-3 text-3xl px-6">
+                                                                            รายละเอียด
+                                                                        </th>
+                                                                        <th scope="col" class="py-3 text-3xl px-6">
+                                                                            จำนวนวันลา
+                                                                        </th>
+                                                                        <th scope="col" class="py-3 text-3xl px-6">
+                                                                            สถานะ
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                                        <td class="py-4 text-2xl px-6">
+                                                                            1
+                                                                        </td>
+                                                                        <td class="py-4 text-2xl px-6">
+                                                                            3/01/2565
+                                                                        </td>
+                                                                        <td class="py-4 text-2xl px-6">
+                                                                            4/01/2565
+                                                                        </td>
+                                                                        <td class="py-4 text-2xl px-14">
+                                                                            ลาหยุด
+                                                                        </td>
+                                                                        <td class="py-4 text-2xl px-14">
+                                                                            ไปโรงบาล
+                                                                        </td>
+                                                                        <td class="py-4 text-2xl px-18">
+                                                                            1
+                                                                        </td>
+                                                                        <td class="py-4 text-2xl px-10">
+                                                                            รอตรวจสอบ
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                                        <td class="py-4 text-2xl px-6">
+                                                                            2
+                                                                        </td>
+                                                                        <td class="py-4 text-2xl px-6">
+                                                                        12/1/2565
+                                                                        </td>
+                                                                        <td class="py-4 text-2xl px-6">
+                                                                            13/1/2565
+                                                                        </td>
+                                                                        <td class="py-4 text-2xl px-14">
+                                                                            ลาป่วย
+                                                                        </td>
+                                                                        <td class="py-4 text-2xl px-14">
+                                                                            ไปเที่ยว
+                                                                        </td>
+                                                                        <td class="py-4 text-2xl px-18">
+                                                                            1
+                                                                        </td>
+                                                                        <td class="py-4 text-2xl px-18">
+                                                                            ลากิจ
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+
+                                                            </ul>
+                                                        </div>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-tab>
+                      </mat-tab-group>
+                    </div>
+                 </div>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,17 @@
+.img {
+    display: flex;
+    width: 500px;
+    height: 400px;
+    align-items: center !important;
+    background: #fff !important;
+    color: #717386 !important;
+    border: 2px solid #717386 !important;
+    border-radius: 5px !important;
+    font-size: 16px !important;
+    overflow-x: auto !important;
+    cursor: pointer;
+}
+#file {
+    display: none;
+
+}

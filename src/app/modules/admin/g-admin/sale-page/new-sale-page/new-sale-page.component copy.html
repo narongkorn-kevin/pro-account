@@ -1,0 +1,271 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    สร้างหน้าเซลล์เพจ
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-3 sm:p-10">
+        <!-- This example requires Tailwind CSS v2.0+ -->
+        <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+            <!-- <div class="flex">
+                <div class="w-full">
+                    <div class="px-4 py-5 sm:px-6">
+                        <h3 class="text-lg font-extrabold leading-6 text-gray-900">รายละเอียดเซลล์เพจ</h3>
+                        <p class="mt-1 max-w-2xl text-l text-gray-500">กรุณากรอกข้อมูลเซลล์เพจ</p>
+                    </div>
+                </div>
+            </div> -->
+            <mat-tab-group animationDuration="0ms">
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        ข้อมูลเซลล์เพจ
+
+                    </ng-template>
+                    <form class="flex flex-col" [formGroup]="formData">
+                        <div class="flex">
+                            <div class="w-full">
+                                <div class="border-t border-gray-200">
+                                    <dl>
+                                        <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                            <dt class="text-l font-extrabold text-gray-500  mt-4"
+                                                style="text-align: center;">
+                                                ชื่อเซลล์เพจ</dt>
+                                            <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                <mat-form-field class="w-full;" style="width: 100%;">
+                                                    <input matInput placeholder="ชื่อเซลล์เพจ"
+                                                        [formControlName]="'name'">
+                                                </mat-form-field>
+                                            </dd>
+                                        </div>
+                                        <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                            <dt class="text-l font-extrabold text-gray-500  mt-4"
+                                                style="text-align: center;">
+                                                เซลล์เพจ URL</dt>
+                                            <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                <mat-form-field class="w-full;" style="width: 100%;">
+                                                    <input matInput placeholder="เซลล์เพจ URL"
+                                                        [formControlName]="'sale_pages_url'">
+                                                </mat-form-field>
+                                            </dd>
+                                        </div>
+                                        <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                            <dt class="text-l font-extrabold text-gray-500  mt-4"
+                                                style="text-align: center;">
+                                                Thank you URL</dt>
+                                            <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                <mat-form-field class="w-full;" style="width: 100%;">
+                                                    <input matInput placeholder="Thank you URL"
+                                                        [formControlName]="'thank_you_url'">
+                                                </mat-form-field>
+                                            </dd>
+                                        </div>
+                                        <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                            <dt class="text-l font-extrabold text-gray-500  mt-4"
+                                                style="text-align: center;">
+                                                เลือกสินค้า</dt>
+                                            <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                <mat-form-field class="w-full;" style="width: 100%;">
+                                                    <input matInput [formControlName]="'select_product_id'" hidden>
+                                                    <input matInput [formControlName]="'product_name'"
+                                                        placeholder="คลิกเพื่อเลือกสินค้า" readonly
+                                                        (click)="openDialog()" style="cursor: pointer;width: 200px;">
+                                                </mat-form-field>
+                                            </dd>
+                                        </div>
+                                        <ng-container *ngIf="this.formData.value.select_product_id !== null">
+
+                                            <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                                <dt class="text-l font-extrabold text-gray-500  mt-4"
+                                                    style="text-align: center;">
+                                                </dt>
+                                                <dd class="mt-1 text-l text-gray-900 sm:col-1 sm:mt-0">
+
+                                                    <div class="row"> <img [src]="this.image"
+                                                            style="width: 30%;height: 40%;" class="sm:col-1"></div>
+
+                                                </dd>
+                                                <dd class="mt-1 text-lg text-gray-900 sm:col-1 sm:mt-0">
+                                                    <div><b> {{this.prod_name}}</b></div>
+                                                    <div> <b>สต็อกคงเหลือ : {{this.qty}} </b> </div>
+                                                    <div><b> ราคา : {{this.unit_price}}</b></div>
+
+                                                </dd>
+                                            </div>
+                                        </ng-container>
+                                        <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                            <dt class="text-l font-extrabold text-gray-500  mt-4"
+                                                style="text-align: center;">
+                                                โปรโมชั่น</dt>
+                                            <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                <label for="default-toggle"
+                                                    class="inline-flex relative items-center cursor-pointer">
+                                                    <input type="checkbox" value="" id="default-toggle"
+                                                        class="sr-only peer" (change)="onValChange($event)">
+                                                    <div
+                                                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                                                    </div>
+                                                </label>
+
+                                            </dd>
+                                        </div>
+                                        <ng-container *ngIf="this.selection === true">
+                                            <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-6 sm:gap-4 sm:px-6">
+                                                <dt class="text-l font-extrabold text-gray-500  mt-4"
+                                                    style="text-align: center;">
+                                                </dt>
+                                                <dd class="mt-1 text-l text-gray-900 sm:col-span-4 sm:mt-0">
+                                                    <div class="flex">
+                                                        <div class="flex-none h-12 w-32">
+                                                            <button class="px-6 ml-3 mat-primary" mat-flat-button
+                                                                (click)="addPromotion()">
+                                                                <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
+                                                                เพิ่มโปรโมชั่น
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="flex flex-col" formArrayName="salepage_promotion">
+                                                            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                                                <div
+                                                                    class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                                                                    <div class="overflow-hidden">
+                                                                        <table class="min-w-full">
+                                                                            <thead class="border-b">
+                                                                                <tr>
+                                                                                    <th scope="col"
+                                                                                        class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                                                        #
+                                                                                    </th>
+                                                                                    <th scope="col"
+                                                                                        class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                                                        ชื่อโปรโมชั่น
+                                                                                    </th>
+
+                                                                                    <th scope="col"
+                                                                                        class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                                                        จำนวน
+                                                                                    </th>
+
+                                                                                    <th scope="col"
+                                                                                        class="text-l font-extraboldtext-gray-900 px-6 py-4 text-left">
+                                                                                        ราคา
+                                                                                    </th>
+
+
+                                                                                    <th scope="col"
+                                                                                        class="text-l font-extraboldtext-gray-900 px-6 py-4 text-left">
+                                                                                        จัดการ
+                                                                                    </th>
+
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr class="border-b"
+                                                                                    *ngFor="let depo; of: promotion().controls; let i = index"
+                                                                                    [formGroupName]="i">
+                                                                                    <td
+                                                                                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                                        {{i +1}}</td>
+
+
+
+
+                                                                                    <td
+                                                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                                                        <mat-form-field
+                                                                                            class="w-60 pr-2"
+                                                                                            style="width: 200px!important;">
+                                                                                            <input type="text   "
+                                                                                                matInput
+                                                                                                [formControlName]="'name'">
+                                                                                        </mat-form-field>
+                                                                                    </td>
+                                                                                    <td
+                                                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                                                        <mat-form-field
+                                                                                            class="w-60 pr-2"
+                                                                                            style="width: 100px!important;">
+                                                                                            <input type="number"
+                                                                                                matInput
+                                                                                                [formControlName]="'qty'">
+                                                                                        </mat-form-field>
+                                                                                    </td>
+                                                                                    <td
+                                                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                                                        <mat-form-field
+                                                                                            class="w-60 pr-2"
+                                                                                            style="width: 120px!important;">
+                                                                                            <input type="number"
+                                                                                                matInput
+                                                                                                [formControlName]="'price'">
+                                                                                        </mat-form-field>
+                                                                                    </td>
+
+                                                                                    <td
+                                                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                                                        <button class="px-6 ml-3"
+                                                                                            mat-flat-button
+                                                                                            (click)="removePromotion(i)">
+                                                                                            <mat-icon
+                                                                                                svgIcon="heroicons_solid:trash">
+                                                                                            </mat-icon>&nbsp;
+                                                                                            ลบ
+                                                                                        </button>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </dd>
+                                            </div>
+                                        </ng-container>
+
+
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="flex items-center justify-end w-ful px-8 py-4">
+                            <div class="flex items-center justify-end">
+                                <a class="ml-4" mat-flat-button href="sale-page/list">
+                                    <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                                    ยกเลิก
+                                </a>
+                                <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="newSalePage()">
+                                    <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                                    ยืนยัน
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        ตั้งค่าการชำระและการจัดส่ง
+
+                    </ng-template>
+                </mat-tab>
+            </mat-tab-group>
+
+        </div>
+    </div>
+</div>

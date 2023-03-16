@@ -1,0 +1,104 @@
+<button
+    class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    type="button" data-modal-toggle="popup-modal">
+    Toggle modal
+</button>
+
+
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-auto bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        <!-- Loader -->
+        <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+            <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+        </div>
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">รายการเงินเดือน</div>
+        <!-- Actions -->
+        <label>เลือกเดือน
+        <input id="name" type="month" 
+        class="mb-5 mt-2 h-10  items-center pl-3 text-lg border-gray-300 rounded border"
+         formControlName="name" /></label>
+
+    </div>
+
+
+
+    <!-- Main -->
+    <div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
+    
+        <div class="flex flex-col p-3 sm:p-10">
+            <div class="overflow-auto  bg-white shadow sm:rounded-lg">
+                <!-- Products list -->
+    
+                <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll">
+    
+                    <table datatable [dtOptions]="dtOptions"
+                        class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400 "
+                        style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th class="text-center">พิมพ์สลิป</th>
+                                <th class="text-center">จ่ายเงินเดือน</th>
+                                <th class="text-center">ปรับเงินเดือน</th>
+                                <th class="text-center">ลำดับ</th>
+                                <th class="text-center">ชื่อ-สกุล</th>
+                                <th><div class="text-center">เงินเพิ่ม</div></th>
+                                <th><div class="text-center">เงินหัก</div></th>
+                                <th><div class="text-center">เงินเดือน</div></th>
+                                <th><div class="text-center">รายได้สุทธิ</div></th>
+                                <th class="text-center">สถานะ</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="dataRow?.length != 0">
+                            <tr *ngFor="let item of dataRow; let i = index">
+                                <td style="min-width: 80px;" class="text-center">
+                                    <button mat-icon-button color="" (click)="print(item.id)" title="พิมพ์สลิป">
+                                        <mat-icon>print</mat-icon>
+                                    </button>
+                                </td>
+                                <td style="min-width: 80px;">
+                                    <button mat-stroked-button (click)="New()" title="จ่ายเงินเดือน">
+                                        <mat-icon svgIcon="mat_outline:attach_money"></mat-icon> จ่ายเงินเดือน
+                                    </button>
+                                </td>
+                                <td style="min-width: 80px;">
+                                    <button mat-stroked-button (click)="Edit()" title="ปรับเงินเดือน">
+                                        <mat-icon>edit</mat-icon> ปรับเงินเดือน
+                                    </button>
+                                </td>
+                                <td style="min-width: 80px;" class="text-center">{{ pages.begin + (i + 1) }}</td>
+                                <td style="min-width: 200px;">{{ item.user[0].first_name }} {{ item.user[0].last_name }}</td>
+                                <td style="min-width: 120px;">
+                                    <div class="text-green-400 bg-green-100 text-center">{{ item.total_income | number : '1.2-2' }}</div>
+                                </td>
+                                <td style="min-width: 120px;">
+                                    <div class="text-red-400 bg-red-100 text-center">{{ item.total_deduct | number : '1.2-2' }}</div>
+                                </td>
+                                <td style="min-width: 120px;">
+                                    <div class="text-center">{{ item.salary  | number : '1.2-2'}}</div>
+                                </td>
+                                <td style="min-width: 120px;"> 
+                                    <div class="text-blue-700 bg-blue-100 text-center">{{ item.total  | number : '1.2-2'}}</div>
+                                </td>
+                                <td style="min-width: 120px;" class="text-center">
+                                    <span class="bg-green-100 text-green-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">จ่ายแล้ว</span>
+                                 </td>
+                             </tr>
+                        </tbody>
+    
+                        <tbody *ngIf="dataRow?.length == 0">
+                            <tr>
+                                <td colspan="8" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                            </tr>
+                        </tbody>
+                    </table>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

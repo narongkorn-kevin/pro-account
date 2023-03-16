@@ -1,0 +1,75 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div class="card1">
+        <img src="assets/images/logo/uniqlo-logo.png" class="center">
+
+
+        <b style="font-size: 24px;">บริษัท จี โกลบอล ริช จำกัด<BR></b>
+        <h2 style="font-size: 18px;">109/1 หมู่ที่ 6 ตำบลบุ่งคล้า อำเภอหล่มสัก จ.เพชรบูรณ์ 67110</h2>
+
+
+    </div>
+    <div class="container mt-5">
+        <div class="card22">
+            <b style="font-size: 16px;"> ข้อมูลลูกค้า<BR> </b>
+            ชื่อลูกค้า : {{ saleorderbyIdData.name }}<BR>
+            เบอร์ติดต่อ : {{ saleorderbyIdData.telephone }}<BR>
+            อีเมลล์ : {{ saleorderbyIdData.email }}<BR>
+            ที่อยู่ : {{ saleorderbyIdData.address }}<BR>
+
+        </div>
+        <div class="card2">
+            <b style="font-size: 16px;"> ข้อมูลคำสั่งซื้อ<BR> </b>
+            เลขที่สั่งซื้อ : {{ saleorderbyIdData.order_id }} <BR>
+            วันที่ : {{ saleorderbyIdData.date_time }}
+        </div>
+    </div>
+
+    
+    <div class="flex flex-auto overflow-hidden">
+        
+        <div class="flex flex-col flex-auto p-5 overflow-hidden sm:overflow-y-auto">
+            <table class="border-collapse border border-slate-400 w-full text-center">
+                <thead>
+                    <tr>
+                        <th class="border border-slate-300 ...">ลำดับ</th>
+                        <th class="border border-slate-300 ...">รหัสสินค้า</th>
+                        <th class="border border-slate-300 ...">ชื่อ</th>
+                        <th class="border border-slate-300 ...">รายละเอียดสินค้า</th>
+                        <th class="border border-slate-300 ...">ที่เก็บสินค้า</th>
+                        <!-- <th class="border border-slate-300 ...">โกดังเก็บเก็บสินค้า</th> -->
+                        <th class="border border-slate-300 ...">ราคา</th>
+                        <th class="border border-slate-300 ...">จำนวน</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="dataRow2?.length != 0">
+                    <tr *ngFor="let s of dataRow2; let i = index">
+                        <td class="border border-slate-300 ...">{{ i+1 }}</td>
+                        <td class="border border-slate-300 ...">{{ s.item.item_id }}</td>
+                        <td class="border border-slate-300 ...">{{ s.item_name }}</td>
+                        <td class="border border-slate-300 ...">{{ s.item.description }}</td>
+                        <td class="border border-slate-300 ...">{{ s.item.location.name }}</td>
+                        <!-- <td class="border border-slate-300 ...">{{ s.item.location.warehouse ? s.item.location.warehouse.name : 'ไม่มีข้อมูล' }}</td> -->
+                        <td class="border border-slate-300 ...">{{ s.unit_price }}</td>
+                        <td class="border border-slate-300 ...">{{ s.qty }}</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-slate-300 ..." colspan="5" rowspan="2"></td>
+                        <td class="border border-slate-300 ...">
+                            <br>
+                        </td>
+                        <td class="border border-slate-300 ..."></td>
+                    </tr>
+                    <tr>
+                        <td class="border border-slate-300 ...">ผู้ส่งสินค้า</td>
+                        <td class="border border-slate-300 ...">ผู้รับสินค้า</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+</div>

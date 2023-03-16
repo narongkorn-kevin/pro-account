@@ -1,0 +1,125 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        <!-- Loader -->
+        <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+            <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+        </div>
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">รายงานสินค้าทั้งหมด</div>
+        <!-- Actions -->
+        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+
+            <!-- Add product button -->
+            <a class="ml-4" mat-flat-button [color]="'primary'" (click)="print()">
+                <mat-icon [svgIcon]="'heroicons_outline:document'"></mat-icon>
+                <span class="ml-2 mr-1">พิมพ์รายงาน</span>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- search -->
+    <div class="flex-auto">
+        <form class="flex flex-col pt-4 pb-4 bg-card shadow overflow-hidden ng-valid" [formGroup]="filterForm">
+            <div class="flex flex-col sm:flex-row">
+                <div class="w-full">
+                    <div class="flex flex-auto flex-wrap">
+                        <div class="flex flex-col w-full lg:w-1/6 sm:pl-8">
+                            <mat-form-field class="w-full">
+                                <input readonly [formControlName]="'date_start'" matInput placeholder="วันที่เริ่มต้น"
+                                    [matDatepicker]="picker_start_date">
+                                <mat-datepicker-toggle matSuffix [for]="picker_start_date"></mat-datepicker-toggle>
+                                <mat-datepicker #picker_start_date></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex flex-col w-full lg:w-1/6 sm:pl-8">
+                            <mat-form-field class="w-full">
+
+                                <input readonly [formControlName]="'date_stop'" matInput placeholder="วันที่สิ้นสุด"
+                                    [matDatepicker]="picker_end_date">
+                                <mat-datepicker-toggle matSuffix [for]="picker_end_date"></mat-datepicker-toggle>
+                                <mat-datepicker #picker_end_date></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex flex-col w-full lg:w-1/6 sm:pl-8 sm:pr-4">
+                            <button mat-stroked-button class="w-full" style="min-height: 48px;" (click)="GetReport()">
+                                <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:search'"></mat-icon>
+                                ค้นหา
+                            </button>
+                        </div>
+                        <div class="flex flex-col w-full lg:w-1/6 sm:pl-8 sm:pr-4">
+                            <button mat-stroked-button class="w-full" style="min-height: 48px;" type="reset">
+                                <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:trash'"></mat-icon>
+                                ล้าง
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="flex flex-col" id="print-section">
+            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                    <div class="overflow-hidden">
+                        <table class="min-w-full">
+                            <thead class="bg-white border-b">
+                                <tr>
+                                    <th scope="col" class="text-l font-large text-gray-900 px-6 py-4 text-left">
+                                        #
+                                    </th>
+                                    <th scope="col" class="text-l font-large text-gray-900 px-6 py-4 text-left">
+                                        รูปสินค้า
+                                    </th>
+                                    <th scope="col" class="text-l font-large text-gray-900 px-6 py-4 text-left">
+                                        ชื่อสินค้าประเภท
+                                    </th>
+                                    <th scope="col" class="text-l font-large text-gray-900 px-6 py-4 text-left">
+                                        ชื่อสินค้า
+                                    </th>
+                                    <th scope="col" class="text-l font-large text-gray-900 px-6 py-4 text-left">
+                                        รหัสสินค้า
+                                    </th>
+                                    <th scope="col" class="text-l font-large text-gray-900 px-6 py-4 text-left">
+                                        จำนวนรับเข้า
+                                    </th>
+                                    <th scope="col" class="text-l font-large text-gray-900 px-6 py-4 text-left">
+                                        จำนวนเบิกออก
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-gray-100 border-b" *ngFor="let item of dataRow; let k = index">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{k + 1}}
+                                    </td>
+                                    <td *ngIf="item.image === null || ''"> </td>
+                                    <td *ngIf="item.image !== null || ''"><img src="{{item.image}}"
+                                            style="width: 30px!important;height: 30px!important"> </td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                        {{item.item_type.name}}
+                                    </td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                        {{item.name}}
+                                    </td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                        {{item.item_id}}
+                                    </td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                        {{item.qty_input}}
+                                    </td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                        {{item.qty_output}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main -->
+
+</div>

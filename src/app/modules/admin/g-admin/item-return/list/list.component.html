@@ -1,0 +1,283 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-auto bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        <!-- Loader -->
+        <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+            <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+        </div>
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">บันทึกการทำงาน</div>
+        <!-- Actions -->
+        <!-- <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+
+       
+            <a (click)="New()" class="ml-4" mat-flat-button [color]="'primary'">
+                <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                <span class="ml-2 mr-1">บันทึกรายละเอียดการติดต่อ</span>
+            </a>
+
+        </div> -->
+    </div>
+
+
+    <!-- Main -->
+    <div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
+
+        <div class="px-6 sm:px-10 grid md:grid-cols-2 xl:grid-cols-4 gap-6 mt-6">
+
+            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                <div
+                    class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M18 18.5a1.5 1.5 0 0 1-1.5-1.5a1.5 1.5 0 0 1 1.5-1.5a1.5 1.5 0 0 1 1.5 1.5a1.5 1.5 0 0 1-1.5 1.5m1.5-9l1.96 2.5H17V9.5m-11 9A1.5 1.5 0 0 1 4.5 17A1.5 1.5 0 0 1 6 15.5A1.5 1.5 0 0 1 7.5 17A1.5 1.5 0 0 1 6 18.5M20 8h-3V4H3c-1.11 0-2 .89-2 2v11h2a3 3 0 0 0 3 3a3 3 0 0 0 3-3h6a3 3 0 0 0 3 3a3 3 0 0 0 3-3h2v-5l-3-4Z"/>
+                    </svg>
+                </div>
+                <div>
+                    <span class="block text-2xl font-bold">{{ totalPacking }}</span>
+                    <span class="block text-gray-500">รวมยอดที่ต้องแพ็ค</span>
+                </div>
+            </div>
+
+            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                <div
+                    class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
+                    <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                </div>
+                <div>
+                    <span class="block text-2xl font-bold">{{ totalDelivery }}</span>
+                    <span class="block text-gray-500">รวมแพ็คสำเร็จ กำลังจัดส่ง</span>
+                </div>
+            </div>
+
+
+            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                    <div
+                        class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-red-600 bg-red-100 rounded-full mr-6">
+                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="inline-block text-2xl font-bold">{{ totalReturn }}</span>
+     
+                        <span class="block text-gray-500">รวมยอดสินค้าส่งคืน</span>
+                    </div>
+                </div>
+
+            <!-- 
+            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                <div
+                    class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
+                    <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                </div>
+                <div>
+                    <span class="block text-2xl font-bold">70</span>
+                    <span class="block text-gray-500">คงเหลือ</span>
+                </div>
+            </div> -->
+        </div>
+
+        <div class="flex flex-col p-3 sm:p-10">
+            <div class="overflow-auto  bg-white shadow sm:rounded-lg">
+                <!-- Products list -->
+                <div class="flex flex-auto p-5 sm:items-center sm:justify-between border-b">
+                    <div class="text-2xl font-extrabold">ข้อมูลแพ็คส่งสินค้า</div>
+
+                    <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+
+                    </div>
+                </div>
+
+                <div class="flex flex-col flex-auto pt-5 sm:overflow-auto overflow-x-scroll">
+                    <mat-tab-group animationDuration="0ms" coler="'primary'">
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                <div class="text-md font-bold">สินค้ากำลังแพ็ค</div>
+                                <div matBadge="{{total_pc}}" matBadgePosition="before" class="job-badge"></div>
+                            </ng-template>
+
+                            <div class="table-responsive overflow-auto mt-2">
+     
+                                    <table datatable [dtOptions]="dtOptionsPacking"
+                                        class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                                        style="width: 100%">
+                                        <thead class="">
+                                            <tr>
+                                                <th></th>
+                                                <th>จัดการ</th>
+                                                <th>ลำดับ</th>
+                                                <th>ช่องทาง</th>
+                                                <th>วันที่สั่งซื้อ</th>
+                                                <th>หมายเลขคำสั่งซื้อ</th>
+                                                <th>ลูกค้า</th>
+                                                <th>สถานะ</th>
+                                                <!-- <th>บริการขนส่ง</th> -->
+                                                <th>การชำระเงิน</th>
+                                                <th>ยอดรวม</th>
+                                                <th>จ่ายแล้ว</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngIf="dataRow_pc?.length != 0">
+                                            <tr *ngFor="let item of dataRow_pc; let i = index" style="">
+
+                                                <td><input type="checkbox" class="h-4 w-4" name="websitecheck" value=""></td>
+                                                
+                                                <td style="width: 140px; min-width: 140px;">
+                                                    <button mat-icon-button color="" (click)="view(item.id)" title="ดูรายละเอียดข้อมูล">
+                                                        <mat-icon>remove_red_eye</mat-icon>
+                                                    </button>
+                                                    <button mat-icon-button color="" (click)="print(item.id)" title="พิมพ์ใบคำสั่งซื้อ">
+                                                        <mat-icon>print</mat-icon>
+                                                    </button>
+                                                    <button mat-icon-button color=""  (click)="AddTracking(item)" title="บันทึกข้อมูลจัดส่ง">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="1.75em" height="1.75em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                                                            <path fill="currentColor" d="M18 18.5a1.5 1.5 0 0 1-1.5-1.5a1.5 1.5 0 0 1 1.5-1.5a1.5 1.5 0 0 1 1.5 1.5a1.5 1.5 0 0 1-1.5 1.5m1.5-9l1.96 2.5H17V9.5m-11 9A1.5 1.5 0 0 1 4.5 17A1.5 1.5 0 0 1 6 15.5A1.5 1.5 0 0 1 7.5 17A1.5 1.5 0 0 1 6 18.5M20 8h-3V4H3c-1.11 0-2 .89-2 2v11h2a3 3 0 0 0 3 3a3 3 0 0 0 3-3h6a3 3 0 0 0 3 3a3 3 0 0 0 3-3h2v-5l-3-4Z"/>
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                                <td style="width: 50px;">{{ pages.begin + (i + 1) }}</td>
+                                                <td *ngIf="item.channal === 'SP'"><img [src]='sp'
+                                                        style="height: 25px;width: 25px">
+                                                <td *ngIf="item.channal === 'line'"><img [src]='line'
+                                                        style="height: 25px;width: 25px"></td>
+                                                <td *ngIf="item.channal === 'facebook'"><img [src]='facebook'
+                                                        style="height: 25px;width: 25px"></td>
+                                                <td *ngIf="item.channal === 'tiktok'"> <img [src]='tiktok'
+                                                        style="height: 25px;width: 25px"></td>
+        
+                                                <!-- <td>{{ item.channal }}</td> -->
+                                                <td style="width: 100px; min-width: 100px;">{{ item.date_time | date: 'dd/MM/yyyy' }}</td>
+                                                <td style="width: 80px; min-width: 80px;" *ngIf="item.channal === 'other'">{{item.channal}}</td>
+                                                <td style="width: 150px; min-width: 150px;">{{ item.order_id }}</td>
+                                                <td style="width: 180px; min-width: 180px;">{{ item.name }}</td>
+        
+                                                <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'order'">
+                                                    <span
+                                                        class="bg-yellow-100 text-yellow-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">ยังไม่จ่าย</span>
+                                                </td>
+                                                <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'paid'">
+                                                    <span
+                                                        class="bg-green-300 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">จ่ายแล้ว</span>
+                                                </td>
+                                                <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'confirm'">
+                                                    <span
+                                                        class="bg-blue-100 text-blue-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">ยืนยัน</span>
+                                                </td>
+                                                <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'packing'">
+                                                    <span
+                                                        class="bg-gray-100 text-gray-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">กำลังแพ็ค</span>
+                                                </td>
+                                                <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'delivery'">
+                                                    <span
+                                                        class="bg-purple-100 text-purple-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">กำลังจัดส่ง</span>
+                                                </td>
+                                                <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'finish'">
+                                                    <span
+                                                        class="bg-green-100 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">สำเร็จ</span>
+                                                </td>
+                                                <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'failed'">
+                                                    <span
+                                                        class="bg-red-100 text-red-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ไม่สำเร็จ</span>
+                                                </td>
+                                                <td style="width: 100px; min-width: 100px;" *ngIf="item.payment_type === 'COD'">
+                                                    COD</td>
+                                                <td style="width: 100px; min-width: 100px;"
+                                                    *ngIf="item.payment_type === 'transfer'"> โอนเงิน</td>
+                                                <td style="width: 100px; min-width: 100px;">{{ item.total | number : '1.2-2' }}</td>
+                                                <td style="width: 100px; min-width: 100px;">{{ item.payment_qty | number : '1.2-2' }}</td>
+                                                <!-- <td>{{ item.date_time | thaiDate}}</td> -->
+                                                <!-- <td>{{ item.created_at | date: 'dd/MM/yyyy hh:mm' }}</td> -->
+    
+                                            </tr>
+                                        </tbody>
+                                        <tbody *ngIf="dataRow_pc?.length == 0">
+                                            <tr>
+                                                <td colspan="6" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                <div class="text-md font-bold">รายงานตีกลับสินค้า</div> 
+                            </ng-template>
+                            <div class="flex flex-auto mb-4 justify-between">
+                                <div class="flex flex-col flex-auto  sm:overflow-auto overflow-x-scroll">
+                                    <a (click)="New()" class="w-72" mat-flat-button [color]="'primary'">
+                                        <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                                        <span class="ml-2 mr-1">บันทึกรายการตีกลับ</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="table-responsive overflow-auto">
+                                <table datatable [dtOptions]="dtOptions"
+                                    class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                                    style="width: 100%">
+                                    <thead class="text-lg text-gray-700 uppercase bg-white-100 dark:bg-gray-700 dark:text-gray-400 text-center">
+                                        <tr>
+                                            <th>จัดการ</th>
+                                            <th>ลำดับ</th>
+                                            <th>รูปภาพ</th>
+                                            <th>รายละเอียด</th>
+                                            <th>สร้างโดย</th>
+                                            <th>สร้างวันที่</th>
+                                            <!-- <th>สถานะ</th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="dataRow?.length != 0">
+                                        <tr *ngFor="let item of dataRow; let i = index"
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md py-15">
+                                            <td  style="min-width: 100px;">
+                                                <!-- <button mat-icon-button (click)="Edit(item.id)" title="แก้ไขข้อมูล">
+                                                    <mat-icon>edit</mat-icon>
+                                                </button> -->
+                                                <button mat-icon-button color="" (click)="view(item.id)" title="ดูรายละเอียดข้อมูล">
+                                                    <mat-icon>remove_red_eye</mat-icon>
+                                                </button>
+                                                <button mat-icon-button (click)="Delete(item.id)" title="ลบข้อมูล">
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                            </td>
+                                            <td style="min-width: 80px;">{{ (i + 1) }}</td>
+                                            <td style="min-width: 80px;" *ngIf="item.image === null || ''"> </td>
+                                            <td style="min-width: 80px;" *ngIf="item.image !== null || ''">
+                                                <a href="{{item.image}}" target="_blank" title="คลิกเพื่อเปิดดูรูปภาพ"><img class="h-10 w-10" src="{{item.image}}"></a>
+                                            </td>
+                                            <td style="min-width: 200px">{{ item.description }}</td>
+                                            <td style="min-width: 120px">{{ item.create_by }}</td>
+                                            <td style="min-width: 120px">{{ item.created_at | date : 'dd/MM/yyy HH:mm' }}</td>
+                                            <!-- <td style="min-width: 150px">ตีกลับ</td> -->
+                                            <!-- <td style="min-width: 150px">
+                                                <span class="bg-red-100 text-red-800 text-md font-extrabold mr-2 
+                                                px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-red-900">ชำรุด</span>
+                                            </td> -->
+                                        </tr>
+                                    </tbody>
+                                    <tbody *ngIf="dataRow?.length == 0">
+                                        <tr>
+                                            <td colspan="7" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

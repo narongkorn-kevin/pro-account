@@ -1,0 +1,691 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        <!-- Loader -->
+        <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+            <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+        </div>
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">รายการคำสั่งซื้อเซลล์เพจ</div>
+        <!-- Actions -->
+        <div *ngIf="roleType == 'marketing'" class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <!-- Add product button -->
+            <a href="sale-order/new-sale-order" class="ml-4" mat-flat-button [color]="'primary'">
+                <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                <span class="ml-2 mr-1">สร้างคำสั่งซื้อ</span>
+            </a>
+        </div>
+    </div>
+    <!-- Main -->
+
+    <div class="flex flex-auto overflow-hidden">
+
+        <!-- Products list -->
+
+        <div class="flex flex-col flex-auto p-5 overflow-hidden sm:overflow-y-auto">
+            <mat-tab-group animationDuration="0ms">
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        ทั้งหมด
+                        <div matBadge="{{total_t}}" matBadgePosition="before" class="job-badge"></div>
+                    </ng-template>
+                    <div class="table-responsive">
+                        <table datatable [dtOptions]="dtOptionsTotal"
+                            class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                            style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>ลำดับ</th>
+                                    <th>ช่องทาง</th>
+                                    <th>หมายเลขคำสั่งซื้อ</th>
+                                    <th>ลูกค้า</th>
+                                    <th>สถานะ</th>
+                                    <th>การชำระเงิน</th>
+                                    <th>ยอดรวม</th>
+                                    <th>จ่ายแล้ว</th>
+                                    <th>วันที่สั่งซื้อ</th>
+                                    <th>จัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="dataRow_t?.length != 0">
+                                <tr *ngFor="let item of dataRow_t; let i = index" (click)="view(item.id)"
+                                    style="cursor: pointer;">
+                                    <td style="width: 5%;">{{ pages.begin + (i + 1) }}</td>
+                                    <td *ngIf="item.channal === 'SP'"><img [src]='sp' style="height: 25px;width: 25px">
+                                    </td>
+                                    <td *ngIf="item.channal === 'facebook'"><img [src]='facebook'
+                                            style="height: 25px;width: 25px"></td>
+                                    <td *ngIf="item.channal === 'tiktok'"> <img [src]='tiktok'
+                                            style="height: 25px;width: 25px"></td>
+                                    <td *ngIf="item.channal === 'other'"> {{item.channal}}</td>
+                                    <!-- <td>{{ item.channal }}</td> -->
+                                    <td>{{ item.order_id }}</td>
+                                    <td>{{ item.name }}</td>
+                                    <td *ngIf="item.status === 'order'"> <span
+                                            class="bg-yellow-100 text-yellow-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">ยังไม่จ่าย</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'paid'"> <span
+                                            class="bg-green-300 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">จ่ายแล้ว</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'confirm'"> <span
+                                            class="bg-blue-100 text-blue-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">ยืนยัน</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'packing'"><span
+                                            class="bg-gray-100 text-gray-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">กำลังแพ็ค</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'delivery'"> <span
+                                            class="bg-purple-100 text-purple-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">กำลังจัดส่ง</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'finish'"> <span
+                                            class="bg-green-100 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">สำเร็จ</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'failed'"> <span
+                                            class="bg-red-100 text-red-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ไม่สำเร็จ</span>
+                                    </td>
+                                    <td *ngIf="item.payment_type === 'COD'"> COD</td>
+                                    <td *ngIf="item.payment_type === 'transfer'"> โอนเงิน</td>
+                                    <td>{{ item.total }}</td>
+                                    <td>{{ item.payment_qty }}</td>
+                                    <td>{{ item.date_time | thaiDate}}</td>
+                                    <td style="width: 10%;">
+                                        <button mat-button (click)="edit(item.id)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <button mat-button (click)="print(item.id)">
+                                            <mat-icon>print</mat-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="dataRow_t?.length == 0">
+                                <tr>
+                                    <td colspan="6" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        ยังไม่จ่าย
+                        <div matBadge="{{total_o}}" matBadgePosition="before" class="job-badge"></div>
+                    </ng-template>
+                    <div class="table-responsive">
+                        <table datatable [dtOptions]="dtOptionsOrder"
+                            class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                            style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>ลำดับ</th>
+                                    <th>ช่องทาง</th>
+                                    <th>หมายเลขคำสั่งซื้อ</th>
+                                    <th>ลูกค้า</th>
+                                    <th>สถานะ</th>
+                                    <!-- <th>บริการขนส่ง</th> -->
+                                    <th>การชำระเงิน</th>
+                                    <th>ยอดรวม</th>
+                                    <th>จ่ายแล้ว</th>
+                                    <th>วันที่สั่งซื้อ</th>
+                                    <th>จัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="dataRow_o?.length != 0">
+                                <tr *ngFor="let item of dataRow_o; let i = index" (click)="view(item.id)"
+                                    style="cursor: pointer;">
+                                    <td style="width: 5%;">{{ pages.begin + (i + 1) }}</td>
+                                    <td *ngIf="item.channal === 'line'"><img [src]='line'
+                                            style="height: 25px;width: 25px"></td>
+                                    <td *ngIf="item.channal === 'facebook'"><img [src]='facebook'
+                                            style="height: 25px;width: 25px"></td>
+                                    <td *ngIf="item.channal === 'tiktok'"> <img [src]='tiktok'
+                                            style="height: 25px;width: 25px"></td>
+                                    <td *ngIf="item.channal === 'other'"> {{item.channal}}</td>
+
+                                    <td>{{ item.order_id }}</td>
+                                    <td>{{ item.name }}</td>
+
+                                    <td *ngIf="item.status === 'order'"> <span
+                                            class="bg-yellow-100 text-yellow-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">ยังไม่จ่าย</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'paid'"> <span
+                                            class="bg-green-300 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">จ่ายแล้ว</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'confirm'"> <span
+                                            class="bg-blue-100 text-blue-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">ยืนยัน</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'packing'"><span
+                                            class="bg-gray-100 text-gray-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">กำลังแพ็ค</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'delivery'"> <span
+                                            class="bg-purple-100 text-purple-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">กำลังจัดส่ง</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'finish'"> <span
+                                            class="bg-green-100 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">สำเร็จ</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'failed'"> <span
+                                            class="bg-red-100 text-red-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ไม่สำเร็จ</span>
+                                    </td>
+                                    <td *ngIf="item.payment_type === 'COD'"> COD</td>
+                                    <td *ngIf="item.payment_type === 'transfer'"> โอนเงิน</td>
+                                    <td>{{ item.total }}</td>
+                                    <td>{{ item.payment_qty }}</td>
+                                    <td>{{ item.date_time | thaiDate}}</td>
+                                    <td style="width: 10%;">
+                                        <button mat-button (click)="edit(item.id)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <button mat-button (click)="print(item.id)">
+                                            <mat-icon>print</mat-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="dataRow_o?.length == 0">
+                                <tr>
+                                    <td colspan="6" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        จ่ายแล้ว
+                        <div matBadge="{{total_p}}" matBadgePosition="before" class="job-badge"></div>
+                    </ng-template>
+                    <div class="table-responsive">
+                        <table datatable [dtOptions]="dtOptionsPaid"
+                            class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                            style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>ลำดับ</th>
+                                    <th>ช่องทาง</th>
+                                    <th>หมายเลขคำสั่งซื้อ</th>
+                                    <th>ลูกค้า</th>
+                                    <th>สถานะ</th>
+                                    <!-- <th>บริการขนส่ง</th> -->
+                                    <th>การชำระเงิน</th>
+                                    <th>ยอดรวม</th>
+                                    <th>จ่ายแล้ว</th>
+                                    <th>วันที่สั่งซื้อ</th>
+                                    <th>จัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="dataRow_p?.length != 0">
+                                <tr *ngFor="let item of dataRow_p; let i = index" (click)="view(item.id)"
+                                    style="cursor: pointer;">
+                                    <td style="width: 5%;">{{ pages.begin + (i + 1) }}</td>
+                                    <td *ngIf="item.channal === 'line'"><img [src]='line'
+                                            style="height: 25px;width: 25px"></td>
+                                    <td *ngIf="item.channal === 'facebook'"><img [src]='facebook'
+                                            style="height: 25px;width: 25px"></td>
+                                    <td *ngIf="item.channal === 'tiktok'"> <img [src]='tiktok'
+                                            style="height: 25px;width: 25px"></td>
+
+                                    <td *ngIf="item.channal === 'other'"> {{item.channal}}</td>
+                                    <td>{{ item.order_id }}</td>
+                                    <td>{{ item.name }}</td>
+                                    <td *ngIf="item.status === 'order'"> <span
+                                            class="bg-yellow-100 text-yellow-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">ยังไม่จ่าย</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'paid'"> <span
+                                            class="bg-green-300 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">จ่ายแล้ว</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'confirm'"> <span
+                                            class="bg-blue-100 text-blue-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">ยืนยัน</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'packing'"><span
+                                            class="bg-gray-100 text-gray-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">กำลังแพ็ค</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'delivery'"> <span
+                                            class="bg-purple-100 text-purple-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">กำลังจัดส่ง</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'finish'"> <span
+                                            class="bg-green-100 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">สำเร็จ</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'failed'"> <span
+                                            class="bg-red-100 text-red-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ไม่สำเร็จ</span>
+                                    </td>
+                                    <td *ngIf="item.payment_type === 'COD'"> COD</td>
+                                    <td *ngIf="item.payment_type === 'transfer'"> โอนเงิน</td>
+                                    <td>{{ item.total }}</td>
+                                    <td>{{ item.payment_qty }}</td>
+                                    <td>{{ item.date_time | thaiDate}}</td>
+                                    <td style="width: 10%;">
+                                        <button mat-button (click)="edit(item.id)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <button mat-button (click)="print(item.id)">
+                                            <mat-icon>print</mat-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="dataRow_p?.length == 0">
+                                <tr>
+                                    <td colspan="6" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        ยืนยัน
+                        <div matBadge="{{total_c}}" matBadgePosition="before" class="job-badge"></div>
+                    </ng-template>
+                    <div class="table-responsive">
+                        <table datatable [dtOptions]="dtOptionsConfirm"
+                            class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                            style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>ลำดับ</th>
+                                    <th>ช่องทาง</th>
+                                    <th>หมายเลขคำสั่งซื้อ</th>
+                                    <th>ลูกค้า</th>
+                                    <th>สถานะ</th>
+                                    <!-- <th>บริการขนส่ง</th> -->
+                                    <th>การชำระเงิน</th>
+                                    <th>ยอดรวม</th>
+                                    <th>จ่ายแล้ว</th>
+                                    <th>วันที่สั่งซื้อ</th>
+                                    <th>จัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="dataRow_c?.length != 0">
+                                <tr *ngFor="let item of dataRow_c; let i = index" (click)="view(item.id)"
+                                    style="cursor: pointer;">
+                                    <td style="width: 5%;">{{ pages.begin + (i + 1) }}</td>
+                                    <td *ngIf="item.channal === 'line'"><img [src]='line'
+                                            style="height: 25px;width: 25px"></td>
+                                    <td *ngIf="item.channal === 'facebook'"><img [src]='facebook'
+                                            style="height: 25px;width: 25px"></td>
+                                    <td *ngIf="item.channal === 'tiktok'"> <img [src]='tiktok'
+                                            style="height: 25px;width: 25px"></td>
+
+                                    <td *ngIf="item.channal === 'other'"> {{item.channal}}</td>
+                                    <td>{{ item.order_id }}</td>
+                                    <td>{{ item.name }}</td>
+                                    <td *ngIf="item.status === 'order'"> <span
+                                            class="bg-yellow-100 text-yellow-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">ยังไม่จ่าย</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'paid'"> <span
+                                            class="bg-green-300 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">จ่ายแล้ว</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'confirm'"> <span
+                                            class="bg-blue-100 text-blue-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">ยืนยัน</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'packing'"><span
+                                            class="bg-gray-100 text-gray-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">กำลังแพ็ค</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'delivery'"> <span
+                                            class="bg-purple-100 text-purple-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">กำลังจัดส่ง</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'finish'"> <span
+                                            class="bg-green-100 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">สำเร็จ</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'failed'"> <span
+                                            class="bg-red-100 text-red-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ไม่สำเร็จ</span>
+                                    </td>
+                                    <td *ngIf="item.payment_type === 'COD'"> COD</td>
+                                    <td *ngIf="item.payment_type === 'transfer'"> โอนเงิน</td>
+                                    <td>{{ item.total }}</td>
+                                    <td>{{ item.payment_qty }}</td>
+                                    <td>{{ item.date_time | thaiDate}}</td>
+                                    <td style="width: 10%;">
+                                        <button mat-button (click)="edit(item.id)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <button mat-button (click)="print(item.id)">
+                                            <mat-icon>print</mat-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="dataRow_c?.length == 0">
+                                <tr>
+                                    <td colspan="6" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        กำลังแพ็ค
+                        <div matBadge="{{total_pc}}" matBadgePosition="before" class="job-badge"></div>
+                    </ng-template>
+                    <div class="table-responsive">
+                        <table datatable [dtOptions]="dtOptionsPacking"
+                            class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                            style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>ลำดับ</th>
+                                    <th>ช่องทาง</th>
+                                    <th>หมายเลขคำสั่งซื้อ</th>
+                                    <th>ลูกค้า</th>
+                                    <th>สถานะ</th>
+                                    <!-- <th>บริการขนส่ง</th> -->
+                                    <th>การชำระเงิน</th>
+                                    <th>ยอดรวม</th>
+                                    <th>จ่ายแล้ว</th>
+                                    <th>วันที่สั่งซื้อ</th>
+                                    <th>จัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="dataRow_pc?.length != 0">
+                                <tr *ngFor="let item of dataRow_pc; let i = index" (click)="view(item.id)"
+                                    style="cursor: pointer;">
+                                    <td style="width: 5%;">{{ pages.begin + (i + 1) }}</td>
+                                    <td *ngIf="item.channal === 'line'"><img [src]='line'
+                                            style="height: 25px;width: 25px"></td>
+                                    <td *ngIf="item.channal === 'facebook'"><img [src]='facebook'
+                                            style="height: 25px;width: 25px"></td>
+                                    <td *ngIf="item.channal === 'tiktok'"> <img [src]='tiktok'
+                                            style="height: 25px;width: 25px"></td>
+
+                                    <td *ngIf="item.channal === 'other'"> {{item.channal}}</td>
+                                    <td>{{ item.order_id }}</td>
+                                    <td>{{ item.name }}</td>
+                                    <td *ngIf="item.status === 'order'"> <span
+                                            class="bg-yellow-100 text-yellow-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">ยังไม่จ่าย</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'paid'"> <span
+                                            class="bg-green-300 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">จ่ายแล้ว</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'confirm'"> <span
+                                            class="bg-blue-100 text-blue-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">ยืนยัน</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'packing'"><span
+                                            class="bg-gray-100 text-gray-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">กำลังแพ็ค</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'delivery'"> <span
+                                            class="bg-purple-100 text-purple-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">กำลังจัดส่ง</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'finish'"> <span
+                                            class="bg-green-100 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">สำเร็จ</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'failed'"> <span
+                                            class="bg-red-100 text-red-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ไม่สำเร็จ</span>
+                                    </td>
+                                    <td *ngIf="item.payment_type === 'COD'"> COD</td>
+                                    <td *ngIf="item.payment_type === 'transfer'"> โอนเงิน</td>
+                                    <td>{{ item.total }}</td>
+                                    <td>{{ item.payment_qty }}</td>
+                                    <td>{{ item.date_time | thaiDate}}</td>
+                                    <td style="width: 10%;">
+                                        <button mat-button (click)="edit(item.id)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <button mat-button (click)="print(item.id)">
+                                            <mat-icon>print</mat-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="dataRow_pc?.length == 0">
+                                <tr>
+                                    <td colspan="6" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        กำลังจัดส่ง
+                        <div matBadge="{{total_d}}" matBadgePosition="before" class="job-badge"></div>
+                    </ng-template>
+                    <div class="table-responsive">
+                        <table datatable [dtOptions]="dtOptionsDelivery"
+                            class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                            style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>ลำดับ</th>
+                                    <th>ช่องทาง</th>
+                                    <th>หมายเลขคำสั่งซื้อ</th>
+                                    <th>ลูกค้า</th>
+                                    <th>สถานะ</th>
+                                    <!-- <th>บริการขนส่ง</th> -->
+                                    <th>การชำระเงิน</th>
+                                    <th>ยอดรวม</th>
+                                    <th>จ่ายแล้ว</th>
+                                    <th>วันที่สั่งซื้อ</th>
+                                    <th>จัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="dataRow_d?.length != 0">
+                                <tr *ngFor="let item of dataRow_d; let i = index" (click)="view(item.id)"
+                                    style="cursor: pointer;">
+                                    <td style="width: 5%;">{{ pages.begin + (i + 1) }}</td>
+                                    <td *ngIf="item.channal === 'line'"><img [src]='line'
+                                            style="height: 25px;width: 25px"></td>
+                                    <td *ngIf="item.channal === 'facebook'"><img [src]='facebook'
+                                            style="height: 25px;width: 25px"></td>
+                                    <td *ngIf="item.channal === 'tiktok'"> <img [src]='tiktok'
+                                            style="height: 25px;width: 25px"></td>
+
+                                    <td *ngIf="item.channal === 'other'"> {{item.channal}}</td>
+                                    <td>{{ item.order_id }}</td>
+                                    <td>{{ item.name }}</td>
+                                    <td *ngIf="item.status === 'order'"> <span
+                                            class="bg-yellow-100 text-yellow-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">ยังไม่จ่าย</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'paid'"> <span
+                                            class="bg-green-300 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">จ่ายแล้ว</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'confirm'"> <span
+                                            class="bg-blue-100 text-blue-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">ยืนยัน</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'packing'"><span
+                                            class="bg-gray-100 text-gray-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">กำลังแพ็ค</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'delivery'"> <span
+                                            class="bg-purple-100 text-purple-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">กำลังจัดส่ง</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'finish'"> <span
+                                            class="bg-green-100 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">สำเร็จ</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'failed'"> <span
+                                            class="bg-red-100 text-red-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ไม่สำเร็จ</span>
+                                    </td>
+                                    <td *ngIf="item.payment_type === 'COD'"> COD</td>
+                                    <td *ngIf="item.payment_type === 'transfer'"> โอนเงิน</td>
+                                    <td>{{ item.total }}</td>
+                                    <td>{{ item.payment_qty }}</td>
+                                    <td>{{ item.date_time | thaiDate}}</td>
+                                    <td style="width: 10%;">
+                                        <button mat-button (click)="edit(item.id)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <button mat-button (click)="print(item.id)">
+                                            <mat-icon>print</mat-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="dataRow_d?.length == 0">
+                                <tr>
+                                    <td colspan="6" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        สำเร็จ
+                        <div matBadge="{{total_f}}" matBadgePosition="before" class="job-badge"></div>
+                    </ng-template>
+                    <div class="table-responsive">
+                        <table datatable [dtOptions]="dtOptionsFinish"
+                            class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                            style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>ลำดับ</th>
+                                    <th>ช่องทาง</th>
+                                    <th>หมายเลขคำสั่งซื้อ</th>
+                                    <th>ลูกค้า</th>
+                                    <th>สถานะ</th>
+                                    <!-- <th>บริการขนส่ง</th> -->
+                                    <th>การชำระเงิน</th>
+                                    <th>ยอดรวม</th>
+                                    <th>จ่ายแล้ว</th>
+                                    <th>วันที่สั่งซื้อ</th>
+                                    <th>จัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="dataRow_f?.length != 0">
+                                <tr *ngFor="let item of dataRow_f; let i = index" (click)="view(item.id)"
+                                    style="cursor: pointer;">
+                                    <td style="width: 5%;">{{ pages.begin + (i + 1) }}</td>
+                                    <td *ngIf="item.channal === 'line'"><img [src]='line'
+                                            style="height: 25px;width: 25px"></td>
+                                    <td *ngIf="item.channal === 'facebook'"><img [src]='facebook'
+                                            style="height: 25px;width: 25px"></td>
+                                    <td *ngIf="item.channal === 'tiktok'"> <img [src]='tiktok'
+                                            style="height: 25px;width: 25px"></td>
+
+                                    <td *ngIf="item.channal === 'other'"> {{item.channal}}</td>
+                                    <td>{{ item.order_id }}</td>
+                                    <td>{{ item.name }}</td>
+                                    <td *ngIf="item.status === 'order'"> <span
+                                            class="bg-yellow-100 text-yellow-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">ยังไม่จ่าย</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'paid'"> <span
+                                            class="bg-green-300 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">จ่ายแล้ว</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'confirm'"> <span
+                                            class="bg-blue-100 text-blue-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">ยืนยัน</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'packing'"><span
+                                            class="bg-gray-100 text-gray-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">กำลังแพ็ค</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'delivery'"> <span
+                                            class="bg-purple-100 text-purple-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">กำลังจัดส่ง</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'finish'"> <span
+                                            class="bg-green-100 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">สำเร็จ</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'failed'"> <span
+                                            class="bg-red-100 text-red-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ไม่สำเร็จ</span>
+                                    </td>
+                                    <td *ngIf="item.payment_type === 'COD'"> COD</td>
+                                    <td *ngIf="item.payment_type === 'transfer'"> โอนเงิน</td>
+                                    <td>{{ item.total }}</td>
+                                    <td>{{ item.payment_qty }}</td>
+                                    <td>{{ item.date_time | thaiDate}}</td>
+                                    <td style="width: 10%;">
+                                        <button mat-button (click)="edit(item.id)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <button mat-button (click)="print(item.id)">
+                                            <mat-icon>print</mat-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="dataRow_f?.length === 0">
+                                <tr>
+                                    <td colspan="6" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        ไม่สำเร็จ
+                        <div matBadge="{{total_reject}}" matBadgePosition="before" class="job-badge"></div>
+                    </ng-template>
+                    <div class="table-responsive">
+                        <table datatable [dtOptions]="dtOptionsReject"
+                            class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                            style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>ลำดับ</th>
+                                    <th>ช่องทาง</th>
+                                    <th>หมายเลขคำสั่งซื้อ</th>
+                                    <th>ลูกค้า</th>
+                                    <th>สถานะ</th>
+                                    <!-- <th>บริการขนส่ง</th> -->
+                                    <th>การชำระเงิน</th>
+                                    <th>ยอดรวม</th>
+                                    <th>จ่ายแล้ว</th>
+                                    <th>วันที่สั่งซื้อ</th>
+                                    <th>จัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="dataRow_reject?.length != 0">
+                                <tr *ngFor="let item of dataRow_reject; let i = index" (click)="view(item.id)"
+                                    style="cursor: pointer;">
+                                    <td style="width: 5%;">{{ pages.begin + (i + 1) }}</td>
+                                    <td *ngIf="item.channal === 'line'"><img [src]='line'
+                                            style="height: 25px;width: 25px"></td>
+                                    <td *ngIf="item.channal === 'facebook'"><img [src]='facebook'
+                                            style="height: 25px;width: 25px"></td>
+                                    <td *ngIf="item.channal === 'tiktok'"> <img [src]='tiktok'
+                                            style="height: 25px;width: 25px"></td>
+
+                                    <td *ngIf="item.channal === 'other'"> {{item.channal}}</td>
+                                    <td>{{ item.order_id }}</td>
+                                    <td>{{ item.name }}</td>
+                                    <td *ngIf="item.status === 'order'"> <span
+                                            class="bg-yellow-100 text-yellow-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">ยังไม่จ่าย</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'paid'"> <span
+                                            class="bg-green-300 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">จ่ายแล้ว</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'confirm'"> <span
+                                            class="bg-blue-100 text-blue-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">ยืนยัน</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'packing'"><span
+                                            class="bg-gray-100 text-gray-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">กำลังแพ็ค</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'delivery'"> <span
+                                            class="bg-purple-100 text-purple-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">กำลังจัดส่ง</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'finish'"> <span
+                                            class="bg-green-100 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">สำเร็จ</span>
+                                    </td>
+                                    <td *ngIf="item.status === 'failed'"> <span
+                                            class="bg-red-100 text-red-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ไม่สำเร็จ</span>
+                                    </td>
+                                    <td *ngIf="item.payment_type === 'COD'"> COD</td>
+                                    <td *ngIf="item.payment_type === 'transfer'"> โอนเงิน</td>
+                                    <td>{{ item.total }}</td>
+                                    <td>{{ item.payment_qty }}</td>
+                                    <td>{{ item.date_time | thaiDate}}</td>
+                                    <td style="width: 10%;">
+                                        <button mat-button (click)="edit(item.id)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <button mat-button (click)="print(item.id)">
+                                            <mat-icon>print</mat-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="dataRow_reject?.length == 0">
+                                <tr>
+                                    <td colspan="6" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+
+</div>

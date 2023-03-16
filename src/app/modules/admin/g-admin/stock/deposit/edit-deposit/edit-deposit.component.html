@@ -1,0 +1,151 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    รายละเอียดข้อมูล รับ - เบิก สินค้า
+                </h2>
+            </div>
+            <a mat-stroked-button type="button" href="stock/deposit/list">
+                <mat-icon>keyboard_arrow_left</mat-icon>
+                ย้อนกลับ
+            </a>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-3 sm:p-10">
+        <form [formGroup]="formData">
+            <div class="flex">
+                <div class="flex-none h-12 w-2/12 font-extrabold text-lg">
+                    ประเภทรายการ
+                </div>
+                <div class="flex-none h-12 w-full">
+                    <div d class="w-3/12 pr-2" *ngIf=" this.dataRow.type === 'Withdraw'">
+                        <p>เบิกสินค้า</p>
+                    </div>
+                    <div d class="w-3/12 pr-2" *ngIf=" this.dataRow.type === 'Deposit'">
+                        <p>รับสินค้า</p>
+                    </div>
+                </div>
+            </div>
+            &nbsp;
+            <div class="flex" *ngIf=" this.dataRow.type === 'Deposit'">
+                <div class="flex-none h-12 w-2/12 font-extrabold text-lg">
+                    วันที่รับสินค้าเข้า
+                </div>
+                <div class="flex-none h-12 w-full">
+                    <div d class="w-3/12 pr-2">
+                        <p> {{ this.dataRow.created_at | thaiDate }}</p>
+                        <!-- <p> {{ this.dataRow.date}}</p> -->
+                    </div>
+                </div>
+            </div>
+            <div class="flex" *ngIf=" this.dataRow.type === 'Withdraw'">
+                <div class="flex-none h-12 w-2/12 font-extrabold text-lg">
+                    วันที่เบิกสินค้าออก
+                </div>
+                <div class="flex-none h-12 w-full">
+                    <div d class="w-3/12 pr-2">
+                        <!-- <p> {{ this.dataRow.date}}</p> -->
+                        <p> {{ this.dataRow.created_at | thaiDate }}</p>
+                    </div>
+                </div>
+            </div>
+            &nbsp;
+            <div class="flex">
+                <div class="flex-none h-12 w-2/12 font-extrabold text-lg">
+                    เลขที่ใบสั่งซื้อสินค้า
+                </div>
+                <div class="flex-initial w-full">
+                    <div d class="w-3/12 pr-2">
+                        <p> {{ this.dataRow.report_id }}</p>
+                    </div>
+                </div>
+            </div>
+            &nbsp;
+            <div class="overflow-x-auto relative shadow-md sm:rounded-lg" formArrayName="deposit">
+                <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead class="text-lg text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400  border-b bg-gray-100">
+                            <tr>
+                                <th scope="col" class="py-3 px-6">
+                                    ลำดับ
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    รหัสสินค้า
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    ชื่อสินค้า
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    จุดเก็บสินค้า
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    จำนวน
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let depo; of: deposit().controls; let i = index" [formGroupName]="i"
+                                class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 text-md border-b">
+
+                                <td class="py-4 px-6">
+                                    {{i +1}}
+                                </td>
+                                <td class="py-4 px-6">
+                                    <input matInput [formControlName]="'item_id'" hidden>
+                                    <input matInput [formControlName]="'code'" readonly
+                                        placeholder="คลิกเพื่อเลือกสินค้า" (click)="openDialog(i)">
+                                </td>
+                                <td class="py-4 px-6">
+                                    <input matInput [formControlName]="'item_name'" readonly>
+                                </td>
+                                <td class="py-4 px-6">
+                                    {{ depo.value.location_1_name ?? 'ไม่มีข้อมูล'}}
+                                </td>
+                                <td class="py-4 px-6">
+                                    <mat-form-field class="w-32 pr-2 mt-1">
+                                        <input matInput [formControlName]="'qty'" readonly>
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </form>
+
+        <div class="flex items-center justify-end w-full px-8 py-4 border-t">
+            <div class="flex items-center justify-end">
+                <div *ngIf="this.dataRow.type === 'Deposit'">
+                    <a class="ml-4" mat-flat-button href="stock/deposit/list">
+                        <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                        ยกเลิก
+                    </a>
+                </div>
+                <div *ngIf="this.dataRow.type === 'Withdraw'">
+                    <a class="ml-4" mat-flat-button href="stock/withdraw/list">
+                        <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                        ยกเลิก
+                    </a>
+                </div>
+                <div *ngIf="this.dataRow.status === 'Open'">
+                    <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="Approve('Reject')">
+                        <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                        ไม่อนุมัติ
+                    </button>
+                    <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="Approve('Approved')">
+                        <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                        อนุมัติ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

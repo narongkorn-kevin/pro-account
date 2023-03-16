@@ -1,0 +1,49 @@
+:host {
+    display: flex;
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+}
+
+::ng-deep table.dataTable td.dataTables_empty {
+    display: none;
+}
+
+::ng-deep .mat-calendar {
+    color: black;
+    background: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+::ng-deep .mat-flat-button.mat-primary {
+    border-radius: 4px !important;
+}
+
+::ng-deep .mat-button,
+.mat-fab,
+.mat-flat-button,
+.mat-icon-button,
+.mat-mini-fab,
+.mat-raised-button,
+.mat-stroked-button {
+    border-radius: 4px !important;
+}
+
+::ng-deep .mat-button,
+.mat-flat-button,
+.mat-raised-button,
+.mat-stroked-button {
+    border-radius: 4px !important;
+}
+
+::ng-deep body.light .mat-flat-button,
+body.light .mat-raised-button,
+body.light .mat-fab,
+body.light .mat-mini-fab,
+body .light .mat-flat-button,
+body .light .mat-raised-button,
+body .light .mat-fab,
+body .light .mat-mini-fab {
+    border-radius: 4px !important;
+}

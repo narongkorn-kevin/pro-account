@@ -1,0 +1,87 @@
+<div
+    class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-1 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+    <div class="flex-1 min-w-0">
+        <!-- Title -->
+        <div class="mt-2">
+            <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                สร้างเงินเพิ่ม
+            </h1>
+        </div>
+    </div>
+</div>
+<div class="flex-auto p-3 sm:p-2">
+    <form [formGroup]="formData">
+        <div class="flex p-5">
+            <label for="name"
+                class="text-gray-800 text-lg font-bold leading-tight tracking-normal w-1/3 mt-4">ชื่อพนักงาน</label>
+            <mat-form-field class="w-2/3 pr-2">
+                <mat-select [formControlName]="'user_id'">
+                    <mat-option *ngFor="let item of UserList" [value]="item.id">
+                        {{item.first_name}} {{item.last_name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+
+
+
+        <div class="flex p-5">
+            <label for="name"
+                class="text-gray-800 text-lg font-bold leading-tight tracking-normal w-1/3 mt-4">ประเภทเงินเพิ่ม</label>
+             <mat-form-field class="w-2/3 pr-2">
+                <mat-select [formControlName]="'income_type_id'">
+                    <mat-option *ngFor="let item of TypeList" [value]="item.id">
+                        {{item.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+       
+       
+      
+   
+        
+        <div class="flex p-5">
+            <label for="name" class="text-gray-800 text-lg font-bold leading-tight tracking-normal w-1/3 mt-4">จำนวนเงิน</label>
+            <input id="name" type="number" min="0"
+                class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600
+                 font-normal w-2/3 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"placeholder="กรุณากรอกจำนวนเงิน" formControlName="price" />
+        </div>
+
+        <div class="flex p-5">
+            <label for="name" class="text-gray-800 text-lg font-bold leading-tight tracking-normal w-1/3 mt-4">สาเหตุ</label>
+                <textarea  id="name" rows="4"  class=" block p-2.5 mb-5 mt-2 text-gray-600 
+                focus:outline-none focus:border focus:border-yellow-600 font-normal w-2/3  flex items-center
+                 pl-3 text-sm border-gray-300 rounded border" placeholder="รายละเอียด" formControlName="description" ></textarea>
+        </div>
+
+        <div class="flex p-5">
+            <label for="name" class="text-gray-800 text-lg font-bold leading-tight tracking-normal w-1/3 mt-4">เลือกเงื่อนไข</label>
+            <mat-form-field class="w-2/3 pr-2">
+                <mat-select [formControlName]="'type'">
+                    <mat-option value="Once">ครั้ง </mat-option>
+                    <mat-option value="All Month">เดือน</mat-option>
+                    <mat-option value="All Year">ปี</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="flex items-center justify-end w-full border-t px-8 py-4">
+            <div class="flex items-center justify-end">
+                <a class="ml-4" mat-flat-button (click)="onClose()">
+                    <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                    ยกเลิก
+                </a>
+                <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="newItemType()">
+                    <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                    ยืนยัน
+                </button>
+            </div>
+        </div>
+
+
+        
+    </form>
+</div>

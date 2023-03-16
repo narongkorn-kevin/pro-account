@@ -1,0 +1,187 @@
+<div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-8 sm:pb-4 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    แก้ไขข้อมูลโปรไฟล์พนักงาน
+                </h2>
+            </div>
+
+        </div>
+    </div>
+    <div class="flex-auto p-3 sm:p-10">
+        <!-- This example requires Tailwind CSS v2.0+ -->
+        <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+            <div class="flex">
+                <div class="w-full">
+                    <div class="px-4 mt-4 sm:px-6">
+                        <h2 class="text-2xl font-extrabold leading-6 text-gray-900">รายละเอียดพนักงาน</h2>
+                        <p class="text-lg mt-1 max-w-2xl text-gray-500">แก้ไขข้อมูลโปรไฟล์พนักงาน</p>
+                    </div>
+                </div>
+            </div>
+            <form class="flex flex-col mt-3 p-2 pb-4 bg-card shadow overflow-hidden ng-valid" [formGroup]="formData">
+                <div class="flex">
+                    <div class="w-full">
+                        <div class="border-t border-gray-200">
+                            <dl>
+                                <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ชื่อ</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input matInput [formControlName]="'first_name'"
+                                                placeholder="กรุณาระบุชื่อพนักงาน">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">นามสกุล</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input matInput [formControlName]="'last_name'"
+                                                placeholder="กรุณาระบุนามสกุลพนักงาน">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">รหัสพนักงาน</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input matInput [formControlName]="'user_id'"
+                                                placeholder="กรุณาระบุรหัสพนักงาน" readonly>
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">อีเมลล์</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input matInput [formControlName]="'email'" placeholder="กรุณาระบุอีเมลล์">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <!-- <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">รหัสผ่าน</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input matInput [formControlName]="'password'" #password autocomplete="false" type="password"
+                                            maxlength="12" placeholder="กรุณาระบุรหัสผ่าน" >
+                                        </mat-form-field>
+                                    </dd>
+                                </div> -->
+<!-- 
+                                <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">กำหนดสิทธิ์</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full pr-2">
+                                            <mat-select [formControlName]="'permission_id'" [disabled]="true">
+                                                <mat-option [value]="''">
+                                                    กรุณาเลือกสิทธิ
+                                                </mat-option>
+                                                <mat-option *ngFor="let item of permissionData" [value]="item.id">
+                                                    {{item.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </dd>
+                                </div> -->
+                                <!-- <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">แผนก</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full pr-2">
+                                            <mat-select [formControlName]="'department_id'" [disabled]="true">
+                                                <mat-option [value]="''">
+                                                    กรุณาเลือกแผนก
+                                                </mat-option>
+                                                <mat-option *ngFor="let item of departmentData" [value]="item.id">
+                                                    {{item.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </dd>
+                                </div> -->
+                                <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ตำแหน่ง</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full pr-2">
+                                            <mat-select [formControlName]="'position_id'" [disabled]="true">
+                                                <mat-option [value]="''">
+                                                    กรุณาเลือกตำแหน่ง
+                                                </mat-option>
+                                                <mat-option *ngFor="let item of positionData" [value]="item.id">
+                                                    {{item.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">สาขา</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full pr-2">
+                                            <mat-select [formControlName]="'branch_id'" [disabled]="true">
+                                                <mat-option [value]="''">
+                                                    กรุณาเลือกสาขา
+                                                </mat-option>
+                                                <mat-option *ngFor="let item of branchData" [value]="item.id">
+                                                    {{item.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="w-full">
+                        <div class="border-t border-gray-200">
+                            <dl>
+                                <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">รูปโปรไฟล์</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <div class="flex justify-center items-center w-full">
+                                            <label>
+                                                <input (change)='onChange($event)' type="file" id="file"
+                                                    style="cursor: pointer;">
+                                                <img class="img h-64 w-64" [src]="url_pro">
+                                            </label>
+                                        </div>
+                                    </dd>
+                                </div>
+                                <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">รูปลายเซ็น</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <div class="flex justify-center items-center w-full">
+
+                                            <label>
+                                                <input (change)='onChangeSignature($event)' type="file" id="file">
+                                                <img class="img h-64 w-64" [src]="url_sig">
+                                            </label>
+                                        </div>
+                                    </dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="flex items-center justify-end w-full border-t px-8 py-4">
+                <div class="flex items-center justify-end">
+                    <a class="ml-4" mat-flat-button href="user/profile">
+                        <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                        ยกเลิก
+                    </a>
+                    <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="updateProfile()">
+                        <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                        ยืนยัน
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

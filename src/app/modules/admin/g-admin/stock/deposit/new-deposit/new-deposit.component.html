@@ -1,0 +1,159 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    สร้างข้อมูลรับสินค้าเข้าคลัง
+                </h2>
+            </div>
+            <a mat-stroked-button type="button" href="stock/deposit/list">
+                <mat-icon>keyboard_arrow_left</mat-icon>
+                ย้อนกลับ
+            </a>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-3 sm:p-10">
+        <form [formGroup]="formData">
+            <div class="flex">
+                <div class="flex-none h-12 w-32">
+                    วันที่รับสินค้าเข้า
+                </div>
+                <div class="flex-none h-12 w-full">
+                    <mat-form-field class="w-3/12 pr-2" >
+                        <input matInput [matDatepicker]="picker" [formControlName]="'date'">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+
+                    <!-- <mat-form-field class="w-3/12 pr-2">
+                        <input matInput type="date" [formControlName]="'date'" class="form-control">
+                    </mat-form-field> -->
+                </div>
+                <div class="flex-none h-12 w-full">
+                    <input type="date" [formControlName]="'date'" class="form-control">
+                </div>
+            </div>
+            &nbsp;
+            <div class="flex">
+                <div class="flex-none h-12 w-32">
+                    ซัพพลายเออร์
+                </div>
+                <div class="flex-initial w-full">
+                    <mat-form-field class="w-3/12 pr-2">
+                        <mat-select [formControlName]="'vendor_id'">
+                            <mat-option [value]="''">
+                                ไม่เลือก
+                            </mat-option>
+                            <mat-option *ngFor="let ven of vendorData" [value]="ven.id">
+                                {{ven.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            &nbsp;
+            <div class="flex">
+                <div class="flex-none h-12 w-32">
+                    <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="addItem()">
+                        <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
+                        เพิ่มสินค้า
+                    </button>
+                </div>
+            </div>
+            <!-- <div class="flex">
+                <div class="flex-none h-12 w-32">
+                    <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="addItem()">
+                        <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
+                        เพิ่มสินค้า
+                    </button>
+                </div>
+            </div> -->
+            <div>
+                <div class="overflow-x-auto relative shadow-md sm:rounded-lg" formArrayName="deposit">
+                    <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead
+                                class="text-lg text-gray-700 uppercase  dark:bg-gray-700 dark:text-gray-400  border-b bg-gray-100">
+                                <tr>
+                                    <th scope="col" class="py-3 px-6">
+                                        ลำดับ
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        รหัสสินค้า
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        ชื่อสินค้า
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        จุดเก็บสินค้า
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        จำนวน
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        จัดการ
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let depo; of: deposit().controls; let i = index" [formGroupName]="i"
+                                    class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 text-md border-b">
+
+                                    <td class="py-4 px-6">
+                                        {{i +1}}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <input matInput [formControlName]="'item_id'" hidden>
+                                        <input matInput [formControlName]="'code'" readonly
+                                            placeholder="คลิกเพื่อเลือกสินค้า" (click)="openDialog(i)">
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <input matInput [formControlName]="'item_name'" readonly>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        {{depo.value.location_1_name ?? 'ไม่มีข้อมูล'}}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <mat-form-field class="w-32 pr-2 mt-1">
+                                            <input matInput [formControlName]="'qty'">
+                                        </mat-form-field>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <button class="px-6 ml-3" mat-flat-button (click)="removeItem(i)">
+                                            <mat-icon svgIcon="heroicons_solid:trash"> </mat-icon>&nbsp;
+                                            ลบ
+                                        </button>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="flex items-center justify-end w-full border-t px-8 py-4">
+            <div class="flex items-center justify-end">
+                <a class="ml-4" mat-flat-button href="stock/deposit/list">
+                    <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                    ยกเลิก
+                </a>
+                <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="createItem()">
+                    <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                    ยืนยัน
+                </button>
+            </div>
+        </div>
+        <pre>
+        </pre>
+    </div>
+    <div>
+        check : {{this.formData.value.date | json}}
+    </div>
+</div>

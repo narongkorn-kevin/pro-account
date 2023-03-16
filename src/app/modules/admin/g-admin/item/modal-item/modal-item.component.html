@@ -1,0 +1,105 @@
+<div
+    class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-1 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent w-auto min-w-200 max-h-screen">
+    <div class="flex-1 min-w-0">
+        <!-- Title -->
+        <div class="mt-2">
+            <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                ค้นหาสินค้า
+            </h1>
+        </div>
+    </div>
+</div>
+<div class="flex-auto p-3 sm:p-2">
+    <form [formGroup]="formData">
+        <div class="flex-wrap">
+            <div class="w-full">
+                <div class="flex p-5">
+                    <label for="code"
+                        class="text-gray-800 text-lg font-bold leading-tight tracking-normal w-1/3 mt-4">เลือกหมวดสินค้า</label>
+                    <mat-form-field class="w-full">
+                        <mat-select [formControlName]="'item_type_id'"
+                            (selectionChange)="onChangeItemType($event.value)">
+                            <mat-option *ngFor="let item of itemtypeData" [value]="item.id">
+                                {{item.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="w-full">
+                <div class="flex p-5">
+                    <label for="name"
+                        class="text-gray-800 text-lg font-bold leading-tight tracking-normal w-1/3 mt-4">ค้นหาสินค้า</label>
+                    <mat-form-field class="w-full">
+                        <input matInput [formControlName]="'filter'" (keyup)=" onFilter($event)"
+                            placeholder="ค้นหาสินค้า">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+            <div class="flex flex-col">
+                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                        <div class="overflow-hidden">
+                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                <thead
+                                    class="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
+                                    <tr>
+                                        <th scope="col" class="py-3 px-6">
+                                            ลำดับ
+                                        </th>
+                                        <th scope="col" class="py-3 px-6 text-left">
+                                            ชื่อสินค้า
+                                        </th>
+                                        <th scope="col" class="py-3 px-6">
+                                            จำนวนคงเหลือ
+                                        </th>
+                                        <th scope="col" class="py-3 px-6">
+                                            ราคา
+                                        </th>
+                                        <th scope="col" class="py-3 px-6">
+                                            จัดการ
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b" *ngFor="let product of dataRow; let k = index"
+                                        class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 text-md border-b">
+
+                                        <td
+                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-center">
+                                            {{k+1}}</td>
+                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap w-200">
+                                            {{product.name}} [{{product.item_id}}]
+                                        </td>
+                                        <td
+                                            class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
+                                            {{product.qty}}
+                                        </td>
+                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center"
+                                            *ngIf="product.set_type === 'normal'">
+                                            {{product.unit_price}}
+                                        </td>
+                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center"
+                                            *ngIf="product.set_type === 'set_products'">
+                                            {{product.total_price}}
+                                        </td>
+                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                            <button class="px-6 ml-3 mat-primary" mat-flat-button
+                                                (click)="addProduct(product)">
+                                                <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
+                                                เพิ่มสินค้า
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    &nbsp;
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

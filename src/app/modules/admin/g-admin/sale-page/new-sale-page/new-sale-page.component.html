@@ -1,0 +1,1112 @@
+<div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    สร้างหน้าเซลล์เพจ
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-3 sm:p-10">
+        <!-- This example requires Tailwind CSS v2.0+ -->
+        <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+            <!-- <div class="flex">
+                <div class="w-full">
+                    <div class="px-4 py-5 sm:px-6">
+                        <h3 class="text-lg font-extrabold leading-6 text-gray-900">รายละเอียดเซลล์เพจ</h3>
+                        <p class="mt-1 max-w-2xl text-l text-gray-500">กรุณากรอกข้อมูลเซลล์เพจ</p>
+                    </div>
+                </div>
+            </div> -->
+            <form class="flex flex-col" [formGroup]="formData">
+                <mat-tab-group animationDuration="0ms" class="mt-4">
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+
+                            <mat-icon>description</mat-icon>&nbsp;&nbsp;&nbsp;
+                            <span>ข้อมูลเซลล์เพจ </span>
+
+
+                        </ng-template>
+                        <div class="flex">
+                            <div class="w-full">
+                                <div class="border-t border-gray-200">
+                                    <dl>
+                                        <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                            <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                ชื่อเซลล์เพจ</dt>
+                                            <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                <mat-form-field class="w-full;" style="width: 100%;">
+                                                    <input matInput placeholder="ชื่อเซลล์เพจ" [formControlName]="'name'">
+                                                </mat-form-field>
+                                            </dd>
+                                        </div>
+                                        <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                            <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                เซลล์เพจ URL</dt>
+                                            <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                <mat-form-field class="w-full;" style="width: 100%;">
+                                                    <input matInput placeholder="เซลล์เพจ URL" [formControlName]="'sale_pages_url'">
+                                                </mat-form-field>
+                                            </dd>
+                                        </div>
+                                        <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                            <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                Thank you URL</dt>
+                                            <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                <mat-form-field class="w-full;" style="width: 100%;">
+                                                    <input matInput placeholder="Thank you URL" [formControlName]="'thank_you_url'">
+                                                </mat-form-field>
+                                            </dd>
+                                        </div>
+                                        <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                            <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                เลือกสินค้า</dt>
+                                            <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                <mat-form-field class="w-full;" style="width: 100%;">
+                                                    <input matInput [formControlName]="'select_product_id'" hidden>
+                                                    <input matInput [formControlName]="'product_name'" placeholder="คลิกเพื่อเลือกสินค้า" readonly (click)="openDialog()" style="cursor: pointer;width: 200px;">
+                                                </mat-form-field>
+                                            </dd>
+                                        </div>
+                                        <ng-container *ngIf="this.formData.value.select_product_id !== null">
+
+                                            <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                                <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                </dt>
+                                                <dd class="mt-1 text-l text-gray-900 sm:col-1 sm:mt-0">
+
+                                                    <div class="row"> <img [src]="this.image" style="width: 30%;height: 40%;" class="sm:col-1"></div>
+
+                                                </dd>
+                                                <dd class="mt-1 text-lg text-gray-900 sm:col-1 sm:mt-0">
+                                                    <div><b> {{this.prod_name}}</b></div>
+                                                    <div> <b>สต็อกคงเหลือ : {{this.qty}} </b> </div>
+                                                    <div><b> ราคา : {{this.unit_price}}</b></div>
+
+                                                </dd>
+                                            </div>
+                                        </ng-container>
+                                        <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                            <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                โปรโมชั่น</dt>
+                                            <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-4">
+                                                <label for="default-toggle" class="inline-flex relative items-center cursor-pointer">
+                                                    <input type="checkbox" value="" id="default-toggle"
+                                                        class="sr-only peer" (change)="onValChange($event)">
+                                                    <div
+                                                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300
+                                                         dark:peer-focus:ring-primary-800 rounded-full peer
+                                                          dark:bg-gray-700 peer-checked:after:translate-x-full
+                                                           peer-checked:after:border-white after:content-['']
+                                                            after:absolute after:top-[2px] after:left-[2px] after:bg-white
+                                                             after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5
+                                                             after:transition-all dark:border-gray-600 peer-checked:bg-primary-600">
+                                                    </div>
+                                                </label>
+
+                                            </dd>
+                                        </div>
+                                        <ng-container *ngIf="this.selection === true">
+                                            <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-6 sm:gap-4 sm:px-6">
+                                                <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                </dt>
+                                                <dd class="mt-1 text-l text-gray-900 sm:col-span-4 sm:mt-0">
+                                                    <div class="flex">
+                                                        <div class="flex-none h-12 w-32">
+                                                            <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="addPromotion()">
+                                                                <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
+                                                                เพิ่มโปรโมชั่น
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="flex flex-col" formArrayName="salepage_promotion">
+                                                            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                                                <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                                                                    <div class="overflow-hidden">
+                                                                        <table class="min-w-full">
+                                                                            <thead class="border-b">
+                                                                                <tr>
+                                                                                    <th scope="col" class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                                                        #
+                                                                                    </th>
+                                                                                    <th scope="col" class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                                                        ชื่อโปรโมชั่น
+                                                                                    </th>
+
+                                                                                    <th scope="col" class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                                                        จำนวน
+                                                                                    </th>
+
+                                                                                    <th scope="col" class="text-l font-extraboldtext-gray-900 px-6 py-4 text-left">
+                                                                                        ราคา
+                                                                                    </th>
+
+
+                                                                                    <th scope="col" class="text-l font-extraboldtext-gray-900 px-6 py-4 text-left">
+                                                                                        จัดการ
+                                                                                    </th>
+
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr class="border-b" *ngFor="let depo; of: promotion().controls; let i = index" [formGroupName]="i">
+                                                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                                        {{i +1}}</td>
+
+
+
+
+                                                                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                                                        <mat-form-field class="w-60 pr-2" style="width: 200px!important;">
+                                                                                            <input type="text   " matInput [formControlName]="'name'">
+                                                                                        </mat-form-field>
+                                                                                    </td>
+                                                                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                                                        <mat-form-field class="w-60 pr-2" style="width: 100px!important;">
+                                                                                            <input type="number" matInput [formControlName]="'qty'">
+                                                                                        </mat-form-field>
+                                                                                    </td>
+                                                                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                                                        <mat-form-field class="w-60 pr-2" style="width: 120px!important;">
+                                                                                            <input type="number" matInput [formControlName]="'price'">
+                                                                                        </mat-form-field>
+                                                                                    </td>
+
+                                                                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                                                        <button class="px-6 ml-3" mat-flat-button (click)="removePromotion(i)">
+                                                                                            <mat-icon
+                                                                                                svgIcon="heroicons_solid:trash">
+                                                                                            </mat-icon>&nbsp;
+                                                                                            ลบ
+                                                                                        </button>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </dd>
+                                            </div>
+                                        </ng-container>
+
+
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="flex items-center justify-end w-ful px-8 py-4">
+                            <div class="flex items-center justify-end">
+                                <a class="ml-4" mat-flat-button href="sale-page/list">
+                                    <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                                    ยกเลิก
+                                </a>
+                                <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="newSalePage()">
+                                    <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                                    ยืนยัน
+                                </button>
+                            </div>
+                        </div>
+
+                    </mat-tab>
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <mat-icon> local_shipping</mat-icon>&nbsp;&nbsp;&nbsp;
+                            <span>ตั้งค่าการชำระเงินและการจัดส่ง </span>
+
+                        </ng-template>
+
+                        <div class="flex">
+                            <div class="w-full">
+                                <div class="border-t border-gray-200">
+                                    <dl>
+                                        <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6 justify-items-center">
+                                            <dt class="text-l font-extrabold text-gray-500  mt-4">
+                                                การชำระเงิน</dt>
+                                            <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-4">
+                                                <label class="inline-flex relative items-center cursor-pointer ">
+                                                    <input type="checkbox" value="" class="sr-only peer"
+                                                        (change)="onValChangeCOD($event)" checked>
+                                                    <div
+                                                        class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-primary-300
+                                                     dark:peer-focus:ring-primary-800 dark:bg-gray-700 peer-checked:after:translate-x-full
+                                                      peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 
+                                                      after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full 
+                                                      after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary-600 ">
+                                                    </div>&nbsp;&nbsp;&nbsp;
+                                                    <span
+                                                        class="text-l font-extrabold text-gray-500 ">เก็บเงินปลายทาง</span>
+                                                </label>&nbsp;&nbsp;&nbsp;
+
+                                                <label class="inline-flex relative items-center cursor-pointer">
+                                                    <input type="checkbox" value="" class="sr-only peer"
+                                                        (change)="onValChangeTran($event)" checked>
+                                                    <div
+                                                        class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-primary-300
+                                                    dark:peer-focus:ring-primary-800 dark:bg-gray-700 peer-checked:after:translate-x-full
+                                                    peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 
+                                                    after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full 
+                                                    after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary-600">
+                                                    </div>&nbsp;&nbsp;&nbsp;
+                                                    <span class="text-l font-extrabold text-gray-500">โอนเงิน</span>
+                                                </label>
+
+                                            </dd>
+
+                                        </div>
+
+
+
+                                    </dl>
+                                </div>
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                    </dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-4">
+
+                                    </dd>
+                                </div>
+
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                        ผู้จัดส่ง</dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-4">
+                                        <mat-form-field class="w-full">
+                                            <mat-select [formControlName]="'delivery_by_id'">
+                                                <mat-option value="">เลือกการจัดส่ง</mat-option>
+                                                <mat-option *ngFor="let role of deliveryData" [value]="role.id">
+                                                    {{role.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <div class="flex items-center pl-4 rounded border-gray-200 dark:border-gray-700 ">
+                                            <a class="text-l font-extrabold text-gray-500" href=".." target="_blank">
+                                                <mat-icon class="mt-4">settings</mat-icon>&nbsp; ตั้งค่าผู้จัดส่ง
+                                            </a>
+                                        </div>
+                                    </dd>
+                                </div>
+
+
+
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                        ค่าจัดส่ง</dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full;" style="width: 100%;">
+                                            <input matInput placeholder="" value="0.00">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+
+
+                            </div>
+                            <div class="w-full">
+                                <!-- <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">เลือกบัญชี</dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <mat-select [formControlName]="'bank_id'">
+                                                <mat-option value="">เลือกธนาคาร</mat-option>
+                                                <mat-option *ngFor="let role of bankData" [value]="role.id">
+                                                    ธนาคาร{{role.name}} {{role.account_number}} :
+                                                    {{role.first_name}}
+                                                    {{role.last_name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </dd>
+                             
+                                  
+                                </div> -->
+                                <ng-container *ngIf="this.selection2 === true">
+                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                        <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                            เลือกบัญชีธนาคาร</dt>
+                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <mat-form-field class="w-full">
+                                                <mat-select [formControlName]="'bank_id'">
+                                                    <mat-option value="">เลือกธนาคาร</mat-option>
+                                                    <mat-option *ngFor="let role of bankData" [value]="role.id">
+                                                        ธนาคาร{{role.name}} {{role.account_number}} : {{role.first_name}} {{role.last_name}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <div class="flex items-center pl-4 rounded border-gray-200 dark:border-gray-700">
+                                                <input checked id="bordered-checkbox-2" type="checkbox" value="" name="bordered-checkbox" class="w-4 h-4 text-primary-600 bg-gray-100 rounded border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600
+                                                 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"> &nbsp;&nbsp;
+                                                <label class="text-l font-extrabold text-gray-500">บังคับให้อัพโหลดสลิปโอนเงิน</label>
+
+                                            </div>
+                                            &nbsp;&nbsp;
+                                            <a class="text-l font-extrabold text-gray-500" href=".." target="_blank">
+                                                <mat-icon>settings</mat-icon>&nbsp; ตั้งค่าบัญชีธนาคาร
+                                            </a>
+                                        </dd>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="this.selection2 === false">
+                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                        <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                        </dt>
+                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+
+
+
+                                        </dd>
+                                    </div>
+                                </ng-container>
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                        รูปแบบการจัดส่ง</dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <mat-select [formControlName]="'type'">
+                                                <mat-option value="">รูปแบบการจัดส่ง</mat-option>
+                                                <mat-option value="1">การจัดส่งราคาเดียว (flat rate)</mat-option>
+                                                <mat-option value="2">การจัดส่งตามน้ำหนัก (table rate by weight)
+                                                </mat-option>
+                                                <mat-option value="3">การจัดส่งตามจำนวนชิ้น (table rate by items)
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                    </dd>
+                                </div>
+
+                                <ng-container *ngIf="this.selection1 === true">
+
+                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                        <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                            ค่าบริการเก็บเงินปลายทาง</dt>
+                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <mat-form-field class="w-full;" style="width: 100%;">
+                                                <input matInput placeholder="ค่าบริการเก็บเงินปลายทาง" value="0.00">
+                                            </mat-form-field>
+                                        </dd>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+
+                    </mat-tab>
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+
+                            <mat-icon> chat</mat-icon>&nbsp;&nbsp;&nbsp;
+                            <span>ตั้งค่า Social & Pixel </span>
+                        </ng-template>
+                        <div class="flex-auto p-3 sm:p-2 border-t">
+                            <form class="flex flex-col" [formGroup]="formDataSocial">
+                                <div class="flex">
+                                    <div class="w-full">
+                                        <div>
+                                            <dl>
+                                                <div class="border-b">
+                                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6" formArrayName="facebook_pixel">
+                                                        <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                            Facebook Pixel ID
+
+                                                        </dt>
+                                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                            <div class="flex" *ngFor="let facebooks of: facebook().controls; let index1 = index" [formGroupName]="index1">
+                                                                <mat-form-field class="w-1/2 pl-4" style="width: 100%;">
+                                                                    <input matInput placeholder="Facebook Pixel ID  {{
+                                                                        index1 + 1}}" [formControlName]="'piexel_id'">
+                                                                </mat-form-field>
+                                                                <mat-form-field class="w-1/2 ml-3" style="width: 100%;">
+                                                                    <input matInput placeholder="Access Token  {{
+                                                                        index1 + 1}}" [formControlName]="'access_token'">
+                                                                </mat-form-field>
+                                                                <a class="w-1/12 ml-3 mt-1" mat-flat-button *ngIf="index1 === 0" [color]="'primary'" (click)="addFacebook()">
+                                                                    <mat-icon [svgIcon]="'heroicons_outline:plus'">
+                                                                    </mat-icon>
+                                                                </a>
+                                                                <a class="w-1/12 ml-3 mt-1" mat-flat-button *ngIf=" index1 > 0" [color]="'primary'" (click)="removeFacebook(index1)">
+                                                                    <mat-icon> delete
+                                                                    </mat-icon>
+                                                                </a>
+                                                            </div>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                                        <dt class="text-l font-extrabold text-gray-500  mt-1" style="text-align: center;">
+                                                            Conversion API</dt>
+                                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                            <label for="default-toggle" class="inline-flex relative items-center cursor-pointer">
+                                                                <input type="checkbox" value="" id="default-toggle"
+                                                                    class="sr-only peer">
+                                                                <div
+                                                                    class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300
+                                                                 dark:peer-focus:ring-primary-800 rounded-full peer
+                                                                  dark:bg-gray-700 peer-checked:after:translate-x-full
+                                                                   peer-checked:after:border-white after:content-['']
+                                                                    after:absolute after:top-[2px] after:left-[2px] after:bg-white
+                                                                     after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5
+                                                                     after:transition-all dark:border-gray-600 peer-checked:bg-primary-600">
+                                                                </div>
+                                                            </label>
+                                                        </dd>
+                                                    </div>
+                                                </div>
+                                                <div class="border-b">
+                                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6" formArrayName="tiktok_pixel">
+                                                        <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                            TikTok Pixel ID</dt>
+                                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                            <div class="flex justify-between" *ngFor="let tiktoks of: tiktok().controls; let index2 = index" [formGroupName]="index2">
+                                                                <mat-form-field class="w-full" style="width: 100%;">
+                                                                    <input matInput placeholder=" TikTok Pixel ID" [formControlName]="'piexel_id'">
+                                                                </mat-form-field>
+                                                                <a class="w-1/12 ml-3 mt-1" mat-flat-button *ngIf="index2 === 0" [color]="'primary'" (click)="addTiktok()">
+                                                                    <mat-icon [svgIcon]="'heroicons_outline:plus'">
+                                                                    </mat-icon>
+                                                                </a>
+                                                                <a class="w-1/12 ml-3 mt-1" mat-flat-button *ngIf=" index2 > 0" [color]="'primary'" (click)="removeTiktok(index2)">
+                                                                    <mat-icon> delete
+                                                                    </mat-icon>
+                                                                </a>
+                                                            </div>
+                                                        </dd>
+                                                    </div>
+                                                </div>
+                                                <div class="border-b">
+                                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                                        <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                            Google Tag Manager ID</dt>
+                                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                            <div class="flex justify-between">
+                                                                <mat-form-field class="w-full" style="width: 100%;">
+                                                                    <input matInput placeholder=" Google Tag Manager ID">
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </dd>
+                                                    </div>
+                                                </div>
+                                                <div class="border-b">
+                                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                                        <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                            Line Tag ID</dt>
+                                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                            <div class="flex justify-between">
+                                                                <mat-form-field class="w-full" style="width: 100%;">
+                                                                    <input matInput placeholder=" Line Tag ID">
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </dd>
+                                                    </div>
+                                                </div>
+                                                <div class="border-b">
+                                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                                        <dt class="text-l font-extrabold text-gray-500  mt-1" style="text-align: center;">
+                                                            เพิ่มปุ่ม Social</dt>
+                                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                            <label for="add social" class="inline-flex relative items-center cursor-pointer">
+                                                                <input type="checkbox" value="" id="add social"
+                                                                    class="sr-only peer">
+                                                                <div
+                                                                    class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300
+                                                             dark:peer-focus:ring-primary-800 rounded-full peer
+                                                              dark:bg-gray-700 peer-checked:after:translate-x-full
+                                                               peer-checked:after:border-white after:content-['']
+                                                                after:absolute after:top-[2px] after:left-[2px] after:bg-white
+                                                                 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5
+                                                                 after:transition-all dark:border-gray-600 peer-checked:bg-primary-600">
+                                                                </div>
+                                                            </label>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                                        <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                            Link Facebook Messenger</dt>
+                                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                            <div class="flex justify-between">
+                                                                <mat-form-field class="w-full" style="width: 100%;">
+                                                                    <input matInput placeholder="ลิงค์ Facebook Messenger">
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </dd>
+                                                    </div>
+
+                                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                                        <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                            Link Line</dt>
+                                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                            <div class="flex justify-between">
+                                                                <mat-form-field class="w-full" style="width: 100%;">
+                                                                    <input matInput placeholder=" Link Line">
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                                        <dt class="text-l font-extrabold text-gray-500  mt-1" style="text-align: center;">
+                                                            แจ้งเตือนทาง Line</dt>
+                                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                            <label for="line notification" class="inline-flex relative items-center cursor-pointer">
+                                                                <input type="checkbox" value="" id="line notification"
+                                                                    class="sr-only peer" (change)="onChange1($event)">
+                                                                <div
+                                                                    class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300
+                                                     dark:peer-focus:ring-primary-800 rounded-full peer
+                                                      dark:bg-gray-700 peer-checked:after:translate-x-full
+                                                       peer-checked:after:border-white after:content-['']
+                                                        after:absolute after:top-[2px] after:left-[2px] after:bg-white
+                                                         after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5
+                                                         after:transition-all dark:border-gray-600 peer-checked:bg-primary-600">
+                                                                </div>
+                                                            </label>
+                                                        </dd>
+
+                                                    </div>
+                                                    <div *ngIf="this.change1 === true" class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                                        <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                        </dt>
+                                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                            <div class="flex justify-between">
+                                                                <mat-form-field class="w-full" style="width: 100%;">
+                                                                    <input matInput placeholder="Line Token">
+                                                                    <mat-hint>
+                                                                        <mat-icon> help</mat-icon>
+                                                                        การขอ Line Token
+                                                                    </mat-hint>
+                                                                </mat-form-field>
+
+                                                            </div>
+                                                        </dd>
+                                                    </div>
+                                                </div>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </mat-tab>
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+
+                            <mat-icon>trending_up</mat-icon>&nbsp;&nbsp;&nbsp;
+                            <span>โปรโมชั่น </span>
+
+                        </ng-template>
+                        <div class="flex">
+                            <div class="w-full">
+
+                                <div class="border-t border-gray-200">
+                                    <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6 mt-4">
+                                        <dt class="text-l font-extrabold text-gray-500" style="text-align: center;">
+                                            เปิดใช้งาน OTO</dt>
+                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <label for="default-toggle" class="inline-flex relative items-center cursor-pointer">
+                                                <input type="checkbox" value="" id="default-toggle" class="sr-only peer"
+                                                    (change)="OTTO($event)" checked>
+                                                <div
+                                                    class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300
+                                                 dark:peer-focus:ring-primary-800 rounded-full peer
+                                                  dark:bg-gray-700 peer-checked:after:translate-x-full
+                                                   peer-checked:after:border-white after:content-['']
+                                                    after:absolute after:top-[2px] after:left-[2px] after:bg-white
+                                                     after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 
+                                                     after:transition-all dark:border-gray-600 peer-checked:bg-primary-600">
+                                                </div>
+                                            </label>
+
+                                        </dd>
+                                    </div>
+                                    <ng-container *ngIf="this.selection4 === true">
+                                        <dl>
+                                            <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                                <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                    ประเภทข้อเสนอ</dt>
+                                                <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-4">
+                                                    <div class="flex items-center pl-4 ">
+                                                        <mat-radio-group [(ngModel)]="selection3">
+
+                                                            <mat-radio-button class="example-radio-button" [value]="1" checked>
+                                                                กระตุ้นยอดขาย (Bump)</mat-radio-button>
+                                                            &nbsp;&nbsp;
+                                                            <mat-radio-button class="example-radio-button" [value]="2">
+                                                                แถมสินค้า
+                                                            </mat-radio-button>
+
+                                                        </mat-radio-group>
+                                                    </div>
+
+                                                </dd>
+                                            </div>
+                                            <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                                <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                    เลือกสินค้า</dt>
+                                                <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                    <mat-form-field class="w-full;" style="width: 100%;">
+                                                        <input matInput [formControlName]="'select_product_id'" hidden>
+                                                        <input matInput [formControlName]="'product_name'" placeholder="คลิกเพื่อเลือกสินค้า" readonly (click)="openDialog()" style="cursor: pointer;width: 200px;">
+                                                    </mat-form-field>
+                                                </dd>
+                                            </div>
+                                            <ng-container *ngIf="this.formData.value.select_product_id !== null">
+
+                                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                                    <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                    </dt>
+                                                    <dd class="mt-1 text-l text-gray-900 sm:col-1 sm:mt-0">
+
+                                                        <div class="row"> <img [src]="this.image" style="width: 30%;height: 40%;" class="sm:col-1"></div>
+
+                                                    </dd>
+                                                    <dd class="mt-1 text-lg text-gray-900 sm:col-1 sm:mt-0">
+                                                        <div><b> {{this.prod_name}}</b></div>
+                                                        <div> <b>สต็อกคงเหลือ : {{this.qty}} </b> </div>
+                                                        <div><b> ราคา : {{this.unit_price}}</b></div>
+
+                                                    </dd>
+                                                </div>
+                                            </ng-container>
+                                            <ng-container *ngIf="this.selection3 === 1">
+                                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                                    <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                        ราคาขาย</dt>
+                                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                        <mat-form-field class="w-full;" style="width: 100%;">
+                                                            <input matInput placeholder="ราคาขาย">
+                                                        </mat-form-field>
+                                                    </dd>
+                                                </div>
+                                            </ng-container>
+
+
+
+
+                                        </dl>
+                                    </ng-container>
+                                </div>
+                                <hr class="my-8 h-px bg-gray-200 border-0 dark:bg-gray-700">
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                        หัวข้อของข้อเสนอ </dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full;" style="width: 100%;">
+                                            <input matInput placeholder="" value="รับสิทธิ์แลกซื้อ! ครีม TOMATAL ราคาพิเศษ 1 กระปุก เพียง 99.-">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                        รายละเอียด </dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                                            <div class="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
+                                                <div class="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
+                                                    <div class="flex items-center space-x-1 sm:pr-4">
+                                                        <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor"
+                                                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
+                                                                    clip-rule="evenodd"></path>
+                                                            </svg>
+                                                            <span class="sr-only">Attach file</span>
+                                                        </button>
+                                                        <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor"
+                                                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                                                    clip-rule="evenodd"></path>
+                                                            </svg>
+                                                            <span class="sr-only">Embed map</span>
+                                                        </button>
+                                                        <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor"
+                                                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                                                                    clip-rule="evenodd"></path>
+                                                            </svg>
+                                                            <span class="sr-only">Upload image</span>
+                                                        </button>
+                                                        <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor"
+                                                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
+                                                                    clip-rule="evenodd"></path>
+                                                            </svg>
+                                                            <span class="sr-only">Format code</span>
+                                                        </button>
+                                                        <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor"
+                                                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z"
+                                                                    clip-rule="evenodd"></path>
+                                                            </svg>
+                                                            <span class="sr-only">Add emoji</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="flex flex-wrap items-center space-x-1 sm:pl-4">
+                                                        <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor"
+                                                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                                                    clip-rule="evenodd"></path>
+                                                            </svg>
+                                                            <span class="sr-only">Add list</span>
+                                                        </button>
+                                                        <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor"
+                                                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                                                                    clip-rule="evenodd"></path>
+                                                            </svg>
+                                                            <span class="sr-only">Settings</span>
+                                                        </button>
+                                                        <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor"
+                                                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                                    clip-rule="evenodd"></path>
+                                                            </svg>
+                                                            <span class="sr-only">Timeline</span>
+                                                        </button>
+                                                        <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor"
+                                                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                                                    clip-rule="evenodd"></path>
+                                                            </svg>
+                                                            <span class="sr-only">Download</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <button type="button" data-tooltip-target="tooltip-fullscreen" class="p-2 text-gray-500 rounded cursor-pointer sm:ml-auto hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor"
+                                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd"
+                                                            d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 11-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z"
+                                                            clip-rule="evenodd"></path>
+                                                    </svg>
+                                                    <span class="sr-only">Full screen</span>
+                                                </button>
+                                                <div id="tooltip-fullscreen" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                                    Show full screen
+                                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                                </div>
+                                            </div>
+                                            <div class="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
+                                                <label for="editor" class="sr-only">Publish post</label>
+                                                <textarea id="editor" rows="8" class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="" required>แนะนำให้ใช้ครีม TOMATAL สูตรเร่งด่วน สารสกัดเข้มข้น ฟื้นฟูภายใน3วัน ราคาโปรโมชั่นเฉพาะเดือนนี้เท่านั้น!!  กู้ผิวหน้าเร่งด่วน บอกลาสิวถาวร  ลดเหลือ 99.- จากปกติราคา 199.- (จำกัดเฉพาะ 10 คนแรก รีบสั่ง! สินค้ามีจำนวนจำกัด)</textarea>
+                                            </div>
+                                        </div>
+                                        <button (click)="onSubmit2()" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                                            ดูตัวอย่างข้อเสนอครั้งเดียว
+                                        </button>
+                                        <!-- <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                        <div class="block-preview-oto">
+                                            <div class="block-preview-oto-title">
+                                                <div class="form-group form-check d-inline m-b-xs ml-2">
+                                                    <input type="checkbox" name="" class="form-check-input"
+                                                        id="checkbox-oto" value="1" style="margin-left: 20px;">
+                                                    <label class="form-check-label label-preview-oto-title"
+                                                        for="checkbox-oto" style="display: contents;">รับสิทธิ์แลกซื้อ!
+                                                        ครีม TOMATAL ราคาพิเศษ 1 กระปุก เพียง 99.-</label>
+                                                </div>
+                                            </div>
+                                            <div class="block-preview-oto-description">
+                                                <div class="row">
+                                                    <div class="col-lg-3 block-preview-oto-description-image"><img
+                                                            src="https://file.xcommerce.co.th/u1/15277/product/image1/hgFr42m4MO.jpg"
+                                                            class="object-fit-cover" width="100%" height=""></div>
+                                                    <div class="col-lg-9 p-l-n block-preview-oto-description-content"
+                                                        style="padding-left: 0px;">
+                                                        <p><span
+                                                                style="color: rgb(0, 0, 0); font-weight: bolder; background-color: rgb(255, 255, 0); font-family: Sarabun, sans-serif; font-size: 16px;">อยากบอกลาสิว
+                                                                ผิวหน้าใส ใช้ได้ทุกเพศทุกวัย</span><br></p>
+                                                        <p
+                                                            style="margin-bottom: 1rem; color: rgb(33, 37, 41); font-family: Sarabun, sans-serif; font-size: 16px; background-color: rgb(252, 248, 230);">
+                                                            <span style="background-color: rgb(255, 255, 0);"><span
+                                                                    style="font-weight: bolder;">
+                                                                    <font color="#000000"><br></font>
+                                                                </span></span></p>
+                                                        <p
+                                                            style="margin-bottom: 1rem; color: rgb(33, 37, 41); font-family: Sarabun, sans-serif; font-size: 16px; background-color: rgb(252, 248, 230);">
+                                                            แนะนำให้ใช้ครีม TOMATAL สูตรเร่งด่วน สารสกัดเข้มข้น
+                                                            ฟื้นฟูภายใน3วัน ราคาโปรโมชั่นเฉพาะเดือนนี้เท่านั้น!!&nbsp;
+                                                            กู้ผิวหน้าเร่งด่วน บอกลาสิวถาวร&nbsp; ลดเหลือ 99.-
+                                                            จากปกติราคา 199.- (จำกัดเฉพาะ 10 คนแรก รีบสั่ง!
+                                                            สินค้ามีจำนวนจำกัด)</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+                                    </dd>
+                                </div>
+                            </div>
+                        </div>
+
+                    </mat-tab>
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <mat-icon>settings</mat-icon>&nbsp;&nbsp;&nbsp;
+                            <span>ตั้งค่าขั้นสูง </span>
+
+                        </ng-template>
+                        <mat-tab-group animationDuration="0ms">
+                            <mat-tab>
+                                <ng-template mat-tab-label>
+                                    <mat-icon>settings</mat-icon>&nbsp;&nbsp;&nbsp;
+                                    <span>ตั้งค่า </span>
+
+                                </ng-template>
+                                <div class="w-full">
+
+                                    <div class="border-t border-gray-200">
+                                        <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                            <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                            ภาษา</dt>
+                                            <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                <mat-form-field class="w-full">
+                                                    <mat-select [formControlName]="'language'">
+                                                        <mat-option value="">เลือกภาษา</mat-option>
+                                                        <mat-option value="1">ไทย</mat-option>
+                                                        <mat-option value="2">English</mat-option>
+                                                        <mat-option value="3">Vietnam</mat-option>
+                                                        <mat-option value="4">Lao</mat-option>
+                                                        <mat-option value="5">Myanmar</mat-option>
+                                                        <mat-option value="6">Indonesia</mat-option>
+                                                        <mat-option value="7">Chinese</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+
+                                            </dd>
+                                        </div>
+
+                                        <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                            <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                            รูปแบบการกรอกที่อยู่</dt>
+                                            <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-4">
+                                                <div class="flex items-center pl-4 ">
+                                                    <mat-radio-group [(ngModel)]="selection5">
+                                                        <mat-radio-button class="example-radio-button" [value]="1" checked>
+                                                            ค้นหาที่อยู่อัตโนมัติ</mat-radio-button>
+                                                        &nbsp;&nbsp;
+                                                        <mat-radio-button class="example-radio-button" [value]="2">
+                                                            ช่องกรอกที่อยู่
+                                                        </mat-radio-button>
+
+                                                    </mat-radio-group>
+                                                </div>
+
+                                            </dd>
+                                        </div>
+                                        <!-- <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                                        <dt class="text-l font-extrabold text-gray-500  mt-4"
+                                                            style="text-align: center;">
+                                                            สีธีม</dt>
+                                                        <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                                           
+                                                        </dd>
+                                                    </div> -->
+
+                                    </div>
+
+
+                                </div>
+                            </mat-tab>
+                            <mat-tab>
+                                <ng-template mat-tab-label>
+                                    <mat-icon>bookmark_border</mat-icon>&nbsp;&nbsp;&nbsp;
+                                    <span>ตั้งค่า Meatadata </span>
+
+                                </ng-template>
+                                <div class="w-full">
+
+                                    <div class="border-t border-gray-200">
+                                        <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                            <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                Meta tags</dt>
+                                            <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+
+                                                <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+
+
+                                            </dd>
+                                        </div>
+
+                                        <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                            <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                                Scripts </dt>
+                                            <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+
+                                                <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+
+                                            </dd>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </mat-tab>
+                            <mat-tab>
+                                <ng-template mat-tab-label>
+                                    <mat-icon>notifications_none</mat-icon>&nbsp;&nbsp;&nbsp;
+                                    <span>ปรับแต่งเหตุการณ์ </span>
+
+                                </ng-template>
+                                <div class="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4" style="text-align: center;">
+                                        เปิดใช้งานปรับแต่งเหตุการณ์</dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-4">
+                                        <label for="default-toggle" class="inline-flex relative items-center cursor-pointer">
+                                            <input type="checkbox" value="" id="default-toggle" class="sr-only peer"
+                                                (change)="events($event)">
+                                            <div
+                                                class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300
+                                             dark:peer-focus:ring-primary-800 rounded-full peer
+                                              dark:bg-gray-700 peer-checked:after:translate-x-full
+                                               peer-checked:after:border-white after:content-['']
+                                                after:absolute after:top-[2px] after:left-[2px] after:bg-white
+                                                 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 
+                                                 after:transition-all dark:border-gray-600 peer-checked:bg-primary-600">
+                                            </div>
+                                        </label>
+
+                                    </dd>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </mat-tab>
+                </mat-tab-group>
+
+                <div class="flex">
+                    <div class="w-full">
+                        <div class="border-t border-gray-200">
+                            <div class="flex flex-col sm:flex-row p-8">
+                                <div class="w-full lg:w-4/4">
+                                    <div class="flex flex-auto flex-wrap">
+
+                                    </div>
+                                </div>
+                                <div class="w-full lg:w-4/4 ">
+                                    <div class="flex flex-auto flex-wrap">
+                                        <div class="flex flex-col w-full lg:w-4/4 sm:pl-8">
+                                            <label class="font-bold">ภาพประกอบ</label>
+                                            <ngx-dropzone style="width: 100%; height: 250px; justify-content: center;" (change)="onSelect($event)">
+                                                <ngx-dropzone-label>เลือกภาพ</ngx-dropzone-label>
+                                                <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" [file]="f" (removed)="onRemove(f)">
+                                                    <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                                                </ngx-dropzone-image-preview>
+                                            </ngx-dropzone>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full lg:w-4/4 ">
+                                    <div class="flex flex-auto flex-wrap">
+                                        <div class="flex flex-col w-full lg:w-4/4 sm:pl-8">
+                                            <label class="font-bold">ภาพประกอบ</label>
+                                            <ngx-dropzone style="width: 100%; height: 250px; justify-content: center;" (change)="onSelect($event)">
+                                                <ngx-dropzone-label>เลือกภาพ</ngx-dropzone-label>
+                                                <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" [file]="f" (removed)="onRemove(f)">
+                                                    <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                                                </ngx-dropzone-image-preview>
+                                            </ngx-dropzone>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full lg:w-4/4 ">
+                                    <div class="flex flex-auto flex-wrap">
+                                        <div class="flex flex-col w-full lg:w-4/4 sm:pl-8">
+                                            <label class="font-bold">ภาพประกอบ</label>
+                                            <ngx-dropzone style="width: 100%; height: 250px; justify-content: center;" (change)="onSelect($event)">
+                                                <ngx-dropzone-label>เลือกภาพ</ngx-dropzone-label>
+                                                <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" [file]="f" (removed)="onRemove(f)">
+                                                    <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                                                </ngx-dropzone-image-preview>
+                                            </ngx-dropzone>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full lg:w-4/4 ">
+                                    <div class="flex flex-auto flex-wrap">
+                                        <div class="flex flex-col w-full lg:w-4/4 sm:pl-8">
+                                            <label class="font-bold">ภาพประกอบ</label>
+                                            <ngx-dropzone style="width: 100%; height: 250px; justify-content: center;" (change)="onSelect($event)">
+                                                <ngx-dropzone-label>เลือกภาพ</ngx-dropzone-label>
+                                                <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" [file]="f" (removed)="onRemove(f)">
+                                                    <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                                                </ngx-dropzone-image-preview>
+                                            </ngx-dropzone>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full lg:w-4/4 ">
+                                    <div class="flex flex-auto flex-wrap">
+                                        <div class="flex flex-col w-full lg:w-4/4 sm:pl-8">
+                                            <label class="font-bold">ภาพประกอบ</label>
+                                            <ngx-dropzone style="width: 100%; height: 250px; justify-content: center;" (change)="onSelect($event)">
+                                                <ngx-dropzone-label>เลือกภาพ</ngx-dropzone-label>
+                                                <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" [file]="f" (removed)="onRemove(f)">
+                                                    <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                                                </ngx-dropzone-image-preview>
+                                            </ngx-dropzone>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full lg:w-4/4 ">
+                                    <div class="flex flex-auto flex-wrap">
+                                        <div class="flex flex-col w-full lg:w-4/4 sm:pl-8">
+                                            <label class="font-bold">ภาพประกอบ</label>
+                                            <ngx-dropzone style="width: 100%; height: 250px; justify-content: center;" (change)="onSelect($event)">
+                                                <ngx-dropzone-label>เลือกภาพ</ngx-dropzone-label>
+                                                <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" [file]="f" (removed)="onRemove(f)">
+                                                    <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                                                </ngx-dropzone-image-preview>
+                                            </ngx-dropzone>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full lg:w-4/4 ">
+                                    <div class="flex flex-auto flex-wrap">
+                                        <div class="flex flex-col w-full lg:w-4/4 sm:pl-8">
+                                            <label class="font-bold">ภาพประกอบ</label>
+                                            <ngx-dropzone style="width: 100%; height: 250px; justify-content: center;" (change)="onSelect($event)">
+                                                <ngx-dropzone-label>เลือกภาพ</ngx-dropzone-label>
+                                                <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" [file]="f" (removed)="onRemove(f)">
+                                                    <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                                                </ngx-dropzone-image-preview>
+                                            </ngx-dropzone>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

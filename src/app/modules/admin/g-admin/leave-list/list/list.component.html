@@ -1,0 +1,89 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        <!-- Loader -->
+        <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+            <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+        </div>
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">รายการลา</div>
+        <!-- Actions -->
+        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+
+            <!-- Add product button -->
+            <!-- <a (click)="New()" class="ml-4" mat-flat-button [color]="'primary'">
+                <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                <span class="ml-2 mr-1">เพิ่มสิทธิการลา</span>
+            </a> -->
+
+        </div>
+    </div>
+
+    
+    <!-- Main -->
+    <div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
+
+        <div class="flex flex-col p-3 sm:p-10">
+            <div class="overflow-auto  bg-white shadow sm:rounded-lg">
+                <!-- Products list -->
+
+                <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll">
+
+                    <table datatable [dtOptions]="dtOptions"
+                        class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                        style="width: 100%">
+                        <thead
+                            class="text-lg text-gray-700 uppercase bg-white-100 dark:bg-gray-700 dark:text-gray-400 text-center">
+                            <tr>
+                                <th>ลำดับ</th>
+                                <th>ชื่อ</th>
+                                <th>วันที่แจ้ง</th>
+                                <th>ตั้งแต่วันที่</th>
+                                <th>ถึงวันที่</th>
+                                <th>ประเภทการลา</th>
+                                <th>รายละเอียด</th>
+                                <th>จำนวนวัน</th>
+                                <th>สถานะ</th>
+                                <th>จัดการ</th>
+                            </tr>
+
+                        </thead>
+                        <tbody *ngIf="dataRow?.length != 0">
+                            <tr *ngFor="let item of dataRow; let i = index"
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md py-15">
+                                <td style="width: 5%;">{{ pages.begin + (i + 1) }}</td>
+                                <td>ดวงใจ ดวงดี</td>
+                                <td>1/1/2565</td>
+                                <td>3/1/2565</td>
+                                <td>5/1/2565</td>
+                                <td>ลากิจ</td>
+                                <td>ไปต่างจังหวัด</td>
+                                <td>3</td>
+                                <td
+                                    class=" text-green-500 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">
+                                    อนุมัติ</td>
+                                <td>
+                                    <button mat-button (click)="Edit(item.id)">
+                                        <mat-icon svgIcon="heroicons_outline:eye"></mat-icon>
+                                    </button>
+                                </td>
+                                <!-- <button mat-button (click)="Delete(item.id)">
+                                <mat-icon>delete</mat-icon>
+                            </button> -->
+
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="dataRow?.length == 0">
+                            <tr>
+                                <td colspan="6" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
