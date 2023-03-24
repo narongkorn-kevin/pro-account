@@ -22,8 +22,17 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         id: 'customer',
                         title: 'แม่ค้า',
                         type: 'basic',
+                        icon: 'heroicons_outline:user',
                         link: '/customer/list',
                     },
+                    {
+                        id: 'user',
+                        title: 'ตัวแทน',
+                        type: 'basic',
+                        icon: 'heroicons_outline:user',
+                        link: '/user/list',
+                    },
+   
                     {
                         id: 'delivery',
                         title: 'ช่องทางการส่งของ',
@@ -293,8 +302,8 @@ export const defaultNavigation: FuseNavigationItem[] = [
     // },
 
     {
-        title: 'Admin',
-        subtitle: 'เมนูการใช้งานแอดมิน',
+        title: 'ตัวแทน',
+        subtitle: 'เมนูการใช้งานตัวแทน',
         type: 'group',
         icon: 'heroicons_outline:home',
         hidden: function () {
@@ -305,16 +314,43 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 id: 'position',
                 title: 'ตำแหน่งพนักงาน',
                 type: 'basic',
-                icon: 'mat_outline:hotel_class',
+      
+                link: '/position/list',
+            },
+
+            {
+                id: 'position',
+                title: 'เช็คยอดขาย',
+                type: 'basic',
+            
                 link: '/position/list',
             },
             {
-                id: 'user',
-                title: 'ตัวแทน',
+                id: 'position',
+                title: 'ตรวจสอบยอดตัวแทน',
                 type: 'basic',
-                icon: 'heroicons_outline:user',
-                link: '/user/list',
+           
+                link: '/position/list',
             },
+            {
+                id: 'position',
+                title: 'เช็คข้อมูลเจาะจงแม่ค้า',
+                type: 'collapsable',
+                
+                link: '/position/list',
+
+                children: [
+                            {
+                                id: 'workpacking',
+                                title: 'แม่ค้า',
+                                type: 'basic',
+                                icon: 'mat_outline:save',
+                                link: '/item-return/list',
+                            },
+
+                        ]
+            },
+            
             // {
             //     title: 'การทำงาน',
             //     type: 'collapsable',
@@ -435,6 +471,79 @@ export const defaultNavigation: FuseNavigationItem[] = [
 
             //     ]
             // },
+        ]
+    },
+
+    {
+        title: 'แม่ค้า',
+        subtitle: 'เมนูการใช้งานแม่ค้า',
+        type: 'group',
+        icon: 'heroicons_outline:home',
+        hidden: function () {
+            return AuthService._Hr;
+        },
+        children: [
+            {
+                id: 'position',
+                title: 'ตั้งค่าข้อมูลส่วนตัว',
+                type: 'basic',
+                
+                link: '/position/list',
+            },
+
+            {
+                id: 'position',
+                title: 'ตั้งค่าข้อมูลสินค้า',
+                type: 'basic',
+              
+                link: '/position/list',
+            },
+            {
+                id: 'position',
+                title: 'ตรวจสอบคำสั่งซื้อ',
+                type: 'basic',
+               
+                link: '/position/list',
+            },
+            {
+                id: 'position',
+                title: 'ตรวจสอบสถานะ',
+                type: 'basic',
+               
+                link: '/position/list',
+            },
+            {
+                id: 'position',
+                title: 'ตรวจสอบยอดขาย',
+                type: 'basic',
+               
+                link: '/position/list',
+            },
+            {
+                id: 'position',
+                title: 'ตั้งค่า live สดสินค้า',
+                type: 'basic',
+               
+                link: '/position/list',
+            },
+            {
+                id: 'position',
+                title: 'เช็คยอดเงิน',
+                type: 'collapsable',
+             
+                link: '/position/list',
+
+                children: [
+                            {
+                                id: 'workpacking',
+                                title: 'กระเป๋าเงิน',
+                                type: 'basic',
+                                icon: 'mat_outline:save',
+                                link: '/item-return/list',
+                            },
+
+                        ]
+            },
         ]
     },
 
