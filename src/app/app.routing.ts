@@ -88,6 +88,18 @@ export const appRoutes: Route[] = [
             },
             //user
             {
+                path: 'clients',
+                canActivate: [], children: [
+                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/clients/customer.module').then(m => m.CustomerModule) },
+                ]
+            },
+            {
+                path: 'faq',
+                canActivate: [], children: [
+                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/faq/customer.module').then(m => m.CustomerModule) },
+                ]
+            },
+            {
                 path: 'user',
                 canActivate: [], children: [
                     { path: '', loadChildren: () => import('app/modules/admin/g-admin/user/user.module').then(m => m.UserModule) },

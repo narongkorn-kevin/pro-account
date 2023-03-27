@@ -19,6 +19,14 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 icon: 'heroicons_outline:home',
                 children: [
                     {
+                        id: 'clients',
+                        title: 'ผู้สนใจ',
+                        type: 'basic',
+                        icon: 'heroicons_outline:user',
+                        link: '/clients/list',
+                    },
+
+                    {
                         id: 'customer',
                         title: 'แม่ค้า',
                         type: 'basic',
@@ -32,7 +40,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         icon: 'heroicons_outline:user',
                         link: '/user/list',
                     },
-   
+
                     {
                         id: 'delivery',
                         title: 'ช่องทางการส่งของ',
@@ -40,6 +48,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/delivery/list',
                     },
+                    
                     {
                         id: 'bank',
                         title: 'ธนาคาร',
@@ -47,7 +56,15 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/bank/list',
                     },
-                ]
+
+                    {
+                        id: 'faq',
+                        title: 'คำถามพบบ่อย',
+                        type: 'basic',
+                        icon: 'heroicons_outline:cube',
+                        link: '/faq/list',
+                    },
+                ],
             },
             // {
             //     id: 'item-all',
@@ -82,8 +99,6 @@ export const defaultNavigation: FuseNavigationItem[] = [
             //             link: '/branch/list',
             //         },
 
-
-
             //         {
             //             id: 'location',
             //             title: 'สถานที่',
@@ -102,7 +117,6 @@ export const defaultNavigation: FuseNavigationItem[] = [
             //             type: 'basic',
             //             link: '/vendor/list',
             //         },
-
 
             //     ]
             // },
@@ -158,13 +172,8 @@ export const defaultNavigation: FuseNavigationItem[] = [
             //         },
             //     ]
             // },
-        ]
+        ],
     },
-
-
-
-
-
 
     // {
     //     title: 'ทีมเทเลเซล',
@@ -322,7 +331,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
             //     id: 'position',
             //     title: 'เช็คยอดขาย',
             //     type: 'basic',
-            
+
             //     link: '/user/profile-firstpage',
             // },
             {
@@ -336,7 +345,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
             //     id: 'position',
             //     title: 'เช็คข้อมูลเจาะจงแม่ค้า',
             //     type: 'collapsable',
-                
+
             //     link: '/position/list',
 
             //     children: [
@@ -350,7 +359,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
 
             //             ]
             // },
-            
+
             // {
             //     title: 'การทำงาน',
             //     type: 'collapsable',
@@ -471,7 +480,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
 
             //     ]
             // },
-        ]
+        ],
     },
 
     {
@@ -487,7 +496,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
             //     id: 'position',
             //     title: 'ตั้งค่าข้อมูลส่วนตัว',
             //     type: 'basic',
-                
+
             //     link: '/user/profile-firstpage',
             // },
 
@@ -497,21 +506,19 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 type: 'collapsable',
                 icon: 'heroicons_outline:cube',
                 children: [
-                         
-                                    {
-                                        id: 'list',
-                                        title: 'รายการสินค้า',
-                                        type: 'basic',
-                                        link: '/item/list',
-                                    },
-                                    {
-                                        id: 'item-type',
-                                        title: 'หมวดหมู่สินค้า',
-                                        type: 'basic',
-                                        link: '/item-type/list',
-                                    },
-                             
-                    ]
+                    {
+                        id: 'list',
+                        title: 'รายการสินค้า',
+                        type: 'basic',
+                        link: '/item/list',
+                    },
+                    {
+                        id: 'item-type',
+                        title: 'หมวดหมู่สินค้า',
+                        type: 'basic',
+                        link: '/item-type/list',
+                    },
+                ],
             },
             {
                 id: 'position',
@@ -532,7 +539,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 title: 'ตรวจสอบสถานะ',
                 type: 'basic',
                 icon: 'heroicons_outline:truck',
-     
+
                 link: '/item-return/list',
             },
             {
@@ -546,7 +553,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
             //     id: 'position',
             //     title: 'ตั้งค่า live สดสินค้า',
             //     type: 'basic',
-               
+
             //     link: '/position/list',
             // },
             {
@@ -557,17 +564,16 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 link: '/position/list',
 
                 children: [
-                            {
-                                id: 'workpacking',
-                                title: 'กระเป๋าเงิน',
-                                type: 'basic',
-                                icon: 'mat_outline:money',
-                                // link: '/item-return/list',
-                            },
-
-                        ]
+                    {
+                        id: 'workpacking',
+                        title: 'กระเป๋าเงิน',
+                        type: 'basic',
+                        icon: 'mat_outline:money',
+                        // link: '/item-return/list',
+                    },
+                ],
             },
-        ]
+        ],
     },
 
     // {
@@ -616,7 +622,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
     //             link: '/report/sale-order/list'
     //         },
     //             ]
- 
+
     //         },
     //         {
     //             title: 'พนักงาน',
@@ -630,7 +636,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
     //             type: 'basic',
     //             // link: '/report/stock-item/list',
     //         },
-            
+
     //         {
     //             id: 'report-stock-item',
     //             title: 'รายงานเงินเดือน',
@@ -652,18 +658,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
     //             type: 'basic',
     //             // link: '/report/stock-item/list',
     //         },
-            
 
     //             ]
     //         },
 
-            
-
-
     //     ]
 
     // },
-
 
     {
         id: 'account',
@@ -687,11 +688,9 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 type: 'basic',
                 icon: 'feather:log-out',
                 link: '/sign-out',
-            }
-        ]
+            },
+        ],
     },
-
-
 ];
 
 export const compactNavigation: FuseNavigationItem[] = [
@@ -701,7 +700,7 @@ export const compactNavigation: FuseNavigationItem[] = [
         tooltip: 'Dashboards',
         type: 'aside',
         icon: 'heroicons_outline:home',
-        children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+        children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
     },
     {
         id: 'apps',
@@ -709,7 +708,7 @@ export const compactNavigation: FuseNavigationItem[] = [
         tooltip: 'Apps',
         type: 'aside',
         icon: 'heroicons_outline:qrcode',
-        children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+        children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
     },
     {
         id: 'pages',
@@ -717,7 +716,7 @@ export const compactNavigation: FuseNavigationItem[] = [
         tooltip: 'Pages',
         type: 'aside',
         icon: 'heroicons_outline:document-duplicate',
-        children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+        children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
     },
     {
         id: 'user-interface',
@@ -725,7 +724,7 @@ export const compactNavigation: FuseNavigationItem[] = [
         tooltip: 'UI',
         type: 'aside',
         icon: 'heroicons_outline:collection',
-        children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+        children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
     },
     {
         id: 'navigation-features',
@@ -733,48 +732,48 @@ export const compactNavigation: FuseNavigationItem[] = [
         tooltip: 'Navigation',
         type: 'aside',
         icon: 'heroicons_outline:menu',
-        children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
-    }
+        children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+    },
 ];
 export const futuristicNavigation: FuseNavigationItem[] = [
     {
         id: 'dashboards',
         title: 'DASHBOARDS',
         type: 'group',
-        children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+        children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
     },
     {
         id: 'apps',
         title: 'APPS',
         type: 'group',
-        children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+        children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
     },
     {
         id: 'others',
         title: 'OTHERS',
-        type: 'group'
+        type: 'group',
     },
     {
         id: 'pages',
         title: 'Pages',
         type: 'aside',
         icon: 'heroicons_outline:document-duplicate',
-        children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+        children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
     },
     {
         id: 'user-interface',
         title: 'User Interface',
         type: 'aside',
         icon: 'heroicons_outline:collection',
-        children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+        children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
     },
     {
         id: 'navigation-features',
         title: 'Navigation Features',
         type: 'aside',
         icon: 'heroicons_outline:menu',
-        children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
-    }
+        children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+    },
 ];
 export const horizontalNavigation: FuseNavigationItem[] = [
     {
@@ -782,34 +781,34 @@ export const horizontalNavigation: FuseNavigationItem[] = [
         title: 'Dashboards',
         type: 'group',
         icon: 'heroicons_outline:home',
-        children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+        children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
     },
     {
         id: 'apps',
         title: 'Apps',
         type: 'group',
         icon: 'heroicons_outline:qrcode',
-        children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+        children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
     },
     {
         id: 'pages',
         title: 'Pages',
         type: 'group',
         icon: 'heroicons_outline:document-duplicate',
-        children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+        children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
     },
     {
         id: 'user-interface',
         title: 'UI',
         type: 'group',
         icon: 'heroicons_outline:collection',
-        children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+        children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
     },
     {
         id: 'navigation-features',
         title: 'Misc',
         type: 'group',
         icon: 'heroicons_outline:menu',
-        children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
-    }
+        children: [], // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+    },
 ];
