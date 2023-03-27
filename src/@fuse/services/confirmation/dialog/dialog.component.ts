@@ -32,7 +32,7 @@ import { FuseConfirmationConfig } from '@fuse/services/confirmation/confirmation
 
                 :host::ng-deep  .mat-stroked-button.mat-primary{
                     border-radius: 0px !important;
-                    background: #c59d52 !important;
+                    background: #10b120 !important;
                     color: white !important;
                 }
 
