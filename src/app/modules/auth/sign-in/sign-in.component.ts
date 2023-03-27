@@ -13,7 +13,7 @@ import { AuthService } from 'app/core/auth/auth.service';
         /* language=SCSS */
         `
             .light{
-                background:#2A2E45 !important;
+                background: linear-gradient(110deg, #62e6a5 50%, #9ae7ba 50%, #9ae7ba 52%, #d1f5de 52%, #d1f5de 0);
             }
 
 
