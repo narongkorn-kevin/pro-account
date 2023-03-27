@@ -312,7 +312,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         children: [
             {
                 id: 'position',
-                title: 'ประเภทแม่ค้า',
+                title: 'แม่ค้า',
                 type: 'basic',
       
                 link: '/position/list',
@@ -519,6 +519,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 type: 'basic',
                
                 link: '/sale-order/list',
+            },
+            {
+                id: 'customer1',
+                title: 'ข้อมูลลูกค้า',
+                type: 'basic',
+                link: '/customer1/list',
             },
             {
                 id: 'position',

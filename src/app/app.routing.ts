@@ -67,6 +67,7 @@ export const appRoutes: Route[] = [
             {
                 path: 'home', loadChildren: () => import('./modules/admin/pages/home/home.module').then(m => m.HomeModule)
             },
+    
             //permission
             {
                 path: 'permission',
@@ -132,6 +133,12 @@ export const appRoutes: Route[] = [
                 path: 'customer',
                 canActivate: [], children: [
                     { path: '', loadChildren: () => import('app/modules/admin/g-admin/customer/customer.module').then(m => m.CustomerModule) },
+                ]
+            },
+            {
+                path: 'customer1',
+                canActivate: [], children: [
+                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/customer1/customer.module').then(m => m.CustomerModule) },
                 ]
             },
 
