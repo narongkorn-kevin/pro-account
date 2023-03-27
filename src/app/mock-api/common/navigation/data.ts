@@ -36,14 +36,14 @@ export const defaultNavigation: FuseNavigationItem[] = [
                     {
                         id: 'delivery',
                         title: 'ช่องทางการส่งของ',
-                        // subtitle: 'Admin',
+                        icon: 'feather:truck',
                         type: 'basic',
                         link: '/delivery/list',
                     },
                     {
                         id: 'bank',
                         title: 'ธนาคาร',
-                        // subtitle: 'Admin',
+                        icon: 'mat_outline:comment_bank',
                         type: 'basic',
                         link: '/bank/list',
                     },
@@ -314,7 +314,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 id: 'position',
                 title: 'แม่ค้า',
                 type: 'basic',
-      
+                icon: 'heroicons_outline:user',
                 link: '/position/list',
             },
 
@@ -329,7 +329,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 id: 'position',
                 title: 'ตรวจสอบยอดตัวแทน',
                 type: 'basic',
-           
+                icon: 'feather:zoom-in',
                 link: '/user/profile-firstpage',
             },
             // {
@@ -517,7 +517,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 id: 'position',
                 title: 'ตรวจสอบคำสั่งซื้อ',
                 type: 'basic',
-               
+                icon: 'mat_outline:shopping_basket',
                 link: '/sale-order/list',
             },
             {
@@ -525,19 +525,21 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 title: 'ข้อมูลลูกค้า',
                 type: 'basic',
                 link: '/customer1/list',
+                icon: 'mat_solid:people_outline',
             },
             {
                 id: 'position',
                 title: 'ตรวจสอบสถานะ',
                 type: 'basic',
-               
+                icon: 'heroicons_outline:truck',
+     
                 link: '/item-return/list',
             },
             {
                 id: 'position',
                 title: 'ตรวจสอบยอดขาย',
                 type: 'basic',
-               
+                icon: 'mat_outline:auto_graph',
                 link: '/home/list',
             },
             // {
@@ -551,7 +553,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 id: 'position',
                 title: 'เช็คยอดเงิน',
                 type: 'collapsable',
-             
+                icon: 'mat_outline:attach_money',
                 link: '/position/list',
 
                 children: [
@@ -559,7 +561,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                                 id: 'workpacking',
                                 title: 'กระเป๋าเงิน',
                                 type: 'basic',
-                                icon: 'mat_outline:save',
+                                icon: 'mat_outline:money',
                                 // link: '/item-return/list',
                             },
 
