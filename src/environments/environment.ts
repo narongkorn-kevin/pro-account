@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    API_URL: 'https://global-rich.dev-asha.com/',
+    API_URL: 'https://suzukisocietyth.tech/ds-api/public/',
 };
 
 /*
