@@ -20,7 +20,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 children: [
                     {
                         id: 'customer',
-                        title: 'แม่ค้า',
+                        title: 'ข้อมูลแม่ค้า',
                         type: 'basic',
                         icon: 'heroicons_outline:user',
                         link: '/customer/list',
