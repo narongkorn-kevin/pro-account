@@ -135,6 +135,12 @@ export const appRoutes: Route[] = [
                     { path: '', loadChildren: () => import('app/modules/admin/g-admin/customer/customer.module').then(m => m.CustomerModule) },
                 ]
             },
+            {
+                path: 'customer1',
+                canActivate: [], children: [
+                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/customer1/customer.module').then(m => m.CustomerModule) },
+                ]
+            },
 
             {
                 path: 'worktelesale',
