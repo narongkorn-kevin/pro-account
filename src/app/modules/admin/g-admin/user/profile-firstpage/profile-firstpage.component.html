@@ -15,72 +15,36 @@
                 <span class="ml-2 mr-1">ตั้งค่ารายละเอียด</span>
             </a> -->
 
-            <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
 
-                <div class="flex items-center p-8 bg-white shadow rounded-lg">
-   
-                    <div
-                        class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
-                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-10 w-10">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
+            <div class="flex flex-col md:col-span-2 md:row-span-2 ">
+
+                <div class="flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg mb-6">
+                    <div class="px-6 py-5 font-semibold border-b border-gray-100">ยอดขายแต่ละเดือน</div>
+                    <div class="p-4 flex-grow">
+                        <div
+                            class="flex items-center justify-center h-full px-4 py-16 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
+                            <h1></h1>
+                            <canvas #lineCanvas style="height:14vh; width:20vw"></canvas>
+                            <hr color="red">
+                        </div>
                     </div>
-
-                    <div>
-                        <span class="inline-block text-7xl font-bold">10</span>
-                        <span class="inline-block text-xl text-gray-500 font-semibold">(คน)</span>
-                        <span class="block text-gray-500">งานวันนี้</span>
-                    </div>
-
                 </div>
 
-                <div class="flex items-center p-8 bg-white shadow rounded-lg">
-                    <div
-                        class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
-                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                        </svg>
-                    </div>
-                    <div>
-                        <span class="inline-block text-7xl font-bold text-green-600">8</span>
-                        <span class="inline-block text-xl text-gray-500 font-semibold">(คน)</span>
-                        <span class="block text-gray-500">สำเร็จ</span>
-                    </div>
-                </div>
-                <div class="flex items-center p-8 bg-white shadow rounded-lg">
-                    <div
-                        class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-red-600 bg-red-100 rounded-full mr-6">
-                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
-                        </svg>
-                    </div>
-                    <div>
-                        <span class="inline-block text-7xl font-bold text-red-600">2</span>
-                        <span class="inline-block text-xl text-gray-500 font-semibold">(คน)</span>
-                        <span class="block text-gray-500">ไม่สำเร็จ</span>
-                    </div>
-                </div>
-                <div class="flex items-center p-8 bg-white shadow rounded-lg">
-                    <div
-                        class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
-                        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                        </svg>
-                    </div>
-                    <div>
-                        <span class="inline-block text-7xl font-bold">10</span>
-                        <span class="inline-block text-xl text-gray-500 font-semibold"> (คน)</span>
-                        <span class="block text-gray-500">สรุปยอดโทรทั้งหมด</span>
-                        <!-- <span class="block text-gray-500"></span>                         -->
-                    </div>
-                </div>
-            </section>
 
- 
+
+
+                <div class="flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg ">
+                    <div class="px-6 py-5 font-semibold border-b border-gray-100">ยอดส่งสินค้าไม่สำเร็จ</div>
+                    <div class="p-4 flex-grow">
+                        <div
+                            class="flex items-center justify-center h-full px-4 py-16 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
+                            <h1></h1>
+                            <canvas #barCanvas style="height:14vh; width:20vw"></canvas>
+                            <hr color="red">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <section class="grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-6">
                 <!-- <div class="flex flex-col md:col-span-2 md:row-span-2 ">     
@@ -196,33 +160,41 @@
               
                 <div class="row-span-2 bg-white shadow rounded-lg">
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
-                        <span> ยอดขายเพิ่มเติม</span>
-                        <span> วัน</span>
+                        <span> ยอดขายแม่ค้ารวม</span>
+                     
                         <!-- Refer here for full dropdown menu code: https://tailwindui.com/components/application-ui/elements/dropdowns -->
                     </div>
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
                         <span> วันที่</span>
-                        <span> จำนวน(ชิ้น)</span>
-                        <span> ยอดขาย</span>                        
+                    
+                        <span> ยอดขายรวม</span>                        
                     </div>
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
-                        <span> 1/1/65</span>
-                        <span> 100</span>
+                        <span> 1/5/66</span>
+                     
                         <span> 200,000</span>                        
                     </div>                 
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
-                        <span> 2/1/65</span>
-                        <span> 20</span>
-                        <span> 15,000</span>                        
+                        <span> 2/5/66</span>
+                        <span> 150,000</span>                        
                     </div>    
+                    <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
+                        <span> 3/5/66</span>
+                        <span> 110,000</span>                        
+                    </div>   
+                    <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
+                        <span> 4/5/66</span>
+                        <span> 15,000</span>                        
+                    </div>   
+                    <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
+                        <span> 5/5/66</span>
+                        <span> 201,000</span>                        
+                    </div>   
                 </div>
 
-                <div class="row-span-2 bg-white shadow rounded-lg">
+                <!-- <div class="row-span-2 bg-white shadow rounded-lg">
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
                         <span> ยอดหักเงินทั้งหมด</span>
-
-                        
-                        <!-- Refer here for full dropdown menu code: https://tailwindui.com/components/application-ui/elements/dropdowns -->
                     </div>
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100 ">
                         <span> วันที่</span>
@@ -239,13 +211,12 @@
                         <span> 1</span>
                         <span> 150</span>                        
                     </div>    
-                </div>
+                </div> -->
                 
                 <div class="row-span-2 bg-white shadow rounded-lg">
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
-                        <span> ลูกค้าที่ค้างโทร (ไม่สำเร็จ)</span>
-                        <span> จำนวนวัน</span>
-                        <!-- Refer here for full dropdown menu code: https://tailwindui.com/components/application-ui/elements/dropdowns -->
+                        <span> แม่ค้า </span>
+                        <span> จำนวนยอดรวม</span>
                     </div>
                     <div class="overflow-y-auto">
                         <ul class="p-6 space-y-6">
@@ -255,7 +226,7 @@
                                         alt="Annette Watson profile picture">
                                 </div>
                                 <span class="text-gray-600">เอกฉัท วัฒนโกศล </span>
-                                <span class="ml-auto font-semibold">1 วัน</span>
+                                <span class="ml-auto font-semibold">200,000 บาท</span>
                             </li>
                             <li class="flex items-center">
                                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
@@ -263,7 +234,7 @@
                                         alt="Calvin Steward profile picture">
                                 </div>
                                 <span class="text-gray-600">ภูมิพัฒน์ สุพรรณภาคิน</span>
-                                <span class="ml-auto font-semibold">2 วัน</span>
+                                <span class="ml-auto font-semibold">190,000 บาท</span>
                             </li>
                             <li class="flex items-center">
                                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
@@ -271,7 +242,7 @@
                                         alt="Ralph Richards profile picture">
                                 </div>
                                 <span class="text-gray-600">จณัตว์ ทรัพย์มั้นคง </span>
-                                <span class="ml-auto font-semibold">3 วัน</span>
+                                <span class="ml-auto font-semibold">189,000 บาท</span>
                             </li>
                             <li class="flex items-center">
                                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
@@ -279,7 +250,7 @@
                                         alt="Bernard Murphy profile picture">
                                 </div>
                                 <span class="text-gray-600">ฉันทกร สีสะอาด</span>
-                                <span class="ml-auto font-semibold">1 วัน</span>
+                                <span class="ml-auto font-semibold">187,000 บาท</span>
                             </li>
                             <li class="flex items-center">
                                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
@@ -287,7 +258,7 @@
                                         alt="Arlene Robertson profile picture">
                                 </div>
                                 <span class="text-gray-600">พิมพ์สุดา ทรัพย์ศิลา</span>
-                                <span class="ml-auto font-semibold">1 วัน</span>
+                                <span class="ml-auto font-semibold">170,000 บาท</span>
                             </li>
                             <li class="flex items-center">
                                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
@@ -295,7 +266,7 @@
                                         alt="Jane Lane profile picture">
                                 </div>
                                 <span class="text-gray-600">ธรรมนิตย์ ธาดาวรวงศ์</span>
-                                <span class="ml-auto font-semibold">2 วัน</span>
+                                <span class="ml-auto font-semibold">165,000 บาท</span>
                             </li>
                             <li class="flex items-center">
                                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
@@ -303,7 +274,7 @@
                                         alt="Pat Mckinney profile picture">
                                 </div>
                                 <span class="text-gray-600">กนกพร พงษ์ธนาพัฒน์</span>
-                                <span class="ml-auto font-semibold">2 วัน</span>
+                                <span class="ml-auto font-semibold">155,000 บาท</span>
                             </li>
                             <li class="flex items-center">
                                 <div class="h-10 w-10 mr-3 bg-gray-100 rounded-full overflow-hidden">
@@ -311,7 +282,7 @@
                                         alt="Norman Walters profile picture">
                                 </div>
                                 <span class="text-gray-600">นิชาภรณ์ ภัชรภิรมย์ </span>
-                                <span class="ml-auto font-semibold">1 วัน</span>
+                                <span class="ml-auto font-semibold">130,000 บาท</span>
                             </li>
                         </ul>
                     </div>
@@ -321,7 +292,7 @@
                 
                 <div class="row-span-2 bg-white shadow rounded-lg">
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
-                        <span> สินค้าที่ขายเพิ่มได้</span>
+                        <span> สินค้าที่ขายดี</span>
                         <span> จำนวน</span>
                         <span> ราคา</span>
                         <!-- Refer here for full dropdown menu code: https://tailwindui.com/components/application-ui/elements/dropdowns -->

@@ -6,7 +6,7 @@
             <!-- Title -->
             <div class="mt-2">
                 <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
-                    สร้างข้อมูลพนักงาน
+                    สร้างข้อมูลตัวแทน
                 </h2>
             </div>
 
@@ -18,8 +18,8 @@
             <div class="flex">
                 <div class="w-full">
                     <div class="px-4 mt-4 sm:px-6">
-                        <h2 class="text-2xl font-extrabold leading-6 text-gray-900">รายละเอียดพนักงาน</h2>
-                        <p class="text-lg mt-1 max-w-2xl text-gray-500">กรุณากรอกข้อมูลพนักงาน</p>
+                        <h2 class="text-2xl font-extrabold leading-6 text-gray-900">รายละเอียดตัวแทน</h2>
+                        <p class="text-lg mt-1 max-w-2xl text-gray-500">กรุณากรอกข้อมูลตัวแทน</p>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                                     <dt class="text-l font-extrabold text-gray-500  mt-4">ชื่อ</dt>
                                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                                         <mat-form-field class="w-full">
-                                            <input matInput [formControlName]="'first_name'" placeholder="กรุณาระบุชื่อพนักงาน">
+                                            <input matInput [formControlName]="'first_name'" placeholder="กรุณาระบุชื่อตัวแทน">
                                         </mat-form-field>
                                     </dd>
                                 </div>
@@ -40,7 +40,7 @@
                                     <dt class="text-l font-extrabold text-gray-500  mt-4">นามสกุล</dt>
                                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                                         <mat-form-field class="w-full">
-                                            <input matInput [formControlName]="'last_name'" placeholder="กรุณาระบุนามสกุลพนักงาน">
+                                            <input matInput [formControlName]="'last_name'" placeholder="กรุณาระบุนามสกุลตัวแทน">
                                         </mat-form-field>
                                     </dd>
                                 </div>
@@ -48,10 +48,10 @@
 
 
                                 <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-l font-extrabold text-gray-500  mt-4">รหัสพนักงาน</dt>
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">รหัสตัวแทน</dt>
                                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0" >
                                         <mat-form-field class="w-full">
-                                            <input matInput [formControlName]="'user_id'" placeholder="กรุณาระบุรหัสพนักงาน " readonly  >
+                                            <input matInput [formControlName]="'user_id'" placeholder="กรุณาระบุรหัสตัวแทน " readonly  >
                                             <!-- readonly -->
                                         </mat-form-field>
                                     </dd>

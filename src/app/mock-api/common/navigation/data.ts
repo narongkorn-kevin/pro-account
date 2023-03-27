@@ -312,44 +312,44 @@ export const defaultNavigation: FuseNavigationItem[] = [
         children: [
             {
                 id: 'position',
-                title: 'ตำแหน่งพนักงาน',
+                title: 'ประเภทแม่ค้า',
                 type: 'basic',
       
                 link: '/position/list',
             },
 
-            {
-                id: 'position',
-                title: 'เช็คยอดขาย',
-                type: 'basic',
+            // {
+            //     id: 'position',
+            //     title: 'เช็คยอดขาย',
+            //     type: 'basic',
             
-                link: '/position/list',
-            },
+            //     link: '/user/profile-firstpage',
+            // },
             {
                 id: 'position',
                 title: 'ตรวจสอบยอดตัวแทน',
                 type: 'basic',
            
-                link: '/position/list',
+                link: '/user/profile-firstpage',
             },
-            {
-                id: 'position',
-                title: 'เช็คข้อมูลเจาะจงแม่ค้า',
-                type: 'collapsable',
+            // {
+            //     id: 'position',
+            //     title: 'เช็คข้อมูลเจาะจงแม่ค้า',
+            //     type: 'collapsable',
                 
-                link: '/position/list',
+            //     link: '/position/list',
 
-                children: [
-                            {
-                                id: 'workpacking',
-                                title: 'แม่ค้า',
-                                type: 'basic',
-                                icon: 'mat_outline:save',
-                                link: '/item-return/list',
-                            },
+            //     children: [
+            //                 {
+            //                     id: 'workpacking',
+            //                     title: 'แม่ค้า',
+            //                     type: 'basic',
+            //                     icon: 'mat_outline:save',
+            //                     link: '/item-return/list',
+            //                 },
 
-                        ]
-            },
+            //             ]
+            // },
             
             // {
             //     title: 'การทำงาน',
@@ -483,49 +483,64 @@ export const defaultNavigation: FuseNavigationItem[] = [
             return AuthService._Hr;
         },
         children: [
-            {
-                id: 'position',
-                title: 'ตั้งค่าข้อมูลส่วนตัว',
-                type: 'basic',
+            // {
+            //     id: 'position',
+            //     title: 'ตั้งค่าข้อมูลส่วนตัว',
+            //     type: 'basic',
                 
-                link: '/position/list',
-            },
+            //     link: '/user/profile-firstpage',
+            // },
 
             {
                 id: 'position',
                 title: 'ตั้งค่าข้อมูลสินค้า',
-                type: 'basic',
-              
-                link: '/position/list',
+                type: 'collapsable',
+                icon: 'heroicons_outline:cube',
+                children: [
+                         
+                                    {
+                                        id: 'list',
+                                        title: 'รายการสินค้า',
+                                        type: 'basic',
+                                        link: '/item/list',
+                                    },
+                                    {
+                                        id: 'item-type',
+                                        title: 'หมวดหมู่สินค้า',
+                                        type: 'basic',
+                                        link: '/item-type/list',
+                                    },
+                             
+                    ]
             },
             {
                 id: 'position',
                 title: 'ตรวจสอบคำสั่งซื้อ',
                 type: 'basic',
                
-                link: '/position/list',
+                link: '/sale-order/list',
             },
             {
                 id: 'position',
                 title: 'ตรวจสอบสถานะ',
                 type: 'basic',
                
-                link: '/position/list',
+                link: '/item-return/list',
             },
             {
                 id: 'position',
                 title: 'ตรวจสอบยอดขาย',
                 type: 'basic',
                
-                link: '/position/list',
+                link: '/home/list',
             },
-            {
-                id: 'position',
-                title: 'ตั้งค่า live สดสินค้า',
-                type: 'basic',
+            // {
+            //     id: 'position',
+            //     title: 'ตั้งค่า live สดสินค้า',
+            //     type: 'basic',
                
-                link: '/position/list',
-            },
+            //     link: '/position/list',
+            // },
             {
                 id: 'position',
                 title: 'เช็คยอดเงิน',
@@ -539,7 +554,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                                 title: 'กระเป๋าเงิน',
                                 type: 'basic',
                                 icon: 'mat_outline:save',
-                                link: '/item-return/list',
+                                // link: '/item-return/list',
                             },
 
                         ]
@@ -651,13 +666,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
         },
         icon: 'heroicons_outline:home',
         children: [
-            {
-                id: 'settings',
-                title: 'โปรไฟล์',
-                type: 'basic',
-                icon: 'feather:user',
-                link: '/user/profile',
-            },
+            // {
+            //     id: 'settings',
+            //     title: 'โปรไฟล์',
+            //     type: 'basic',
+            //     icon: 'feather:user',
+            //     link: '/user/profile',
+            // },
             {
                 id: 'user-signout',
                 title: 'ออกจากระบบ',

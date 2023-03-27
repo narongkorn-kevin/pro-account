@@ -101,7 +101,7 @@
                     <mat-tab-group animationDuration="0ms" coler="'primary'">
                         <mat-tab>
                             <ng-template mat-tab-label>
-                                <div class="text-md font-bold">ตรวจสอบข้อมูลส่วนตัว</div>
+                                <div class="text-md font-bold">ตรวจสอบสถานะ</div>
                                
                             </ng-template>
 
@@ -209,7 +209,7 @@
                             </div>
                         </mat-tab>
 
-                        <mat-tab>
+                        <!-- <mat-tab>
                             <ng-template mat-tab-label>
                                 <div class="text-md font-bold">ตรวจสอบข้อมูลสินค้า</div> 
                             </ng-template>
@@ -233,16 +233,14 @@
                                             <th>รายละเอียด</th>
                                             <th>สร้างโดย</th>
                                             <th>สร้างวันที่</th>
-                                            <!-- <th>สถานะ</th> -->
+                                      
                                         </tr>
                                     </thead>
                                     <tbody *ngIf="dataRow?.length != 0">
                                         <tr *ngFor="let item of dataRow; let i = index"
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md py-15">
                                             <td  style="min-width: 100px;">
-                                                <!-- <button mat-icon-button (click)="Edit(item.id)" title="แก้ไขข้อมูล">
-                                                    <mat-icon>edit</mat-icon>
-                                                </button> -->
+                                         
                                                 <button mat-icon-button color="" (click)="view(item.id)" title="ดูรายละเอียดข้อมูล">
                                                     <mat-icon>remove_red_eye</mat-icon>
                                                 </button>
@@ -258,11 +256,7 @@
                                             <td style="min-width: 200px">{{ item.description }}</td>
                                             <td style="min-width: 120px">{{ item.create_by }}</td>
                                             <td style="min-width: 120px">{{ item.created_at | date : 'dd/MM/yyy HH:mm' }}</td>
-                                            <!-- <td style="min-width: 150px">ตีกลับ</td> -->
-                                            <!-- <td style="min-width: 150px">
-                                                <span class="bg-red-100 text-red-800 text-md font-extrabold mr-2 
-                                                px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-red-900">ชำรุด</span>
-                                            </td> -->
+                              
                                         </tr>
                                     </tbody>
                                     <tbody *ngIf="dataRow?.length == 0">
@@ -279,7 +273,7 @@
                             <ng-template mat-tab-label>
                                 <div class="text-md font-bold">ตรวจสอบยอดขาย</div> 
                             </ng-template>
-                        </mat-tab>
+                        </mat-tab> -->
 
                     </mat-tab-group>
                 </div>
