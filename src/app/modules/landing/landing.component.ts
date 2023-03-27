@@ -17,32 +17,32 @@ export class LandingComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        const user =(JSON.parse(localStorage.getItem("user")))
-        let redirectURL = '/signed-in-redirect';
-                      switch (user.position_id) {
-                    case 1:
-                        redirectURL = 'home/list';
-                        break;
-                    case 2:
-                        redirectURL = 'workads/list';
-                        break;
-                    case 3:
-                        redirectURL = 'workadmin/list';
-                        break;
-                    case 4:
-                        redirectURL = 'worktelesale/list';
-                        break;
-                    case 5:
-                        redirectURL = 'item-return/list';
-                        break;
-                    case 6:
-                        redirectURL = 'home/list';
-                         break;
-                    case 7:
-                         redirectURL = 'calendar/new-calendar';
-                        break;
-                }
-                this._router.navigateByUrl(redirectURL);
+        // const user =(JSON.parse(localStorage.getItem("user")))
+        // let redirectURL = '/signed-in-redirect';
+        //               switch (user.position_id) {
+        //             case 1:
+        //                 redirectURL = 'home/list';
+        //                 break;
+        //             case 2:
+        //                 redirectURL = 'workads/list';
+        //                 break;
+        //             case 3:
+        //                 redirectURL = 'workadmin/list';
+        //                 break;
+        //             case 4:
+        //                 redirectURL = 'worktelesale/list';
+        //                 break;
+        //             case 5:
+        //                 redirectURL = 'item-return/list';
+        //                 break;
+        //             case 6:
+        //                 redirectURL = 'home/list';
+        //                  break;
+        //             case 7:
+        //                  redirectURL = 'calendar/new-calendar';
+        //                 break;
+        //         }
+        //         this._router.navigateByUrl(redirectURL);
             
 
 
