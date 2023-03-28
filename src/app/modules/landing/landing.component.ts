@@ -17,7 +17,7 @@ export class LandingComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        // const user =(JSON.parse(localStorage.getItem("user")))
+        const user =(JSON.parse(localStorage.getItem("user")))
         // let redirectURL = '/signed-in-redirect';
         //               switch (user.position_id) {
         //             case 1:
@@ -44,7 +44,7 @@ export class LandingComponent implements OnInit {
         //         }
         //         this._router.navigateByUrl(redirectURL);
             
-
+this._router.navigateByUrl('home/list');
 
 
         // this._authService.me().subscribe({
