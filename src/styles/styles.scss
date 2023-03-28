@@ -5,17 +5,17 @@
 /*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
 /* ----------------------------------------------------------------------------------------------------- */
 
-.search-box {
-    .mat-form-field-wrapper {
-        .mat-form-field-flex {
-            border-width: 0px !important;
-            @apply shadow-none #{'!important'};
-        }
-    }
-    button {
-        border: 0px;
-    }
-}
+// .search-box {
+//     .mat-form-field-wrapper {
+//         .mat-form-field-flex {
+//             border-width: 0px !important;
+//             @apply shadow-none #{'!important'};
+//         }
+//     }
+//     button {
+//         border: 0px;
+//     }
+// }
 
 .mat-flat-button {
     .mat-primary {
@@ -24,6 +24,6 @@
 }
 
 .dark{
-background-color: #000000 !important;
+background-color: #62e6a5 !important;
 
 }
