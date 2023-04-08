@@ -16,7 +16,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 id: 'g-Admin',
                 title: 'จัดการระบบส่วน website',
                 type: 'collapsable',
-                icon: 'heroicons_outline:home',
+                icon: 'mat_solid:web',
                 children: [
                     {
                         id: 'clients',
