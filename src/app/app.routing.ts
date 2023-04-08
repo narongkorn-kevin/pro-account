@@ -339,6 +339,14 @@ export const appRoutes: Route[] = [
                 ]
             },
 
+            {
+                path: 'chat',
+                canActivate: [], children: [
+                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/chat/chat.module').then(m => m.ChatModule) },
+
+                ]
+            },
+
             // {
             //     path: 'ads-calendar',
             //     canActivate: [], children: [

@@ -492,13 +492,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
             return AuthService._Hr;
         },
         children: [
-            // {
-            //     id: 'position',
-            //     title: 'ตั้งค่าข้อมูลส่วนตัว',
-            //     type: 'basic',
-
-            //     link: '/user/profile-firstpage',
-            // },
+            {
+                title: 'ห้องพูดคุยกับลูกค้า',
+                type: 'basic',
+                icon: 'heroicons_outline:chat',
+                link: '/chat/list/data',
+            },
 
             {
                 id: 'position',
