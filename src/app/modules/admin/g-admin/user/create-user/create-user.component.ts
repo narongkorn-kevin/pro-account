@@ -45,7 +45,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit, OnDestroy {
     positionData: any = []
     branchData: any = []
     permissionData: any = []
-
+    type: string;
     files: File[] = [];
     filesSignature: File[] = [];
 
@@ -102,6 +102,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit, OnDestroy {
             password: ['', Validators.required,],
             salary: ['', Validators.required,],
             image: ['',],
+            type:'',
             image_signature: ['',]
         })
     }
@@ -319,6 +320,21 @@ export class CreateUserComponent implements OnInit, AfterViewInit, OnDestroy {
     onSubmit(): void {
         console.log(this.formData.value)
     }
-
+    
+    changeType(event) {
+        console.log(event)
+        if (event.value == '1'){
+            this.formData.patchValue({
+                // sec: 0, 
+                // hour: 0,
+                // min: 0,
+                // qty_lesson: 0,
+            });
+            this.type= '1'
+        }
+         else if (event.value == '2'){
+            this.type='2'
+         }
+    }
 
 }

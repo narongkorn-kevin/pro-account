@@ -76,7 +76,7 @@
                         <mat-header-cell *matHeaderCellDef mat-sort-header> สถานะ </mat-header-cell>
                         <mat-cell *matCellDef="let row">
                             <td>
-                                <div *ngIf="row.status === 1"> เปิดการใช้งาน</div>
+                                <div *ngIf="row.status == 1"> เปิดการใช้งาน</div>
                                 <div *ngIf="row.status === 0">
                                     ปิดการใช้งาน
                                 </div>
