@@ -8,15 +8,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { SharedModule } from 'app/shared/shared.module';
-<<<<<<< HEAD
-import { chatRoutes } from 'app/modules/admin/g-admin/chat/chat.routing';
-import { ChatComponent } from 'app/modules/admin/g-admin/chat/chat.component';
-import { ChatsComponent } from 'app/modules/admin/g-admin/chat/chats/chats.component';
-import { ContactInfoComponent } from 'app/modules/admin/g-admin/chat/contact-info/contact-info.component';
-import { ConversationComponent } from 'app/modules/admin/g-admin/chat/conversation/conversation.component';
-import { NewChatComponent } from 'app/modules/admin/g-admin/chat/new-chat/new-chat.component';
-import { ProfileComponent } from 'app/modules/admin/g-admin/chat/profile/profile.component';
-=======
 import { chatRoutes } from 'app/modules/admin/apps/chat/chat.routing';
 import { ChatComponent } from 'app/modules/admin/apps/chat/chat.component';
 import { ChatsComponent } from 'app/modules/admin/apps/chat/chats/chats.component';
@@ -25,7 +16,6 @@ import { EmptyConversationComponent } from 'app/modules/admin/apps/chat/empty-co
 import { ConversationComponent } from 'app/modules/admin/apps/chat/conversation/conversation.component';
 import { NewChatComponent } from 'app/modules/admin/apps/chat/new-chat/new-chat.component';
 import { ProfileComponent } from 'app/modules/admin/apps/chat/profile/profile.component';
->>>>>>> 1f6064cb32c630f9775246543626c9ddfda31647
 
 @NgModule({
     declarations: [
@@ -33,10 +23,7 @@ import { ProfileComponent } from 'app/modules/admin/apps/chat/profile/profile.co
         ChatsComponent,
         ContactInfoComponent,
         ConversationComponent,
-<<<<<<< HEAD
-=======
         EmptyConversationComponent,
->>>>>>> 1f6064cb32c630f9775246543626c9ddfda31647
         NewChatComponent,
         ProfileComponent
     ],
