@@ -76,12 +76,12 @@
                                             <td style="width: 100px; min-width: 100px;">{{ item.booking }}</td>
                                             <td style="width: 100px; min-width: 100px;">{{ item.balance }}</td>
                                             <td style="width: 130px; min-width: 130px;">
-                                                <div *ngIf="item.status === 1">
+                                                <div *ngIf="item.status == 1">
                                                     <!-- เปิดการใช้งาน -->
                                                     <span
                                                         class="bg-green-100 text-green-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">เปิดการใช้งาน</span>
                                                 </div>
-                                                <div *ngIf="item.status === 0">
+                                                <div *ngIf="item.status == 0">
                                                     <!-- ปิดการใช้งาน -->
                                                     <span
                                                         class="bg-red-100 text-red-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ปิดการใช้งาน</span>
@@ -92,7 +92,7 @@
                                                 item.user_create.last_name: '' }}
                                             </td>
                                             <!-- <td>{{ item.created_at | thaiDate }}</td> -->
-                                            <td style="width: 100px; min-width: 100px;">{{ item.created_at | date: 'dd/MM/yyyy hh:mm' }}</td>
+                                            <td style="width: 100px; min-width: 100px;">{{ item.created_at  }}</td>
                                         </tr>
                                     </tbody>
                                     <tbody *ngIf="items?.length == 0">
@@ -141,12 +141,12 @@
                                             <td style="width: 100px; min-width: 100px;">{{ item.booking }}</td>
                                             <td style="width: 100px; min-width: 100px;">{{ item.balance }}</td>
                                             <td style="width: 130px; min-width: 130px;">
-                                                <div *ngIf="item.status === 1">
+                                                <div *ngIf="item.status == 1">
                                                     <!-- เปิดการใช้งาน -->
                                                     <span
                                                         class="bg-green-100 text-green-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">เปิดการใช้งาน</span>
                                                 </div>
-                                                <div *ngIf="item.status === 0">
+                                                <div *ngIf="item.status == 0">
                                                     <!-- ปิดการใช้งาน -->
                                                     <span
                                                         class="bg-red-100 text-red-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ปิดการใช้งาน</span>

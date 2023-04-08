@@ -7,7 +7,7 @@
             <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
         </div>
         <!-- Title -->
-        <div class="text-4xl font-extrabold tracking-tight">รายการตัวแทน</div>
+        <div class="text-4xl font-extrabold tracking-tight">รายการสมาชิก</div>
         <!-- Actions -->
 
 
@@ -41,7 +41,7 @@
                             <tr>
                                 <th>จัดการ</th>
                                 <th>ลำดับ</th>
-                                <th>รหัสแม่ค้า</th>                              
+                                <th>รหัสสมาชิก</th>                              
                                 <th>ชื่อ</th>
                                 <th>นามสกุล</th>
                                 <th>อีเมลล์</th>
@@ -69,11 +69,11 @@
                                 <td style="width: 100px; min-width: 100px;">{{ item.position.name }}</td>
                                 <td style="width: 100px; min-width: 100px;">{{ item.branch.name }}</td>
                                 <td style="width: 120px; min-width: 120px;">
-                                    <div *ngIf="item.status === 1">
+                                    <div *ngIf="item.status == 1">
                                         <!-- เปิดการใช้งาน -->
                                         <span class="bg-green-100 text-green-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">เปิดการใช้งาน</span>
                                     </div>
-                                    <div *ngIf="item.status === 0">
+                                    <div *ngIf="item.status == 0">
                                         <!-- ปิดการใช้งาน -->
                                         <span class="bg-red-100 text-red-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ปิดการใช้งาน</span>
                                     </div>
@@ -81,7 +81,7 @@
                                 <!-- <td style="width: 120px; min-width: 120px;">{{ item.create_by }}
                                 </td> -->
                                 <!--<td>{{ item.created_at | thaiDate }}</td> -->
-                                <td style="width: 120px; min-width: 120px;">{{ item.created_at | date: 'dd/MM/yyyy hh:mm' }}</td>
+                                <td style="width: 120px; min-width: 120px;">{{ item.created_at }}</td>
                             </tr>
                         </tbody>
 

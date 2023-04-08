@@ -1,7 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
+<<<<<<< HEAD
 import { Chat, Profile } from 'app/modules/admin/g-admin/chat/chat.types';
 import { ChatService } from 'app/modules/admin/g-admin/chat/chat.service';
+=======
+import { Chat, Profile } from 'app/modules/admin/apps/chat/chat.types';
+import { ChatService } from 'app/modules/admin/apps/chat/chat.service';
+>>>>>>> 1f6064cb32c630f9775246543626c9ddfda31647
 
 @Component({
     selector       : 'chat-chats',

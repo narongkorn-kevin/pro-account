@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, filter, map, Observable, of, switchMap, take, tap, throwError } from 'rxjs';
+<<<<<<< HEAD
 import { Chat, Contact, Profile } from 'app/modules/admin/g-admin/chat/chat.types';
+=======
+import { Chat, Contact, Profile } from 'app/modules/admin/apps/chat/chat.types';
+>>>>>>> 1f6064cb32c630f9775246543626c9ddfda31647
 
 @Injectable({
     providedIn: 'root'

@@ -115,7 +115,11 @@
                     <div class="flex-auto overflow-y-auto">
                         <ng-container *ngIf="filteredChats.length > 0; else noChats">
                             <ng-container *ngFor="let chat of filteredChats; trackBy: trackByFn">
+<<<<<<< HEAD
                                 <div
+=======
+                                <a
+>>>>>>> 1f6064cb32c630f9775246543626c9ddfda31647
                                     class="z-20 flex items-center py-5 px-8 cursor-pointer border-b"
                                     [ngClass]="{'hover:bg-gray-100 dark:hover:bg-hover': !selectedChat || selectedChat.id !== chat.id,
                                                 'bg-primary-50 dark:bg-hover': selectedChat && selectedChat.id === chat.id}"
@@ -155,7 +159,11 @@
                                                 [svgIcon]="'heroicons_solid:volume-off'"></mat-icon>
                                         </ng-container>
                                     </div>
+<<<<<<< HEAD
                                 </div>
+=======
+                                </a>
+>>>>>>> 1f6064cb32c630f9775246543626c9ddfda31647
                             </ng-container>
                         </ng-container>
                     </div>
@@ -169,7 +177,11 @@
                 <div class="flex flex-auto flex-col items-center justify-center h-full">
                     <mat-icon
                         class="icon-size-24"
+<<<<<<< HEAD
                         [svgIcon]="'iconsmind:speach_bubble'"></mat-icon>
+=======
+                        [svgIcon]="'heroicons_outline:chat'"></mat-icon>
+>>>>>>> 1f6064cb32c630f9775246543626c9ddfda31647
                     <div class="mt-4 text-2xl font-semibold tracking-tight text-secondary">No chats</div>
                 </div>
             </ng-template>

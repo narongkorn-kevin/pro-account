@@ -6,7 +6,7 @@
             <!-- Title -->
             <div class="mt-2">
                 <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
-                    สร้างข้อมูลตัวแทน
+                    สร้างข้อมูลสมาชิก
                 </h2>
             </div>
 
@@ -18,8 +18,8 @@
             <div class="flex">
                 <div class="w-full">
                     <div class="px-4 mt-4 sm:px-6">
-                        <h2 class="text-2xl font-extrabold leading-6 text-gray-900">รายละเอียดตัวแทน</h2>
-                        <p class="text-lg mt-1 max-w-2xl text-gray-500">กรุณากรอกข้อมูลตัวแทน</p>
+                        <h2 class="text-2xl font-extrabold leading-6 text-gray-900">รายละเอียดสมาชิก</h2>
+                        <p class="text-lg mt-1 max-w-2xl text-gray-500">กรุณากรอกข้อมูลสมาชิก</p>
                     </div>
                 </div>
             </div>
@@ -28,11 +28,55 @@
                     <div class="w-full">
                         <div class="border-t border-gray-200">
                             <dl>
+                                
+                                <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ประเภทการสมัคร</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full pr-2">
+                                            <mat-select [formControlName]="'type'">
+                                                <mat-option [value]="''">
+                                                    กรุณาเลือกประเภท
+                                                </mat-option>
+                                                <mat-option [value]="'0'">
+                                                    ตัวแทน
+                                                </mat-option>
+                                                <mat-option [value]="'1'">
+                                                    แม่ค้า
+                                                </mat-option>
+                                                <!-- <mat-option *ngFor="let item of branchData" [value]="item.id">
+                                                    {{item.name}}
+                                                </mat-option> -->
+
+
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+
+                            
+                            <ng-container *ngIf="formData.value.type=='1'">
+                                <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">เลือกตัวแทน</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full pr-2">
+                                            <mat-select [formControlName]="'branch_id'">
+                                                <mat-option [value]="''">กรุณาเลือกตัวแทน</mat-option>
+                                                <mat-option [value]="''">นาย A</mat-option>
+                                                <mat-option [value]="''">นาย B</mat-option>
+                                                <!-- <mat-option *ngFor="let item of branchData" [value]="item.id">
+                                                    {{item.name}}
+                                                </mat-option> -->
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                            </ng-container>
+
                                 <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                     <dt class="text-l font-extrabold text-gray-500  mt-4">ชื่อ</dt>
                                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                                         <mat-form-field class="w-full">
-                                            <input matInput [formControlName]="'first_name'" placeholder="กรุณาระบุชื่อตัวแทน">
+                                            <input matInput [formControlName]="'first_name'" placeholder="กรุณาระบุชื่อ">
                                         </mat-form-field>
                                     </dd>
                                 </div>
@@ -40,7 +84,7 @@
                                     <dt class="text-l font-extrabold text-gray-500  mt-4">นามสกุล</dt>
                                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                                         <mat-form-field class="w-full">
-                                            <input matInput [formControlName]="'last_name'" placeholder="กรุณาระบุนามสกุลตัวแทน">
+                                            <input matInput [formControlName]="'last_name'" placeholder="กรุณาระบุนามสกุล">
                                         </mat-form-field>
                                     </dd>
                                 </div>
@@ -48,7 +92,7 @@
 
 
                                 <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-l font-extrabold text-gray-500  mt-4">รหัสตัวแทน</dt>
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">รหัสสมาชิก</dt>
                                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0" >
                                         <mat-form-field class="w-full">
                                             <input matInput [formControlName]="'user_id'" placeholder="กรุณาระบุรหัสตัวแทน " readonly  >
@@ -91,7 +135,7 @@
                                     </dd>  
                                 </div>
 
-                                <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <!-- <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                     <dt class="text-l font-extrabold text-gray-500  mt-4">ตำแหน่ง</dt>
                                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                                         <mat-form-field class="w-full pr-2">
@@ -113,22 +157,8 @@
                                             <input matInput [formControlName]="'salary'" min="1" type="number" maxlength="10" placeholder="กรุณาใส่เงินเดือน">
                                         </mat-form-field>
                                     </dd>
-                                </div>
-                                <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-l font-extrabold text-gray-500  mt-4">สาขา</dt>
-                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                        <mat-form-field class="w-full pr-2">
-                                            <mat-select [formControlName]="'branch_id'">
-                                                <mat-option [value]="''">
-                                                    กรุณาเลือกสาขา
-                                                </mat-option>
-                                                <mat-option *ngFor="let item of branchData" [value]="item.id">
-                                                    {{item.name}}
-                                                </mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </dd>
-                                </div>
+                                </div> -->
+                         
                             </dl>
                         </div>
                     </div>

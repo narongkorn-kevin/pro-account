@@ -12,7 +12,7 @@
         <!-- Icon -->
         <ng-container *ngIf="item.icon">
             <mat-icon
-                class="fuse-vertical-navigation-item-icon"
+                class="fuse-vertical-navigation-item-icon text-black"
                 [ngClass]="item.classes?.icon"
                 [svgIcon]="item.icon"></mat-icon>
         </ng-container>
@@ -20,12 +20,12 @@
         <!-- Title & Subtitle -->
         <div class="fuse-vertical-navigation-item-title-wrapper">
             <div class="fuse-vertical-navigation-item-title">
-                <span [ngClass]="item.classes?.title">
+                <span class="text-black"[ngClass]="item.classes?.title">
                     {{item.title}}
                 </span>
             </div>
             <ng-container *ngIf="item.subtitle">
-                <div class="fuse-vertical-navigation-item-subtitle">
+                <div class="fuse-vertical-navigation-item-subtitle ">
                     <span [ngClass]="item.classes?.subtitle">
                         {{item.subtitle}}
                     </span>
