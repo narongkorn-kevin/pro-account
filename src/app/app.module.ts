@@ -18,7 +18,8 @@ import { SaleOrderComponent } from './modules/admin/g-admin/sale-order/sale-orde
 import { Calendar } from '@fullcalendar/core';
 import { CalendarComponent } from './modules/admin/g-admin/calendar/calendar.component';
 import { SalePageComponent } from './modules/admin/g-admin/sale-page/sale-page.component';
-// import { BranchComponent } from './modules/admin/g-admin/branch/branch.component';
+import { MatSelectComponent } from './modules/admin/g-admin/topup/mat-select/mat-select.component';
+import { MatStepperModule } from '@angular/material/stepper';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,
@@ -49,6 +50,7 @@ const routerConfig: ExtraOptions = {
 
         // 3rd party modules that require global configuration via forRoot
         MarkdownModule.forRoot({}),
+        MatStepperModule
 
     ],
     bootstrap: [

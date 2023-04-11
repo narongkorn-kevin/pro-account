@@ -52,7 +52,7 @@
     // color: theming.get-color-from-palette($foreground, text);
     &:hover:not(.mat-option-disabled),
     &:focus:not(.mat-option-disabled) {
-        background: #b17d10!important;
+        background: #3fa875!important;
         color: white;
     }
     // In multiple mode there is a checkbox to show that the option is selected.
@@ -60,7 +60,7 @@
     //   background: theming.get-color-from-palette($background, hover);
     // }
     &.mat-active {
-        background: #b17d10!important;
+        background: #4DB433!important;
         color: white !important;
     }
     // &.mat-option-disabled {

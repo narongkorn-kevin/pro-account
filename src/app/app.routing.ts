@@ -130,6 +130,18 @@ export const appRoutes: Route[] = [
                 ]
             },
             {
+                path: 'topup',
+                canActivate: [], children: [
+                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/topup/bank.module').then(m => m.BankModule) },
+                ]
+            },
+            {
+                path: 'Wallet',
+                canActivate: [], children: [
+                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/topup/bank.module').then(m => m.BankModule) },
+                ]
+            },
+            {
                 path: 'delivery',
                 canActivate: [], children: [
                     { path: '', loadChildren: () => import('app/modules/admin/g-admin/delivery/delivery.module').then(m => m.DeliveryModule) },

@@ -57,7 +57,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/bank/list',
                     },
-
+                    {
+                        id: 'topup',
+                        title: 'เติมเงิน',
+                        icon: 'mat_outline:payment',
+                        type: 'basic',
+                        link: '/topup/list',
+                    },
                     {
                         id: 'faq',
                         title: 'คำถามพบบ่อย',
