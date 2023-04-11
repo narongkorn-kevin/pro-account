@@ -521,12 +521,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
             return AuthService._Hr;
         },
         children: [
-            {
-                title: 'ห้องพูดคุยกับลูกค้า',
-                type: 'basic',
-                icon: 'heroicons_outline:chat',
-                link: '/chat/list/data',
-            },
+            // {
+            //     title: 'ห้องพูดคุยกับลูกค้า',
+            //     type: 'basic',
+            //     icon: 'heroicons_outline:chat',
+            //     link: '/chat/list/data',
+            // },
 
             {
                 id: 'position',
