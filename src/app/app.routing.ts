@@ -129,6 +129,13 @@ export const appRoutes: Route[] = [
                     { path: '', loadChildren: () => import('app/modules/admin/g-admin/bank/bank.module').then(m => m.BankModule) },
                 ]
             },
+
+            {
+                path: 'bank-user',
+                canActivate: [], children: [
+                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/bank-user/bank.module').then(m => m.BankModule) },
+                ]
+            },
             {
                 path: 'topup',
                 canActivate: [], children: [
@@ -159,12 +166,7 @@ export const appRoutes: Route[] = [
                     { path: '', loadChildren: () => import('app/modules/admin/g-admin/customer/customer.module').then(m => m.CustomerModule) },
                 ]
             },
-            {
-                path: 'customer1',
-                canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/customer1/customer.module').then(m => m.CustomerModule) },
-                ]
-            },
+  
 
             {
                 path: 'worktelesale',
@@ -334,6 +336,21 @@ export const appRoutes: Route[] = [
 
                 ]
             },
+            // {
+            //     path: 'chat',
+            //     canActivate: [], children: [
+            //         { path: '', loadChildren: () => import('app/modules/admin/g-admin/chat/page.module').then(m => m.Module) },
+
+            //     ]
+            // },
+
+            {
+                path: 'chat',
+                canActivate: [], children: [
+                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/chat/chat.module').then(m => m.ChatModule) },
+
+                ]
+            },
 
             {
                 path: 'check-status',
@@ -347,6 +364,14 @@ export const appRoutes: Route[] = [
                 path: 'calendar',
                 canActivate: [], children: [
                     { path: '', loadChildren: () => import('app/modules/admin/g-admin/calendar/calendar.module').then(m => m.CalendarModule) },
+
+                ]
+            },
+
+            {
+                path: 'chat',
+                canActivate: [], children: [
+                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/chat/chat.module').then(m => m.ChatModule) },
 
                 ]
             },

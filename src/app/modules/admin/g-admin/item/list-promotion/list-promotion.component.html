@@ -85,10 +85,10 @@
                         <td style="width: 9%;">{{ item.booking }}</td>
                         <td style="width: 9%;">{{ item.balance }}</td>
                         <td>
-                            <div *ngIf="item.status === 1">
+                            <div *ngIf="item.status == 1">
                                 เปิดการใช้งาน
                             </div>
-                            <div *ngIf="item.status === 0">
+                            <div *ngIf="item.status == 0">
                                 ปิดการใช้งาน
                             </div>
                         </td>

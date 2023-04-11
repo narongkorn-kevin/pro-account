@@ -8,13 +8,13 @@
             <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
         </div>
         <!-- Title -->
-        <div class="text-4xl font-extrabold tracking-tight">รายการแม่ค้า</div>
+        <div class="text-4xl font-extrabold tracking-tight">รายการลูกค้า</div>
         <!-- Actions -->
         <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
             <!-- Add product button -->
             <a href="customer/new-customer" class="ml-4" mat-flat-button [color]="'primary'">
                 <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
-                <span class="ml-2 mr-1">เพิ่มแม่ค้าใหม่</span>
+                <span class="ml-2 mr-1">เพิ่มลูกค้าใหม่</span>
             </a>
         </div>
     </div>
@@ -52,12 +52,12 @@
                                 <td style="min-width: 200px;">{{ item.name }}</td>
                                 <td style="min-width: 200px;">{{ item.email }}</td>
                                 <td style="min-width: 120px;">
-                                    <div *ngIf="item.status === 1">
+                                    <div *ngIf="item.status == 1">
                                         <!-- เปิดการใช้งาน -->
                                         <span
                                             class="bg-green-100 text-green-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">เปิดการใช้งาน</span>
                                     </div>
-                                    <div *ngIf="item.status === 0">
+                                    <div *ngIf="item.status == 0">
                                         <!-- ปิดการใช้งาน -->
                                         <span
                                             class="bg-red-100 text-red-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ปิดการใช้งาน</span>

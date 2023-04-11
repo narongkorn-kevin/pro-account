@@ -129,70 +129,63 @@ export const messages = [
         id       : '415151b9-9ee9-40a4-a4ad-2d88146bc71b',
         chatId   : '',
         contactId: '',
-        value    : 'Ohh dude, I\'m really sorry you had to go through all that in such a short period of time',
-        createdAt: moment().subtract(1, 'week').hour(19).minute(11).toISOString()
-    },
-    {
-        id       : 'ea7662d5-7b72-4c19-ad6c-f80320541001',
-        chatId   : '',
-        contactId: '',
-        value    : '😕',
+        value    : 'ฉันต้องการสั่งซื้อสินค้า',
         createdAt: moment().subtract(1, 'week').hour(19).minute(11).toISOString()
     },
     {
         id       : '3a2d3a0e-839b-46e7-86ae-ca0826ecda7c',
         chatId   : '',
         contactId: 'me',
-        value    : 'Thanks, man! It was good catching up with you.',
+        value    : 'ขอบคุณที่สนใจ คุณต้องการสินค้าอะไรบ้างครับ',
         createdAt: moment().subtract(1, 'week').hour(19).minute(11).toISOString()
     },
     {
         id       : '5329c20d-6754-47ec-af8c-660c72be3528',
         chatId   : '',
         contactId: '',
-        value    : 'Yeah dude. Hit me again next week so we can grab a coffee, remotely!',
+        value    : 'ฉันต้องการสั่งซื้อหมอนยางพารา 1 ใบ',
         createdAt: moment().subtract(1, 'week').hour(19).minute(12).toISOString()
     },
     {
         id       : '5329c20d-6754-47ec-af8c-660c72be3528',
         chatId   : '',
         contactId: 'me',
-        value    : ':) Sure, man! See you next week!',
+        value    : 'ยินดีครับ สินค้ามีในสต๊อกพร้อมส่ง',
         createdAt: moment().subtract(1, 'week').hour(19).minute(12).toISOString()
     },
     {
         id       : '5329c20d-6754-47ec-af8c-660c72be3528',
         chatId   : '',
         contactId: '',
-        value    : 'See you later!',
+        value    : 'เยี่ยมมาก แล้วฉันต้องทำอย่างไรบ้าง',
         createdAt: moment().subtract(1, 'week').hour(19).minute(12).toISOString()
     },
     {
         id       : 'bab8ca0e-b8e5-4375-807b-1c91fca25a5d',
         chatId   : '',
         contactId: 'me',
-        value    : 'Hey! Are you available right now? How about if we grab that coffee today? Remotely, of course :)',
+        value    : 'กรุณาชำระเงินค่าสินค้า เพื่อให้เราทำการจัดส่งสินค้าถึงท่าน',
         createdAt: moment().hour(12).minute(45).toISOString()
     },
     {
         id       : '8445a84d-599d-4e2d-a31c-5f4f29ad2b4c',
         chatId   : '',
         contactId: '',
-        value    : 'Hi!',
+        value    : 'ได้เลย',
         createdAt: moment().hour(12).minute(56).toISOString()
     },
     {
         id       : '9f506742-50da-4350-af9d-61e53392fa08',
         chatId   : '',
         contactId: '',
-        value    : 'Sure thing! I\'m gonna call you in 5, is it okay?',
+        value    : 'กรุณารอฉันโอนเงินภายใน 5 นาที',
         createdAt: moment().hour(12).minute(56).toISOString()
     },
     {
         id       : 'ca8523d8-faed-45f7-af09-f6bd5c3f3875',
         chatId   : '',
         contactId: 'me',
-        value    : 'Awesome! Call me in 5 minutes..',
+        value    : 'ได้ครับ',
         createdAt: moment().hour(12).minute(58).toISOString()
     },
     {
@@ -209,119 +202,119 @@ export const chats = [
         contactId    : '9d3f0e7f-dcbd-4e56-a5e8-87b8154e9edf',
         unreadCount  : 2,
         muted        : false,
-        lastMessage  : 'See you tomorrow!',
-        lastMessageAt: '26/04/2021'
+        lastMessage  : 'ไม่ได้ออนไลน์ขณะนี้',
+        lastMessageAt: '26/04/2023'
     },
     {
         id           : '4459a3f0-b65e-4df2-8c37-6ec72fcc4b31',
         contactId    : '16b9e696-ea95-4dd8-86c4-3caf705a1dc6',
         unreadCount  : 0,
         muted        : false,
-        lastMessage  : 'See you tomorrow!',
-        lastMessageAt: '26/04/2021'
+        lastMessage  : 'ไม่ได้ออนไลน์ขณะนี้',
+        lastMessageAt: '26/04/2023'
     },
     {
         id           : 'f73a5a34-a723-4b35-8439-5289e0164c83',
         contactId    : 'bf172879-423a-4fd6-8df3-6d1938bbfe1f',
         unreadCount  : 1,
         muted        : false,
-        lastMessage  : 'See you tomorrow!',
-        lastMessageAt: '26/04/2021'
+        lastMessage  : 'ไม่ได้ออนไลน์ขณะนี้',
+        lastMessageAt: '26/04/2023'
     },
     {
         id           : '747f101c-0371-4ca3-9f20-cb913a80fe89',
         contactId    : 'abd9e78b-9e96-428f-b3ff-4d934c401bee',
         unreadCount  : 0,
         muted        : true,
-        lastMessage  : 'See you tomorrow!',
-        lastMessageAt: '26/04/2021'
+        lastMessage  : 'ไม่ได้ออนไลน์ขณะนี้',
+        lastMessageAt: '26/04/2023'
     },
     {
         id           : 'b3facfc4-dfc2-4ac2-b55d-cb70b3e68419',
         contactId    : '6519600a-5eaa-45f8-8bed-c46fddb3b26a',
         unreadCount  : 0,
         muted        : false,
-        lastMessage  : 'See you tomorrow!',
-        lastMessageAt: '26/04/2021'
+        lastMessage  : 'ไม่ได้ออนไลน์ขณะนี้',
+        lastMessageAt: '26/04/2023'
     },
     {
         id           : 'e3127982-9e53-4611-ac27-eb70c84be4aa',
         contactId    : 'b62359fd-f2a8-46e6-904e-31052d1cd675',
         unreadCount  : 0,
         muted        : false,
-        lastMessage  : 'See you tomorrow!',
-        lastMessageAt: '26/04/2021'
+        lastMessage  : 'ไม่ได้ออนไลน์ขณะนี้',
+        lastMessageAt: '26/04/2023'
     },
     {
         id           : 'a30351f3-bfa6-4ce3-b13a-82748fe0edee',
         contactId    : '2c37ed00-427a-46d7-8f8f-d711c768d1ee',
         unreadCount  : 0,
         muted        : false,
-        lastMessage  : 'See you tomorrow!',
-        lastMessageAt: '26/04/2021'
+        lastMessage  : 'ไม่ได้ออนไลน์ขณะนี้',
+        lastMessageAt: '26/04/2023'
     },
     {
         id           : '5636c0ba-fa47-42ca-9160-27340583041e',
         contactId    : 'b8258ccf-48b5-46a2-9c95-e0bd7580c645',
         unreadCount  : 0,
         muted        : false,
-        lastMessage  : 'See you tomorrow!',
-        lastMessageAt: '26/04/2021'
+        lastMessage  : 'ไม่ได้ออนไลน์ขณะนี้',
+        lastMessageAt: '26/04/2023'
     },
     {
         id           : 'feddd91a-51af-48d8-99b0-cd99ee060a36',
         contactId    : 'e2946946-b4b5-4fd7-bab4-62c38cdff2f1',
         unreadCount  : 0,
         muted        : false,
-        lastMessage  : 'See you tomorrow!',
-        lastMessageAt: '26/04/2021'
+        lastMessage  : 'ไม่ได้ออนไลน์ขณะนี้',
+        lastMessageAt: '26/04/2023'
     },
     {
         id           : '89421c2f-1751-4040-b09b-4a4268db47b9',
         contactId    : '12148fa2-e0a4-49fb-b3c5-daeecdb5180a',
         unreadCount  : 0,
         muted        : true,
-        lastMessage  : 'See you tomorrow!',
-        lastMessageAt: '26/04/2021'
+        lastMessage  : 'ไม่ได้ออนไลน์ขณะนี้',
+        lastMessageAt: '26/04/2023'
     },
     {
         id           : 'ffbbfdb4-0485-44aa-8521-5ce1eda3fd2f',
         contactId    : '81fdc48c-5572-4123-8a73-71b7892120de',
         muted        : false,
-        lastMessage  : 'See you tomorrow!',
-        lastMessageAt: '26/04/2021'
+        lastMessage  : 'ไม่ได้ออนไลน์ขณะนี้',
+        lastMessageAt: '26/04/2023'
     },
     {
         id           : 'a477baea-df90-4e2f-b108-7791bcd50bc8',
         contactId    : 'a9a9f382-e4c3-42fb-9fe9-65aa534732b5',
         unreadCount  : 0,
         muted        : false,
-        lastMessage  : 'See you tomorrow!',
-        lastMessageAt: '26/04/2021'
+        lastMessage  : 'ไม่ได้ออนไลน์ขณะนี้',
+        lastMessageAt: '26/04/2023'
     },
     {
         id           : '450840c8-aa0b-47a4-b6ca-b864ad9a3a88',
         contactId    : '7e8e1f1e-d19f-45c7-86bd-6fef599dae71',
         unreadCount  : 0,
         muted        : false,
-        lastMessage  : 'See you tomorrow!',
-        lastMessageAt: '26/04/2021'
+        lastMessage  : 'ไม่ได้ออนไลน์ขณะนี้',
+        lastMessageAt: '26/04/2023'
     },
     {
         id           : '427270f0-841c-47f9-912c-3fd8139db5e6',
         contactId    : '8141dd08-3a6e-4770-912c-59d0ed06dde6',
         unreadCount  : 0,
         muted        : false,
-        lastMessage  : 'See you tomorrow!',
-        lastMessageAt: '26/04/2021'
+        lastMessage  : 'ไม่ได้ออนไลน์ขณะนี้',
+        lastMessageAt: '26/04/2023'
     },
     {
         id           : '491b2918-e71e-4017-919e-0ba009afd003',
         contactId    : '114642a2-ccb7-4cb1-ad2b-5e9b6a0c1d2e',
         unreadCount  : 0,
         muted        : false,
-        lastMessage  : 'See you tomorrow!',
-        lastMessageAt: '26/04/2021'
+        lastMessage  : 'ไม่ได้ออนไลน์ขณะนี้',
+        lastMessageAt: '26/04/2023'
     }
 ];
 export const contacts = [

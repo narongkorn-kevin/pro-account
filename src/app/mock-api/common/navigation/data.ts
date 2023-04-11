@@ -14,10 +14,9 @@ export const defaultNavigation: FuseNavigationItem[] = [
         children: [
             {
                 id: 'g-Admin',
-                title: 'จัดการระบบ',
+                title: 'จัดการระบบส่วน website',
                 type: 'collapsable',
-                icon: 'heroicons_outline:home',
-  
+                icon: 'mat_solid:web',
                 children: [
                     {
                         id: 'clients',
@@ -25,18 +24,37 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         icon: 'heroicons_outline:user',
                         link: '/clients/list',
+                    },             
+
+                    {
+                        id: 'faq',
+                        title: 'คำถามพบบ่อย',
+                        type: 'basic',
+                        icon: 'heroicons_outline:cube',
+                        link: '/faq/list',
                     },
+                ],
+
+
+                
+            },
+            {
+                id: 'g-Admin',
+                title: 'จัดการระบบส่วนหลังบ้าน',
+                type: 'collapsable',
+                icon: 'heroicons_outline:home',
+                children: [
 
                     {
                         id: 'customer',
-                        title: 'ข้อมูลแม่ค้า',
+                        title: 'ข้อมูลลูกค้า',
                         type: 'basic',
-                        icon: 'heroicons_outline:user',
+                        icon: 'mat_solid:people_outline',
                         link: '/customer/list',
                     },
                     {
                         id: 'user',
-                        title: 'ตัวแทน',
+                        title: 'สมัครสมาชิก',
                         type: 'basic',
                         icon: 'heroicons_outline:user',
                         link: '/user/list',
@@ -57,22 +75,21 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/bank/list',
                     },
+
                     {
-                        id: 'topup',
-                        title: 'เติมเงิน',
-                        icon: 'mat_outline:payment',
+                        id: 'chat',
+                        title: 'กล่องข้อความ',
+                        icon: 'heroicons_outline:chat',
                         type: 'basic',
-                        link: '/topup/list',
+                        link: '/chat/chats',
                     },
-                    {
-                        id: 'faq',
-                        title: 'คำถามพบบ่อย',
-                        type: 'basic',
-                        icon: 'heroicons_outline:cube',
-                        link: '/faq/list',
-                    },
+
                 ],
+
+
+                
             },
+            
             // {
             //     id: 'item-all',
             //     title: 'จัดการสินค้า',
@@ -333,7 +350,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 icon: 'heroicons_outline:user',
                 link: '/position/list',
             },
-
+            {
+                id: 'bank',
+                title: 'ธนาคาร',
+                icon: 'mat_outline:comment_bank',
+                type: 'basic',
+                link: '/bank-user/list',
+            },
             // {
             //     id: 'position',
             //     title: 'เช็คยอดขาย',
@@ -500,11 +523,10 @@ export const defaultNavigation: FuseNavigationItem[] = [
         },
         children: [
             // {
-            //     id: 'position',
-            //     title: 'ตั้งค่าข้อมูลส่วนตัว',
+            //     title: 'ห้องพูดคุยกับลูกค้า',
             //     type: 'basic',
-
-            //     link: '/user/profile-firstpage',
+            //     icon: 'heroicons_outline:chat',
+            //     link: '/chat/list/data',
             // },
 
             {
@@ -535,10 +557,10 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 link: '/sale-order/list',
             },
             {
-                id: 'customer1',
+                id: 'customer',
                 title: 'ข้อมูลลูกค้า',
                 type: 'basic',
-                link: '/customer1/list',
+                link: '/customer/list',
                 icon: 'mat_solid:people_outline',
             },
             {
@@ -555,6 +577,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 type: 'basic',
                 icon: 'mat_outline:auto_graph',
                 link: '/home/list',
+            },
+            {
+                id: 'bank',
+                title: 'ธนาคาร',
+                icon: 'mat_outline:comment_bank',
+                type: 'basic',
+                link: '/bank-user/list',
             },
             // {
             //     id: 'position',

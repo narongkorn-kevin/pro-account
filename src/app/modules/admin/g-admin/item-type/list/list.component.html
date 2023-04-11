@@ -65,12 +65,12 @@
                                 <td style="width: 10%; min-width: 100px;">{{ item.code }}</td>
                                 <td style="width: 30%; min-width: 150px;">{{ item.name }}</td>
                                 <td style="min-width: 120px;">
-                                    <div *ngIf="item.status === 1">
+                                    <div *ngIf="item.status == 1">
                                         <!-- เปิดการใช้งาน -->
                                         <span
                                             class="bg-green-100 text-green-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">เปิดการใช้งาน</span>
                                     </div>
-                                    <div *ngIf="item.status === 0">
+                                    <div *ngIf="item.status == 0">
                                         <!-- ปิดการใช้งาน -->
                                         <span
                                             class="bg-red-100 text-red-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ปิดการใช้งาน</span>
