@@ -336,18 +336,12 @@ export const appRoutes: Route[] = [
 
                 ]
             },
-            // {
-            //     path: 'chat',
-            //     canActivate: [], children: [
-            //         { path: '', loadChildren: () => import('app/modules/admin/g-admin/chat/page.module').then(m => m.Module) },
-
-            //     ]
-            // },
+   
 
             {
                 path: 'chat',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/chat/chat.module').then(m => m.ChatModule) },
+                    { path: '', loadChildren: () => import('app/modules/admin/apps/chat/chat.module').then(m => m.ChatModule) },
 
                 ]
             },
@@ -368,13 +362,7 @@ export const appRoutes: Route[] = [
                 ]
             },
 
-            {
-                path: 'chat',
-                canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/chat/chat.module').then(m => m.ChatModule) },
 
-                ]
-            },
 
             // {
             //     path: 'ads-calendar',
