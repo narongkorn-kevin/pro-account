@@ -2,9 +2,7 @@
 
     <!-- Header -->
     <div class="flex flex-0 items-center h-18 px-4 border-b bg-gray-50 dark:bg-transparent">
-        <button
-            mat-icon-button
-            (click)="drawer.close()">
+        <button mat-icon-button (click)="drawer.close()">
             <mat-icon [svgIcon]="'heroicons_outline:x'"></mat-icon>
         </button>
         <div class="ml-2 text-lg font-medium">Order</div>
@@ -13,48 +11,98 @@
     <div class="overflow-y-auto">
         <!-- Contact avatar & info -->
         <div class="flex flex-col items-center mt-8">
-            <div class="w-10 h-10 rounded-full">
-                <ng-container *ngIf="chat.contact.avatar">
-                    <img
-                        class="w-full h-full rounded-full object-cover"
-                        [src]="chat.contact.avatar"
-                        [alt]="'Contact avatar'">
-                </ng-container>
-                <ng-container *ngIf="!chat.contact.avatar">
+
+            <div class="flex w-full  px-7">
+                <div class="w-20 h-20 rounded-full">
+                    <ng-container *ngIf="chat.contact.avatar">
+                        <img class="w-full h-full rounded-full object-cover" [src]="chat.contact.avatar"
+                            [alt]="'Contact avatar'">
+                    </ng-container>
+                    <!-- <ng-container *ngIf="!chat.contact.avatar">
                     <div class="flex items-center justify-center w-full h-full rounded-full text-8xl font-semibold uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
                         {{chat.contact.name.charAt(0)}}
                     </div>
+                </ng-container> -->
+
+                </div>
+                <div class="mt-8  w-2/3 px-3">{{chat.contact.name}}</div>
+                <!-- <div class="mt-4  text-secondary w-1/3 px-3">{{chat.contact.about}}</div> -->
+            </div>
+
+            <div class="flex w-full py-10 px-7">
+
+                <div class="flex items-cente w-1/3 ">
+                    <a href="customer/new-customer" class="ml-4" mat-icon-button [color]="'primary'">
+                        <span class="ml-2 mr-1">เลือกสินค้า</span>
+                    </a>
+                </div>
+                <div class="flex items-center w-1/3">
+                    <a href="customer/new-customer" class="ml-4" mat-icon-button [color]="'primary'">
+                        <span class="ml-2 mr-1">แจ้งโอนเงิน</span>
+                    </a>
+                </div>
+
+                <div class="flex shrink-0 items-center w-1/3">
+                    <a href="customer/new-customer" class="ml-4" mat-stroked-button [color]="'primary'">
+                        <span class="ml-2 mr-1">อัพโหลดสลิป</span>
+                    </a>
+                </div>
+            </div>
+            <!-- <div class="mt-4 text-lg font-medium">{{chat.contact.name}}</div>
+            <div class="mt-0.5 text-md text-secondary">{{chat.contact.about}}</div> -->
+            
+        </div>
+        <div class="flex items-center justify-between  font-semibold border-b border-gray-100 mb-4"></div>
+    
+        <div class=" px-7">
+            <!-- Media -->
+            <div class="text-lg font-medium">รายละเอียดผู้ซื้อ</div>
+
+
+            <div class="flex w-full mt-4">
+                <ng-container *ngIf="chat.contact.name.length">
+                    <div class="font-medium text-secondary w-1/2">ชื่อ-สกุล</div>
+                    <div class="w-1/2">{{chat.contact.name}}</div>
+                </ng-container>
+            </div>
+            <div class="flex w-full mt-4">
+                <ng-container *ngIf="chat.contact.details.phoneNumbers.length">
+                    <div class="ont-medium text-secondary w-1/2">Phone number</div>
+                    <div class="w-1/2">{{chat.contact.details.phoneNumbers[0].phoneNumber}}</div>
+                </ng-container>
+            </div>
+            <div class="flex w-full mt-4">
+                <ng-container *ngIf="chat.contact.details.address">
+                    <div class="font-medium text-secondary w-1/2">Address</div>
+                    <div class="w-1/2">{{chat.contact.details.address}}</div>
                 </ng-container>
             </div>
 
-            <div class="mt-4 text-lg font-medium">เลือกรายการสินค้า</div>
-            <div class="mt-4 text-lg font-medium">แจ้งโอนเงิน</div>
+            <div class="flex w-full mt-4">
+                <ng-container *ngIf="chat.contact.details.emails.length">
+                    <div class="font-medium text-secondary w-1/2">Email</div>
+                    <div class="w-1/2">{{chat.contact.details.emails[0].email}}</div>
+                </ng-container>
+            </div>
+            <div class="flex items-center justify-between  font-semibold border-b border-gray-100 mb-4 mt-4"></div>
+            <div class="flex  items-center mt-4">
+                <a href="customer/new-customer" class="ml-6  mr-6 w-full" mat-flat-button [color]="'primary'">
+                    <span class="ml-2 mr-1">เลือกสินค้า</span>
+                </a>
+            </div>
 
-            
-            <!-- <div class="mt-4 text-lg font-medium">{{chat.contact.name}}</div>
-            <div class="mt-0.5 text-md text-secondary">{{chat.contact.about}}</div> -->
-        </div>
 
-        <div class="py-10 px-7">
-            <!-- Media -->
-            <div class="text-lg font-medium">Media</div>
-            <div class="grid grid-cols-4 gap-1 mt-4">
+
+
+            <div class="grid grid-cols-2 gap-1 mt-2">
                 <ng-container *ngFor="let media of chat.contact.attachments.media">
-                    <img
-                        class="h-20 rounded object-cover"
-                        [src]="media"/>
+                    <img class="h-20 rounded object-cover" [src]="media" />
                 </ng-container>
             </div>
             <!-- Details -->
-            <div class="mt-10 space-y-4">
-                <div class="text-lg font-medium mb-3">Details</div>
-                <ng-container *ngIf="chat.contact.details.emails.length">
-                    <div>
-                        <div class="font-medium text-secondary">Email</div>
-                        <div class="">{{chat.contact.details.emails[0].email}}</div>
-                    </div>
-                </ng-container>
-                <ng-container *ngIf="chat.contact.details.phoneNumbers.length">
+         
+
+                <!-- <ng-container *ngIf="chat.contact.details.phoneNumbers.length">
                     <div>
                         <div class="font-medium text-secondary">Phone number</div>
                         <div class="">{{chat.contact.details.phoneNumbers[0].phoneNumber}}</div>
@@ -83,8 +131,8 @@
                         <div class="font-medium text-secondary">Address</div>
                         <div class="">{{chat.contact.details.address}}</div>
                     </div>
-                </ng-container>
-            </div>
+                </ng-container> -->
+           
         </div>
     </div>
 
