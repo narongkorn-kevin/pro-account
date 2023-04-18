@@ -820,6 +820,7 @@ export const contacts = [
         id          : 'c500255a-1173-47d0-a0e4-4944d48fc12a',
         avatar      : 'assets/images/avatars/male-10.jpg',
         background  : 'assets/images/cards/34-640x480.jpg',
+        logo        : 'assets/images/socials/line.png',
         name        : 'English Haney',
         emails      : [
             {
@@ -847,6 +848,7 @@ export const contacts = [
         id          : 'b62359fd-f2a8-46e6-904e-31052d1cd675',
         avatar      : 'assets/images/avatars/male-11.jpg',
         background  : 'assets/images/cards/35-640x480.jpg',
+        logo        : 'assets/images/socials/line.png',
         name        : 'Joseph Strickland',
         emails      : [
             {
@@ -878,6 +880,7 @@ export const contacts = [
         id          : '16b9e696-ea95-4dd8-86c4-3caf705a1dc6',
         avatar      : 'assets/images/avatars/male-12.jpg',
         background  : 'assets/images/cards/36-640x480.jpg',
+        logo        : 'assets/images/socials/line.png',
         name        : 'Nunez Faulkner',
         emails      : [
             {
@@ -1027,6 +1030,7 @@ export const contacts = [
         id          : '823e6166-c0c8-4373-9270-8a0d17489a08',
         avatar      : 'assets/images/avatars/male-16.jpg',
         background  : 'assets/images/cards/17-640x480.jpg',
+        logo        : 'assets/images/socials/line.png',
         name        : 'Mccall Day',
         emails      : [
             {
@@ -1064,6 +1068,7 @@ export const contacts = [
         id          : '2c37ed00-427a-46d7-8f8f-d711c768d1ee',
         avatar      : 'assets/images/avatars/male-17.jpg',
         background  : 'assets/images/cards/18-640x480.jpg',
+        logo        : 'assets/images/socials/line.png',
         name        : 'Silva Foster',
         emails      : [
             {
@@ -1096,6 +1101,7 @@ export const contacts = [
         id          : '944764c0-b261-4428-9188-bbd3022d66a8',
         avatar      : 'assets/images/avatars/female-16.jpg',
         background  : 'assets/images/cards/19-640x480.jpg',
+        logo        : 'assets/images/socials/line.png',
         name        : 'Cathryn Snider',
         emails      : [
             {

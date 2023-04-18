@@ -317,6 +317,9 @@ export const chats = [
         lastMessageAt: '26/04/2023'
     }
 ];
+
+
+
 export const contacts = [
     {
         id         : 'cd5fa417-b667-482d-b208-798d9da3213c',
@@ -386,6 +389,7 @@ export const contacts = [
     {
         id         : '9d3f0e7f-dcbd-4e56-a5e8-87b8154e9edf',
         avatar     : 'assets/images/avatars/male-02.jpg',
+        logo       : 'assets/images/socials/line.png',
         name       : 'Bernard Langley',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
@@ -557,6 +561,7 @@ export const contacts = [
     {
         id         : 'bf172879-423a-4fd6-8df3-6d1938bbfe1f',
         avatar     : 'assets/images/avatars/male-06.jpg',
+        logo         : 'assets/images/socials/line.png',
         name       : 'Edwards Mckenzie',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
@@ -627,6 +632,7 @@ export const contacts = [
     {
         id         : 'abd9e78b-9e96-428f-b3ff-4d934c401bee',
         avatar     : 'assets/images/avatars/female-04.jpg',
+        logo       : 'assets/images/socials/line.png',
         name       : 'Elsie Melendez',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
@@ -735,6 +741,7 @@ export const contacts = [
         id         : '6519600a-5eaa-45f8-8bed-c46fddb3b26a',
         background : 'assets/images/cards/24-640x480.jpg',
         name       : 'Mcleod Wagner',
+        logo       : 'assets/images/socials/line.png',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
             emails      : [
@@ -1140,6 +1147,7 @@ export const contacts = [
     {
         id         : 'b62359fd-f2a8-46e6-904e-31052d1cd675',
         avatar     : 'assets/images/avatars/male-11.jpg',
+        logo       : 'assets/images/socials/ig.png',
         name       : 'Joseph Strickland',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
@@ -1170,6 +1178,7 @@ export const contacts = [
     {
         id         : '16b9e696-ea95-4dd8-86c4-3caf705a1dc6',
         avatar     : 'assets/images/avatars/male-12.jpg',
+        logo       : 'assets/images/socials/line.png',
         name       : 'Nunez Faulkner',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
@@ -1196,6 +1205,7 @@ export const contacts = [
     {
         id         : '19662ecf-0686-4aad-a46c-24b552eb2ff5',
         avatar     : 'assets/images/avatars/female-15.jpg',
+        logo         : 'assets/images/socials/line.png',
         name       : 'Juana Morrow',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
@@ -1222,6 +1232,7 @@ export const contacts = [
     {
         id         : '26dfe954-8bf3-45ee-b285-1d0a88c8d3ea',
         avatar     : 'assets/images/avatars/male-13.jpg',
+        logo         : 'assets/images/socials/line.png',
         name       : 'Lara Gaines',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
@@ -1248,6 +1259,7 @@ export const contacts = [
     {
         id         : 'd6462af2-c488-4de7-9b26-3845bd2983f9',
         avatar     : 'assets/images/avatars/male-14.jpg',
+        logo         : 'assets/images/socials/line.png',
         name       : 'Johnston Riddle',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
@@ -1284,6 +1296,7 @@ export const contacts = [
     {
         id         : 'a1723c04-69fe-4573-a135-6645658afe76',
         avatar     : null,
+        logo         : 'assets/images/socials/line.png',
         name       : 'Vargas Gardner',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
@@ -1314,6 +1327,7 @@ export const contacts = [
     {
         id         : '823e6166-c0c8-4373-9270-8a0d17489a08',
         avatar     : 'assets/images/avatars/male-16.jpg',
+        logo         : 'assets/images/socials/line.png',
         name       : 'Mccall Day',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
@@ -1350,6 +1364,7 @@ export const contacts = [
     {
         id         : '2c37ed00-427a-46d7-8f8f-d711c768d1ee',
         avatar     : 'assets/images/avatars/male-17.jpg',
+        logo       : 'assets/images/socials/ig.png',
         name       : 'Silva Foster',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
@@ -1699,6 +1714,7 @@ export const contacts = [
     {
         id         : 'b8258ccf-48b5-46a2-9c95-e0bd7580c645',
         avatar     : 'assets/images/avatars/female-02.jpg',
+        logo       : 'assets/images/socials/ig.png',
         name       : 'Tina Harris',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
@@ -1831,6 +1847,7 @@ export const contacts = [
     {
         id         : 'e2946946-b4b5-4fd7-bab4-62c38cdff2f1',
         avatar     : 'assets/images/avatars/female-05.jpg',
+        logo       : 'assets/images/socials/ig.png',
         name       : 'Samantha Jacobson',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
@@ -1888,6 +1905,7 @@ export const contacts = [
     {
         id         : '12148fa2-e0a4-49fb-b3c5-daeecdb5180a',
         avatar     : 'assets/images/avatars/female-07.jpg',
+        logo       : 'assets/images/socials/ig.png',
         name       : 'Olga Rhodes',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
@@ -1964,6 +1982,7 @@ export const contacts = [
     {
         id         : '81fdc48c-5572-4123-8a73-71b7892120de',
         avatar     : 'assets/images/avatars/female-09.jpg',
+        logo       : 'assets/images/socials/ig.png',
         name       : 'Earlene Rosales',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
@@ -2096,6 +2115,7 @@ export const contacts = [
     {
         id         : 'a9a9f382-e4c3-42fb-9fe9-65aa534732b5',
         avatar     : 'assets/images/avatars/female-13.jpg',
+        logo       : 'assets/images/socials/fb.png',
         name       : 'Francisca Perkins',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
@@ -2246,6 +2266,7 @@ export const contacts = [
     {
         id         : '7e8e1f1e-d19f-45c7-86bd-6fef599dae71',
         avatar     : 'assets/images/avatars/female-16.jpg',
+        logo       : 'assets/images/socials/fb.png',
         name       : 'Margo Witt',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
@@ -2428,6 +2449,7 @@ export const contacts = [
     {
         id         : '8141dd08-3a6e-4770-912c-59d0ed06dde6',
         avatar     : null,
+        logo       : 'assets/images/socials/fb.png',
         name       : 'Madeleine Fletcher',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
@@ -2529,6 +2551,7 @@ export const contacts = [
     {
         id         : '114642a2-ccb7-4cb1-ad2b-5e9b6a0c1d2e',
         avatar     : 'assets/images/avatars/male-09.jpg',
+        logo       : 'assets/images/socials/fb.png',
         name       : 'Barber Johnson',
         about      : 'Hi there! I\'m using FuseChat.',
         details    : {
