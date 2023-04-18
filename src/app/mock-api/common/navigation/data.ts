@@ -550,10 +550,10 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 ],
             },
             {
-                id: 'position',
+                id: 'sale-order',
                 title: 'ตรวจสอบคำสั่งซื้อ',
                 type: 'basic',
-                icon: 'mat_outline:shopping_basket',
+                icon: 'heroicons_outline:shopping-cart',
                 link: '/sale-order/list',
             },
             {

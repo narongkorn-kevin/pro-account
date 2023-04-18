@@ -30,7 +30,8 @@ export const chatRoutes: Route[] = [
                         resolve  : {
                             conversation: ChatChatResolver
                         }
-                    }
+                    },
+  
                 ]
             }
         ]

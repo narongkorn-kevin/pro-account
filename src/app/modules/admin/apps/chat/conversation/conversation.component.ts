@@ -4,6 +4,7 @@ import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
 import { Chat } from 'app/modules/admin/apps/chat/chat.types';
 import { ChatService } from 'app/modules/admin/apps/chat/chat.service';
 
+
 @Component({
     selector       : 'chat-conversation',
     templateUrl    : './conversation.component.html',
@@ -17,6 +18,7 @@ export class ConversationComponent implements OnInit, OnDestroy
     drawerMode: 'over' | 'side' = 'side';
     drawerOpened: boolean = false;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
+    _matDialog: any;
 
     /**
      * Constructor
@@ -163,5 +165,10 @@ export class ConversationComponent implements OnInit, OnDestroy
     trackByFn(index: number, item: any): any
     {
         return item.id || index;
+    }
+
+  
+    rerender() {
+        throw new Error('Method not implemented.');
     }
 }
