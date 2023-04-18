@@ -25,6 +25,10 @@ import { BankService } from '../bank.service';
 
 export class NewBankComponent implements OnInit, AfterViewInit, OnDestroy {
 
+    newType = ''
+
+
+
     files: File[] = [];
     formData: FormGroup
     flashErrorMessage: string;

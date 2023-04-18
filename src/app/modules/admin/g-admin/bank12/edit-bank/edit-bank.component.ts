@@ -48,8 +48,8 @@ export class EditBankComponent implements OnInit, AfterViewInit, OnDestroy {
     pagination: BankPagination;
     bankId: string;
     statusData = [
-        { id: 0, name: 'ล้มเหลว' },
-        { id: 1, name: 'ยืนยัน' },
+        { id: 0, name: 'ไม่สำเร็จ' },
+        { id: 1, name: 'สำเร็จ' },
     ]
     /**
      * Constructor

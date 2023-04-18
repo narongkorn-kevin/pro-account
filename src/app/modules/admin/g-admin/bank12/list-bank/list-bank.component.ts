@@ -194,7 +194,6 @@ export class ListBankComponent implements OnInit, AfterViewInit, OnDestroy {
                 { data: 'status' },
                 { data: 'create_by' },
                 { data: 'created_at' },
-               
             ]
         };
 

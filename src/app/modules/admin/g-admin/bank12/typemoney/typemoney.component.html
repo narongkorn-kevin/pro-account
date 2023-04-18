@@ -8,7 +8,7 @@
         </mat-form-field>
         <div class="text-center">
           <p class="text-red-500 pb-6">**เติมเงินขั้นต่ำตั้งแต่ 100 บาทขึ้นไป**</p>
-          <button mat-raised-button matStepperNext>ถัดไป</button>
+          <button class="bg-green-100 hover:bg-green-500" mat-raised-button matStepperNext>ถัดไป</button>
         </div>
       </form>
     </mat-step>
@@ -64,6 +64,9 @@
               </div>
             </div>
           </div>
+          <div class="text-center items-center justify-center space-y-6 p-10">
+          <button class="bg-green-100 hover:bg-green-500" mat-raised-button matStepperNext>ถัดไป</button>
+        </div>
       </form>
       </div>
     </mat-step>
@@ -71,7 +74,7 @@
       <ng-template matStepLabel>เสร็จสิ้น</ng-template>
       <p class="flex flex-auto text-center items-center justify-center">ทำรายการสำเร็จ</p>
       <div class="flex flex-auto text-center items-center justify-center pt-6">
-        <button mat-raised-button matStepperPrevious>ปิด</button>
+        <button class="bg-green-100 hover:bg-green-500" mat-raised-button matStepperPrevious>ปิด</button>
       </div>
     </mat-step>
   </mat-stepper>

@@ -20,8 +20,9 @@ interface Food {
   ],
 })
 export class TypemoneyComponent {
-onClose() {
-throw new Error('Method not implemented.');
+  dialogRef: any;
+  onClose() {
+    this.dialogRef.close();
 }
   
   imageUrl: string = 'assets/images/kasikorn.png';
@@ -50,6 +51,7 @@ throw new Error('Method not implemented.');
     });
     // console.log(this.formData.value)
 }
+
 
  //Show bank top up from
   selectedValue: string;
