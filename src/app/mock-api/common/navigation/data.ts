@@ -602,10 +602,10 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 children: [
                     {
                         id: 'workpacking',
-                        title: 'กระเป๋าเงิน',
+                        title: 'กระเป๋า',
                         type: 'basic',
                         icon: 'mat_outline:money',
-                        // link: '/item-return/list',
+                        link: '/bank12/list',
                     },
                 ],
             },

@@ -1,0 +1,77 @@
+<mat-stepper #stepper>
+    <mat-step [stepControl]="firstFormGroup" errorMessage="ระบุจำนวนเงิน.">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>กรอกจำนวนเงิน</ng-template>
+        <mat-form-field class="items-center justify-center text-center w-full" appearance="fill">
+          <mat-label>จำนวนเงิน</mat-label>
+          <input matInput placeholder="กรุณาระบุจำนวนเงิน" formControlName="firstCtrl" required>
+        </mat-form-field>
+        <div class="text-center">
+          <p class="text-red-500 pb-6">**เติมเงินขั้นต่ำตั้งแต่ 100 บาทขึ้นไป**</p>
+          <button mat-raised-button matStepperNext>ถัดไป</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" errorMessage="กรุณากรอกรายละเอียด">
+      <div class="flex flex-col items-center justify-center">
+        <img class="w-1/3 h-1/3" src="/src/assets/images/kasikorn.png" alt="kasikorn">
+        <p class="text-lg font-bold mt-4">ธนาคารกสิกรไทย (KBANK)</p>
+        <p class="text-gray-600 mt-2">เลขที่บัญชี : ***-***-****</p>
+      </div>
+    <!-- v select bank -->
+    <div class="flex flex-auto text-center items-center justify-center p-2">
+        <mat-form-field class="w-5/6 text-center items-center justify-center ml-6" appearance="fill">
+          <mat-label>กรุณาเลือกธนาคาร</mat-label>
+          <mat-select [(ngModel)]="selectedValue" name="food">
+            <mat-option class="text-center flex items-center" *ngFor="let food of foods" [value]="food.value">
+              {{food.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+        <!-- Two select -->
+        <div class="flex flex-auto text-center items-center justify-center">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>รายละเอียด</ng-template>
+        <mat-form-field class="w-5/6 text-center items-center justify-center ml-6" appearance="fill">
+          <mat-label>ชื่อบัญชี</mat-label>
+          <input matInput placeholder="หมายเลขบัญชีธนาคาร" formControlName="secondCtrl"
+                 required>
+        </mat-form-field>
+        <mat-form-field class="w-5/6 text-center items-center justify-center ml-6" appearance="fill">
+            <mat-label>จำนวนเงิน</mat-label>
+            <input matInput placeholder="กรอกจำนวนเงิน" formControlName="secondCtrl"
+                   required>
+          </mat-form-field>
+          <!-- Date time transfer-->
+          <!-- Upload form -->
+          <div class="w-full">
+            <div class="flex mt-2 px-5">
+              <label for="code"
+                class="text-gray-800 text-lg font-bold leading-tight tracking-normal w-1/3 mt-4">อัพโหลดรูป</label>
+              <div class="flex justify-start items-start w-full space-x-6">
+                <ngx-dropzone class="w-72 h-40"
+                  (change)="onSelect($event)">
+                  <ngx-dropzone-label>อัพโหลดหลักฐาน</ngx-dropzone-label>
+                  <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" [file]="f"
+                    (removed)="onRemove(f)">
+                  </ngx-dropzone-image-preview>
+                </ngx-dropzone>
+                <div class="flex flex-col justify-center items-start space-y-2">
+                  <p class="text-gray-600 text-sm">**หมายเหตุ**</p>
+                  <p class="text-gray-700 text-sm">เพื่อความรวดเร็วในการตรวจสอบ กรุณาแนบไฟล์รูปภาพหลักฐานการชำระเงินจาก Mobile Banking</p>
+                </div>
+              </div>
+            </div>
+          </div>
+      </form>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>เสร็จสิ้น</ng-template>
+      <p class="flex flex-auto text-center items-center justify-center">ทำรายการสำเร็จ</p>
+      <div class="flex flex-auto text-center items-center justify-center pt-6">
+        <button mat-raised-button matStepperPrevious>ปิด</button>
+      </div>
+    </mat-step>
+  </mat-stepper>

@@ -36,6 +36,7 @@
         "duplicate-id-active": "off"
       }
     ],
-    "meta-viewport": "off"
+    "meta-viewport": "off",
+    "typescript-config/consistent-casing": "off"
   }
 }

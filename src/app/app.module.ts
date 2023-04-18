@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule , CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExtraOptions, PreloadAllModules, RouterModule } from '@angular/router';
@@ -18,8 +18,8 @@ import { SaleOrderComponent } from './modules/admin/g-admin/sale-order/sale-orde
 import { Calendar } from '@fullcalendar/core';
 import { CalendarComponent } from './modules/admin/g-admin/calendar/calendar.component';
 import { SalePageComponent } from './modules/admin/g-admin/sale-page/sale-page.component';
-import { MatSelectComponent } from './modules/admin/g-admin/topup/mat-select/mat-select.component';
 import { MatStepperModule } from '@angular/material/stepper';
+
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,
@@ -53,6 +53,7 @@ const routerConfig: ExtraOptions = {
         MatStepperModule
 
     ],
+    schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
     bootstrap: [
         AppComponent
     ]
