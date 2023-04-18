@@ -1,0 +1,20 @@
+<h2 class="flex justify-center text-center items-center p-8">วิธีการเติมเงิน</h2>
+<div class="flex text-center justify-center">
+<ul class="heroes">
+  <li *ngFor="let hero of heroes">
+    <button class="p-2" [class.selected]="hero === selectedHero" type="button" (click)="onSelect(hero)">
+      <span class="name">{{hero.name}}</span>
+    </button>
+  </li>
+</ul>
+</div>
+
+<div class="text-center justify-center items-center" *ngIf="selectedHero">
+  <h2>{{selectedHero.name | uppercase}}</h2>
+  <div>
+    <label for="hero-name">ขั้นตอน:</label>
+    <input id="hero-name" [(ngModel)]="selectedHero.name" placeholder="name">
+    <button>ถัดไป</button>
+  </div>
+</div>
+

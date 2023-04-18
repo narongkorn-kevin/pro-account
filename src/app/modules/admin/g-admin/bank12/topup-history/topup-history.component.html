@@ -1,0 +1,29 @@
+<div class="flex text-center items-center justify-center text-xl border-b font-bold">
+    <h1>ประวัติการทำรายการ</h1>
+</div>
+<div ng-app="topupHistoryApp" ng-controller="topupHistoryController">
+    <div class="form-group">
+      <label for="searchDate" class="text-gray-700 mr-120 p-6">วันที่:</label>
+      <input type="date" id="searchDate" ng-model="searchDate" class="px-2 py-1 rounded-lg border border-gray-400 focus:outline-none focus:shadow-outline-blue p-16">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" ng-click="search()">ค้นหา</button>
+    </div>
+    <table class="table-auto w-full">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="px-4 py-2">วันที่เวลา</th>
+          <th class="px-4 py-2">รายการ</th>
+          <th class="px-4 py-2">ยอดสุทธิ</th>
+          <th class="px-4 py-2">สถานะ</th>
+          <th class="px-4 py-2">รายละเอียด</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="payment in payments" class="bg-white border-gray-300">
+        </tr>
+        <tr ng-if="payments.length == 0">
+          <td colspan="5" class="text-center bg-white border-gray-300 p-20">ยังไม่มีรายการ</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
