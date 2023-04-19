@@ -196,8 +196,9 @@ social():void{
      */
 
     loginWithFacebook(): void {
-        this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
         this.social();
+        this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+   
       }
       signOut(): void {
         this.socialAuthService.signOut();
