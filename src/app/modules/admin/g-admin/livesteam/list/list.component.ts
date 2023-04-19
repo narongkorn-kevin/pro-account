@@ -57,15 +57,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     tagsEditMode: boolean = false;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     env_path = environment.API_URL;
-
+    
     supplierId: string | null;
     pagination: BranchPagination;
 
-    /**
-     * Constructor
-     */
     constructor(
-
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseConfirmationService: FuseConfirmationService,
         private _formBuilder: FormBuilder,
@@ -76,8 +72,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
         private _authService: AuthService,
         private formBuilder: FormBuilder,
         private socialAuthService: SocialAuthService
-
-
     ) {
     }
 
