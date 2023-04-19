@@ -39,11 +39,18 @@ import { ListComponent } from './list/list.component';
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import { DataTablesModule } from 'angular-datatables';
+import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import {
-    FacebookLoginProvider,
-    SocialLoginModule,
-    SocialAuthServiceConfig,
-  } from 'angularx-social-login';
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from '@abacritt/angularx-social-login';
+
+
+// import {
+//     FacebookLoginProvider,
+//     SocialLoginModule,
+//     SocialAuthServiceConfig,
+//   } from 'angularx-social-login';
 @NgModule({
     declarations: [
         ChatComponent,
@@ -88,19 +95,23 @@ import {
         SocialLoginModule
     ],
     providers: [
-        {
-          provide: 'SocialAuthServiceConfig',
-          useValue: {
-            autoLogin: false,
-            providers: [
-              {
-                id: FacebookLoginProvider.PROVIDER_ID,
-                provider: new FacebookLoginProvider('Facebook-App-ID-Goes-Here'),
-              },
-            ],
-          } as SocialAuthServiceConfig,
-        },
-      ],
+      {
+        provide: 'SocialAuthServiceConfig',
+        useValue: {
+          autoLogin: false,
+          providers: [
+
+            {
+              id: FacebookLoginProvider.PROVIDER_ID,
+              provider: new FacebookLoginProvider('clientId')
+            }
+          ],
+          onError: (err) => {
+            console.error(err);
+          }
+        } as SocialAuthServiceConfig,
+      }
+    ],
 })
 export class Module {
 }

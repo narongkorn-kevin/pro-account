@@ -13,11 +13,7 @@ import { AuthService } from 'app/core/auth/auth.service';
 import { sortBy, startCase } from 'lodash-es';
 import { AssetType, BranchPagination } from '../page.types';
 import { PageService } from '../page.service';
-import {
-    SocialAuthService,
-    FacebookLoginProvider,
-    SocialUser,
-  } from 'angularx-social-login';
+// s
 
 
 // import { ImportOSMComponent } from '../card/import-osm/import-osm.component';
@@ -33,9 +29,6 @@ import {
 export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(MatPaginator) private _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
-    loginForm!: FormGroup;
-    socialUser!: SocialUser;
-    isLoggedin?: boolean = undefined;
 
     formData: FormGroup
     flashErrorMessage: string;
@@ -70,10 +63,10 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
         private _activatedRoute: ActivatedRoute,
         private _authService: AuthService,
         private formBuilder: FormBuilder,
-        private socialAuthService: SocialAuthService
+        
 
     ) {
-        console.log(this.isLoggedin);
+       
 
 
     }
@@ -96,15 +89,6 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
 
           
     }
-
-
-    loginWithFacebook(): void {
-        this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
-      }
-      signOut(): void {
-        this.socialAuthService.signOut();
-      }
-
 
 
     onClose() {

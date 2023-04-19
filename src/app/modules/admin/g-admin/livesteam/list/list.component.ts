@@ -22,8 +22,9 @@ import {
     SocialAuthService, 
     FacebookLoginProvider,
     SocialUser,
-  } from 'angularx-social-login';
+  } from '@abacritt/angularx-social-login';
   
+
   
 
 @Component({
@@ -72,7 +73,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
         private _activatedRoute: ActivatedRoute,
         private _authService: AuthService,
         private formBuilder: FormBuilder,
-        private socialAuthService: SocialAuthService
+        private authService: SocialAuthService, 
+
     ) {
     }
 
@@ -91,7 +93,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
             email: ['', Validators.required],
             password: ['', Validators.required],
           });
-          this.socialAuthService.authState.subscribe((user) => {
+          this.authService.authState.subscribe((user) => {
             this.socialUser = user;
             this.isLoggedin = user != null;
             console.log(user)
@@ -197,15 +199,18 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
      * On destroy
      */
 
-    loginWithFacebook(): void {
-  
-        this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
-   
+    signInWithFB(): void {
+        this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
       }
+    
       signOut(): void {
-        this.socialAuthService.signOut();
+        this.authService.signOut();
       }
 
+
+
+
+      
     ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next(null);
