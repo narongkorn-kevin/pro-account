@@ -1,79 +1,19 @@
-<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
-
-    <!-- Header -->
-    <div
-        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
-        <!-- Loader -->
-        <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
-            <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
-        </div>
-        <!-- Title -->
-        <div class="text-4xl font-extrabold tracking-tight">สิทธิการลา</div>
-        <!-- Actions -->
-        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
-
-            <!-- Add product button -->
-            <a (click)="New()" class="ml-4" mat-flat-button [color]="'primary'">
-                <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
-                <span class="ml-2 mr-1">facebooklogin</span>
-            </a>
-
-        </div>
-    </div>
-
-    <!-- Main -->
-    <div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
-
-        <div class="flex flex-col p-3 sm:p-10">
-            <div class="overflow-auto  bg-white shadow sm:rounded-lg">
-                <!-- Products list -->
-
-                <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll">
-
-                    <table datatable [dtOptions]="dtOptions"
-                        class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
-                        style="width: 100%">
-                        <thead
-                            class="text-lg text-gray-700 uppercase bg-white-100 dark:bg-gray-700 dark:text-gray-400 text-center">
-                            <tr>
-                                <th>ลำดับ</th>
-                                <th>อายุงาน(ปี)</th>
-                                <th>ประเภท</th>
-                                <th>จำนวนวัน</th>
-
-
-                                <th>จัดการ</th>
-                            </tr>
-
-                        </thead>
-                        <tbody *ngIf="dataRow?.length != 0">
-                            <tr *ngFor="let item of dataRow; let i = index"
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md py-15">
-                                <td style="width: 5%;">{{ pages.begin + (i + 1) }}</td>
-                                <td>2</td>
-                                <td>ป่วย</td>
-                                <td>6</td>
-
-
-                                <td>
-                                    <button mat-button (click)="Edit(item.id)">
-                                        <mat-icon>edit</mat-icon>
-                                    </button>
-                                    <button mat-button (click)="Delete(item.id)">
-                                        <mat-icon>delete</mat-icon>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody *ngIf="dataRow?.length == 0">
-                            <tr>
-                                <td colspan="6" class="no-data-available text-center">ไม่มีข้อมูล !</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
+<h2 class="text-center mb-4">Login with Facebook in Angular</h2>
+<div *ngIf="!isLoggedin">
+  <button type="button" (click)="loginWithFacebook()" class="btn btn-primary btn-block">Signin with Facebook</button>
+</div>
+<div *ngIf="isLoggedin === true">
+  <div class="form-group">
+    <label>First Name</label>
+    <input type="text" class="form-control" [value]="socialUser.firstName" id="firstname" readonly>
+  </div>
+  <div class="form-group">
+    <label>Last Name</label>
+    <input type="text" class="form-control" [value]="socialUser.lastName" id="lastname" readonly>
+  </div>
+  <div class="form-group">
+    <label>Email</label>
+    <input type="text" class="form-control" [value]="socialUser.email" id="email" readonly>
+  </div>
+  <button type="button" (click)="signOut()" class="btn btn-primary">Sign Out</button>
 </div>

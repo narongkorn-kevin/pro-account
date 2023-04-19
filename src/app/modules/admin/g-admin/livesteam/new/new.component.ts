@@ -92,14 +92,6 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
 
-        this.loginForm = this.formBuilder.group({
-            email: ['', Validators.required],
-            password: ['', Validators.required],
-          });
-          this.socialAuthService.authState.subscribe((user) => {
-            this.socialUser = user;
-            this.isLoggedin = user != null;
-          });
 
 
           

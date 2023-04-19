@@ -18,6 +18,13 @@ import { Item } from '../../item/item.types';
 import { DataTableDirective } from 'angular-datatables';
 import { NewComponent } from '../new/new.component';
 import { EditComponent } from '../edit/edit.component';
+import {
+    SocialAuthService,
+    FacebookLoginProvider,
+    SocialUser,
+  } from 'angularx-social-login';
+  
+
 @Component({
     selector: 'list',
     templateUrl: './list.component.html',
@@ -35,6 +42,10 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(MatSort) private _sort: MatSort;
     displayedColumns: string[] = ['id', 'name', 'code', 'status', 'create_by', 'created_at', 'actions'];
     dataSource: MatTableDataSource<DataWarehouse>;
+    loginForm!: FormGroup;
+    socialUser!: SocialUser;
+    isLoggedin?: boolean = undefined;
+
 
     products$: Observable<any>;
     asset_types: AssetType[];
@@ -63,6 +74,10 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
         private _router: Router,
         private _activatedRoute: ActivatedRoute,
         private _authService: AuthService,
+        private formBuilder: FormBuilder,
+        private socialAuthService: SocialAuthService
+
+
     ) {
     }
 
@@ -74,62 +89,61 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
-        // this._Service.getWarehouse().subscribe((resp: any) => {
-        //     this.dataRow = resp.data;
-        //     this.dataSource = new MatTableDataSource(this.dataRow)
-        //     this.dataSource.paginator = this._paginator;
-        //     this.dataSource.sort = this._sort;
-        //     this._changeDetectorRef.markForCheck();
-        // })
-        this.loadTable();
-
-
-    }
-
-    pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
-    loadTable(): void {
-
-        const that = this;
-        this.dtOptions = {
-            pagingType: 'full_numbers',
-            pageLength: 10,
-            serverSide: true,
-            processing: true,
-            language: {
-                "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
-            },
-            ajax: (dataTablesParameters: any, callback) => {
-                dataTablesParameters.item_type_id = 1;
-                that._Service.getWarehousePage(dataTablesParameters).subscribe((resp) => {
-                    this.dataRow = resp.data
-                    console.log(resp)
-                    this.pages.current_page = resp.current_page;
-                    this.pages.last_page = resp.last_page;
-                    this.pages.per_page = resp.per_page;
-                    if (resp.current_page > 1) {
-                        this.pages.begin = resp.per_page * resp.current_page - 1;
-                    } else {
-                        this.pages.begin = 0;
-                    }
-                    callback({
-                        recordsTotal: resp.total,
-                        recordsFiltered: resp.total,
-                        data: []
-                    });
-                    this._changeDetectorRef.markForCheck();
-                })
-            },
-            columns: [
-                { data: 'id' },
-                { data: 'name' },
-                { data: 'status' },
-                { data: 'create_by' },
-
-                { data: 'actice', orderable: false },
-            ]
-        };
+        this.loginForm = this.formBuilder.group({
+            email: ['', Validators.required],
+            password: ['', Validators.required],
+          });
+          this.socialAuthService.authState.subscribe((user) => {
+            this.socialUser = user;
+            this.isLoggedin = user != null;
+          });
 
     }
+
+    // pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
+    // loadTable(): void {
+
+    //     const that = this;
+    //     this.dtOptions = {
+    //         pagingType: 'full_numbers',
+    //         pageLength: 10,
+    //         serverSide: true,
+    //         processing: true,
+    //         language: {
+    //             "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
+    //         },
+    //         ajax: (dataTablesParameters: any, callback) => {
+    //             dataTablesParameters.item_type_id = 1;
+    //             that._Service.getWarehousePage(dataTablesParameters).subscribe((resp) => {
+    //                 this.dataRow = resp.data
+    //                 console.log(resp)
+    //                 this.pages.current_page = resp.current_page;
+    //                 this.pages.last_page = resp.last_page;
+    //                 this.pages.per_page = resp.per_page;
+    //                 if (resp.current_page > 1) {
+    //                     this.pages.begin = resp.per_page * resp.current_page - 1;
+    //                 } else {
+    //                     this.pages.begin = 0;
+    //                 }
+    //                 callback({
+    //                     recordsTotal: resp.total,
+    //                     recordsFiltered: resp.total,
+    //                     data: []
+    //                 });
+    //                 this._changeDetectorRef.markForCheck();
+    //             })
+    //         },
+    //         columns: [
+    //             { data: 'id' },
+    //             { data: 'name' },
+    //             { data: 'status' },
+    //             { data: 'create_by' },
+
+    //             { data: 'actice', orderable: false },
+    //         ]
+    //     };
+
+    // }
 
     /**
      * After view init
@@ -182,6 +196,13 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     /**
      * On destroy
      */
+
+    loginWithFacebook(): void {
+        this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+      }
+      signOut(): void {
+        this.socialAuthService.signOut();
+      }
     ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next(null);
