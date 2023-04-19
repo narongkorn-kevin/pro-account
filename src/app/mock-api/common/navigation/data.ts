@@ -83,6 +83,16 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/chat/chats',
                     },
+                    {
+                        id: 'livesteam',
+                        title: 'ไลฟ์สด',
+                        icon: 'heroicons_outline:video-camera',
+                        type: 'basic',
+                        link: '/livesteam/list',
+                    },
+
+
+
 
                 ],
 

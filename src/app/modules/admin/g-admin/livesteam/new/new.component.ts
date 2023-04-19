@@ -13,53 +13,15 @@ import { AuthService } from 'app/core/auth/auth.service';
 import { sortBy, startCase } from 'lodash-es';
 import { AssetType, BranchPagination } from '../page.types';
 import { PageService } from '../page.service';
+// s
+
+
 // import { ImportOSMComponent } from '../card/import-osm/import-osm.component';
 
 @Component({
     selector: 'new',
     templateUrl: './new.component.html',
     styleUrls: ['./new.component.scss'],
-    //     `
-    //     table{
-    //         width: 100%;
-    //        }
-
-    //     .bg-gray-50{
-    //         background:#FEEDEE !important;
-    //         font-weight:bold !important;
-    //         padding:5px;
-    //     }
-
-    //     .mat-dialog-container .mat-stroked-button{
-    //         border:unset !important;
-    //     }
-
-    //     .btn-add-asset{
-    //         border-radius: 5px !important;
-    //         background:#ffffff !important;
-    //         border:2px solid #F43F5E !important;
-    //         color:#F43F5E !important;
-    //         width:100% !important;
-    //     }
-
-    //     .mat-tab-group .mat-tab-header .mat-tab-label-container .mat-tab-list .mat-tab-labels .mat-tab-label.mat-tab-label-active{
-    //         background-color:#ffffff !important;
-    //         border-top:2px solid red !important;
-    //         color:red !important
-    //     }
-
-    //     .mat-tab-group .mat-tab-header .mat-tab-label-container .mat-tab-list .mat-tab-labels .mat-tab-label{
-    //         background-color:#ccc !important;
-    //         border-radius:0px !important;
-    //     }
-
-    //     /* ::ng-deep .mat-form-field-flex {
-    //             border-width: 1px !important;
-    //         } */
-    //     `
-
-    // ],
-    // encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: fuseAnimations
 })
@@ -67,7 +29,6 @@ import { PageService } from '../page.service';
 export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(MatPaginator) private _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
-
 
     formData: FormGroup
     flashErrorMessage: string;
@@ -101,8 +62,11 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
         private _router: Router,
         private _activatedRoute: ActivatedRoute,
         private _authService: AuthService,
-    ) {
+        private formBuilder: FormBuilder,
+        
 
+    ) {
+       
 
 
     }
@@ -118,7 +82,14 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
         this.formData = this._formBuilder.group({
             name: ['', Validators.required],
         })
+
+
+
+
+
+          
     }
+
 
     onClose() {
         this.dialogRef.close();

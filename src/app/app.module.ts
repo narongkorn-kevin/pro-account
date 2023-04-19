@@ -20,18 +20,21 @@ import { CalendarComponent } from './modules/admin/g-admin/calendar/calendar.com
 import { SalePageComponent } from './modules/admin/g-admin/sale-page/sale-page.component';
 import { MatStepperModule } from '@angular/material/stepper';
 
-
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,
     scrollPositionRestoration: 'enabled'
 };
+
+
 
 @NgModule({
     declarations: [
         AppComponent,
         SaleOrderComponent,
         SalePageComponent,
+
     ],
+
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -50,9 +53,13 @@ const routerConfig: ExtraOptions = {
 
         // 3rd party modules that require global configuration via forRoot
         MarkdownModule.forRoot({}),
-        MatStepperModule
+        MatStepperModule,
+
+ 
 
     ],
+
+
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
     bootstrap: [
         AppComponent
