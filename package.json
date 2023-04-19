@@ -36,6 +36,7 @@
         "angular-datatables": "^14.0.0",
         "angular-password-strength-meter": "^5.0.1",
         "angularx-qrcode": "^14.0.0",
+        "angularx-social-login": "^4.1.0",
         "apexcharts": "3.35.5",
         "chart.js": "^3.9.1",
         "crypto-js": "4.1.1",

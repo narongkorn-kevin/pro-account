@@ -231,10 +231,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     New() {
         const dialogRef = this._matDialog.open(NewComponent, {
             width: 'auto%',
-
             height: 'auto',
         });
-
         dialogRef.afterClosed().subscribe(item => {
             this.rerender();
             this._changeDetectorRef.markForCheck();

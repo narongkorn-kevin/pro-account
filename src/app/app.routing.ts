@@ -357,7 +357,13 @@ export const appRoutes: Route[] = [
                 ]
             },
 
+            {
+                path: 'livesteam',
+                canActivate: [], children: [
+                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/livesteam/page.module').then(m => m.Module) },
 
+                ]
+            },
 
             // {
             //     path: 'ads-calendar',
