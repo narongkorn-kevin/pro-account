@@ -88,12 +88,15 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
             email: ['', Validators.required],
             password: ['', Validators.required],
           });
-          this.socialAuthService.authState.subscribe((user) => {
-            this.socialUser = user;
-            this.isLoggedin = user != null;
-          });
+
 
     }
+social():void{
+    this.socialAuthService.authState.subscribe((user) => {
+        this.socialUser = user;
+        this.isLoggedin = user != null;
+      });
+}
 
     // pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
     // loadTable(): void {
@@ -194,6 +197,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     loginWithFacebook(): void {
         this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+        this.social();
       }
       signOut(): void {
         this.socialAuthService.signOut();
