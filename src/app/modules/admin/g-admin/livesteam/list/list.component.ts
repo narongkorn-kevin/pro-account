@@ -200,7 +200,14 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
      */
 
     signInWithFB(): void {
-        this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+        
+
+        const fbLoginOptions = {
+            scope: 'publish_video,pages_show_list,pages_messaging,pages_read_engagement,pages_read_user_content,pages_manage_posts,public_profile'
+          }; // https://developers.facebook.com/docs/reference/javascript/FB.login/v2.11
+          
+          this.authService.signIn(FacebookLoginProvider.PROVIDER_ID, fbLoginOptions);
+
       }
     
       signOut(): void {
@@ -210,7 +217,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
 
-      
+
     ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next(null);
