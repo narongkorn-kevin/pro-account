@@ -19,11 +19,6 @@ import { Calendar } from '@fullcalendar/core';
 import { CalendarComponent } from './modules/admin/g-admin/calendar/calendar.component';
 import { SalePageComponent } from './modules/admin/g-admin/sale-page/sale-page.component';
 import { MatStepperModule } from '@angular/material/stepper';
-import {
-  FacebookLoginProvider,
-  SocialLoginModule,
-  SocialAuthServiceConfig,
-} from 'angularx-social-login';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,
@@ -60,24 +55,10 @@ const routerConfig: ExtraOptions = {
         MarkdownModule.forRoot({}),
         MatStepperModule,
 
-        SocialLoginModule,
+ 
 
     ],
 
-  providers: [
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('Facebook-App-ID-Goes-Here'),
-          },
-        ],
-      } as SocialAuthServiceConfig,
-    },
-  ],
 
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
     bootstrap: [

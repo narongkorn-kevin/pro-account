@@ -19,10 +19,11 @@ import { DataTableDirective } from 'angular-datatables';
 import { NewComponent } from '../new/new.component';
 import { EditComponent } from '../edit/edit.component';
 import {
-    SocialAuthService,
+    SocialAuthService, 
     FacebookLoginProvider,
     SocialUser,
   } from 'angularx-social-login';
+  
   
 
 @Component({
@@ -57,7 +58,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     tagsEditMode: boolean = false;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     env_path = environment.API_URL;
-    
+
     supplierId: string | null;
     pagination: BranchPagination;
 
@@ -197,6 +198,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
       signOut(): void {
         this.socialAuthService.signOut();
       }
+
     ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next(null);
