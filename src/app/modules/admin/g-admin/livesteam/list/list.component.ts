@@ -84,19 +84,21 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
+
+     
+
         this.loginForm = this.formBuilder.group({
             email: ['', Validators.required],
             password: ['', Validators.required],
           });
-
+          this.socialAuthService.authState.subscribe((user) => {
+            this.socialUser = user;
+            this.isLoggedin = user != null;
+            console.log(user)
+          });
 
     }
-social():void{
-    this.socialAuthService.authState.subscribe((user) => {
-        this.socialUser = user;
-        this.isLoggedin = user != null;
-      });
-}
+
 
     // pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
     // loadTable(): void {
@@ -196,7 +198,7 @@ social():void{
      */
 
     loginWithFacebook(): void {
-        this.social();
+  
         this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
    
       }
