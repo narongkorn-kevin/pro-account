@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class LivemagComponent {
   products = [
-    { id: '001', name: 'Monitor', quantity: 10, image: '/images/ifrv492j.png' },
+    { id: '001', name: 'Monitor', quantity: 10, image: 'ตัวอย่าง' },
     { id: '002', name: 'Bag', quantity: 5, imageUrl: '/images/ifrv492j.png' },
     { id: '003', name: 'Dove', quantity: 3, imageUrl: '/images/ifrv492j.png' },
     { id: '004', name: 'Dior', quantity: 8, imageUrl: '/images/ifrv492j.png' },

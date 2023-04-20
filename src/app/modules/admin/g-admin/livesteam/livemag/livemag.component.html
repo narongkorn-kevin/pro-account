@@ -28,23 +28,23 @@
             <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
         </div>
         <!-- Title -->
-<div class="shadow-slate-500 shadow-lg  text-lg mr-auto p-9 items-center justify-between text-center">
-  <h1 class="p-3 mb-6 font-bold text-xl">รายการสินค้า</h1>
-  <table>
+<div class="flex-col shadow-slate-500 shadow-lg  text-lg mr-auto p-8 items-center justify-between text-center">
+  <h1 class="p-1 mb-6 font-bold text-xl bg-green-400 rounded-full text-white">รายการสินค้า</h1>
+  <table class=" shadow-slate-300 rounded-xl pr-2">
     <tr>
       <th>Code</th>
+      <th>Pic</th>
       <th>Name</th>
-      <th>Qty.</th>
-      <th>Picture</th>
+      <th>Qty</th>
       <th>On/Off</th>
     </tr>
     <tr *ngFor="let product of products">
       <td>{{ product.id }}</td>
+      <td>{{ product.image }}</td>
       <td>{{ product.name }}</td>
       <td>{{ product.quantity }}</td>
-      <td>{{ product.image }}</td>
       <td>
-        <button class="w-16 rounded-full" (click)="toggleProductStatus(product)"
+        <button class="w-16 rounded-full m-2" (click)="toggleProductStatus(product)"
                 [ngClass]="{'bg-green-500': product.isActive, 'bg-red-500': !product.isActive}">
           {{ product.isActive ? 'เปิด' : 'ปิด' }}
         </button>
@@ -54,3 +54,4 @@
 </div>
 
 <app-live-pre></app-live-pre>
+
