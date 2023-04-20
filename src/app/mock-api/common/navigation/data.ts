@@ -90,7 +90,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/livesteam/list',
                     },
-
+                    {
+                        id: 'livemag',
+                        title: 'จัดการไลฟ์สด',
+                        icon: 'heroicons_outline:video-camera',
+                        type: 'basic',
+                        link: '/livesteam/livemag',
+                    },
 
 
 

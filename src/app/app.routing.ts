@@ -364,6 +364,13 @@ export const appRoutes: Route[] = [
 
                 ]
             },
+            {
+                path: 'livemag',
+                canActivate: [], children: [
+                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/livesteam/page.module').then(m => m.Module) },
+
+                ]
+            },
 
             // {
             //     path: 'ads-calendar',

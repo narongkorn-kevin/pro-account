@@ -1,0 +1,56 @@
+<!--<div class="shadow-sm text-center font-bold text-md mr-auto p-16 pt-6 items-center justify-between">
+<div class="flex flex-col gap-4 border mx-16 text-center justify-center items-center">
+    <div class="flex flex-col p-6">
+      <label class="text-sm font-semibold mb-1 text-center" for="product-code">รหัส:</label>
+      <input id="product-code" type="text" [(ngModel)]="product.code" class="border border-gray-300 px-2 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+    </div>
+    <div class="flex flex-col p-6 text-center">
+      <label class="text-sm font-semibold mb-1" for="product-name">ชื่อสินค้า:</label>
+      <input id="product-name" type="text" [(ngModel)]="product.name" class="border border-gray-300 px-2 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+    </div>
+    <div class="flex flex-col p-6 text-center">
+      <label class="text-sm font-semibold mb-1" for="product-quantity">จำนวน:</label>
+      <input id="product-quantity" type="number" [(ngModel)]="product.quantity" class="border border-gray-300 px-2 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+    </div>
+    <div class="flex justify-center p-6 text-md">
+      <button (click)="toggleProduct()" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+        {{product.isActivated ? 'ปิดการใช้งาน' : 'เปิดการใช้งาน'}}
+      </button>
+    </div>
+  </div>
+</div>
+-->
+
+    <!-- Header -->
+   
+        <!-- Loader -->
+        <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+            <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+        </div>
+        <!-- Title -->
+<div class="shadow-slate-500 shadow-lg  text-lg mr-auto p-9 items-center justify-between text-center">
+  <h1 class="p-3 mb-6 font-bold text-xl">รายการสินค้า</h1>
+  <table>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Qty.</th>
+      <th>Picture</th>
+      <th>On/Off</th>
+    </tr>
+    <tr *ngFor="let product of products">
+      <td>{{ product.id }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.quantity }}</td>
+      <td>{{ product.image }}</td>
+      <td>
+        <button class="w-16 rounded-full" (click)="toggleProductStatus(product)"
+                [ngClass]="{'bg-green-500': product.isActive, 'bg-red-500': !product.isActive}">
+          {{ product.isActive ? 'เปิด' : 'ปิด' }}
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<app-live-pre></app-live-pre>

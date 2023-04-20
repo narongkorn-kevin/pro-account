@@ -44,6 +44,9 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from '@abacritt/angularx-social-login';
+import { LivemagComponent } from './livemag/livemag.component';
+import { LivePreComponent } from './live-pre/live-pre.component';
+
 
 
 // import {
@@ -56,7 +59,9 @@ import {
         ChatComponent,
         NewComponent,
         ListComponent,
-        EditComponent
+        EditComponent,
+        LivemagComponent,
+        LivePreComponent,
 
     ],
     imports: [

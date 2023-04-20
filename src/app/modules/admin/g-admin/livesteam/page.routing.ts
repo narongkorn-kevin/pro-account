@@ -1,6 +1,7 @@
 import { Route } from '@angular/router';
 import { ChatComponent } from './page.component';
 import { ListComponent } from './list/list.component';
+import { LivemagComponent } from './livemag/livemag.component';
 
 
 export const PageRoute: Route[] = [
@@ -12,6 +13,14 @@ export const PageRoute: Route[] = [
             {
                 path: 'list',
                 component: ListComponent,
+                // resolve: {
+                //     products: PermissionProductsResolver,
+
+                // }
+            },
+            {
+                path: 'livemag',
+                component: LivemagComponent,
                 // resolve: {
                 //     products: PermissionProductsResolver,
 
