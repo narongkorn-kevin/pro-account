@@ -20,6 +20,7 @@ import {
 import { environment } from 'environments/environment';
 import { AssetCategory } from 'app/shared/asset-category';
 import { DataTablesResponse } from 'app/shared/datatable.types';
+// import { access } from 'fs';
 // import { UserDetail } from '../user/user.types';
 const token = localStorage.getItem('accessToken') || null;
 @Injectable({
@@ -745,6 +746,32 @@ export class PageService {
         );
     }
 
+    getTokenUser(data:any): Observable<AssetType[]> {
+        return this._httpClient.get<AssetType[]>('https://graph.facebook.com/v16.0/me/accounts?fields=name,access_token,tasks,picture&access_token='+data).pipe(
+            tap((asset_types) => {
+                this._asset_types.next(asset_types);
+            })
+        );
+    }
+    getTokenPage(data:any,dataId:any): Observable<AssetType[]> {
+        return this._httpClient.get<AssetType[]>('https://graph.facebook.com/'+dataId+'/live_videos?access_token='+data).pipe(
+            tap((asset_types) => {
+                this._asset_types.next(asset_types);
+            })
+        );
+    }
+
+    getPage(data:any): Observable<AssetType[]> {
+        return this._httpClient.get<AssetType[]>('https://graph.facebook.com/:page_id/live_videos?access_token='+data).pipe(
+            tap((asset_types) => {
+                this._asset_types.next(asset_types);
+            })
+        );
+    }
+
+
+
+    
     /**
     * Get Asset Type
     */

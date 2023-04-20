@@ -1,19 +1,59 @@
-<!-- <h2 class="text-center mb-4">Login with Facebook in Angular</h2>
-<div *ngIf="!isLoggedin">
-  <button type="button" (click)="loginWithFacebook()" class="btn btn-primary btn-block">Signin with Facebook</button>
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    เลือก เพจร้านค้า
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
+    
+        <div class="flex flex-col p-3 sm:p-10">
+            <div class="overflow-auto  bg-white shadow sm:rounded-lg">
+                <!-- Products list -->
+    
+                <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll">
+                    <table datatable [dtOptions]="dtOptions"
+                        class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                        style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>จัดการ</th>
+                                <th>ลำดับ</th>
+                                <th>รูปภาพ</th>
+                                <th>ชื่อธนาคาร</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="dataRow?.length != 0">
+                            <tr *ngFor="let item of dataRow; let i = index"
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md py-15">
+                                <td style="min-width: 80px;">
+                                    <button mat-icon-button (click)="Edit(item.id)" title="แก้ไขข้อมูล">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                    <button mat-icon-button (click)="Delete(item.id)" title="ลบข้อมูล">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </td>
+                                <td style="min-width: 80px;" *ngIf="item.image === null || ''"> </td>
+                                <td style="min-width: 80px;" *ngIf="item.image !== null || ''"><img src="{{item.image}}"
+                                        class="h-10 w-10"> </td>
+                                <td style="min-width: 150px;">{{ item.user_create ? item.user_create.first_name : 'No data' }} {{ item.user_create ?
+                                    item.user_create.last_name: '' }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div *ngIf="isLoggedin === true">
-  <div class="form-group">
-    <label>First Name</label>
-    <input type="text" class="form-control" [value]="socialUser.firstName" id="firstname" readonly>
-  </div>
-  <div class="form-group">
-    <label>Last Name</label>
-    <input type="text" class="form-control" [value]="socialUser.lastName" id="lastname" readonly>
-  </div>
-  <div class="form-group">
-    <label>Email</label>
-    <input type="text" class="form-control" [value]="socialUser.email" id="email" readonly>
-  </div>
-  <button type="button" (click)="signOut()" class="btn btn-primary">Sign Out</button>
-</div> -->

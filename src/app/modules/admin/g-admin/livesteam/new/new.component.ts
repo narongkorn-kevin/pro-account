@@ -13,15 +13,58 @@ import { AuthService } from 'app/core/auth/auth.service';
 import { sortBy, startCase } from 'lodash-es';
 import { AssetType, BranchPagination } from '../page.types';
 import { PageService } from '../page.service';
-// s
-
-
-// import { ImportOSMComponent } from '../card/import-osm/import-osm.component';
+// import { ImportOSMComponent } from '../card/import-osm/import-osm.component';\
+import {
+    SocialAuthService, 
+    FacebookLoginProvider,
+    SocialUser,
+  } from '@abacritt/angularx-social-login';
 
 @Component({
     selector: 'new',
     templateUrl: './new.component.html',
     styleUrls: ['./new.component.scss'],
+    //     `
+    //     table{
+    //         width: 100%;
+    //        }
+
+    //     .bg-gray-50{
+    //         background:#FEEDEE !important;
+    //         font-weight:bold !important;
+    //         padding:5px;
+    //     }
+
+    //     .mat-dialog-container .mat-stroked-button{
+    //         border:unset !important;
+    //     }
+
+    //     .btn-add-asset{
+    //         border-radius: 5px !important;
+    //         background:#ffffff !important;
+    //         border:2px solid #F43F5E !important;
+    //         color:#F43F5E !important;
+    //         width:100% !important;
+    //     }
+
+    //     .mat-tab-group .mat-tab-header .mat-tab-label-container .mat-tab-list .mat-tab-labels .mat-tab-label.mat-tab-label-active{
+    //         background-color:#ffffff !important;
+    //         border-top:2px solid red !important;
+    //         color:red !important
+    //     }
+
+    //     .mat-tab-group .mat-tab-header .mat-tab-label-container .mat-tab-list .mat-tab-labels .mat-tab-label{
+    //         background-color:#ccc !important;
+    //         border-radius:0px !important;
+    //     }
+
+    //     /* ::ng-deep .mat-form-field-flex {
+    //             border-width: 1px !important;
+    //         } */
+    //     `
+
+    // ],
+    // encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: fuseAnimations
 })
@@ -29,7 +72,8 @@ import { PageService } from '../page.service';
 export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(MatPaginator) private _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
-
+    public dataRow: any[];
+    public dtOptions: DataTables.Settings = {};
     formData: FormGroup
     flashErrorMessage: string;
     flashMessage: 'success' | 'error' | null = null;
@@ -45,7 +89,11 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
     // get roleType(): string {
     //     return 'marketing';
     // }
-
+    loginForm!: FormGroup;
+    socialUser!: SocialUser;
+    isLoggedin?: boolean = undefined;
+    userData: any;
+    pageData: any;
     supplierId: string | null;
     pagination: BranchPagination;
 
@@ -62,12 +110,15 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
         private _router: Router,
         private _activatedRoute: ActivatedRoute,
         private _authService: AuthService,
-        private formBuilder: FormBuilder,
-        
-
+        private authService: SocialAuthService, 
     ) {
-       
 
+        this.formData = this._formBuilder.group({
+            pic: '',
+            name: '',
+            id: '',
+            token_user:'',
+        })
 
     }
 
@@ -79,17 +130,85 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
-        this.formData = this._formBuilder.group({
-            name: ['', Validators.required],
+    
+
+        this.authService.authState.subscribe((user) => {
+            this.socialUser = user;
+            this.isLoggedin = user != null;
+            console.log(user)
+          });
+        this._Service.getTokenUser(this.socialUser.authToken).subscribe((resp: any) => {
+            this.userData = resp.data
+            this.formData.patchValue({
+                name: this.userData[0].name,
+                id: this.userData[0].id,
+                pic: this.userData[0].picture.data.url,
+                token_user: this.userData[0].access_token,
+            }) 
+            console.log('ข้อมูล',this.formData.value)
+
+
+            this._Service.getTokenPage(this.socialUser.authToken,this.formData.value.id).subscribe((resp: any) => {
+                this.pageData = resp.data
+        
+                // this.formData.patchValue({
+                //     name: this.pageData[0].name,
+                //     id: this.pageData[0].id,
+                //     pic: this.pageData[0].picture.data.url,
+                }) 
         })
+        console.log('ข้อมูล',this.pageData)
 
 
+        // this.loadTable();
+ 
 
-
-
-          
+  
     }
 
+    pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
+    loadTable(): void {
+        const that = this;
+        this.dtOptions = {
+            pagingType: 'full_numbers',
+            pageLength: 10,
+            serverSide: true,
+            processing: true,
+            language: {
+                "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
+            },
+            ajax: (dataTablesParameters: any, callback) => {
+
+                that._Service.getPage(dataTablesParameters).subscribe((resp: any) => {
+                    this.dataRow = resp.data
+                    console.log(resp)
+                    this.pages.current_page = resp.current_page;
+                    this.pages.last_page = resp.last_page;
+                    this.pages.per_page = resp.per_page;
+                    if (resp.current_page > 1) {
+                        this.pages.begin = resp.per_page * resp.current_page - 1;
+                    } else {
+                        this.pages.begin = 0;
+                    }
+                    callback({
+                        recordsTotal: resp.total,
+                        recordsFiltered: resp.total,
+                        data: []
+                    });
+                    this._changeDetectorRef.markForCheck();
+                })
+            },
+            columns: [
+                { data: 'actice', orderable: false },
+                { data: 'id' },
+                { data: 'name' },
+                { data: 'pic' },
+       
+               
+            ]
+        };
+
+    }
 
     onClose() {
         this.dialogRef.close();
@@ -110,6 +229,8 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
         // Unsubscribe from all subscriptions
 
     }
+
+  
 
 
     New(): void {
