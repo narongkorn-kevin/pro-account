@@ -731,6 +731,7 @@ export interface DataBank {
             created_at: Date,
             updated_at: Date,
             No: number,
+            quality: number
         }
     ]
 }

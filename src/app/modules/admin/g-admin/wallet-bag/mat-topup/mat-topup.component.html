@@ -1,0 +1,13 @@
+<div class="flex flex-auto text-center items-center justify-center">
+<mat-form-field class="w-full text-center p-6 items-center justify-center" appearance="fill">
+  <mat-label class="text-lg font-bold">วิธีการเติมเงิน</mat-label>
+  <mat-select (selectionChange)="onChangeItem()" class="text-center items-center justify-center" [formControl]="bbankControl" required>
+    <mat-option class="text-center items-center">กรุณาเลือก</mat-option>
+    <mat-option  class="text-center items-center" *ngFor="let animal of animals" [value]="animal">
+      {{animal.name}}
+    </mat-option>
+  </mat-select>
+  <mat-error *ngIf="bbankControl.hasError('required')">กรุณาเลือกช่องทางเติมเงิน</mat-error>
+  <mat-hint>{{bbankControl.value?.detail}}</mat-hint>
+</mat-form-field>  
+</div>

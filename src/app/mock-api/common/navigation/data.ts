@@ -615,7 +615,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         title: 'กระเป๋า',
                         type: 'basic',
                         icon: 'mat_outline:money',
-                        link: '/bank12/list',
+                        link: '/wallet-bag/list',
                     },
                 ],
             },
