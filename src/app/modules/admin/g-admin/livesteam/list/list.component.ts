@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, Inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -6,11 +6,12 @@ import { MatSort } from '@angular/material/sort';
 import { debounceTime, map, merge, Observable, Subject, switchMap, takeUntil } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog , MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { AuthService } from 'app/core/auth/auth.service';
 import { sortBy, startCase } from 'lodash-es';
+
 import { AssetType, BranchPagination, DataWarehouse } from '../page.types';
 import { PageService } from '../page.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -48,7 +49,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     socialUser!: SocialUser;
     isLoggedin?: boolean = undefined;
 
-
+    formData: FormGroup
     products$: Observable<any>;
     asset_types: AssetType[];
     flashMessage: 'success' | 'error' | null = null;
@@ -59,7 +60,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     tagsEditMode: boolean = false;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     env_path = environment.API_URL;
-
+    tokenData: any;
     supplierId: string | null;
     pagination: BranchPagination;
 
@@ -67,6 +68,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseConfirmationService: FuseConfirmationService,
         private _formBuilder: FormBuilder,
+        
         private _Service: PageService,
         private _matDialog: MatDialog,
         private _router: Router,
@@ -99,6 +101,9 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
             console.log(user)
           });
 
+
+
+          
     }
 
 
@@ -214,6 +219,23 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
         this.authService.signOut();
       }
 
+      openPage() {
+        // console.log(this.socialUser.authToken)
+        // this._Service.getToken(this.socialUser.authToken).subscribe((resp: any) => {
+        //     this.tokenData = resp.data
+        //     console.log(this.tokenData)
+        // })
+        const dialogRef = this._matDialog.open(NewComponent, {
+            width: 'auto%',
+            height: 'auto',
+        });
+        dialogRef.afterClosed().subscribe(item => {
+            this.rerender();
+            this._changeDetectorRef.markForCheck();
+        });
+    }
+
+
 
 
 
@@ -264,16 +286,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
         });
     }
 
-    New() {
-        const dialogRef = this._matDialog.open(NewComponent, {
-            width: 'auto%',
-            height: 'auto',
-        });
-        dialogRef.afterClosed().subscribe(item => {
-            this.rerender();
-            this._changeDetectorRef.markForCheck();
-        });
-    }
 
     rerender(): void {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {

@@ -1,4 +1,4 @@
-<h2 class="text-center mb-4">Login with Facebook in Angular</h2>
+<!-- <h2 class="text-center mb-4">Login with Facebook in Angular</h2> -->
 <div *ngIf="!isLoggedin">
 
 
@@ -18,5 +18,6 @@
     <label>Email</label>
     <input type="text" class="form-control" [value]="socialUser.email" id="email" readonly>
   </div>
-  <button type="button" (click)="signOut()" class="btn btn-primary">Sign Out</button>
+  <button mat-flat-button (click)="signOut()" class="px-6 ml-3 mat-primary">Sign Out</button>
+   <button mat-flat-button (click)="openPage()" class="px-6 ml-3 mat-primary">Open Page</button>
 </div>
