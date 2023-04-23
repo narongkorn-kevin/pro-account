@@ -1,11 +1,32 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation , Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { debounceTime, map, merge, Observable, Subject, switchMap, takeUntil } from 'rxjs';
+import { fuseAnimations } from '@fuse/animations';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
 
+import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'environments/environment';
+import { AuthService } from 'app/core/auth/auth.service';
+import { sortBy, startCase } from 'lodash-es';
+import { AssetType, BranchPagination } from '../page.types';
+import { PageService } from '../page.service';
+import {
+  SocialAuthService, 
+  FacebookLoginProvider,
+  SocialUser,
+} from '@abacritt/angularx-social-login';
 @Component({
   selector: 'app-livemag',
   templateUrl: './livemag.component.html',
-  styleUrls: ['./livemag.component.scss']
+  styleUrls: ['./livemag.component.scss'],
+  
+  changeDetection: ChangeDetectionStrategy.Default,
+  animations: fuseAnimations
 })
-export class LivemagComponent {
+export class LivemagComponent implements OnInit {
   products = [
     { id: '001', name: 'Monitor', quantity: 10, image: 'ตัวอย่าง' },
     { id: '002', name: 'Bag', quantity: 5, imageUrl: '/images/ifrv492j.png' },
@@ -28,10 +49,95 @@ export class LivemagComponent {
     { id: '019', name: 'Sneaker', quantity: 8, imageUrl: '/images/ifrv492j.png' },
     { id: '020', name: 'Glasses', quantity: 12, imageUrl: '/images/ifrv492j.png' },
 ];
-  
+@ViewChild(MatPaginator) private _paginator: MatPaginator;
+@ViewChild(MatSort) private _sort: MatSort;
+
+
+public dataRow: any[];
+public dtOptions: DataTables.Settings = {};
+formData: FormGroup
+
+pageid: string;
+vdo: string;
+
+flashErrorMessage: string;
+flashMessage: 'success' | 'error' | null = null;
 isLoading: boolean = false;
+searchInputControl: FormControl = new FormControl();
+selectedProduct: any | null = null;
+filterForm: FormGroup;
+tagsEditMode: boolean = false;
+private _unsubscribeAll: Subject<any> = new Subject<any>();
+env_path = environment.API_URL;
+
+loginForm!: FormGroup;
+socialUser!: SocialUser;
+isLoggedin?: boolean = undefined;
+userData: any;
+pageData: any;
+
+
+supplierId: string | null;
+pagination: BranchPagination;
+
+constructor(
+
+  private _changeDetectorRef: ChangeDetectorRef,
+  private _fuseConfirmationService: FuseConfirmationService,
+  private _formBuilder: FormBuilder,
+  private _Service: PageService,
+
+  private _router: Router,
+  private _activatedRoute: ActivatedRoute,
+  private _authService: AuthService,
+  private authService: SocialAuthService, 
+) {
+
+  this.formData = this._formBuilder.group({
+      pic: '',
+      name: '',
+      id: '',
+      token_user:'',
+  })
+
+}
 
   toggleProductStatus(product) {
     product.isActive = !product.isActive;
+  }
+
+  ngOnInit(): void {
+    
+
+    this.authService.authState.subscribe((user) => {
+        this.socialUser = user;
+        this.isLoggedin = user != null;
+        console.log(user)
+      });
+    this._Service.getTokenUser(this.socialUser.authToken).subscribe((resp: any) => {
+        this.userData = resp
+        // this.formData.patchValue({
+        //     name: this.userData[0].name,
+        //     id: this.userData[0].id,
+        //     pic: this.userData[0].picture.data.url,
+        //     token_user: this.userData[0].access_token,
+        // }) 
+        console.log('ข้อมูลPage',this.userData)
+        this.pageid=this._activatedRoute.snapshot.paramMap.get("id")
+        this._Service.getTokenPage(this.socialUser.authToken,this.pageid).subscribe((resp: any) => {
+            this.pageData = resp
+            console.log('เพจไอดี',resp)
+            // console.log('เรียกข้อมูล',this.pageData.data[0].embed_html)
+            this.vdo=this.pageData.data[0].embed_html
+            }) 
+
+           
+    })
+  
+  
+
+    
+  
+  
   }
 }

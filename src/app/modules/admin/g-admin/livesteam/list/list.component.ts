@@ -226,8 +226,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
         //     console.log(this.tokenData)
         // })
         const dialogRef = this._matDialog.open(NewComponent, {
-            width: 'auto%',
-            height: 'auto',
+            width: '50%',
+            height: '50',
         });
         dialogRef.afterClosed().subscribe(item => {
             this.rerender();

@@ -1,4 +1,4 @@
-<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+<div class="flex flex-col flex-auto bg-card dark:bg-transparent ">
 
     <!-- Header -->
     <div
@@ -6,7 +6,7 @@
         <div class="flex-1 min-w-0">
             <!-- Title -->
             <div class="mt-2">
-                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate text-center">
                     เลือก เพจร้านค้า
                 </h2>
             </div>
@@ -21,34 +21,40 @@
                 <!-- Products list -->
     
                 <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll">
-                    <table datatable [dtOptions]="dtOptions"
+                    <table 
                         class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
                         style="width: 100%">
                         <thead>
                             <tr>
-                                <th>จัดการ</th>
-                                <th>ลำดับ</th>
-                                <th>รูปภาพ</th>
-                                <th>ชื่อธนาคาร</th>
+                                <!-- <th>ลำดับ</th> -->
+                                <th class="w-1/6 text-center">เพจ</th>
+                                <th class="w-1/3"></th>
+                                <th class="w-1/3 text-center">จัดการ</th>
                             </tr>
                         </thead>
-                        <tbody *ngIf="dataRow?.length != 0">
-                            <tr *ngFor="let item of dataRow; let i = index"
+                        <tbody *ngIf="userData?.data.length != 0">
+                            <tr *ngFor="let item of userData.data; let i = index"
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md py-15">
-                                <td style="min-width: 80px;">
-                                    <button mat-icon-button (click)="Edit(item.id)" title="แก้ไขข้อมูล">
-                                        <mat-icon>edit</mat-icon>
-                                    </button>
-                                    <button mat-icon-button (click)="Delete(item.id)" title="ลบข้อมูล">
-                                        <mat-icon>delete</mat-icon>
-                                    </button>
+                                <!-- <td style="min-width: 80px;"> {{item.id}}</td> -->
+                                <td> <div class="flex justify-center ">
+                                <img src="{{item.picture.data.url}} " class="h-20 w-20 "> 
+                                </div>
+                                 </td>
+                                 <td>
+                                <div>รหัสเพจ : {{item.id}}</div>
+                                <div>ชื่อเพจ : {{item.name}}</div>
                                 </td>
-                                <td style="min-width: 80px;" *ngIf="item.image === null || ''"> </td>
+                                <td>
+                                    <div class="flex justify-center ">    
+                                    <button mat-flat-button (click)="live(item.id)" class="px-6 ml-3 mat-primary">เลือก</button>
+                                </div>
+                                </td>
+                                <!-- <td style="min-width: 80px;" *ngIf="item.image === null || ''"> </td>
                                 <td style="min-width: 80px;" *ngIf="item.image !== null || ''"><img src="{{item.image}}"
                                         class="h-10 w-10"> </td>
                                 <td style="min-width: 150px;">{{ item.user_create ? item.user_create.first_name : 'No data' }} {{ item.user_create ?
                                     item.user_create.last_name: '' }}
-                                </td>
+                                </td> -->
 
                             </tr>
                         </tbody>
