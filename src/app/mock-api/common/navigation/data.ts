@@ -75,36 +75,45 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/bank/list',
                     },
-
-                    {
-                        id: 'chat',
-                        title: 'กล่องข้อความ',
-                        icon: 'heroicons_outline:chat',
-                        type: 'basic',
-                        link: '/chat/chats',
-                    },
+                    
                     {
                         id: 'livesteam',
-                        title: 'ไลฟ์สด',
+                        title: 'เข้าสู่ระบบจัดการไลฟ์สด',
                         icon: 'heroicons_outline:video-camera',
                         type: 'basic',
                         link: '/livesteam/list',
                     },
                     {
-                        id: 'livemag',
-                        title: 'จัดการไลฟ์สด',
-                        icon: 'heroicons_outline:video-camera',
-                        type: 'basic',
-                        link: '/livesteam/livemag',
+                        id: 'g-Admin',
+                        title: 'จัดการเพจ',
+                        type: 'collapsable',
+                        icon: 'heroicons_outline:home',
+                        children: [
+                            {
+                                id: 'chat',
+                                title: 'กล่องข้อความ',
+                                icon: 'heroicons_outline:chat',
+                                type: 'basic',
+                                link: '/chat/chats',
+                            },
+                            {
+                                id: 'livemag',
+                                title: 'จัดการไลฟ์สด',
+                                icon: 'heroicons_outline:video-camera',
+                                type: 'basic',
+                                link: '/livesteam/livemag',
+                            },
+                        ]
                     },
+
                     {
                         id: 'wallet-bag',
                         title: 'กระเป๋าเงิน',
-                        icon: 'heroicons_outline:video-camera',
+                        icon: 'heroicons_outline:shopping-bag',
                         type: 'basic',
                         link: '/wallet-bag/list',
                     },
-
+                    
 
                 ],
 

@@ -32,7 +32,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
-
+import { JsonPipe } from '@angular/common';
 import { PageRoute } from './page.routing';
 import { ChatComponent } from './page.component';
 import { ListComponent } from './list/list.component';

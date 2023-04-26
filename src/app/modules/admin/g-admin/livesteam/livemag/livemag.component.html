@@ -61,10 +61,12 @@
   </table>
 </div>
 
-<h1 class="flex text-center mx-auto ml-12 pt-10 font-extrabold text-3xl">LIVE STREAMING</h1>
+<!--<h1 class="flex text-center mx-auto ml-12 pt-10 font-extrabold text-3xl">LIVE STREAMING</h1>
 <div *ngFor="let video of listVideo">
 <div  [innerHTML]="video.embed_html | noSanitize">
 <pre>{{listVideo | json}}</pre>
 <div class="flex mt-5 mb-12 ml-5 mr-60 p-14">
 <div class="grid grid-cols-3 mr-10 mb-60 gap-4 pt-2">
-</div>
+</div>-->
+
+<app-live-list></app-live-list>
