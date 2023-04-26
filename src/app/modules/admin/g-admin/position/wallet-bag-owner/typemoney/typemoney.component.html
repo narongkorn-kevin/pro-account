@@ -9,7 +9,7 @@
         </mat-form-field>
         <div class="text-center">
           <p class="text-red-500 pb-6">**เติมเงินขั้นต่ำตั้งแต่ 100 บาทขึ้นไป**</p>
-          <button class="bg-green-100 hover:bg-green-500" mat-raised-button matStepperNext>ถัดไป</button>
+          <button class="bg-green-100 hover:bg-green-500" mat-raised-button matStepperNext [disabled]="firstFormGroup.invalid">ยืนยัน</button>
         </div>
       </form>
     </mat-step>
@@ -23,7 +23,7 @@
     <div class="flex flex-auto items-center justify-center p-2">
         <mat-form-field class="w-160 text-center items-center justify-center ml-6" appearance="fill">
           <mat-label class="text-center items-center">กรุณาเลือกธนาคาร</mat-label>
-          <mat-select class="text-center items-center" [(ngModel)]="selectedValue" name="food">
+          <mat-select class="text-center items-center justify-center px-auto" [(ngModel)]="selectedValue" name="food">
             <mat-option class="text-center flex items-center justify-center" *ngFor="let food of foods" [value]="food.value">
               {{food.viewValue}}
             </mat-option>
@@ -65,8 +65,8 @@
             </div>
           </div>
           <div class="text-center items-center justify-center space-y-6 p-10">
-          <button class="bg-green-100 hover:bg-green-500" mat-raised-button matStepperNext>ถัดไป</button>
-        </div>
+            <button class="bg-green-100 hover:bg-green-500" mat-raised-button matStepperNext [disabled]="secondFormGroup.invalid">ยืนยัน</button>
+          </div>
       </form>
       </div>
     </mat-step>

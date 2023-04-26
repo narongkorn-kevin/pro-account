@@ -97,7 +97,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/livesteam/livemag',
                     },
-
+                    {
+                        id: 'wallet-bag',
+                        title: 'กระเป๋าเงิน',
+                        icon: 'heroicons_outline:video-camera',
+                        type: 'basic',
+                        link: '/wallet-bag/list',
+                    },
 
 
                 ],
@@ -373,13 +379,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 type: 'basic',
                 link: '/bank-user/list',
             },
-            {
-                id: 'wallet-bag-owner',
-                title: 'กระเป๋าตัง',
-                icon: 'mat_outline:account_balance_wallet',
-                type: 'basic',
-                link: '/wallet-bag-owner/list',
-            },
+          //  {
+          //      id: 'wallet-bag-owner',
+          //      title: 'กระเป๋าตัง',
+          //      icon: 'mat_outline:account_balance_wallet',
+          //      type: 'basic',
+           //     link: '/wallet-bag-owner/list',
+          //  },
             // {
             //     id: 'position',
             //     title: 'เช็คยอดขาย',
@@ -608,6 +614,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 type: 'basic',
                 link: '/bank-user/list',
             },
+            {
+                id: 'wallet-bag-owner',
+                title: 'กระเป๋าตัง',
+                icon: 'mat_outline:account_balance_wallet',
+                type: 'basic',
+                link: '/wallet-bag-owner/list',
+            },
             // {
             //     id: 'position',
             //     title: 'ตั้งค่า live สดสินค้า',
@@ -615,23 +628,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
 
             //     link: '/position/list',
             // },
-            {
-                id: 'position',
-                title: 'เช็คยอดเงิน',
-                type: 'collapsable',
-                icon: 'mat_outline:attach_money',
-                link: '/position/list',
-
-                children: [
-                    {
-                        id: 'workpacking',
-                        title: 'กระเป๋า',
-                        type: 'basic',
-                        icon: 'mat_outline:money',
-                        link: '/wallet-bag/list',
-                    },
-                ],
-            },
+           // {
+           //     id: 'position',
+          //      title: 'เช็คยอดเงิน',
+           //     type: 'basic',
+           //     icon: 'mat_outline:attach_money',
+            //    link: '/position/list',
+           // },
         ],
     },
 

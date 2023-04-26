@@ -41,19 +41,19 @@
                 <div class="shadow-sm text-center font-bold text-2xl p-12 pt-6">
                     <span></span>
                     <span></span>
-                    <div class="flex flex-col mx-auto pl-6 text-center justify-center bg-gray-100 rounded-sm p-8 grow-0">
+                    <div class="flex flex-col mx-auto pl-6 text-center justify-center bg-gray-100 rounded-xl p-8 grow-0">
                         <section class="text-left">
                             <h1 class="pb-4 ml-3">ยอดเงินคงเหลือ:</h1>
-                            <p class="ml-3 pb-4 border-b-4">1,000,000 ฿</p>
+                            <p class="ml-6 pb-4 border-b-4">1,000,000 ฿</p>
                             <ul>
-                                <a (click)="New()" class="mr-8">
-                                    <span class="material-symbols-outlined">
+                                <a (click)="New()" class="mr-8 text-lg">
+                                    <span class="material-symbols-outlined py-2">
                                         credit_card
                                         </span>
                                     <span class="ml-2 mr-1 cursor-pointer">เติมเงินเข้ากระเป๋า</span>
                                 </a>
                                 <p>
-                                <a (click)="New2()" class="mr-8">
+                                <a (click)="New2()" class="mr-8 text-lg">
                                     <span class="material-symbols-outlined"> history
                                     </span>
                                     <span class="ml-2 mr-1 cursor-pointer">ประวัติการทำรายการ</span>
@@ -67,7 +67,7 @@
                 <div class="shadow-sm text-center font-bold text-2xl p-12 pt-6">
                     <span></span>
                     <span></span>
-                    <div class="flex flex-col mx-auto pl-6 text-center justify-center bg-gray-100 rounded-sm p-8 grow-0"> 
+                    <div class="flex flex-col mx-auto pl-6 text-center justify-center bg-gray-100 rounded-full p-8 grow-0 text-lg"> 
                 <section class="text-center">
                 <h1>ยอดเงินรอจ่ายค่าส่ง ( COD ) : 5,000 ( บาท )</h1>
                 </section>
@@ -77,11 +77,11 @@
                     <span class="material-symbols-outlined">
                         pending_actions
                         </span>
-                        <h1 class="pl-4">รอดำเนินการ</h1>
+                        <h1 class="pl-4">อยู่ระหว่างรอดำเนินการ</h1>
                 </div>
-                <div class="flex flex-col p-5 sm:overflow-auto overflow-x-scroll">
+                <div class="flex flex-col p-5 sm:overflow-auto overflow-x-scroll  ">
                     <table datatable [dtOptions]="dtOptions"
-                        class="table row-border hover w-full text-lg text-gray-500 dark:text-gray-400"
+                        class="table row-border border-collapse hover w-full text-lg text-black dark:text-gray-400"
                         style="width: 100%">
                         <thead>
                             <tr>
@@ -93,19 +93,19 @@
                                 <th>สถานะ</th>
                                 <!--<th>สร้างโดย</th>-->
                                 <!-- New name table -->
-                                <th>วันที่และเวลา</th>
-                                <th>รายการชำระ</th>
-                                <th>ยอดสุทธิ ( บาท )</th>
-                                <th>วันครบกำหนดชำระ</th>
-                                <th>สถานะ</th>
+                                <th class="px-4 py-2">วันที่และเวลา</th>
+                                <th class="px-4 py-2">รายการชำระ</th>
+                                <th class="px-4 py-2">ยอดสุทธิ ( บาท )</th>
+                                <th class="px-4 py-2">วันครบกำหนดชำระ</th>
+                                <th class="px-4 py-2">สถานะ</th>
                             </tr>
                         </thead>
-                        <tr *ngFor="let detail of details" class="border-b-2 px-4">
-                            <td>{{detail.date}}</td>
-                            <td>{{detail.name_list}}</td>
-                            <td>{{detail.amount_m}}</td>
-                            <td>{{detail.date_line}}</td>
-                            <td>{{detail.status_s}}</td>
+                        <tr *ngFor="let detail of details" class="ml-10">
+                            <td class="px-4 py-2">{{detail.date}}</td>
+                            <td class="px-8 py-2">{{detail.name_list}}</td>
+                            <td class="px-10 py-2">{{detail.amount_m}}</td>
+                            <td class="px-4 py-2">{{detail.date_line}}</td>
+                            <td class="px-auto py-2">{{detail.status_s}}</td>
                         </tr>
                         <!--<tbody *ngIf="dataRow?.length != 0">
                             <tr *ngFor="let item of dataRow; let i = index"

@@ -45,7 +45,7 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
     public dataRow: any[];
 
     details: Detail [] = [
-        { date: '2023-04-06 17:00:00 น.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06 17:00:00 น.',status_s: 'สำเร็จ' },
+        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'รอดำเนินการ' },
 
     ];
 
