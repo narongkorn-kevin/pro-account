@@ -1,7 +1,7 @@
 <!--<h1 class="flex text-center items-center justify-center text-xl p-6 font-bold animate-pulse">Live Steam</h1>-->
-<img class="w-24 h-24 mx-auto flex flex-col items-center text-center" src="assets/images/69428-live-webinar-animation-unscreen.gif" alt="stream">
+<!--<img class="w-24 h-24 mx-auto flex flex-col items-center text-center" src="assets/images/69428-live-webinar-animation-unscreen.gif" alt="stream">
 <!--<div class="m-20 w-full pr-30 h-96 justify-start">-->
-<img class="p-6 flex-col w-full h-1/6" src="assets/images/wp2757885-wallpaper-gif.gif" alt="live" style="width: 100%; height: 100%;">
+<!--<img class="p-6 flex-col w-full h-1/6" src="assets/images/wp2757885-wallpaper-gif.gif" alt="live" style="width: 100%; height: 100%;">
 <!--<img class="p-6 flex-col" src="assets/images/jamiewinsoscar.gif" alt="live" style="width: 60%;">
 <img class="p-6 flex-col" src="assets/images/giphy.gif" alt="live" style="width: 60%;">-->
 <!--</div>-->
@@ -12,3 +12,8 @@
 		Browser not supported
 	</video>
 </div>-->
+
+<div class="flex-col block mx-0">
+	<div *ngFor="let embed of embedVideo">
+	<iframe width="560" height="315" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>{{embedVideo.Url}}</iframe>
+</div>

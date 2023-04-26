@@ -124,6 +124,12 @@ export const appRoutes: Route[] = [
                 ]
             },
             {
+                path: 'wallet-bag-owner',
+                canActivate: [], children: [
+                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/position/wallet-bag-owner/wallet.module').then(m => m.BankModule) },
+                ]
+            },
+            {
                 path: 'bank',
                 canActivate: [], children: [
                     { path: '', loadChildren: () => import('app/modules/admin/g-admin/bank/bank.module').then(m => m.BankModule) },

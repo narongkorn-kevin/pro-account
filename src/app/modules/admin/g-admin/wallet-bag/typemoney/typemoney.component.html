@@ -1,3 +1,4 @@
+<div class="text-center items-center justify-center">
 <mat-stepper #stepper>
     <mat-step [stepControl]="firstFormGroup" errorMessage="ระบุจำนวนเงิน.">
       <form [formGroup]="firstFormGroup">
@@ -19,30 +20,28 @@
         <p class="text-gray-600 mt-2">เลขที่บัญชี : ***-***-****</p>
       </div>
     <!-- v select bank -->
-    <div class="flex flex-auto text-center items-center justify-center p-2">
+    <div class="flex flex-auto items-center justify-center p-2">
         <mat-form-field class="w-160 text-center items-center justify-center ml-6" appearance="fill">
-          <mat-label>กรุณาเลือกธนาคาร</mat-label>
-          <mat-select [(ngModel)]="selectedValue" name="food">
-            <mat-option class="text-center flex items-center" *ngFor="let food of foods" [value]="food.value">
+          <mat-label class="text-center items-center">กรุณาเลือกธนาคาร</mat-label>
+          <mat-select class="text-center items-center" [(ngModel)]="selectedValue" name="food">
+            <mat-option class="text-center flex items-center justify-center" *ngFor="let food of foods" [value]="food.value">
               {{food.viewValue}}
             </mat-option>
           </mat-select>
         </mat-form-field>
     </div>
         <!-- Two select -->
-        <div class="flex flex-auto text-center items-center justify-center">
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>รายละเอียด</ng-template>
-        <mat-form-field class="w-4/5 text-center items-center justify-center ml-6" appearance="fill">
-          <mat-label>ชื่อบัญชี</mat-label>
-          <input matInput placeholder="หมายเลขบัญชีธนาคาร" formControlName="secondCtrl"
-                 required>
-        </mat-form-field>
-        <mat-form-field class="w-4/5 text-center items-center justify-center ml-6" appearance="fill">
-            <mat-label>จำนวนเงิน</mat-label>
-            <input matInput placeholder="กรอกจำนวนเงิน" formControlName="secondCtrl"
-                   required>
-          </mat-form-field>
+        <div class="w-full text-center items-center justify-center">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>รายละเอียด</ng-template>
+            <mat-form-field class="w-5/6 text-center items-center justify-center ml-6" appearance="outline" color="primary">
+              <mat-label>ชื่อบัญชี</mat-label>
+              <input matInput placeholder="หมายเลขบัญชีธนาคาร" formControlName="secondCtrl" required>
+            </mat-form-field>
+            <mat-form-field class="w-5/6 text-center items-center justify-center ml-6" appearance="outline" color="accent">
+              <mat-label>จำนวนเงิน</mat-label>
+              <input matInput placeholder="กรอกจำนวนเงิน" formControlName="secondCtrl" required>
+            </mat-form-field>
           <!-- Date time transfer-->
           <!-- Upload form -->
           <div class="w-full p-8">
@@ -77,3 +76,4 @@
       </div>
     </mat-step>
   </mat-stepper>
+</div>

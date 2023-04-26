@@ -6,7 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { debounceTime, map, merge, Observable, Subject, switchMap, takeUntil } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-
+import { LiveListComponent } from '../live-list/live-list.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { AuthService } from 'app/core/auth/auth.service';
@@ -18,6 +18,14 @@ import {
   FacebookLoginProvider,
   SocialUser,
 } from '@abacritt/angularx-social-login';
+import { DomSanitizer } from '@angular/platform-browser';
+
+interface product {
+id: number;
+image: string;
+name: string;
+quantity: number;
+}
 @Component({
   selector: 'app-livemag',
   templateUrl: './livemag.component.html',
@@ -28,8 +36,8 @@ import {
 })
 export class LivemagComponent implements OnInit {
   products = [
-    { id: '001', name: 'Monitor', quantity: 10, image: 'ตัวอย่าง' },
-    { id: '002', name: 'Bag', quantity: 5, imageUrl: '/images/ifrv492j.png' },
+    { id: '001', name: 'Monitor', quantity: 10, image: '.' },
+    { id: '002', name: 'Bag', quantity: 5, imageUrl: 'assets/images/ifrv492j.png' },
     { id: '003', name: 'Dove', quantity: 3, imageUrl: '/images/ifrv492j.png' },
     { id: '004', name: 'Dior', quantity: 8, imageUrl: '/images/ifrv492j.png' },
     { id: '005', name: 'Givenchy', quantity: 12, imageUrl: '/images/ifrv492j.png' },
@@ -51,6 +59,8 @@ export class LivemagComponent implements OnInit {
 ];
 @ViewChild(MatPaginator) private _paginator: MatPaginator;
 @ViewChild(MatSort) private _sort: MatSort;
+
+
 
 
 public dataRow: any[];
@@ -81,7 +91,7 @@ supplierId: string | null;
 pagination: BranchPagination;
 
 constructor(
-
+  private sanitizer: DomSanitizer,
   private _changeDetectorRef: ChangeDetectorRef,
   private _fuseConfirmationService: FuseConfirmationService,
   private _formBuilder: FormBuilder,
@@ -102,12 +112,21 @@ constructor(
 
 }
 
+
+
   toggleProductStatus(product) {
     product.isActive = !product.isActive;
   }
 
   ngOnInit(): void {
-    
+    this._Service.getTokenPage("EAACa5iDAEsMBAOtQf9dS9KTJ1GJzBFdmY5Sh5mJoZCgYl4fJRuo6iUfXeq1O8f97ZBGcikOVrxAqN5uLASSOAaPjIKM3jpNCBgpDCO9HU6x2HvCdhS0crgn5tbdzxm9dPu1KJMSKDxZAHbYjsgdGJMZAuPSGb4OeRyaCU7ovA7pWBpqXBlYgA6kIZAKnG8RMZD",116311434766128).subscribe((resp: any) => {
+      this.listVideo = resp.data            
+      console.log('เพจไอดี',resp)
+     // console.log('เรียกข้อมูล',this.pageData.data[0].embed_html)
+     // this.vdo=this.pageData.data[0].embed_html
+     // this._changeDetectorRef.markForCheck();
+      }) 
+
 
     this.authService.authState.subscribe((user) => {
         this.socialUser = user;
@@ -125,19 +144,19 @@ constructor(
         console.log('ข้อมูลPage',this.userData)
         this.pageid=this._activatedRoute.snapshot.paramMap.get("id")
         this._Service.getTokenPage(this.socialUser.authToken,this.pageid).subscribe((resp: any) => {
-            this.pageData = resp
+            this.listVideo = resp.data            
             console.log('เพจไอดี',resp)
-            // console.log('เรียกข้อมูล',this.pageData.data[0].embed_html)
-            this.vdo=this.pageData.data[0].embed_html
+           // console.log('เรียกข้อมูล',this.pageData.data[0].embed_html)
+           // this.vdo=this.pageData.data[0].embed_html
+           // this._changeDetectorRef.markForCheck();
             }) 
 
            
     })
-  
-  
 
-    
   
   
   }
+  listVideo: any;
 }
+

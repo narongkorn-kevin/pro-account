@@ -52,6 +52,7 @@
         "ng-image-slider": "^6.0.0",
         "ngx-bootstrap": "^9.0.0",
         "ngx-dropzone": "^3.1.0",
+        "ngx-facebook": "^3.0.0-0",
         "ngx-formly-designer": "0.0.6",
         "ngx-image-viewer": "^1.0.13",
         "ngx-markdown": "14.0.1",

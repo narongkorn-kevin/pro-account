@@ -46,6 +46,7 @@ import {
 } from '@abacritt/angularx-social-login';
 import { LivemagComponent } from './livemag/livemag.component';
 import { LivePreComponent } from './live-pre/live-pre.component';
+import { LiveListComponent } from './live-list/live-list.component';
 
 
 
@@ -62,6 +63,7 @@ import { LivePreComponent } from './live-pre/live-pre.component';
         EditComponent,
         LivemagComponent,
         LivePreComponent,
+        LiveListComponent
 
     ],
     imports: [

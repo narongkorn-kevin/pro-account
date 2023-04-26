@@ -1,0 +1,10 @@
+<mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>เลือกวันที่ชำระ</mat-label>
+    <input matInput [matDatepicker]="picker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <button class="flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 " 
+  (click)="picker.open()">
+Open
+</button>

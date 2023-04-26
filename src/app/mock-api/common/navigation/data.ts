@@ -367,11 +367,18 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 link: '/position/list',
             },
             {
-                id: 'bank',
+                id: 'bank-user',
                 title: 'ธนาคาร',
                 icon: 'mat_outline:comment_bank',
                 type: 'basic',
                 link: '/bank-user/list',
+            },
+            {
+                id: 'wallet-bag-owner',
+                title: 'กระเป๋าตัง',
+                icon: 'mat_outline:account_balance_wallet',
+                type: 'basic',
+                link: '/wallet-bag-owner/list',
             },
             // {
             //     id: 'position',
@@ -597,7 +604,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
             {
                 id: 'bank',
                 title: 'ธนาคาร',
-                icon: 'mat_outline:comment_bank',
+                icon: 'mat_outline:account_balance',
                 type: 'basic',
                 link: '/bank-user/list',
             },

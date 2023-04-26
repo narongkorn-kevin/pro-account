@@ -24,13 +24,13 @@
     <!-- Header -->
    
         <!-- Loader -->
-        <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+       <!-- <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
             <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
         </div>
         <!-- Title -->
-<div class="flex-col shadow-slate-500 shadow-lg  text-lg mr-auto p-4 items-center justify-between text-center">
-  <h1 class="p-1 mb-6 font-bold text-xl bg-green-400 rounded-full text-black">รายการสินค้า</h1>
-  <table class=" shadow-slate-300 rounded-xl pr-2">
+<div class="flex-col shadow-slate-500 shadow-lg  text-lg mr-auto p-1  pl-8 items-center justify-between text-center">
+  <h1 class="p-1 mt-4 mb-6 font-bold text-xl mr-4 shadow-slate-500 rounded-full text-black">รายการสินค้า</h1>
+  <table class=" shadow-slate-300 rounded-xl pr-4 mr-2">
     <tr>
       <th>Code</th>
       <th>Pic</th>
@@ -44,7 +44,7 @@
       <td>{{ product.name }}</td>
       <td>{{ product.quantity }}</td>
       <td>
-        <label class="relative inline-flex items-center mr-5 cursor-pointer"> 
+        <label class="relative inline-flex items-center mr-8 ml-8 cursor-pointer"> 
           <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1"
           [(ngModel)]="product.isActive" (change)="toggleProductStatus(product)" class="sr-only peer" checked>
           <div class="w-11 h-6 bg-red-600 rounded-full peer 
@@ -60,9 +60,11 @@
 
   </table>
 </div>
-<div [innerHTML]="this.vdo"></div>
-<!-- <div class="flex mt-5 mb-5 ml-5 mr-5">	
-	<iframe allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen="true" frameborder="0" height="300" scrolling="no" src="https://www.facebook.com/plugins/video.php?width=720&href=https%3A%2F%2Fwww.facebook.com%2F103242799424019%2Fvideos%2F9824339450925666" style="border:none;overflow:hidden" width="300"></iframe>
-</div>
-<pre>{{pageData | json}}</pre> -->
 
+<h1 class="flex text-center mx-auto ml-12 pt-10 font-extrabold text-3xl">LIVE STREAMING</h1>
+<div *ngFor="let video of listVideo">
+<div  [innerHTML]="video.embed_html | noSanitize">
+<pre>{{listVideo | json}}</pre>
+<div class="flex mt-5 mb-12 ml-5 mr-60 p-14">
+<div class="grid grid-cols-3 mr-10 mb-60 gap-4 pt-2">
+</div>

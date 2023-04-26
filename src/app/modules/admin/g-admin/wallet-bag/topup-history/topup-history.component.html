@@ -1,4 +1,4 @@
-<div class="flex text-center items-center justify-center text-xl border-b font-bold">
+<!--<div class="flex text-center items-center justify-center text-xl border-b font-bold">
     <h1>ประวัติการทำรายการ</h1>
 </div>
 <div ng-app="topupHistoryApp" ng-controller="topupHistoryController">
@@ -22,6 +22,37 @@
         </tr>
         <tr ng-if="payments.length == 0">
           <td colspan="5" class="justify-center items-center text-center bg-white border-gray-300 p-20">ยังไม่มีรายการ</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>-->
+  
+  <div class="container mx-auto p-4 text-center">
+    <h1 class="text-3xl font-bold mb-4 ">ประวัติการทำรายการ</h1>
+    <div class="search flex items-center mb-4">
+      <h2 class="text-lg mr-4 justify-center mx-auto">ค้นหา</h2>
+      <input type="date" name="search-date" class="border rounded py-2 px-4 mr-4">
+      <button class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">ค้นหา</button>
+    </div>
+    <table class="table-auto w-full rounded-full" >
+      <thead>
+        <tr class="bg-gray-300">
+          <th class="px-4 py-2">วันที่และเวลา</th>
+          <th class="px-4 py-2">รายการ</th>
+          <th class="px-4 py-2">ยอดสุทธิ</th>
+          <th class="px-4 py-2">รายละเอียด</th>
+          <th class="px-4 py-2">Export PDF</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of payments" class="border-b">
+          <td class="px-4 py-2">{{payment.date}}</td>
+          <td class="px-4 py-2">{{payment.name}}</td>
+          <td class="px-4 py-2">{{payment.amount}}</td>
+          <td class="px-4 py-2">{{payment.detail}}</td>
+          <td class="px-4 py-2">
+            <a href="{{payment.pdfLink}}" class="text-blue-500 hover:text-blue-700">ดูรายละเอียด</a>
+          </td>
         </tr>
       </tbody>
     </table>
