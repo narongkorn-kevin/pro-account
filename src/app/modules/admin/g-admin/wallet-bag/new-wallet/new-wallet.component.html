@@ -9,9 +9,11 @@
         </div>
     </div>
 </div>
+<div class="items-center text-center justify-center">
 <app-mat-topup (newType) = "newType = $event"></app-mat-topup>
 <app-typemoney *ngIf="newType == 'TRANSFER'"></app-typemoney>
 <app-typemoneybank *ngIf="newType == 'QRCODE'"></app-typemoneybank>
+</div>
 <!--<div class="flex items-center justify-end w-full border-t px-8 py-4 mt-4">
             <div class="flex items-center justify-end">
                 <a class="ml-4" mat-flat-button (click)="onClose()">

@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 interface embedVideo {
   Url:string
@@ -12,12 +11,20 @@ interface embedVideo {
 })
 export class LiveListComponent{
 
-embedVideo = {
-    Url:'https://www.youtube.com/embed/i_uxTM3-INc',
-}
+  isLoading = true;
+
   constructor() { }
 
   ngOnInit(): void {
+    this.isLoading = true;
   }
 
+  ngAfterViewInit(): void {
+    this.isLoading = false;
+  }
+
+  reloadPage(): void {
+    this.isLoading = true;
+    location.reload();
+  }
 }

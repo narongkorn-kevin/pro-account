@@ -34,7 +34,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { JsonPipe } from '@angular/common';
 import { PageRoute } from './page.routing';
-import { ChatComponent } from './page.component';
+import { PageComponent } from './page.component';
 import { ListComponent } from './list/list.component';
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
@@ -47,6 +47,9 @@ import {
 import { LivemagComponent } from './livemag/livemag.component';
 import { LivePreComponent } from './live-pre/live-pre.component';
 import { LiveListComponent } from './live-list/live-list.component';
+import { ChatLiveComponent } from './chat-live/chat-live.component';
+import { FacebookModule } from 'ngx-facebook';
+import { LiveDialogeComponent } from './live-dialoge/live-dialoge.component';
 
 
 
@@ -57,13 +60,15 @@ import { LiveListComponent } from './live-list/live-list.component';
 //   } from 'angularx-social-login';
 @NgModule({
     declarations: [
-        ChatComponent,
+        PageComponent,
         NewComponent,
         ListComponent,
         EditComponent,
         LivemagComponent,
         LivePreComponent,
-        LiveListComponent
+        LiveListComponent,
+        ChatLiveComponent,
+        LiveDialogeComponent,
 
     ],
     imports: [
@@ -99,7 +104,8 @@ import { LiveListComponent } from './live-list/live-list.component';
         MatExpansionModule,
         NgxMatTimepickerModule.setLocale('en-GB'),
         DataTablesModule,
-        SocialLoginModule
+        SocialLoginModule,
+        FacebookModule
     ],
     providers: [
       {

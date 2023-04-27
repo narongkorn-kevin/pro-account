@@ -119,7 +119,7 @@ constructor(
   }
 
   ngOnInit(): void {
-    this._Service.getTokenPage("EAACa5iDAEsMBAOtQf9dS9KTJ1GJzBFdmY5Sh5mJoZCgYl4fJRuo6iUfXeq1O8f97ZBGcikOVrxAqN5uLASSOAaPjIKM3jpNCBgpDCO9HU6x2HvCdhS0crgn5tbdzxm9dPu1KJMSKDxZAHbYjsgdGJMZAuPSGb4OeRyaCU7ovA7pWBpqXBlYgA6kIZAKnG8RMZD",116311434766128).subscribe((resp: any) => {
+    this._Service.getTokenPage("this.socialUser.authToken",116311434766128).subscribe((resp: any) => {
       this.listVideo = resp.data            
       console.log('เพจไอดี',resp)
      // console.log('เรียกข้อมูล',this.pageData.data[0].embed_html)
@@ -159,4 +159,3 @@ constructor(
   }
   listVideo: any;
 }
-

@@ -1,0 +1,8 @@
+<div *ngIf="liveStreams.length === 0">
+    <p>No live streams available.</p>
+  </div>
+  
+  <div *ngFor="let stream of liveStreams">
+    <h3>{{ stream.description }}</h3>
+    <div [innerHTML]="stream.embedHtmlSafe"></div>
+  </div>

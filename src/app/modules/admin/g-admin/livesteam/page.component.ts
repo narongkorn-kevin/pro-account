@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.Default
 })
-export class ChatComponent {
+export class PageComponent {
     /**
      * Constructor
      */

@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { ChatComponent } from './page.component';
+import { PageComponent } from './page.component';
 import { ListComponent } from './list/list.component';
 import { LivemagComponent } from './livemag/livemag.component';
 
@@ -8,7 +8,7 @@ export const PageRoute: Route[] = [
 
     {
         path: '',
-        component: ChatComponent,
+        component: PageComponent,
         children: [
             {
                 path: 'list',
