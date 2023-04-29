@@ -1,15 +1,11 @@
-<!--<h1 class="flex text-center items-center justify-center text-xl p-6 font-bold animate-pulse">Live Steam</h1>-->
-<!-- <img class="w-24 h-24 mx-auto flex flex-col items-center text-center" src="assets/images/69428-live-webinar-animation-unscreen.gif" alt="stream"> -->
-<!--<div class="m-20 w-full pr-30 h-96 justify-start">-->
-<!-- <img class="p-6 flex-col w-full h-2/6" src="assets/images/wp2757885-wallpaper-gif.gif" alt="live" style="width: 50%; height: 50%;"> -->
-<!--<img class="p-6 flex-col" src="assets/images/jamiewinsoscar.gif" alt="live" style="width: 60%;">
-<img class="p-6 flex-col" src="assets/images/giphy.gif" alt="live" style="width: 60%;">-->
-<!--</div>-->
-
-
-<!--<div class="video">
-	<video controls (click)="toggleVideo()" #videoPlayer>
-		<source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
-		Browser not supported
-	</video>
-</div>-->
+<div class="p-4">
+	<h2 class="text-xl font-bold mb-4">Live Stream Chat</h2>
+	<div class="bg-gray-200 p-4 rounded-lg mb-4 h-40 overflow-y-scroll">
+	  <!-- Display messages here -->
+	</div>
+	<div class="flex items-center mb-4">
+	  <input type="text" placeholder="Type your message" [(ngModel)]="message" class="w-full rounded-l-lg py-2 px-4 border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" (keyup.enter)="sendMessage()">
+	  <button class="bg-green-600 text-white py-2 px-4 rounded-r-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-opacity-50" (click)="sendMessage()">Send</button>
+	</div>
+  </div>
+  

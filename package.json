@@ -45,6 +45,7 @@
         "datatables.net": "^1.11.3",
         "datatables.net-dt": "^1.11.3",
         "facebook-js-sdk": "^0.3.4",
+        "fb-sdk": "^1.0.3",
         "fetch-jsonp": "^1.2.3",
         "fullcalendar": "^5.11.3",
         "highlight.js": "11.6.0",
