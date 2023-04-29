@@ -194,6 +194,12 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
     
     }
 
+    live2(id: string): void {
+        this._router.navigate(['chat/chat'+id]);
+        this.onClose();
+    
+    }
+
 
     New(): void {
         this.flashMessage = null;

@@ -1,38 +1,12 @@
-<!--<h1 class="flex text-center items-center justify-center text-xl p-6 font-bold animate-pulse">Live Steam</h1>-->
-<!--<img class="w-24 h-24 mx-auto flex flex-col items-center text-center" src="assets/images/69428-live-webinar-animation-unscreen.gif" alt="stream">
-<!--<div class="m-20 w-full pr-30 h-96 justify-start">-->
-<!--<img class="p-6 flex-col w-full h-1/6" src="assets/images/wp2757885-wallpaper-gif.gif" alt="live" style="width: 100%; height: 100%;">
-<!--<img class="p-6 flex-col" src="assets/images/jamiewinsoscar.gif" alt="live" style="width: 60%;">
-<img class="p-6 flex-col" src="assets/images/giphy.gif" alt="live" style="width: 60%;">-->
-<!--</div>-->
-
-<!--<div class="video">
-	<video controls (click)="toggleVideo()" #videoPlayer>
-		<source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
-		Browser not supported
-	</video>
-</div>-->
-
-<div class="grid grid-cols-3 gap-8 w-35 h-50 my-30 mr-20">
-	<div class="flex flex-col items-center justify-center">
-		<iframe width="215" height="215" src="https://www.youtube.com/embed/6OVuyzr6rWE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-		<button class="mt-4 text-sm font-medium text-gray-600 border border-gray-600 rounded-md py-1 px-2 hover:text-gray-900 hover:border-gray-900">
-			<a href="https://youtu.be/6OVuyzr6rWE" target="_blank" rel="noopener">FULL</a>
-		</button>
+<div class="chat-container bg-gray-100 rounded-md shadow-lg mr-120 w-4/6 h-1/3 pt-15">
+	<div class="chat-header bg-purple-500 text-white py-2 px-4 rounded-t-md text-center border-y-green-500">
+	  CF Products Chat
 	</div>
-	<div class="flex flex-col items-center justify-center">
-		<iframe width="215" height="215" src="https://www.youtube.com/embed/6OVuyzr6rWE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-		<button class="mt-4 text-sm font-medium text-gray-600 border border-gray-600 rounded-md py-1 px-2 hover:text-gray-900 hover:border-gray-900">
-			<a href="https://youtu.be/6OVuyzr6rWE" target="_blank" rel="noopener">FULL</a>
-		</button>
+	<div class="chat-messages p-4">
+	  <!-- Display messages here -->
 	</div>
-	<div class="flex flex-col items-center justify-center">
-		<iframe width="215" height="215" src="https://www.youtube.com/embed/6OVuyzr6rWE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-		<button class="mt-4 text-sm font-medium text-gray-600 border border-gray-600 rounded-md py-1 px-2 hover:text-gray-900 hover:border-gray-900">
-			<a href="https://youtu.be/6OVuyzr6rWE" target="_blank" rel="noopener">FULL</a>
-		</button>
+	<div class="chat-input bg-white p-2 rounded-b-md h-full">
+	  <input type="text" placeholder="กรุณากรอกรหัสสินค้า..." [(ngModel)]="inputMessage" (keyup.enter)="sendMessage()" class="w-full text-center border border-purple-500 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
 	</div>
-</div>
-
-
-	
+  </div>
+  

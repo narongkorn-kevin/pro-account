@@ -16,6 +16,7 @@ import { EmptyConversationComponent } from 'app/modules/admin/apps/chat/empty-co
 import { ConversationComponent } from 'app/modules/admin/apps/chat/conversation/conversation.component';
 import { NewChatComponent } from 'app/modules/admin/apps/chat/new-chat/new-chat.component';
 import { ProfileComponent } from 'app/modules/admin/apps/chat/profile/profile.component';
+import { FacebookLoginProvider, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 
 @NgModule({
     declarations: [
@@ -37,8 +38,26 @@ import { ProfileComponent } from 'app/modules/admin/apps/chat/profile/profile.co
         MatMenuModule,
         MatSidenavModule,
         SharedModule
-    ]
-})
+    ],
+    providers: [
+        {
+          provide: 'SocialAuthServiceConfig',
+          useValue: {
+            autoLogin: false,
+            providers: [
+  
+              {
+                id: FacebookLoginProvider.PROVIDER_ID,
+                provider: new FacebookLoginProvider('170313182614211')
+              }
+            ],
+            onError: (err) => {
+              console.error(err);
+            }
+          } as SocialAuthServiceConfig,
+        }
+      ],
+  })
 export class ChatModule
 {
 }

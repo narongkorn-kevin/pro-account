@@ -2,14 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-chat-live',
-  templateUrl: './chat-live.component.html',
-  styleUrls: ['./chat-live.component.scss']
+  templateUrl: 'chat-live.component.html'
 })
-export class ChatLiveComponent implements OnInit {
 
+export class NameComponent implements OnInit {
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit() { }
 }

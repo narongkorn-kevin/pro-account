@@ -47,10 +47,8 @@ import {
 import { LivemagComponent } from './livemag/livemag.component';
 import { LivePreComponent } from './live-pre/live-pre.component';
 import { LiveListComponent } from './live-list/live-list.component';
-import { ChatLiveComponent } from './chat-live/chat-live.component';
 import { FacebookModule } from 'ngx-facebook';
 import { LiveDialogeComponent } from './live-dialoge/live-dialoge.component';
-
 
 
 // import {
@@ -67,9 +65,7 @@ import { LiveDialogeComponent } from './live-dialoge/live-dialoge.component';
         LivemagComponent,
         LivePreComponent,
         LiveListComponent,
-        ChatLiveComponent,
         LiveDialogeComponent,
-
     ],
     imports: [
         RouterModule.forChild(PageRoute),
@@ -105,7 +101,9 @@ import { LiveDialogeComponent } from './live-dialoge/live-dialoge.component';
         NgxMatTimepickerModule.setLocale('en-GB'),
         DataTablesModule,
         SocialLoginModule,
-        FacebookModule
+        FacebookModule,
+        FacebookModule.forRoot()
+
     ],
     providers: [
       {

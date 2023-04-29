@@ -6,6 +6,7 @@ import { ConversationComponent } from 'app/modules/admin/apps/chat/conversation/
 import { EmptyConversationComponent } from 'app/modules/admin/apps/chat/empty-conversation/empty-conversation.component';
 
 export const chatRoutes: Route[] = [
+    
     {
         path     : '',
         component: ChatComponent,
@@ -14,6 +15,7 @@ export const chatRoutes: Route[] = [
             contacts: ChatContactsResolver,
             profile : ChatProfileResolver
         },
+        
         children : [
             {
                 path     : '',
@@ -30,6 +32,7 @@ export const chatRoutes: Route[] = [
                         resolve  : {
                             conversation: ChatChatResolver
                         }
+                        
                     },
   
                 ]

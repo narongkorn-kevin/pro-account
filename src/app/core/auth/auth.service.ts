@@ -16,6 +16,9 @@ const token = localStorage.getItem('accessToken') || null;
 
 @Injectable()
 export class AuthService {
+    setLoggedIn(arg0: boolean) {
+        throw new Error('Method not implemented.');
+    }
     private _authenticated: boolean = false;
     private _requireResetPassword: boolean = false;
     private _jwt: string = null;

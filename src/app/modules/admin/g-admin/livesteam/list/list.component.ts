@@ -24,7 +24,8 @@ import {
     FacebookLoginProvider,
     SocialUser,
   } from '@abacritt/angularx-social-login';
-  
+  import { DomSanitizer } from '@angular/platform-browser';
+
 
   
 
@@ -80,6 +81,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     ) {
     }
 
+    
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------
