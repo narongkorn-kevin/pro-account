@@ -6,14 +6,14 @@ import fetchJsonp from 'fetch-jsonp';
   providedIn: 'root'
 })
 export class LiveDialogeService {
-  private accessToken = 'EAACa5iDAEsMBACMJeQliMuGjPLKguwYdn0QaL3YZAebkgsk0P1lTVkveb7kaPx7mopLZCrNGMCTjIj4kIKlLrvYrnKC2BfZAnAMDVDW3KQmZAEquDwVdFlvfPt3r4Cz3X4TV2WBc2gdDZCtTNHS9ZAABnB7JEmWsIz8XHLqZCffgXQKj43706F6EVdoFVZCiCC69UnXGbiR9OgZDZD';
+  private accessToken = 'EAACa5iDAEsMBAF6WCUrGVZCeEr4ZAFqFJa3YmkVVLRjwZBZBFa4puysa3rFcnhToNd8wDhrxWTWfcLPjdZAPusA3RARqOIqXnZBo9yh0GY3cCjT9px6xMcJNnbGRJhLkwIOZCxhyfWe1cduBFs12BW44QARJfJPlkITZBFfqU5UFdyVnlm8kUvKbprZCdOK9oZB65NyQlgmoeDWsXkPZBov2WXu';
   private pageId = '116311434766128';
 
   constructor() {}
 
   getLiveStreamingVideos(): Promise<any> {
     const url = `https://graph.facebook.com/${this.pageId}/live_videos?fields=description,status,embed_html&access_token=${this.accessToken}`;
-
+    console.log(this.accessToken)
     return fetchJsonp(url)
       .then(response => response.json())
       .then(json => json.data)

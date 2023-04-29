@@ -13,7 +13,7 @@ export class LivePreComponent {
 
   constructor() {
     FB.init({
-      appId      : '<170313182614211>',
+      appId      : '<your-app-id>',
       cookie     : true,
       xfbml      : true,
       version    : 'v12.0'
@@ -26,7 +26,7 @@ export class LivePreComponent {
 
       // Get active live stream
       FB.api(
-        'https://streaming-graph.facebook.com/:live-video-id/live_comments?access_token={{access_token_page}}&comment_rate=one_per_two_seconds&fields=from{name,id},message',
+        'https://graph.facebook.com/:{page-id}/feed/?fields=can_reply_privately,from,message,comments{can_reply_privately,from,message}&access_token=EAACa5iDAEsMBAFFQ4inMiI26MMmEXheLEF6ERPIxLZAdgb1ODeKpkgRc9CJoenSUVetfseyYMEpGMTCbjSCfDTA38qKKQQ7JbP640RWKgWBEkvZBYprZBBhPTZBmwBNH7QMa1Li8J0UyIxtKB7gMDeOshqZA4ptcUA0vMbJa69uzNn3VU6cDNzZBz2zvxrYgZCunSRCsaWnna73yll71Sfi',
         'GET',
         { fields: 'status,description' },
         (response) => {
@@ -51,7 +51,7 @@ export class LivePreComponent {
 
   sendMessage() {
     FB.api(
-      '/<https://streaming-graph.facebook.com/:live-video-id/live_comments?access_token={{access_token_page}}&comment_rate=one_per_two_seconds&fields=from{name,id},message>/comments',
+      '/<live-stream-id>/comments',
       'POST',
       { message: this.message },
       (response) => {

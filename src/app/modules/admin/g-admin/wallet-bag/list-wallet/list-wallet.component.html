@@ -41,17 +41,29 @@
                 <div class="shadow-sm text-center font-bold text-2xl p-12 pt-6">
                     <span></span>
                     <span></span>
-                    <div class="bg-gray-100 rounded-full p-4">
-                        <p class="text-gray-700 font-medium mb-2">ยอดเงินคงเหลือ</p>
-                        <p class="text-3xl text-green-600 font-bold">1,000,000,000 บาท</p>
-                      </div>                      
-                </div>
-                <div class="flex flex-auto text-center justify-center items-center text-xl font-bold">
+                    <div class="flex flex-col bg-center text-center items-center justify-center">
+                        <div class="message-container flex space-x-4">
+                          <div class="message-box bg-green-500 text-white p-4 rounded-lg">
+                            <div class="title font-bold">ยอดเติมสำเร็จ</div>
+                            <div class="content">100 รายการ</div>
+                          </div>
+                          <div class="message-box bg-green-500 text-white p-4 rounded-lg">
+                            <div class="title font-bold">ยอดเติมเงินรวม</div>
+                            <div class="content">1,000,000,000 บาท</div>
+                          </div>
+                          <div class="message-box bg-red-500 text-white p-4 rounded-lg">
+                            <div class="title font-bold">รอยืนยัน</div>
+                            <div class="content">8,000 รายการ</div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                <div class="flex flex-auto text-center justify-center items-center text-xl font-bold pt-6">
                     <h1>ยืนยันสถานะการชำระเงิน</h1>
                 </div>
-                <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll">
+                <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll text-md">
                     <table datatable [dtOptions]="dtOptions"
-                        class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                        class="table row-border hover w-full text-md text-left text-gray-500 dark:text-gray-400"
                         style="width: 100%">
                         <thead>
                             <tr>

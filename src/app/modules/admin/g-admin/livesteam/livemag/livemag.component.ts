@@ -57,6 +57,8 @@ export class LivemagComponent implements OnInit {
     { id: '019', name: 'Sneaker', quantity: 8, imageUrl: '/images/ifrv492j.png' },
     { id: '020', name: 'Glasses', quantity: 12, imageUrl: '/images/ifrv492j.png' },
 ];
+
+
 @ViewChild(MatPaginator) private _paginator: MatPaginator;
 @ViewChild(MatSort) private _sort: MatSort;
 
@@ -119,40 +121,42 @@ constructor(
   }
 
   ngOnInit(): void {
-    this._Service.getTokenPage("this.socialUser.authToken",116311434766128).subscribe((resp: any) => {
-      this.listVideo = resp.data            
-      console.log('เพจไอดี',resp)
+   // this._Service.getTokenPage("this.socialUser.authToken",116311434766128).subscribe((resp: any) => {
+ //     this.listVideo = resp.data            
+ //     console.log('เพจไอดี',resp)
      // console.log('เรียกข้อมูล',this.pageData.data[0].embed_html)
      // this.vdo=this.pageData.data[0].embed_html
      // this._changeDetectorRef.markForCheck();
-      }) 
+    //  }) 
+      
 
 
     this.authService.authState.subscribe((user) => {
         this.socialUser = user;
         this.isLoggedin = user != null;
         console.log(user)
+        this._Service.getTokenUser(this.socialUser.authToken).subscribe((resp: any) => {
+          this.userData = resp
+          // this.formData.patchValue({
+          //     name: this.userData[0].name,
+          //     id: this.userData[0].id,
+          //     pic: this.userData[0].picture.data.url,
+          //     token_user: this.userData[0].access_token,
+          // }) 
+          console.log('ข้อมูลPage',this.userData)
+          this.pageid=this._activatedRoute.snapshot.paramMap.get("id")
+          this._Service.getTokenPage(this.socialUser.authToken,this.pageid).subscribe((resp: any) => {
+              this.listVideo = resp.data            
+              console.log('เพจไอดี',resp)
+             // console.log('เรียกข้อมูล',this.pageData.data[0].embed_html)
+             // this.vdo=this.pageData.data[0].embed_html
+             // this._changeDetectorRef.markForCheck();
+              }) 
+  
+             
+      })
       });
-    this._Service.getTokenUser(this.socialUser.authToken).subscribe((resp: any) => {
-        this.userData = resp
-        // this.formData.patchValue({
-        //     name: this.userData[0].name,
-        //     id: this.userData[0].id,
-        //     pic: this.userData[0].picture.data.url,
-        //     token_user: this.userData[0].access_token,
-        // }) 
-        console.log('ข้อมูลPage',this.userData)
-        this.pageid=this._activatedRoute.snapshot.paramMap.get("id")
-        this._Service.getTokenPage(this.socialUser.authToken,this.pageid).subscribe((resp: any) => {
-            this.listVideo = resp.data            
-            console.log('เพจไอดี',resp)
-           // console.log('เรียกข้อมูล',this.pageData.data[0].embed_html)
-           // this.vdo=this.pageData.data[0].embed_html
-           // this._changeDetectorRef.markForCheck();
-            }) 
 
-           
-    })
 
   
   

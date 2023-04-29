@@ -49,8 +49,8 @@ import { LivePreComponent } from './live-pre/live-pre.component';
 import { LiveListComponent } from './live-list/live-list.component';
 import { FacebookModule } from 'ngx-facebook';
 import { LiveDialogeComponent } from './live-dialoge/live-dialoge.component';
-
-
+import { ChatComponent } from './chat/chat.component'
+import { ChatModule } from './chat/chat.module'
 // import {
 //     FacebookLoginProvider,
 //     SocialLoginModule,
@@ -66,6 +66,7 @@ import { LiveDialogeComponent } from './live-dialoge/live-dialoge.component';
         LivePreComponent,
         LiveListComponent,
         LiveDialogeComponent,
+        ChatComponent
     ],
     imports: [
         RouterModule.forChild(PageRoute),
@@ -102,8 +103,8 @@ import { LiveDialogeComponent } from './live-dialoge/live-dialoge.component';
         DataTablesModule,
         SocialLoginModule,
         FacebookModule,
-        FacebookModule.forRoot()
-
+        FacebookModule.forRoot(),
+        ChatModule
     ],
     providers: [
       {
