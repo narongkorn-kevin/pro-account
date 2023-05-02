@@ -25,7 +25,13 @@ export const PageRoute: Route[] = [
             //   products: PermissionProductsResolver,
             // }
           },
-          
+          {
+            path: 'chat/:id',
+            component: ChatComponent,
+            // resolve: {
+            //   products: PermissionProductsResolver,
+            // }
+          },
         ],
       },
     ];

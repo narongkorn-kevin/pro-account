@@ -51,6 +51,9 @@ import { FacebookModule } from 'ngx-facebook';
 import { LiveDialogeComponent } from './live-dialoge/live-dialoge.component';
 import { ChatComponent } from './chat/chat.component'
 import { ChatModule } from './chat/chat.module'
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 // import {
 //     FacebookLoginProvider,
 //     SocialLoginModule,
@@ -104,7 +107,9 @@ import { ChatModule } from './chat/chat.module'
         SocialLoginModule,
         FacebookModule,
         FacebookModule.forRoot(),
-        ChatModule
+        ChatModule,
+        MatCardModule,
+        MatGridListModule
     ],
     providers: [
       {

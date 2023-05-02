@@ -6,7 +6,7 @@ import fetchJsonp from 'fetch-jsonp';
   providedIn: 'root'
 })
 export class LiveDialogeService {
-  private accessToken = 'EAACa5iDAEsMBAF6WCUrGVZCeEr4ZAFqFJa3YmkVVLRjwZBZBFa4puysa3rFcnhToNd8wDhrxWTWfcLPjdZAPusA3RARqOIqXnZBo9yh0GY3cCjT9px6xMcJNnbGRJhLkwIOZCxhyfWe1cduBFs12BW44QARJfJPlkITZBFfqU5UFdyVnlm8kUvKbprZCdOK9oZB65NyQlgmoeDWsXkPZBov2WXu';
+  private accessToken = 'EAACa5iDAEsMBAPB77iMblGOT5xCEwiRQWjD1ATTgOztDEYfvbFFZCdcUlchOLdhONhUFhyNzQXDV3328G2WGcl7l6rJKp8VRjy1dp78EhWHIGJ252Yu2ItlOXTz3fSfW3s1dRuiJ0XtAPIErpjWVyrjwxtcO7GvcS3KViNkyw1IZC9ATzpz3fwMV4XXkuVZA46AGJ8R2NcvAaqwuY0U';
   private pageId = '116311434766128';
 
   constructor() {}
@@ -15,16 +15,6 @@ export class LiveDialogeService {
     const url = `https://graph.facebook.com/${this.pageId}/live_videos?fields=description,status,embed_html&access_token=${this.accessToken}`;
     console.log(this.accessToken)
     return fetchJsonp(url)
-      .then(response => response.json())
-      .then(json => json.data)
-      .catch(error => console.error('Error:', error));
-  }
-
-  getComments(streamId: string): Promise<any> {
-    // Replace this URL with the appropriate API endpoint
-    const apiUrl = `https://graph.facebook.com/:{page-id}/feed/?fields=can_reply_privately,from,message,comments{can_reply_privately,from,message}&access_token=EAACa5iDAEsMBAFFQ4inMiI26MMmEXheLEF6ERPIxLZAdgb1ODeKpkgRc9CJoenSUVetfseyYMEpGMTCbjSCfDTA38qKKQQ7JbP640RWKgWBEkvZBYprZBBhPTZBmwBNH7QMa1Li8J0UyIxtKB7gMDeOshqZA4ptcUA0vMbJa69uzNn3VU6cDNzZBz2zvxrYgZCunSRCsaWnna73yll71Sfi`;
-
-    return fetchJsonp(apiUrl)
       .then(response => response.json())
       .then(json => json.data)
       .catch(error => console.error('Error:', error));

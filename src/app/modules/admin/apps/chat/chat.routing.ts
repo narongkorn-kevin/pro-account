@@ -4,9 +4,13 @@ import { ChatComponent } from 'app/modules/admin/apps/chat/chat.component';
 import { ChatsComponent } from 'app/modules/admin/apps/chat/chats/chats.component';
 import { ConversationComponent } from 'app/modules/admin/apps/chat/conversation/conversation.component';
 import { EmptyConversationComponent } from 'app/modules/admin/apps/chat/empty-conversation/empty-conversation.component';
+import { ListComponent } from '../../g-admin/livesteam/list/list.component';
 
 export const chatRoutes: Route[] = [
-    
+    {
+        path: 'livestream/list',
+        component: ListComponent,
+      },
     {
         path     : '',
         component: ChatComponent,

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LiveDialogeService } from './live-dialoge.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-live-dialoge',
@@ -19,8 +20,9 @@ export class LiveDialogeComponent implements OnInit {
     this.fbApi.getLiveStreamingVideos().then(data => {
       this.liveStreams = data.map(stream => ({
         ...stream,
-        embedHtmlSafe: this.sanitizer.bypassSecurityTrustHtml(stream.embed_html)
+        embedHtmlSafe: this.sanitizer.bypassSecurityTrustHtml(stream.embed_html) 
       }));
+      console.log("SING",this.liveStreams)
     });
-  }
+}
 }

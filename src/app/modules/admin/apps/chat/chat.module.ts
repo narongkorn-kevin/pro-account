@@ -27,6 +27,7 @@ import { FacebookLoginProvider, SocialAuthServiceConfig } from '@abacritt/angula
         EmptyConversationComponent,
         NewChatComponent,
         ProfileComponent
+        
     ],
     imports     : [
         RouterModule.forChild(chatRoutes),

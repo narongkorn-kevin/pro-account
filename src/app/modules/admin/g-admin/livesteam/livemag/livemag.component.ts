@@ -19,6 +19,8 @@ import {
   SocialUser,
 } from '@abacritt/angularx-social-login';
 import { DomSanitizer } from '@angular/platform-browser';
+import { LiveDialogeService } from '../live-dialoge/live-dialoge.service';
+
 
 interface product {
 id: number;
@@ -91,28 +93,29 @@ pageData: any;
 
 supplierId: string | null;
 pagination: BranchPagination;
+  liveStreams: any;
+stream: any;
 
 constructor(
+  private fbApi: LiveDialogeService,
   private sanitizer: DomSanitizer,
   private _changeDetectorRef: ChangeDetectorRef,
   private _fuseConfirmationService: FuseConfirmationService,
   private _formBuilder: FormBuilder,
   private _Service: PageService,
-
   private _router: Router,
   private _activatedRoute: ActivatedRoute,
   private _authService: AuthService,
-  private authService: SocialAuthService, 
+  private authService: SocialAuthService
 ) {
-
   this.formData = this._formBuilder.group({
-      pic: '',
-      name: '',
-      id: '',
-      token_user:'',
-  })
-
+    pic: '',
+    name: '',
+    id: '',
+    token_user: '',
+  });
 }
+
 
 
 
@@ -121,13 +124,12 @@ constructor(
   }
 
   ngOnInit(): void {
-   // this._Service.getTokenPage("this.socialUser.authToken",116311434766128).subscribe((resp: any) => {
- //     this.listVideo = resp.data            
- //     console.log('เพจไอดี',resp)
-     // console.log('เรียกข้อมูล',this.pageData.data[0].embed_html)
-     // this.vdo=this.pageData.data[0].embed_html
-     // this._changeDetectorRef.markForCheck();
-    //  }) 
+    this.fbApi.getLiveStreamingVideos().then(data => {
+      this.liveStreams = data.map(stream => ({
+        ...stream,
+        embedHtmlSafe: this.sanitizer.bypassSecurityTrustHtml(stream.embed_html)
+      }));
+    });
       
 
 

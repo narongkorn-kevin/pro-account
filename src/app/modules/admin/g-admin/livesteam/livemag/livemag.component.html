@@ -56,8 +56,6 @@
            </label>
       </td>
     </tr>
-
-
   </table>
 </div>
 
@@ -69,5 +67,22 @@
 <div class="grid grid-cols-3 mr-10 mb-60 gap-4 pt-2">
 </div>-->
 
-<app-live-dialoge></app-live-dialoge>
-<app-chat></app-chat>
+<!--<app-live-dialoge></app-live-dialoge>-->
+<!--<app-chat></app-chat>-->
+
+<div class="flex flex-row" *ngFor="let stream of liveStreams">
+  <div class="basis-1/4">
+    <mat-card class="card h-100">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{ stream.description }}</mat-card-title>
+      </mat-card-header>
+        <mdc-card__media--square	o class="card-video" [innerHTML]="stream.embedHtmlSafe" controls>
+        </mdc-card__media--square	>
+      <mat-card-actions>
+        <button mat-button class="flex flex-auto">Click</button>
+        <button mat-button class="flex flex-auto">Manage</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

@@ -31,6 +31,7 @@
         "@fullcalendar/daygrid": "^6.0.0-beta.1",
         "@fullcalendar/interaction": "^6.0.0-beta.1",
         "@fullcalendar/web-component": "^6.0.0-beta.1",
+        "@material/card": "^14.0.0",
         "@ngneat/transloco": "4.1.1",
         "@types/facebook-js-sdk": "^3.3.6",
         "@types/fetch-jsonp": "^1.1.0",
