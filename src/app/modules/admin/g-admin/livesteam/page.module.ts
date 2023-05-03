@@ -53,6 +53,7 @@ import { ChatComponent } from './chat/chat.component'
 import { ChatModule } from './chat/chat.module'
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { ProductControlComponent } from './product-control/product-control.component';
 
 // import {
 //     FacebookLoginProvider,
@@ -69,7 +70,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
         LivePreComponent,
         LiveListComponent,
         LiveDialogeComponent,
-        ChatComponent
+        ChatComponent,
+        ProductControlComponent
     ],
     imports: [
         RouterModule.forChild(PageRoute),

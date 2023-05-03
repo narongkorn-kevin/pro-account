@@ -19,8 +19,6 @@ import { DataTableDirective } from 'angular-datatables';
 import { NewWalletComponent } from '../new-wallet/new-wallet.component';
 import { EditWalletComponent } from '../edit-wallet/edit-wallet.component';
 import { TopupHistoryComponent } from '../topup-history/topup-history.component';
-import { HttpClient } from '@angular/common/http';
-import { RefundComponent } from '../refund/refund.component';
 
 
 interface Detail {
@@ -45,7 +43,6 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
     dtElement!: DataTableDirective;
     public dtOptions: DataTables.Settings = {};
     public dataRow: any[];
-    imageData: any;
 
     details: Detail [] = [
         { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'สำเร็จ' },
@@ -99,7 +96,6 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
         private _router: Router,
         private _activatedRoute: ActivatedRoute,
         private _authService: AuthService,
-        private http: HttpClient
     ) {
     }
 
@@ -110,9 +106,7 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
     ngAfterViewInit(): void {
-        this.http.get('assets/delivery.json').subscribe(data => {
-            this.imageData = data;
-        })
+   
     }
 
 
@@ -260,21 +254,6 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
             width: '900px',
             height: '750px'
         });
-
-        
-
-        dialogRef.afterClosed().subscribe(item => {
-            this.rerender();
-            this._changeDetectorRef.markForCheck();
-        });
-    }
-    Refund() {
-        const dialogRef = this._matDialog.open(RefundComponent, {
-            width: '900px',
-            height: '750px'
-        });
-
-        
 
         dialogRef.afterClosed().subscribe(item => {
             this.rerender();

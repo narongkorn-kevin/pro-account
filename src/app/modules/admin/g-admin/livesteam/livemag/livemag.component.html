@@ -28,7 +28,39 @@
             <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
         </div>
         <!-- Title -->
-<div class="flex-col shadow-slate-500 shadow-lg  text-lg mr-auto p-1  pl-8 items-center justify-between text-center">
+
+
+
+<!--<h1 class="flex text-center mx-auto ml-12 pt-10 font-extrabold text-3xl">LIVE STREAMING</h1>
+<div *ngFor="let video of listVideo">
+<div  [innerHTML]="video.embed_html | noSanitize">
+<pre>{{listVideo | json}}</pre>
+<div class="flex mt-5 mb-12 ml-5 mr-60 p-14">
+<div class="grid grid-cols-3 mr-10 mb-60 gap-4 pt-2">
+</div>-->
+
+<!--<app-live-dialoge></app-live-dialoge>-->
+<!--<app-chat></app-chat>-->
+
+<div class="flex flex-row" *ngFor="let stream of liveStreams">
+  <div class="basis-1/4">
+    <mat-card class="card h-100">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{ stream.description }}</mat-card-title>
+      </mat-card-header>
+        <mdc-card__media--square	o class="card-video" [innerHTML]="stream.embedHtmlSafe" controls>
+        </mdc-card__media--square	>
+      <mat-card-actions>
+        <button mat-button class="flex flex-auto">Click</button>
+        <button mat-button class="flex flex-auto">Manage</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+
+<div class="flex-col shadow-slate-500 shadow-lg  text-lg mr-auto p-1  pl-8 items-center justify-between text-center ">
   <h1 class="p-1 mt-4 mb-6 font-bold text-xl mr-4 shadow-slate-500 rounded-full text-black">รายการสินค้า</h1>
   <table class=" shadow-slate-300 rounded-xl pr-4 mr-2">
     <tr>
@@ -57,32 +89,4 @@
       </td>
     </tr>
   </table>
-</div>
-
-<!--<h1 class="flex text-center mx-auto ml-12 pt-10 font-extrabold text-3xl">LIVE STREAMING</h1>
-<div *ngFor="let video of listVideo">
-<div  [innerHTML]="video.embed_html | noSanitize">
-<pre>{{listVideo | json}}</pre>
-<div class="flex mt-5 mb-12 ml-5 mr-60 p-14">
-<div class="grid grid-cols-3 mr-10 mb-60 gap-4 pt-2">
-</div>-->
-
-<!--<app-live-dialoge></app-live-dialoge>-->
-<!--<app-chat></app-chat>-->
-
-<div class="flex flex-row" *ngFor="let stream of liveStreams">
-  <div class="basis-1/4">
-    <mat-card class="card h-100">
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{ stream.description }}</mat-card-title>
-      </mat-card-header>
-        <mdc-card__media--square	o class="card-video" [innerHTML]="stream.embedHtmlSafe" controls>
-        </mdc-card__media--square	>
-      <mat-card-actions>
-        <button mat-button class="flex flex-auto">Click</button>
-        <button mat-button class="flex flex-auto">Manage</button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
 </div>

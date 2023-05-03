@@ -20,6 +20,7 @@ import { CalendarComponent } from './modules/admin/g-admin/calendar/calendar.com
 import { SalePageComponent } from './modules/admin/g-admin/sale-page/sale-page.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import {MatCardModule} from '@angular/material/card';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,
@@ -55,8 +56,8 @@ const routerConfig: ExtraOptions = {
         // 3rd party modules that require global configuration via forRoot
         MarkdownModule.forRoot({}),
         MatStepperModule,
-        MatCardModule
- 
+        MatCardModule,
+        ReactiveFormsModule
 
     ],
 

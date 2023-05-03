@@ -1,0 +1,50 @@
+<div class="p-6">
+    <form [formGroup]="refundRequestForm" (ngSubmit)="onSubmit()" class="bg-white rounded-lg p-8 shadow-md">
+      <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">แบบฟอร์มขอเงินคืน</h2>
+      
+      <div class="mb-4">
+        <label for="fullName" class="text-gray-800 font-medium block mb-2">ชื่อจริง-นามสกุล:</label>
+        <input id="fullName" type="text" formControlName="fullName" class="w-full border border-gray-300 p-2 rounded-lg">
+      </div>
+    
+      <div class="mb-4">
+        <label for="email" class="text-gray-800 font-medium block mb-2">อีเมล:</label>
+        <input id="email" type="email" formControlName="email" class="w-full border border-gray-300 p-2 rounded-lg ">
+      </div>
+    
+      <div class="mb-4">
+        <label for="dateTime" class="text-gray-800 font-medium block mb-2">วันที่/เวลา:</label>
+        <input id="dateTime" type="datetime-local" formControlName="dateTime" class="w-full border border-gray-300 p-2 rounded-lg">
+      </div>
+    
+      <div class="mb-4">
+        <label for="reason" class="text-gray-800 font-medium block mb-2">เหตุผลในการขอเงินคืน:</label>
+        <textarea id="reason" formControlName="reason" class="w-full border border-gray-300 p-2 rounded-lg"></textarea>
+      </div>
+    
+      <div class="mb-4">
+        <label for="uploadProof" class="text-gray-800 font-medium block mb-2">อัพโหลดหลักฐาน:</label>
+        <input id="uploadProof" type="file" (change)="onFileSelected($event)" class="border border-gray-300 p-2 rounded-lg">
+      </div>
+    
+      <div class="mb-4">
+        <label for="transactionDateTime" class="text-gray-800 font-medium block mb-2">วันที่/เวลาในการทำรายการ:</label>
+        <input id="transactionDateTime" type="datetime-local" formControlName="transactionDateTime" class="w-full border border-gray-300 p-2 rounded-lg">
+      </div>
+    
+      <div class="mb-4">
+        <label for="amount" class="text-gray-800 font-medium block mb-2">จำนวน (บาท):</label>
+        <input id="amount" type="number" formControlName="amount" class="w-full border border-gray-300 p-2 rounded-lg">
+      </div>
+    
+      <div class="mb-4">
+        <input id="terms" type="checkbox" formControlName="terms" class="mr-2">
+        <label for="terms" class="text-gray-800 font-medium">ฉันยอมรับเงื่อนไขข้อกำหนดของบริษัท</label>
+      </div>
+    
+      <button type="submit" [disabled]="!refundRequestForm.valid" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">ยืนยันข้อมูล</button>
+      <button type="button" (click)="onClear()" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-600 ml-4">ล้างข้อมูล</button>
+
+</form>
+  </div>
+  

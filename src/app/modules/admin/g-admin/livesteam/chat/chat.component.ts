@@ -18,9 +18,9 @@ throw new Error('Method not implemented.');
 
     ngOnInit(): void {
 
-        const token = "EAACa5iDAEsMBAPB77iMblGOT5xCEwiRQWjD1ATTgOztDEYfvbFFZCdcUlchOLdhONhUFhyNzQXDV3328G2WGcl7l6rJKp8VRjy1dp78EhWHIGJ252Yu2ItlOXTz3fSfW3s1dRuiJ0XtAPIErpjWVyrjwxtcO7GvcS3KViNkyw1IZC9ATzpz3fwMV4XXkuVZA46AGJ8R2NcvAaqwuY0U";
+        const token = "EAACa5iDAEsMBAI4xZA9eF0uuBZAKoI6rHiU5N4TtPRZCjasThzXyjsIZCysgYbfZAc348YKbTmdHfDbqGlM1MBsN1XttlxRrFqdxklGafRBNAUTLNKzsXXKwpnCdlEIFEOw7HnYEkZBOI83E07HnfDimcZCcLiIK0cDI500zZARRrzDrNhzbhoOaM0Si5f6MgNAMtlgoXB90n39QuLUsHlpG";
 
-        const lideo_id = "115747071506925";
+        const lideo_id = "115956238152675";
 
         this.chatService.getServerSentEvent(`https://streaming-graph.facebook.com/${lideo_id}/live_comments?access_token=${token}&comment_rate=one_per_two_seconds&fields=from{name,id},message`).subscribe(res => {
             console.log(JSON.parse(res.data));

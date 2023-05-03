@@ -46,10 +46,10 @@ import { MockHowtoComponent } from './mock-howto/mock-howto.component';
 import { MatTopupComponent } from './mat-topup/mat-topup.component';
 import { TypemoneyComponent } from './typemoney/typemoney.component';
 import { MatStepperModule } from '@angular/material/stepper';
+import { DatePickerComponent } from './date-picker/date-picker.component';
 import { TimepickerComponent } from './timepicker/timepicker.component';
 import { TypemoneybankComponent } from './typemoneybank/typemoneybank.component';
 import { TopupHistoryComponent } from './topup-history/topup-history.component';
-import { RefundComponent } from './refund/refund.component';
 
 @NgModule({
   declarations: [
@@ -60,10 +60,10 @@ import { RefundComponent } from './refund/refund.component';
     MockHowtoComponent,
     MatTopupComponent,
     TypemoneyComponent,
+    DatePickerComponent,
     TimepickerComponent,
     TypemoneybankComponent,
-    TopupHistoryComponent,
-    RefundComponent
+    TopupHistoryComponent
   ],
   imports: [
     RouterModule.forChild(bankRoute),
