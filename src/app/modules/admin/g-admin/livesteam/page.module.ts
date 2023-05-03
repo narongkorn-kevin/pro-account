@@ -45,7 +45,6 @@ import {
   FacebookLoginProvider
 } from '@abacritt/angularx-social-login';
 import { LivemagComponent } from './livemag/livemag.component';
-import { LivePreComponent } from './live-pre/live-pre.component';
 import { LiveListComponent } from './live-list/live-list.component';
 import { FacebookModule } from 'ngx-facebook';
 import { LiveDialogeComponent } from './live-dialoge/live-dialoge.component';
@@ -67,7 +66,6 @@ import { ProductControlComponent } from './product-control/product-control.compo
         ListComponent,
         EditComponent,
         LivemagComponent,
-        LivePreComponent,
         LiveListComponent,
         LiveDialogeComponent,
         ChatComponent,

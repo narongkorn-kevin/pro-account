@@ -20,6 +20,8 @@ import {
 } from '@abacritt/angularx-social-login';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LiveDialogeService } from '../live-dialoge/live-dialoge.service';
+import { ItemService } from './item.service';
+
 
 
 interface product {
@@ -38,26 +40,7 @@ quantity: number;
 })
 export class LivemagComponent implements OnInit {
   products = [
-    { id: '001', name: 'Monitor', quantity: 10, image: '.' },
-    { id: '002', name: 'Bag', quantity: 5, imageUrl: 'assets/images/ifrv492j.png' },
-    { id: '003', name: 'Dove', quantity: 3, imageUrl: '/images/ifrv492j.png' },
-    { id: '004', name: 'Dior', quantity: 8, imageUrl: '/images/ifrv492j.png' },
-    { id: '005', name: 'Givenchy', quantity: 12, imageUrl: '/images/ifrv492j.png' },
-    { id: '006', name: 'Chanel', quantity: 10, imageUrl: '/images/ifrv492j.png' },
-    { id: '007', name: 'Gucci', quantity: 5, imageUrl: '/images/ifrv492j.png' },
-    { id: '008', name: 'Cartier', quantity: 3, imageUrl: '/images/ifrv492j.png' },
-    { id: '009', name: 'Tiger', quantity: 8, imageUrl: '/images/ifrv492j.png' },
-    { id: '010', name: 'Hermes', quantity: 12, imageUrl: '/images/ifrv492j.png' },
-    { id: '011', name: 'Prada', quantity: 10, imageUrl: '/images/ifrv492j.png' },
-    { id: '012', name: 'Boss', quantity: 5, imageUrl: '/images/ifrv492j.png' },
-    { id: '013', name: 'MAC', quantity: 3, imageUrl: '/images/ifrv492j.png' },
-    { id: '014', name: 'Ipad 8', quantity: 8, imageUrl: '/images/ifrv492j.png' },
-    { id: '015', name: 'IP14', quantity: 12, imageUrl: '/images/ifrv492j.png' },
-    { id: '016', name: 'S23 Plus', quantity: 10, imageUrl: '/images/ifrv492j.png' },
-    { id: '017', name: 'Camera', quantity: 5, imageUrl: '/images/ifrv492j.png' },
-    { id: '018', name: 'Laptop', quantity: 3, imageUrl: '/images/ifrv492j.png' },
-    { id: '019', name: 'Sneaker', quantity: 8, imageUrl: '/images/ifrv492j.png' },
-    { id: '020', name: 'Glasses', quantity: 12, imageUrl: '/images/ifrv492j.png' },
+    
 ];
 
 
@@ -106,7 +89,8 @@ constructor(
   private _router: Router,
   private _activatedRoute: ActivatedRoute,
   private _authService: AuthService,
-  private authService: SocialAuthService
+  private authService: SocialAuthService,
+  private ItemServive:ItemService 
 ) {
   this.formData = this._formBuilder.group({
     pic: '',
@@ -125,12 +109,21 @@ constructor(
 
   ngOnInit(): void {
     this.fbApi.getLiveStreamingVideos().then(data => {
+     this.stream = data.find(e => e.status == "LIVE")
+     console.log(this.stream)
       this.liveStreams = data.map(stream => ({
         ...stream,
         embedHtmlSafe: this.sanitizer.bypassSecurityTrustHtml(stream.embed_html)
       }));
     });
       
+   this.ItemServive.getItemPage().subscribe(
+    (resp:any) => {this.products = resp.data.data
+      console.log(resp)
+    }
+   )
+
+
 
 
     this.authService.authState.subscribe((user) => {
