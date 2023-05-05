@@ -18,6 +18,7 @@ import { LocationService } from '../../location/location.service';
 import { VendorService } from '../../vendor/vendor.service';
 // import { ImportOSMComponent } from '../card/import-osm/import-osm.component';
 import Chart from 'chart.js/auto'
+import { WithdrawComponent } from '../withdraw/withdraw.component';
 @Component({
     selector: 'profile-firstpage',
     templateUrl: './profile-firstpage.component.html',
@@ -26,6 +27,7 @@ import Chart from 'chart.js/auto'
 })
 
 export class ProfileFirstpageComponent implements OnInit, AfterViewInit, OnDestroy {
+[x: string]: any;
     @ViewChild(MatPaginator) private _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
     @ViewChild('doughnutCanvas') doughnutCanvas: ElementRef | undefined;
@@ -99,10 +101,53 @@ export class ProfileFirstpageComponent implements OnInit, AfterViewInit, OnDestr
 
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
+    pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
+    loadTable(): void {
+        const that = this;
+        this.dtOptions = {
+            pagingType: 'full_numbers',
+            pageLength: 10,
+            serverSide: true,
+            processing: true,
+            language: {
+                "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
+            },
+            ajax: (dataTablesParameters: any, callback) => {
 
+                that._Service.getbankPage(dataTablesParameters).subscribe((resp) => {
+                    this.dataRow = resp.data
+                    console.log(resp)
+                    this.pages.current_page = resp.current_page;
+                    this.pages.last_page = resp.last_page;
+                    this.pages.per_page = resp.per_page;
+                    if (resp.current_page > 1) {
+                        this.pages.begin = resp.per_page * resp.current_page - 1;
+                    } else {
+                        this.pages.begin = 0;
+                    }
+                    callback({
+                        recordsTotal: resp.total,
+                        recordsFiltered: resp.total,
+                        data: []
+                    });
+                    this._changeDetectorRef.markForCheck();
+                })
+            },
+            columns: [
+                { data: 'actice', orderable: false },
+                { data: 'id' },
+                { data: 'image' },
+                { data: 'account_number' },
+                { data: 'first_name' },
+                { data: 'last_name' },
+                { data: 'status' },
+                { data: 'create_by' },
+                { data: 'created_at' },
+
+            ]
+        };
+
+    }
     /**
      * On init
      */
@@ -111,6 +156,8 @@ export class ProfileFirstpageComponent implements OnInit, AfterViewInit, OnDestr
             image: '',
             path: 'images/item/'
         })
+
+        this.loadTable();
 
         const itemtype = await lastValueFrom(this._ServiceItemtemType.getItemType())
         this.itemtypeData = itemtype.data;
@@ -258,6 +305,17 @@ export class ProfileFirstpageComponent implements OnInit, AfterViewInit, OnDestr
         });
     }
 
+    Withdraw() {
+        const dialogRef = this._matDialog.open(WithdrawComponent, {
+            width: '900px',
+            height: '750px'
+        });
+
+        dialogRef.afterClosed().subscribe(item => {
+            this.rerender();
+            this._changeDetectorRef.markForCheck();
+        });
+    }
 
     ngAfterViewInit(): void {
         this.barChartMethod();
@@ -267,7 +325,7 @@ export class ProfileFirstpageComponent implements OnInit, AfterViewInit, OnDestr
     /**
      * After view init
      */
- 
+
     /**
      * On destroy
      */
@@ -298,11 +356,14 @@ export class ProfileFirstpageComponent implements OnInit, AfterViewInit, OnDestr
                     "label": "ยกเลิก"
                 }
 
-                
-                
+
+
             },
             "dismissible": true
         });
+
+
+
 
         confirmation.afterClosed().subscribe((result) => {
 

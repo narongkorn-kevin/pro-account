@@ -1,36 +1,108 @@
+
 <body class="flex bg-gray-00 min-h-screen">
 
     <div class="flex-grow text-gray-800">
 
         <main class="p-6 sm:p-10 space-y-6">
+            <button class="bg-green-500 rounded-md">
+            <a (click)="Withdraw()" class="flex items-center px-4 py-2 text-lg text-white rounded">
+                <span class="material-symbols-outlined"> payments
+                </span>
+                <span class="ml-2 mr-1 cursor-pointer hover:text-blue-600">ถอนเงิน</span>
+            </a></button>
+<!-- Main -->
+<div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
 
-            <!-- <a href="user/profile-firstpage" class="ml-4" mat-flat-button [color]="'primary'">
-                <mat-icon svgIcon="heroicons_solid:menu"></mat-icon>
-                <mat-icon style="color: white!important;"></mat-icon>
-                ภาพรวมการทำงาน
-            </a> -->
-<!-- 
-            <a href="user/profile1" class="ml-4" mat-flat-button [color]="'primary'">
-                <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
-                <span class="ml-2 mr-1">ตั้งค่ารายละเอียด</span>
-            </a> -->
+    <div class="flex flex-col p-3 sm:p-10">
+        <div class="overflow-auto  bg-white shadow sm:rounded-lg">
+            <!-- Products list -->
+
+            <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll">
+                <table datatable [dtOptions]="dtOptions"
+                    class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                    style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>จัดการ</th>
+                            <th>ลำดับ</th>
+                            <th>รูปภาพ</th>
+                            <th>ชื่อธนาคาร</th>
+                            <th>หมายเลขบัญชี</th>
+                            <th>ชื่อบัญชี</th>
+                            <th>นามสกุล</th>
+                            <th>สถานะ</th>
+                            <th>สร้างโดย</th>
+                            <th>วันที่สร้าง</th>
+
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="dataRow?.length != 0">
+                        <tr *ngFor="let item of dataRow; let i = index"
+                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md py-15">
+                            <td style="min-width: 80px;">
+                                <button mat-icon-button (click)="Edit(item.id)" title="แก้ไขข้อมูล">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                                <button mat-icon-button (click)="Delete(item.id)" title="ลบข้อมูล">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </td>
+                            <td style="width: 5%; min-width: 80px;">{{ pages.begin + (i + 1) }}</td>
+                            <td style="min-width: 80px;" *ngIf="item.image === null || ''"> </td>
+                            <td style="min-width: 80px;" *ngIf="item.image !== null || ''"><img src="{{item.image}}"
+                                    class="h-10 w-10"> </td>
+                            <td style="min-width: 100px;">{{ item.name }}</td>
+                            <td style="min-width: 120px;">{{ item.account_number }}</td>
+                            <td style="min-width: 120px;">{{ item.first_name }}</td>
+                            <td style="min-width: 120px;">{{ item.last_name }}</td>
+                            <td style="min-width: 120px;">
+                                <div *ngIf="item.status == 1">
+                                    <!-- เปิดการใช้งาน -->
+                                    <span
+                                        class="bg-green-100 text-green-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">เปิดการใช้งาน</span>
+                                </div>
+                                <div *ngIf="item.status == 0">
+                                    <!-- ปิดการใช้งาน -->
+                                    <span
+                                        class="bg-red-100 text-red-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ปิดการใช้งาน</span>
+                                </div>
+                            </td>
+                            <td style="min-width: 150px;">{{ item.user_create ? item.user_create.first_name : 'No data' }} {{ item.user_create ?
+                                item.user_create.last_name: '' }}
+                            </td>
+                            <!-- <td>{{ item.created_at | thaiDate }}</td> -->
+                            <td style="min-width: 120px;">{{ item.created_at  }}</td>
+                        </tr>
+                    </tbody>
+                    <!-- <tbody *ngIf="dataRow?.length == 0">
+                    <tr>
+                        <td colspan="7" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                    </tr>
+                </tbody> -->
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
 
             <div class="flex flex-col md:col-span-2 md:row-span-2 w-full">
                 <div class="flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg mb-6 ">
                     <div class="px-6 py-5 font-semibold border-b border-gray-100">ยอดจำนวนสินค้าขายแต่ละเดือน</div>
-                        <div class="flex items-center justify-center h-full px-4 py-16 text-gray-400 
+                        <div class="flex items-center justify-center h-full px-4 py-16 text-gray-400
                         text-3xl font-semibold border-2 border-gray-200 border-dashed rounded-md">
                             <canvas #lineCanvas style="height:14vh; width:20vw"></canvas>
                             <hr color="red">
                         </div>
                 </div>
 
-                
+
                 <div class="flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg  ">
                     <div class="px-6 py-5 font-semibold border-b border-gray-100">ยอดขายรวมแต่ละเดือน</div>
-                        <div class="flex items-center justify-center h-full px-4 py-16 
+                        <div class="flex items-center justify-center h-full px-4 py-16
                         text-gray-400 text-3xl font-semibold  border-2 border-gray-200 border-dashed rounded-md">
                              <canvas #barCanvas style="height:14vh; width:20vw"></canvas>
                             <hr color="red">
@@ -41,32 +113,32 @@
 
 
             <section class="grid md:grid-cols-1 xl:grid-cols-2 xl:grid-rows-3 xl:grid-flow-col gap-6">
-                <!-- <div class="flex flex-col md:col-span-2 md:row-span-2 ">     
+                <!-- <div class="flex flex-col md:col-span-2 md:row-span-2 ">
 
 
-                <div class="flex"> 
+                <div class="flex">
 
                     <div class="flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg mb-6">
 
-    
+
                         <div class="p-4 flex-grow">
                             <tr>
                                 <th class="py-3 px-6">
                                     ยอดขายเพิ่มเติม
                                 </th>
                                 <th class="py-3 px-6">
-                                    
+
                                 </th>
                                 <th class="py-3 px-6">
                                     วัน/เดือน
                                 </th>
                             </tr>
-                            <tr>         
+                            <tr>
                                 <th class="py-3 px-6">
                                     วันที่
                                 </th>
                                 <th class="py-3 px-6">
-                                    จำนวน(ชิ้น)  
+                                    จำนวน(ชิ้น)
                                 </th>
                                 <th class="py-3 px-6">
                                     ยอดขาย
@@ -101,7 +173,7 @@
                     <div class="flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg">
                         <div class="px-6 py-5 font-semibold ">ยอดหักเงินทั้งหมด</div>
                         <div class="px-6 py-5 font-semibold ">วัน</div>
-                        <div class="px-6 py-5 font-semibold ">เดือน</div>                        
+                        <div class="px-6 py-5 font-semibold ">เดือน</div>
                         <div class="p-4 flex-grow">
                             <tr>
                                 <th class="py-3 px-6">
@@ -150,40 +222,40 @@
                         </div>
                     </div>
                 </div> -->
-             
-              
+
+
                 <div class="row-span-2 bg-white shadow rounded-lg">
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
                         <span> ยอดขายแม่ค้ารวม</span>
-                     
+
                         <!-- Refer here for full dropdown menu code: https://tailwindui.com/components/application-ui/elements/dropdowns -->
                     </div>
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
                         <span> วันที่</span>
-                    
-                        <span> ยอดขายรวม</span>                        
+
+                        <span> ยอดขายรวม</span>
                     </div>
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
                         <span> 1/5/66</span>
-                     
-                        <span> 200,000</span>                        
-                    </div>                 
+
+                        <span> 200,000</span>
+                    </div>
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
                         <span> 2/5/66</span>
-                        <span> 150,000</span>                        
-                    </div>    
+                        <span> 150,000</span>
+                    </div>
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
                         <span> 3/5/66</span>
-                        <span> 110,000</span>                        
-                    </div>   
+                        <span> 110,000</span>
+                    </div>
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
                         <span> 4/5/66</span>
-                        <span> 15,000</span>                        
-                    </div>   
+                        <span> 15,000</span>
+                    </div>
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
                         <span> 5/5/66</span>
-                        <span> 201,000</span>                        
-                    </div>   
+                        <span> 201,000</span>
+                    </div>
                 </div>
 
                 <!-- <div class="row-span-2 bg-white shadow rounded-lg">
@@ -193,20 +265,20 @@
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100 ">
                         <span> วันที่</span>
                         <span> จำนวนสินค้า</span>
-                        <span> ราคา(บาท)</span>                        
+                        <span> ราคา(บาท)</span>
                     </div>
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100 ">
                         <span> 1/1/65</span>
                         <span> 2</span>
-                        <span> 200</span>                        
-                    </div>                 
+                        <span> 200</span>
+                    </div>
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100 ">
                         <span> 2/1/65</span>
                         <span> 1</span>
-                        <span> 150</span>                        
-                    </div>    
+                        <span> 150</span>
+                    </div>
                 </div> -->
-                
+
                 <div class="row-span-2 bg-white shadow rounded-lg">
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
                         <span> แม่ค้า </span>
@@ -283,7 +355,7 @@
                 </div>
 
 
-                
+
                 <div class="row-span-2 bg-white shadow rounded-lg">
                     <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
                         <span> สินค้าที่ขายดี</span>
@@ -298,7 +370,7 @@
                                     <img src="assets/images/product/a1.jpg" alt="Annette Watson profile picture">
                                 </div>
                                 <span class="text-gray-600">กันแดด Luxary</span>
-                                
+
                                 <span
                                     class="ml-auto bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">99
                                     ชิ้น</span>

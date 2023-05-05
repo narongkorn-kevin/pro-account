@@ -1,1 +1,36 @@
-<p>timepicker works!</p>
+<section>
+    <div class="flex flex-auto text-center justify-center items-center text-xl font-bold pt-6">
+      <span class="material-symbols-outlined">
+        pending_actions
+      </span>
+      <h1 class="pl-4">รอจ่าย COD</h1>
+    </div>
+  
+    <div class="flex flex-col p-5 sm:overflow-auto overflow-x-scroll">
+      <table datatable [dtOptions]="dtOptions" class="table-auto w-full text-gray-800">
+        <thead>
+          <tr class="bg-gray-300 text-gray-600 uppercase text-sm leading-normal">
+            <th class="py-3 px-4 text-left">ลำดับ</th>
+            <th class="py-3 px-4 text-left">วันที่และเวลา</th>
+            <th class="py-3 px-4 text-left">รายการชำระ</th>
+            <th class="py-3 px-4 text-right">ยอดสุทธิ ( บาท )</th>
+            <th class="py-3 px-4 text-right">วันครบกำหนดชำระ</th>
+            <th class="py-3 px-4 text-center">สถานะ</th>
+          </tr>
+        </thead>
+        <tbody class="text-sm font-normal">
+          <tr *ngFor="let detail of details" class="hover:bg-gray-100">
+            <td class="py-3 px-4">{{detail.id}}</td>
+            <td class="py-3 px-4">{{detail.date}}</td>
+            <td class="py-3 px-4">{{detail.name_list}}</td>
+            <td class="py-3 px-4 text-right">{{detail.amount_m}}</td>
+            <td class="py-3 px-4 text-right">{{detail.date_line}}</td>
+            <td class="py-3 px-4 text-center">
+                <span class="px-2 py-1 rounded-md" [ngClass]="{'bg-green-500 text-white': detail.status_s === 'สำเร็จ', 'bg-yellow-500 text-white': detail.status_s === 'รอดำเนินการ', 'bg-red-500 text-white': detail.status_s === 'ไม่สำเร็จ'}">{{detail.status_s}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  

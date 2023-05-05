@@ -56,6 +56,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NewLeaveComponent } from './leave/new.component';
 import { DialogChangePwdComponent } from './dialog-change-pwd/dialog-change-pwd.component';
+import { WithdrawComponent } from './withdraw/withdraw.component';
 
 @NgModule({
     declarations: [
@@ -76,7 +77,8 @@ import { DialogChangePwdComponent } from './dialog-change-pwd/dialog-change-pwd.
         Profile3Component,
         ProfileUseradminComponent,
         OtListComponent,
-        SalaryListComponent
+        SalaryListComponent,
+        WithdrawComponent
 
 
 

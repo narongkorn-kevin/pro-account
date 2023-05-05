@@ -24,7 +24,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         icon: 'heroicons_outline:user',
                         link: '/clients/list',
-                    },             
+                    },
 
                     {
                         id: 'faq',
@@ -36,7 +36,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 ],
 
 
-                
+
             },
             {
                 id: 'g-Admin',
@@ -67,7 +67,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/delivery/list',
                     },
-                    
+
                     {
                         id: 'bank',
                         title: 'ธนาคาร',
@@ -75,7 +75,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/bank/list',
                     },
-                    
+
                     {
                         id: 'livesteam',
                         title: 'เข้าสู่ระบบจัดการไลฟ์สด',
@@ -113,14 +113,14 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/wallet-bag/list',
                     },
-                    
+
 
                 ],
 
 
-                
+
             },
-            
+
             // {
             //     id: 'item-all',
             //     title: 'จัดการสินค้า',
@@ -410,11 +410,11 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 link: '/user/profile-firstpage',
             },
             {
-                id: 'wallet-bag-sell-agent',
+                id: 'wallet-agent',
                 title: 'กระเป๋าเงินสำหรับตัวแทน',
                 type: 'basic',
                 icon: 'feather:briefcase',
-                link: '/wallet-bag-sell-agent/list-wallet',
+                link: '/wallet-agent/list',
             },
             // {
             //     id: 'position',

@@ -1,0 +1,15 @@
+<!-- Dialog Overlay -->
+<div *ngIf="showDialog" class="fixed inset-0 z-50 overflow-auto bg-smoke-dark flex" (click)="closeDialog()">
+    <!-- Dialog Box -->
+    <div class="relative p-6 w-full max-w-md m-auto flex-col flex bg-white rounded-lg shadow-lg" (click)="$event.stopPropagation()">
+      <h3 class="text-xl font-semibold mb-4">คุณต้องการขอเงินคืนใช่หรือไม่?</h3>
+      <div class="flex justify-end">
+        <button class="bg-red-500 text-white font-bold py-2 px-4 rounded shadow hover:bg-red-400 focus:outline-none mr-2" (click)="confirm()">
+          ใช่
+        </button>
+        <button class="bg-gray-500 text-white font-bold py-2 px-4 rounded shadow hover:bg-gray-400 focus:outline-none" (click)="closeDialog()">
+          ไม่
+        </button>
+      </div>
+    </div>
+  </div>

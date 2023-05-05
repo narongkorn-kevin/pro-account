@@ -67,7 +67,7 @@ export const appRoutes: Route[] = [
             {
                 path: 'home', loadChildren: () => import('./modules/admin/pages/home/home.module').then(m => m.HomeModule)
             },
-    
+
             //permission
             {
                 path: 'permission',
@@ -167,7 +167,7 @@ export const appRoutes: Route[] = [
                     { path: '', loadChildren: () => import('app/modules/admin/g-admin/customer/customer.module').then(m => m.CustomerModule) },
                 ]
             },
-  
+
 
             {
                 path: 'worktelesale',
@@ -337,7 +337,7 @@ export const appRoutes: Route[] = [
 
                 ]
             },
-   
+
 
             {
                 path: 'chat',
@@ -374,6 +374,13 @@ export const appRoutes: Route[] = [
                 path: 'livemag',
                 canActivate: [], children: [
                     { path: '', loadChildren: () => import('app/modules/admin/g-admin/livesteam/page.module').then(m => m.Module) },
+
+                ]
+            },
+            {
+                path: 'wallet-agent',
+                canActivate: [], children: [
+                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/wallet-agent/wallet.module').then(m => m.BankModule) },
 
                 ]
             },

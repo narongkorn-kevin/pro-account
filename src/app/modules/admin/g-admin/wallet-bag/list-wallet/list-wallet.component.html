@@ -34,94 +34,97 @@
 
     <!-- Main -->
     <div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
-    
-        <div class="flex flex-col p-3 sm:p-10">
-            <div class="overflow-auto  bg-white shadow sm:rounded-lg">
-                <!-- Products list -->
-                <div class="shadow-sm text-center font-bold text-2xl p-12 pt-6">
-                    <span></span>
-                    <span></span>
-                    <div class="flex flex-col bg-center text-center items-center justify-center">
-                        <div class="message-container flex space-x-4">
-                          <div class="message-box bg-green-500 text-white p-4 rounded-lg">
-                            <div class="title font-bold">ยอดเติมสำเร็จ</div>
-                            <div class="content">100 รายการ</div>
-                          </div>
-                          <div class="message-box bg-green-500 text-white p-4 rounded-lg">
-                            <div class="title font-bold">ยอดเติมเงินรวม</div>
-                            <div class="content">1,000,000,000 บาท</div>
-                          </div>
-                          <div class="message-box bg-red-500 text-white p-4 rounded-lg">
-                            <div class="title font-bold">รอยืนยัน</div>
-                            <div class="content">8,000 รายการ</div>
-                          </div>
-                        </div>
-                      </div>
-                      
-                <div class="flex flex-auto text-center justify-center items-center text-xl font-bold pt-6">
-                    <h1>ยืนยันสถานะการชำระเงิน</h1>
+
+      <div class="flex flex-col p-3 sm:p-10">
+        <div class="overflow-auto bg-white shadow-md rounded-lg">
+          <!-- Products list -->
+          <div class=" text-center font-bold text-3xl p-8 sm:p-16 bg-gradient-to-b text-black rounded-t-lg">
+            <h2>Top-up Summary</h2>
+            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                <div
+                    class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
+                    <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
                 </div>
-                <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll text-md">
-                    <table datatable [dtOptions]="dtOptions"
-                        class="table row-border hover w-full text-md text-left text-gray-500 dark:text-gray-400"
-                        style="width: 100%">
-                        <thead>
-                            <tr>
-                                <th>จัดการ</th>
-                                <th>ลำดับ</th>
-                                <th>ชื่อธนาคาร</th>
-                                <th>หมายเลขบัญชี</th>
-                                <th>ชื่อบัญชี</th>
-                                <th>สถานะ</th>
-                                <!--<th>สร้างโดย</th>-->
-                                <th>วันที่สร้าง</th>
-                            </tr>
-                        </thead>
-                        <tbody *ngIf="dataRow?.length != 0">
-                            <tr *ngFor="let item of dataRow; let i = index"
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md py-15">
-                                <td style="min-width: 80px;">
-                                    <button mat-icon-button (click)="Edit(item.id)" title="แก้ไขข้อมูล">
-                                        <mat-icon>edit</mat-icon>
-                                    </button>
-                                    <!--<button mat-icon-button (click)="Delete(item.id)" title="ลบข้อมูล">
-                                        <mat-icon>delete</mat-icon>
-                                    </button>-->
-                                </td>
-                                <td style="width: 5%; min-width: 80px;">{{ pages.begin + (i + 1) }}</td>
-                                <!--<td style="min-width: 80px;" *ngIf="item.image === null || ''"> </td>
-                                <td style="min-width: 80px;" *ngIf="item.image !== null || ''"><img src="{{item.image}}"
-                                        class="h-10 w-10"> </td>-->
-                                <td style="min-width: 100px;">{{ item.name }}</td>
-                                <td style="min-width: 120px;">{{ item.account_number }}</td>
-                                <td style="min-width: 120px;">{{ item.first_name }}</td>
-                                <td style="min-width: 120px;">
-                                    <div *ngIf="item.status == 1">
-                                        <!-- เปิดการใช้งาน -->
-                                        <span
-                                            class="bg-green-100 text-green-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">สำเร็จ</span>
-                                    </div>
-                                    <div *ngIf="item.status == 0">
-                                        <!-- ปิดการใช้งาน -->
-                                        <span
-                                            class="bg-red-100 text-red-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ไม่สำเร็จ</span>
-                                    </div>
-                                </td>
-                                <!--<td style="min-width: 150px;">{{ item.user_create ? item.user_create.first_name : 'No data' }} {{ item.user_create ?
-                                    item.user_create.last_name: '' }}
-                                </td>
-                                <!-- <td>{{ item.created_at | thaiDate }}</td> -->
-                                <td style="min-width: 120px;">{{ item.created_at  }}</td>
-                            </tr>
-                        </tbody>
-                        <!-- <tbody *ngIf="dataRow?.length == 0">
-                        <tr>
-                            <td colspan="7" class="no-data-available text-center">ไม่มีข้อมูล !</td>
-                        </tr>
-                    </tbody> -->
-                    </table>
+                <div>
+                    <span class="block text-2xl font-bold">5,000 บาท</span>
+                    <span class="block text-gray-500">ยอดขายเดือนมกราคม</span>
                 </div>
             </div>
+            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                <div
+                    class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
+                    <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                </div>
+                <div>
+                    <span class="block text-2xl font-bold">5,000 บาท</span>
+                    <span class="block text-gray-500">ยอดขายเดือนมกราคม</span>
+                </div>
+            </div>
+            <div class="flex items-center p-8 bg-white shadow rounded-lg">
+                <div
+                    class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
+                    <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                </div>
+                <div>
+                    <span class="block text-2xl font-bold">5,000 บาท</span>
+                    <span class="block text-gray-500">ยอดขายเดือนมกราคม</span>
+                </div>
+            </div>
+
+                      <div class="container mx-auto px-4 py-16">
+                        <div class="flex flex-auto text-center justify-center items-center text-xl font-bold">
+                          <h1>ยืนยันสถานะการชำระเงิน</h1>
+                        </div>
+                        <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll text-md">
+                          <table datatable [dtOptions]="dtOptions" class="table row-border hover w-full text-md text-left text-gray-500 dark:text-gray-400" style="width: 100%">
+                            <thead>
+                              <tr class="bg-gray-200 dark:bg-gray-700">
+                                <th class="p-2">จัดการ</th>
+                                <th class="p-2">ลำดับ</th>
+                                <th class="p-2">ชื่อผู้รับเงิน</th>
+                                <th class="p-2">ชื่อธนาคาร</th>
+                                <th class="p-2">หมายเลขบัญชี</th>
+                                <th class="p-2">จำนวนเงิน</th>
+                                <th class="p-2">สถานะ</th>
+                                <th class="p-2">วันที่สร้าง</th>
+                              </tr>
+                            </thead>
+                            <tbody *ngIf="dataRow?.length != 0">
+                              <tr *ngFor="let item of dataRow; let i = index" class="bg-white dark:bg-gray-800 dark:border-gray-700 text-md py-15">
+                                <td class="p-2">
+                                  <button mat-icon-button (click)="Edit(item.id)" title="แก้ไขข้อมูล">
+                                    <mat-icon>edit</mat-icon>
+                                  </button>
+                                </td>
+                                <td class="p-2">{{ pages.begin + (i + 1) }}</td>
+                                <td class="p-2">{{ item.name }}</td>
+                                <td class="p-2">{{ item.account_number }}</td>
+                                <td class="p-2">{{ item.first_name }}</td>
+                                <td class="p-2">{{ item.account_number }}</td>
+                                <td class="p-2">
+                                  <div *ngIf="item.status == 1">
+                                    <span class="bg-green-100 text-green-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">สำเร็จ</span>
+                                  </div>
+                                  <div *ngIf="item.status == 0">
+                                    <span class="bg-red-100 text-red-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ไม่สำเร็จ</span>
+                                  </div>
+                                </td>
+                                <td class="p-2">{{ item.created_at }}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
         </div>
     </div>
 

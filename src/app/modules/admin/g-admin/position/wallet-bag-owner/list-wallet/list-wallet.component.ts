@@ -21,6 +21,7 @@ import { EditWalletComponent } from '../edit-wallet/edit-wallet.component';
 import { TopupHistoryComponent } from '../topup-history/topup-history.component';
 import { HttpClient } from '@angular/common/http';
 import { RefundComponent } from '../refund/refund.component';
+import { TimepickerComponent } from '../timepicker/timepicker.component';
 
 
 interface Detail {
@@ -57,7 +58,7 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
         { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'รอดำเนินการ' },
         { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'รอดำเนินการ' },
         { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'รอดำเนินการ' },
-        
+
     ];
 
     // dataRow: any = []
@@ -78,6 +79,8 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
     env_path = environment.API_URL;
 
     me: any | null;
+    dataService: any;
+    confirmDelete: any;
     get roleType(): string {
         return 'marketing';
     }
@@ -103,10 +106,25 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
     ) {
     }
 
-
+    bankId: string;
+    statusData = [
+        { id: 0, name: 'ไม่สำเร็จ' },
+        { id: 1, name: 'สำเร็จ' },
+    ]
     ngOnInit(): void {
         this.loadTable();
+        this.fetchData();
+
     }
+    fetchData(): void {
+        this.dataService.getData().subscribe((data: any[]) => {
+          this.details = data;
+        });
+      }
+
+      refreshTable(): void {
+        this.fetchData();
+      }
 
 
     ngAfterViewInit(): void {
@@ -171,7 +189,7 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     openNewOrder(productId: string): void {
-        
+
         this._router.navigate(['marketing/data/assets-list/new-order/' + productId]);
     }
 
@@ -261,7 +279,7 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
             height: '750px'
         });
 
-        
+
 
         dialogRef.afterClosed().subscribe(item => {
             this.rerender();
@@ -274,7 +292,17 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
             height: '750px'
         });
 
-        
+        dialogRef.afterClosed().subscribe(item => {
+            this.rerender();
+            this._changeDetectorRef.markForCheck();
+        });
+    }
+    COD() {
+        const dialogRef = this._matDialog.open(TimepickerComponent, {
+            width: '900px',
+            height: '750px'
+        });
+
 
         dialogRef.afterClosed().subscribe(item => {
             this.rerender();
@@ -288,68 +316,10 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
         });
     }
 
-    Delete(id) {
-
-        const confirmation = this._fuseConfirmationService.open({
-            "title": "ยืนยันการลบรายการ",
-            "message": "คุณต้องการลบรายการใช่หรือไม่ ?",
-            "icon": {
-                "show": true,
-                "name": "heroicons_outline:exclamation",
-                "color": "warning"
-            },
-            "actions": {
-                "confirm": {
-                    "show": true,
-                    "label": "ยืนยัน",
-                    "color": "primary"
-                },
-                "cancel": {
-                    "show": true,
-                    "label": "ยกเลิก"
-                }
-            },
-            "dismissible": true
-        });
-
-        // Subscribe to the confirmation dialog closed action
-        confirmation.afterClosed().subscribe((result) => {
-
-            // If the confirm button pressed...
-            if (result === 'confirmed') {
-                this._Service
-                    .delete(id)
-                    .pipe(takeUntil(this.destroy$))
-                    .subscribe((res: any) => {
-                        if (res.code == 201) {
-                            this._fuseConfirmationService.open({
-                                "title": "ลบรายการ",
-                                "message": "ลบเรียบร้อย",
-                                "icon": {
-                                    "show": true,
-                                    "name": "heroicons_outline:check-circle",
-                                    "color": "success"
-                                },
-                                "actions": {
-                                    "confirm": {
-                                        "show": false,
-                                        "label": "ตกลง",
-                                        "color": "primary"
-                                    },
-                                    "cancel": {
-                                        "show": false,
-                                        "label": "ยกเลิก"
-                                    }
-                                },
-                                "dismissible": true
-                            }).afterClosed().subscribe((res) => {
-                                this.rerender();
-                            })
-                        }
-                    });
-
-            }
-        });
-
+    Update(): void {
+        const confirmationDialog = confirm("คุณต้องการขอเงินคืนใช่หรือไม่?");
+        if (confirmationDialog) {
+          this.confirmDelete.emit(true);
+        }
     }
 }

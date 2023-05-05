@@ -50,6 +50,7 @@ import { TimepickerComponent } from './timepicker/timepicker.component';
 import { TypemoneybankComponent } from './typemoneybank/typemoneybank.component';
 import { TopupHistoryComponent } from './topup-history/topup-history.component';
 import { RefundComponent } from './refund/refund.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { RefundComponent } from './refund/refund.component';
     TimepickerComponent,
     TypemoneybankComponent,
     TopupHistoryComponent,
-    RefundComponent
+    RefundComponent,
+    ConfirmComponent,
   ],
   imports: [
     RouterModule.forChild(bankRoute),

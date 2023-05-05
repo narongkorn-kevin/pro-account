@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RefundComponent implements OnInit {
   refundRequestForm: FormGroup;
   uploadedFile: File;
-
+  termsForm: FormGroup;
   constructor(private fb: FormBuilder) {
     this.refundRequestForm = this.fb.group({
       fullName: ['', Validators.required],
@@ -22,8 +22,12 @@ export class RefundComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.termsForm = this.fb.group({
+      agreeTerms: [false, Validators.requiredTrue]
+    }
 
+)}
   onSubmit(): void {
     if (this.refundRequestForm.valid) {
       // Process the form data here

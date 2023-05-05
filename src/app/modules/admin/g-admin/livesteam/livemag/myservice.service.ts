@@ -10,6 +10,7 @@ export class Myservice {
   constructor(private _zone: NgZone , private _sseService: SseService,
                       private http: HttpClient) {}
 
+//การดึง API มาแสดง
 getItemPage(){
   return this.http.post(environment.API_URL+"api/item_page",{
     "item_type_id":null,
