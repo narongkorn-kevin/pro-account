@@ -19,6 +19,16 @@ import { DataTableDirective } from 'angular-datatables';
 import { NewWalletComponent } from '../new-wallet/new-wallet.component';
 import { EditWalletComponent } from '../edit-wallet/edit-wallet.component';
 import { TopupHistoryComponent } from '../topup-history/topup-history.component';
+
+
+interface RefundRequest {
+    dateTime: string;
+    nameSurname: string;
+    accountNumber: string;
+    bank: string;
+    amount: number;
+  }
+
 @Component({
     selector: 'app-list-wallet',
     templateUrl: './list-wallet.component.html',
@@ -57,7 +67,85 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
 
     supplierId: string | null;
     pagination: BankPagination;
+    title = 'Refund Requests';
 
+    refundRequests: RefundRequest[] = [
+      {
+        dateTime: '2023-05-05 10:00',
+        nameSurname: 'เกวลิน  อัคคเดชโภคิน',
+        accountNumber: '1234567890',
+        bank: 'ธนาคารกสิกรไทย',
+        amount: 500,
+      },
+      {
+        dateTime: '2023-05-05 10:00',
+        nameSurname: 'จิตติพัฒน์ สิทธิศักดิ์โสภณ',
+        accountNumber: '1234567890',
+        bank: 'ธนาคารกรุงเทพ',
+        amount: 100,
+      },
+      {
+        dateTime: '2023-05-05 10:00',
+        nameSurname: 'ตุลธร พุฒิสรรค์สกุล',
+        accountNumber: '1234567890',
+        bank: 'ธนาคารไทยพานิชย์',
+        amount: 100,
+      },
+      {
+        dateTime: '2023-05-05 10:00',
+        nameSurname: 'ฐิติวัฒน์  ปัญญารัศมิ์สกุล',
+        accountNumber: '1234567890',
+        bank: 'ธนาคารกรุงไทย',
+        amount: 100,
+      },
+      {
+        dateTime: '2023-05-05 10:00',
+        nameSurname: 'นงลักษณ์ ธิติรัตน์วรโชติ',
+        accountNumber: '1234567890',
+        bank: 'ธนาคารเพื่อการเกษตร',
+        amount: 100,
+      },
+      {
+        dateTime: '2023-05-05 10:00',
+        nameSurname: 'ชวัลลักษณ์ ศิริกรโสภณ',
+        accountNumber: '1234567890',
+        bank: 'ธนาคารกสิกร',
+        amount: 100,
+      },
+      {
+        dateTime: '2023-05-05 10:00',
+        nameSurname: 'พัสกร ศิริวัฒนกวินท์',
+        accountNumber: '1234567890',
+        bank: 'ธนาคารกรุงศรี',
+        amount: 100,
+      },
+      {
+        dateTime: '2023-05-05 10:00',
+        nameSurname: 'มนัสนันท์ โชติวัฒนทวีชัย',
+        accountNumber: '1234567890',
+        bank: 'ธนาคารกสิกร',
+        amount: 100,
+      },
+      {
+        dateTime: '2023-05-05 10:00',
+        nameSurname: 'จริญญา วิรุฬห์วัชรสกุล',
+        accountNumber: '1234567890',
+        bank: 'ธนาคารกสิกร',
+        amount: 100,
+      },
+
+      // Add more refund request objects here
+    ];
+
+    confirm(index: number): void {
+      // Handle confirmation logic here
+      console.log(`Confirm refund request #${index + 1}`);
+    }
+
+    refund(index: number): void {
+      // Handle refund logic here
+      console.log(`Refund request #${index + 1}`);
+    }
     /**
      * Constructor
      */
@@ -82,7 +170,7 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
     ngAfterViewInit(): void {
-   
+
     }
 
 
@@ -141,7 +229,7 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     openNewOrder(productId: string): void {
-        
+
         this._router.navigate(['marketing/data/assets-list/new-order/' + productId]);
     }
 

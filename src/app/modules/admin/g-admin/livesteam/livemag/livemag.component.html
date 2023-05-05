@@ -41,16 +41,16 @@
 
 <!--<app-live-dialoge></app-live-dialoge>-->
 <!--<app-chat></app-chat>-->
-
-<div class="flex flex-row">
-  <div class="basis-1/4">
-    <mat-card class="card h-100">
-        <div [innerHTML]="stream?.embedHtmlSafe">
-        </div	>
-    </mat-card>
-  </div>
-</div>
-
+<section>
+    <div class="flex flex-col items-center">
+      <div class="w-full">
+        <!-- <mat-card class="card h-100"> -->
+            <!-- <div [innerHTML]="stream?.embedHtmlSafe"> -->
+                <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fweb.facebook.com%2F100092148962153%2Fvideos%2F3331175923862155%2F&show_text=false&width=267&t=0" width="870" height="406" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>        </div>
+        <!-- </mat-card> -->
+      </div>
+      <app-chat class="w-full mt-4 ml-16 h-50 item-center justify-center"></app-chat>
+  </section>
 
 <!--<app-chat></app-chat>-->
 
