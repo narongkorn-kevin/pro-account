@@ -17,10 +17,10 @@
                 <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
                 <span class="ml-2 mr-1">เพิ่มสินค้าใหม่</span>
             </a>
-            <a href="item/new-item-promotion" class="ml-4" mat-flat-button [color]="'primary'">
+            <!-- <a href="item/new-item-promotion" class="ml-4" mat-flat-button [color]="'primary'">
                 <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
                 <span class="ml-2 mr-1">เพิ่มสินค้าโปรโมชั่นใหม่</span>
-            </a>
+            </a> -->
         </div>
     </div>
 
@@ -33,12 +33,12 @@
     
                 <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll">
     
-                    <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)" >
-                        <mat-tab *ngFor="let tab of tabs; let index = index">
+                    <!-- <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)" >
+                        <mat-tab *ngFor="let tab of tabs; let index = index"> -->
                             <ng-template mat-tab-label>
                                 <div class="text-md font-bold">{{tab}}</div>
                             </ng-template>
-                            <div *ngIf="tab === 'สินค้าธรรมดา'" class="table-responsive">
+                            <!-- <div *ngIf="tab === 'สินค้าธรรมดา'" class="table-responsive"> -->
                                 <table datatable [dtOptions]="dtOptionsNormal"
                                     class="table row-border hover text-lg text-left text-gray-500 dark:text-gray-400">
                                     <thead>
@@ -101,8 +101,8 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                            <div *ngIf="tab === 'สินค้าโปรโมชั่น'" class="table-responsive">
+                            <!-- </div> -->
+                            <!-- <div *ngIf="tab === 'สินค้าโปรโมชั่น'" class="table-responsive">
                                 <table datatable [dtOptions]="dtOptionsPromotion"
                                     class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
                                     style="width: 100%">
@@ -142,12 +142,12 @@
                                             <td style="width: 100px; min-width: 100px;">{{ item.balance }}</td>
                                             <td style="width: 130px; min-width: 130px;">
                                                 <div *ngIf="item.status == 1">
-                                                    <!-- เปิดการใช้งาน -->
+                                                
                                                     <span
                                                         class="bg-green-100 text-green-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">เปิดการใช้งาน</span>
                                                 </div>
                                                 <div *ngIf="item.status == 0">
-                                                    <!-- ปิดการใช้งาน -->
+                                            
                                                     <span
                                                         class="bg-red-100 text-red-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ปิดการใช้งาน</span>
                                                 </div>
@@ -156,7 +156,7 @@
                                                 item.user_create ?
                                                 item.user_create.last_name: '' }}
                                             </td>
-                                            <!-- <td>{{ item.created_at | thaiDate }}</td> -->
+                                    
                                             <td style="width: 100px; min-width: 100px;">{{ item.created_at | date: 'dd/MM/yyyy hh:mm' }}</td>
                                         </tr>
                                     </tbody>
@@ -166,9 +166,9 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                        </mat-tab>
-                    </mat-tab-group>
+                            </div> -->
+                        <!-- </mat-tab>
+                    </mat-tab-group> -->
     
                 </div>
             </div>

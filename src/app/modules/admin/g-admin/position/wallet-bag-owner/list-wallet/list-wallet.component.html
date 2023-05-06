@@ -44,6 +44,7 @@
                     <div class="flex flex-col mx-auto pl-6 text-center justify-center bg-gray-100 rounded-xl p-8 grow-0">
                         <section class="text-left">
                             <div class="bg-white shadow-md rounded-lg p-6">
+                              <h1 class="text-3xl font-bold  mb-4">ID : Admin1</h1>
                                 <h1 class="text-3xl font-bold text-blue-600 mb-4">เลือกวิธีชำระเงิน</h1>
                                 <h3 class="text-xl mb-2 font-bold">ชำระเงินอัตโนมัติ</h3>
                                 <p class="text-lg mb-4">รายการเรียกก็บจะถูกหักอัตโนมัติในวันครบกำหนดชำระ ตั้งแต่เวลา 00.01 - 02.59 น.</p>
@@ -67,7 +68,7 @@
                                     </span>
                                     <span class="ml-2 mr-1 cursor-pointer hover:text-blue-600">ประวัติการทำรายการ</span>
                                 </a>
-                                <a (click)="Update()" class="flex items-center px-4 py-2 text-lg text-black rounded">
+                                <!-- <a (click)="Update()" class="flex items-center px-4 py-2 text-lg text-black rounded">
                                     <span class="material-symbols-outlined"> paid
                                     </span>
                                     <span class="ml-2 mr-1 cursor-pointer hover:text-blue-600">ขอเงินคืน</span>
@@ -76,13 +77,35 @@
                                     <span class="material-symbols-outlined"> pending
                                     </span>
                                     <span class="ml-2 mr-1 cursor-pointer hover:text-blue-600">รอจ่าย COD</span>
-                                </a>
+                                </a> -->
                             </ul>
 
                         </section>
 
 
                 </div>
+
+                <div class="flex shadow-sm text-center font-bold text-2xl p-12 pt-6">
+                  <span></span>
+                  <span></span>
+
+                  <div class="text-left flex-col pl-6  bg-gray-100 rounded-full p-8 grow-0 text-lg w-1/2 ml-5">     
+                          <label class="text-red-600 text-left text-3xl mr-5">ยอดเงินรอจ่าย : 100 ( บาท )</label>
+                          <button (click)="Update()" mat-flat-button="'primary'">ขอคืนเงิน</button>
+                  </div>
+                  <div class="text-left flex-col pl-6  bg-gray-100 rounded-full p-8 grow-0 text-lg w-1/2">
+                 
+                     
+                          <label class="text-red-600 text-right text-3xl mr-5">  ยอดเงินรอจ่าย ( COD ) : 5,000 ( บาท )</label>
+                          <button (click)="Update()" mat-flat-button="'primary'">ขอคืนเงิน</button>
+                  </div>
+
+
+
+              </div>
+
+
+
                 </div>
                 <div class="flex flex-auto text-center justify-center items-center text-xl font-bold pt-6">
                     <span class="material-symbols-outlined">
@@ -153,7 +176,7 @@
                         </tr>
                       </thead>
                       <tbody class="text-sm font-normal">
-                        <tr *ngFor="let detail of details" class="hover:bg-gray-100">
+                        <tr *ngFor="let detail of details2" class="hover:bg-gray-100">
                           <td class="py-3 px-4">{{detail.id}}</td>
                           <td class="py-3 px-4">{{detail.date}}</td>
                           <td class="py-3 px-4">{{detail.name_list}}</td>

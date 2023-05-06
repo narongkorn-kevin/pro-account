@@ -49,17 +49,33 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
     imageData: any;
 
     details: Detail [] = [
+        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'รอดำเนินการ' },
+        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'สำเร็จ' },
+        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'สำเร็จ' },
+        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'สำเร็จ' },
+        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'สำเร็จ' },
+        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'สำเร็จ' },
+        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'สำเร็จ' },
         { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'สำเร็จ' },
         { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'ไม่สำเร็จ' },
-        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'รอดำเนินการ' },
-        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'รอดำเนินการ' },
-        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'รอดำเนินการ' },
-        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'รอดำเนินการ' },
-        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'รอดำเนินการ' },
-        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'รอดำเนินการ' },
-        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '5,000' , date_line: '2025-04-06.',status_s: 'รอดำเนินการ' },
 
     ];
+
+    details2: Detail [] = [
+        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '100' , date_line: '2025-04-06.',status_s: 'รอดำเนินการ' },
+        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '200' , date_line: '2025-04-06.',status_s: 'สำเร็จ' },
+        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '30' , date_line: '2025-04-06.',status_s: 'สำเร็จ' },
+        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '40' , date_line: '2025-04-06.',status_s: 'สำเร็จ' },
+        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '10' , date_line: '2025-04-06.',status_s: 'สำเร็จ' },
+        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '50' , date_line: '2025-04-06.',status_s: 'สำเร็จ' },
+        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '60' , date_line: '2025-04-06.',status_s: 'สำเร็จ' },
+        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '70' , date_line: '2025-04-06.',status_s: 'สำเร็จ' },
+        { date: '2023-04-06.', name_list: 'แพ็จเกจ',amount_m: '25' , date_line: '2025-04-06.',status_s: 'ไม่สำเร็จ' },
+
+    ];
+
+
+
 
     // dataRow: any = []
     @ViewChild(MatPaginator) _paginator: MatPaginator;
