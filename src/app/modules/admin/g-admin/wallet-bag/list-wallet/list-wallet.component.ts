@@ -27,6 +27,8 @@ interface RefundRequest {
     accountNumber: string;
     bank: string;
     amount: number;
+    status: string;
+    send: string;
   }
 
 @Component({
@@ -75,6 +77,8 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
         nameSurname: 'เกวลิน  อัคคเดชโภคิน',
         accountNumber: '1234567890',
         bank: 'ธนาคารกสิกรไทย',
+        status:'รอยืนยัน',
+        send: 'COD',
         amount: 500,
       },
       {
@@ -82,6 +86,8 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
         nameSurname: 'จิตติพัฒน์ สิทธิศักดิ์โสภณ',
         accountNumber: '1234567890',
         bank: 'ธนาคารกรุงเทพ',
+        status:'รอยืนยัน',
+        send: 'COD',
         amount: 100,
       },
       {
@@ -89,6 +95,8 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
         nameSurname: 'ตุลธร พุฒิสรรค์สกุล',
         accountNumber: '1234567890',
         bank: 'ธนาคารไทยพานิชย์',
+        status:'รอยืนยัน',
+        send: 'COD',
         amount: 100,
       },
       {
@@ -96,6 +104,8 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
         nameSurname: 'ฐิติวัฒน์  ปัญญารัศมิ์สกุล',
         accountNumber: '1234567890',
         bank: 'ธนาคารกรุงไทย',
+        status:'รอยืนยัน',
+        send: 'ค่าขนส่ง',
         amount: 100,
       },
       {
@@ -103,6 +113,8 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
         nameSurname: 'นงลักษณ์ ธิติรัตน์วรโชติ',
         accountNumber: '1234567890',
         bank: 'ธนาคารเพื่อการเกษตร',
+        status:'สำเร็จ',
+        send: 'ค่าขนส่ง',
         amount: 100,
       },
       {
@@ -110,6 +122,8 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
         nameSurname: 'ชวัลลักษณ์ ศิริกรโสภณ',
         accountNumber: '1234567890',
         bank: 'ธนาคารกสิกร',
+        status:'สำเร็จ',
+        send: 'ค่าขนส่ง',
         amount: 100,
       },
       {
@@ -117,6 +131,8 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
         nameSurname: 'พัสกร ศิริวัฒนกวินท์',
         accountNumber: '1234567890',
         bank: 'ธนาคารกรุงศรี',
+        status:'สำเร็จ',
+        send: 'ค่าขนส่ง',
         amount: 100,
       },
       {
@@ -124,14 +140,18 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
         nameSurname: 'มนัสนันท์ โชติวัฒนทวีชัย',
         accountNumber: '1234567890',
         bank: 'ธนาคารกสิกร',
-        amount: 100,
+        status:'สำเร็จ',
+        send: 'ค่าขนส่ง',
+        amount: 200,
       },
       {
         dateTime: '2023-05-05 10:00',
         nameSurname: 'จริญญา วิรุฬห์วัชรสกุล',
         accountNumber: '1234567890',
         bank: 'ธนาคารกสิกร',
-        amount: 100,
+        status:'สำเร็จ',
+        send: 'ค่าขนส่ง',
+        amount: 300,
       },
 
       // Add more refund request objects here

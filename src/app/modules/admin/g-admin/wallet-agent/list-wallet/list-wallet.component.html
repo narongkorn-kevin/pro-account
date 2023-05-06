@@ -19,7 +19,7 @@
             </a>
 
                         <!-- Add product button -->
-                        <!--<a (click)="New2()" class="ml-4" mat-flat-button [color]="'primary'">
+            <!--<a (click)="New2()" class="ml-4" mat-flat-button [color]="'primary'">
                             <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
                             <span class="ml-2 mr-1">ประวัติการทำรายการ</span>
                         </a>-->
@@ -34,59 +34,79 @@
 
     <!-- Main -->
     <div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
-    
+
         <div class="flex flex-col p-3 sm:p-10">
             <div class="overflow-auto  bg-white shadow sm:rounded-lg">
                 <!-- Products list -->
                 <div class="shadow-sm text-center font-bold text-2xl p-12 pt-6">
                     <span></span>
                     <span></span>
-                    <div class="flex flex-col mx-auto pl-6 text-center justify-center bg-gray-100 rounded-xl p-8 grow-0">
+                    <div
+                        class="flex flex-col mx-auto pl-6 text-center justify-center bg-gray-100 rounded-xl p-8 grow-0">
                         <section class="text-left">
                             <div class="text-right ml-10">
                                 <h1 class="text-blue-600">เลือกวิธีชำระเงิน</h1>
                                 <h3 class="text-lg">ชำระเงินอัตโนมัติ</h3>
-                                <h3 class="text-md"> รายการเรียกก็บจะถูกหักอัตนมัติในวันครบกำหนดชำระ ตั้งแต่เวลา 00.01 - 02.59 u.</h3>
+                                <h3 class="text-md"> รายการเรียกก็บจะถูกหักอัตนมัติในวันครบกำหนดชำระ ตั้งแต่เวลา 00.01 -
+                                    02.59 u.</h3>
                                 <h3 class="text-md">คุณจำเป็นจะต้องทำการเติมเงินไว้ให้เพียงพอสำหรับการใช้งาน</h3>
                                 <h3 class="text-md"> ตัวอย่าง
-                                    วันครบกำหนดชำระ 01/01/2022 ระบบหักเงินอัตโนมัติวันที่ 02/01/2022 เวลา 00.01 - 02.59 น.</h3>
-                                </div>
-                            <h1 class="pb-4 ml-3 text-green-600">ยอดเงินคงเหลือ:</h1>
-                            <p class="ml-6 pb-4 border-b-4 text-green-600">1,000,000 ฿</p>
+                                    วันครบกำหนดชำระ 01/01/2022 ระบบหักเงินอัตโนมัติวันที่ 02/01/2022 เวลา 00.01 - 02.59
+                                    น.</h3>
+                            </div>
+                            <h1 class="pb-4 ml-3 text-green-600 text-5xl">ยอดเงินคงเหลือ:</h1>
+                            <p class="ml-6 pb-4 border-b-4 text-green-600 text-5xl">10,000 ฿</p>
                             <ul>
                                 <a (click)="New()" class="mr-8 text-lg">
                                     <span class="material-symbols-outlined py-2">
                                         credit_card
-                                        </span>
+                                    </span>
                                     <span class="ml-2 mr-1 cursor-pointer">เติมเงินเข้ากระเป๋า</span>
                                 </a>
                                 <p>
-                                <a (click)="New2()" class="mr-8 text-lg">
-                                    <span class="material-symbols-outlined"> history
-                                    </span>
-                                    <span class="ml-2 mr-1 cursor-pointer">ประวัติการทำรายการ</span>
-                                </a></p>
+                                    <a (click)="New2()" class="mr-8 text-lg">
+                                        <span class="material-symbols-outlined"> history
+                                        </span>
+                                        <span class="ml-2 mr-1 cursor-pointer">ประวัติการทำรายการ</span>
+                                    </a>
+                                </p>
                             </ul>
                         </section>
 
 
+                    </div>
                 </div>
-                </div>
-                <div class="shadow-sm text-center font-bold text-2xl p-12 pt-6">
+
+
+
+                <div class="flex shadow-sm text-center font-bold text-2xl p-12 pt-6">
                     <span></span>
                     <span></span>
-                    <div class="text-left flex-col pl-6  bg-gray-100 rounded-full p-8 grow-0 text-lg"> 
-                <section class="">
-                <h1 class="text-red-600">ยอดเงินรอจ่าย: 100 บาท</h1>
-                <h1 class="text-red-600">ยอดเงินรอจ่าย ( COD ) : 5,000 ( บาท )</h1>
-                </section>
+
+                    <div class="text-left flex-col pl-6  bg-gray-100 rounded-full p-8 grow-0 text-lg w-1/2">
+                
+                            <label class="text-red-600 text-left text-3xl">ยอดเงินรอจ่าย: 100 บาท</label>
+                        
+                
+                    </div>
+                    <div class="text-left flex-col pl-6  bg-gray-100 rounded-full p-8 grow-0 text-lg w-1/2">
+                   
+                       
+                            <label class="text-red-600 text-right text-3xl">  ยอดเงินรอจ่าย ( COD ) : 5,000 ( บาท )</label>
+                       
+                    </div>
+
+
+
                 </div>
-                </div>
+
+
+
                 <div class="flex flex-auto text-center justify-center items-center text-xl font-bold pt-6">
                     <span class="material-symbols-outlined">
                         pending_actions
-                        </span>
-                        <h1 class="pl-4">อยู่ระหว่างรอดำเนินการ</h1>
+                    </span>
+                    <h1 class="pl-4">อยู่ระหว่างรอดำเนินการ</h1>
                 </div>
                 <div class="flex flex-col p-5 sm:overflow-auto overflow-x-scroll  ">
                     <table datatable [dtOptions]="dtOptions"
@@ -126,26 +146,26 @@
                                     <!--<button mat-icon-button (click)="Delete(item.id)" title="ลบข้อมูล">
                                         <mat-icon>delete</mat-icon>
                                     </button>-->
-                                <!--</td>
+                        <!--</td>
                                 <!--<td style="width: 5%; min-width: 80px;">{{ pages.begin + (i + 1) }}</td>
                                 <!--<td style="min-width: 80px;" *ngIf="item.image === null || ''"> </td>
                                 <td style="min-width: 80px;" *ngIf="item.image !== null || ''"><img src="{{item.image}}"
                                         class="h-10 w-10"> </td>-->
-                                <!--<td style="min-width: 100px;">{{ item.name }}</td>
+                        <!--<td style="min-width: 100px;">{{ item.name }}</td>
                                 <td style="min-width: 120px;">{{ item.account_number }}</td>
                                 <td style="min-width: 120px;">{{ item.first_name }}</td>
                                 <td style="min-width: 120px;">-->
-                                    <!--<td style="min-width: 120px;">{{ item.account_number }}</td>
+                        <!--<td style="min-width: 120px;">{{ item.account_number }}</td>
                                     <td style="min-width: 120px;">{{ item.account_number }}</td>
                                     <td style="min-width: 120px;">{{ item.first_name }}</td>
                                     <div class="p-2" *ngIf="item.status == 1">
                                         <!-- เปิดการใช้งาน -->
-                                        <!--<span
+                        <!--<span
                                             class="bg-green-100 text-green-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">สำเร็จ</span>
                                     </div>
                                     <div class="p-2" *ngIf="item.status == 0">
                                         <!-- ปิดการใช้งาน -->
-                                        <!--<span
+                        <!--<span
                                             class="bg-red-100 text-red-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ล้มเหลว</span>
                                     </div>
                                 <!--</td>
@@ -153,7 +173,7 @@
                                     item.user_create.last_name: '' }}
                                 </td>
                                 <!-- <td>{{ item.created_at | thaiDate }}</td> -->
-                                <!--<td style="min-width: 120px;">{{ item.created_at  }}</td>
+                        <!--<td style="min-width: 120px;">{{ item.created_at  }}</td>
                             </tr>
                         </tbody>
                         <!-- <tbody *ngIf="dataRow?.length == 0">
@@ -168,5 +188,3 @@
     </div>
 
 </div>
-
-
