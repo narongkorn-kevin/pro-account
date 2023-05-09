@@ -409,13 +409,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 icon: 'feather:zoom-in',
                 link: '/user/profile-firstpage',
             },
-            {
-                id: 'wallet-agent',
-                title: 'กระเป๋าเงินสำหรับตัวแทน',
-                type: 'basic',
-                icon: 'feather:briefcase',
-                link: '/wallet-agent/list',
-            },
+            // {
+            //     id: 'wallet-agent',
+            //     title: 'กระเป๋าเงินสำหรับตัวแทน',
+            //     type: 'basic',
+            //     icon: 'feather:briefcase',
+            //     link: '/wallet-agent/list',
+            // },
             // {
             //     id: 'position',
             //     title: 'เช็คข้อมูลเจาะจงแม่ค้า',

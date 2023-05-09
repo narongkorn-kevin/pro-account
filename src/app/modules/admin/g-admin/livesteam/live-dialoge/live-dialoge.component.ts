@@ -20,7 +20,7 @@ export class LiveDialogeComponent implements OnInit {
     this.fbApi.getLiveStreamingVideos().then(data => {
       this.liveStreams = data.map(stream => ({
         ...stream,
-        embedHtmlSafe: this.sanitizer.bypassSecurityTrustHtml(stream.embed_html) 
+        embedHtmlSafe: this.sanitizer.bypassSecurityTrustHtml(stream.embed_html)
       }));
       console.log("SING",this.liveStreams)
     });

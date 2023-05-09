@@ -14,8 +14,8 @@ export class ChatComponent implements OnInit {
     constructor(private chatService: ChatService) { }
 
     ngOnInit(): void {
-      const token = "";
-      const lideo_id = "";
+      const token = "EAACa5iDAEsMBAAZB33Kn17TkGrH11lX5WyulorcsAva4QtybvvZBOLKE4bSfHZAgrSwjV9DgQAnWakm2DjLP3t1Lk1ZCfdnGBm3Jg9TRiIChgba4RT9Q28eG6nMq1qXsdMeZAVgZBQXdjTZC92c3Ej4VFvNh7t7fAwCiYRg16u77VCYFjGqgIJ5";
+      const video_id = "121738634241102";
 
       this.chatService.getServerSentEvent(``).subscribe(res => {
         console.log(JSON.parse(res.data));

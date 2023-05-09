@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LiveListComponent } from './live-list.component';
+import { FbLiveComponent } from './fb-live.component';
 
-describe('LiveListComponent', () => {
-  let component: LiveListComponent;
-  let fixture: ComponentFixture<LiveListComponent>;
+describe('FbLiveComponent', () => {
+  let component: FbLiveComponent;
+  let fixture: ComponentFixture<FbLiveComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LiveListComponent ]
+      declarations: [ FbLiveComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LiveListComponent);
+    fixture = TestBed.createComponent(FbLiveComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -45,7 +45,6 @@ import {
   FacebookLoginProvider
 } from '@abacritt/angularx-social-login';
 import { LivemagComponent } from './livemag/livemag.component';
-import { LiveListComponent } from './live-list/live-list.component';
 import { FacebookModule } from 'ngx-facebook';
 import { LiveDialogeComponent } from './live-dialoge/live-dialoge.component';
 import { ChatComponent } from './chat/chat.component'
@@ -53,6 +52,8 @@ import { ChatModule } from './chat/chat.module'
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ProductControlComponent } from './product-control/product-control.component';
+import { FbLiveComponent } from './fb-live/fb-live.component';
+import { SafeHtmlPipe } from './live-dialoge/safe-html.pipe';
 
 // import {
 //     FacebookLoginProvider,
@@ -66,10 +67,11 @@ import { ProductControlComponent } from './product-control/product-control.compo
         ListComponent,
         EditComponent,
         LivemagComponent,
-        LiveListComponent,
         LiveDialogeComponent,
         ChatComponent,
-        ProductControlComponent
+        ProductControlComponent,
+        FbLiveComponent,
+        SafeHtmlPipe
     ],
     imports: [
         RouterModule.forChild(PageRoute),

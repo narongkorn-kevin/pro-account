@@ -6,7 +6,7 @@ import fetchJsonp from 'fetch-jsonp';
   providedIn: 'root'
 })
 export class LiveDialogeService {
-  private accessToken = 'EAACa5iDAEsMBAF0MzQVC4OXeGfczHtzmlAW3JLjIGebZBZAsZBNxFOV3H13qSSwBzZBQ8yfVfLEUJ8gUmUzG828A1dtOidQNTdv5y7jWPep7xFc0kTRFJYCWHZBxBOAW738Xeis4tgp2usPWLgcpzqbCvtPh5PQXCf6HGWoB8JX3xogKf5dVRs2quIYi0ySZCtKJfKyQycKLzYSX9tWJ5q';
+  private accessToken = 'EAACa5iDAEsMBAAZB33Kn17TkGrH11lX5WyulorcsAva4QtybvvZBOLKE4bSfHZAgrSwjV9DgQAnWakm2DjLP3t1Lk1ZCfdnGBm3Jg9TRiIChgba4RT9Q28eG6nMq1qXsdMeZAVgZBQXdjTZC92c3Ej4VFvNh7t7fAwCiYRg16u77VCYFjGqgIJ5';
   private pageId = '116311434766128';
 
   constructor() {}

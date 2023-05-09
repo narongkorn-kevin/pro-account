@@ -17,14 +17,21 @@ module.exports = {
     purge: ['./src/**/*.{html,ts}'],
     darkMode: false, // or 'media' or 'class'
     theme: {
-      extend: {},
+      extend: {
+        width: {
+            '500': '500px',
+          },
+          height: {
+    '500': '500px',
+    },
+      },
     },
     variants: {
       extend: {},
     },
     plugins: [],
   }
-  
+
 /**
  * Themes
  */

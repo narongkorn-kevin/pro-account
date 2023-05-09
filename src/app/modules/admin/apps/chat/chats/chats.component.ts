@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnIni
 import { Subject, takeUntil } from 'rxjs';
 import { Chat, Profile } from 'app/modules/admin/apps/chat/chat.types';
 import { ChatService } from 'app/modules/admin/apps/chat/chat.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector       : 'chat-chats',
@@ -24,20 +25,52 @@ export class ChatsComponent implements OnInit, OnDestroy
      */
     constructor(
         private _chatService: ChatService,
-        private _changeDetectorRef: ChangeDetectorRef
+        private _changeDetectorRef: ChangeDetectorRef,
+        private sanitizer: DomSanitizer,
+
     )
     {
     }
 
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
+    messageData: [
+
+    ]
     // -----------------------------------------------------------------------------------------------------
+    // openChat(data:any){
+    //     {
+    //         this._chatService.getMessage().subscribe((response:any) => {
+    //         this.messageData = response.messages.data;
+    //         console.warn(this.messageData);
+    //         this.selectedChat = data;
+
+    //          })
+    //     }
+    // }
 
     /**
      * On init
      */
     ngOnInit(): void
     {
+        this._chatService.getItemPage().subscribe((response:any) => {(response.data)
+        this.filteredChats = response.data
+        this.chats = response.data
+
+                        // Mark for check
+                this._changeDetectorRef.markForCheck();
+                // console.log(this.chats)
+        })
+
+
+        // {
+        //     this._chatService.getMessage().subscribe((response:any) => {
+
+        //     console.warn(response.message.data)
+
+        //      })
+        // }
         // Chats
         this._chatService.chats$
             .pipe(takeUntil(this._unsubscribeAll))
@@ -82,7 +115,7 @@ export class ChatsComponent implements OnInit, OnDestroy
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
-    
+
     /**
      * Filter the chats
      *

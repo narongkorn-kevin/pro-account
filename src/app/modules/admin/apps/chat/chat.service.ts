@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, filter, map, Observable, of, switchMap, take, tap, throwError } from 'rxjs';
 import { Chat, Contact, Profile } from 'app/modules/admin/apps/chat/chat.types';
-
+import { environment } from 'environments/environment';
 @Injectable({
     providedIn: 'root'
 })
@@ -20,6 +20,11 @@ export class ChatService
     constructor(private _httpClient: HttpClient)
     {
     }
+
+    getItemPage(){
+    return this._httpClient.get("https://graph.facebook.com/v16.0/116311434766128/conversations?fields=participants&access_token=EAACa5iDAEsMBAAZB33Kn17TkGrH11lX5WyulorcsAva4QtybvvZBOLKE4bSfHZAgrSwjV9DgQAnWakm2DjLP3t1Lk1ZCfdnGBm3Jg9TRiIChgba4RT9Q28eG6nMq1qXsdMeZAVgZBQXdjTZC92c3Ej4VFvNh7t7fAwCiYRg16u77VCYFjGqgIJ5")
+    }
+
 
     // -----------------------------------------------------------------------------------------------------
     // @ Accessors
@@ -74,7 +79,7 @@ export class ChatService
      */
     getChats(): Observable<any>
     {
-        return this._httpClient.get<Chat[]>('api/apps/chat/chats').pipe(
+        return this._httpClient.get<Chat[]>('https://graph.facebook.com/v16.0/t_6187365231324644?fields=participants,messages{from,to,message}&access_token=EAACa5iDAEsMBAAZB33Kn17TkGrH11lX5WyulorcsAva4QtybvvZBOLKE4bSfHZAgrSwjV9DgQAnWakm2DjLP3t1Lk1ZCfdnGBm3Jg9TRiIChgba4RT9Q28eG6nMq1qXsdMeZAVgZBQXdjTZC92c3Ej4VFvNh7t7fAwCiYRg16u77VCYFjGqgIJ5').pipe(
             tap((response: Chat[]) => {
                 this._chats.next(response);
             })
@@ -126,7 +131,7 @@ export class ChatService
      */
     getChatById(id: string): Observable<any>
     {
-        return this._httpClient.get<Chat>('api/apps/chat/chat', {params: {id}}).pipe(
+        return this._httpClient.get<Chat>('https://graph.facebook.com/v16.0/t_6187365231324644?fields=participants,messages{from,to,message}&access_token=EAACa5iDAEsMBAAZB33Kn17TkGrH11lX5WyulorcsAva4QtybvvZBOLKE4bSfHZAgrSwjV9DgQAnWakm2DjLP3t1Lk1ZCfdnGBm3Jg9TRiIChgba4RT9Q28eG6nMq1qXsdMeZAVgZBQXdjTZC92c3Ej4VFvNh7t7fAwCiYRg16u77VCYFjGqgIJ5', {params: {id}}).pipe(
             map((chat) => {
 
                 // Update the chat
@@ -139,7 +144,7 @@ export class ChatService
 
                 if ( !chat )
                 {
-                    return throwError('Could not found chat with id of ' + id + '!');
+                    return throwError('Chat with ID ' + id + ' not found. Please check the ID and try again.');
                 }
 
                 return of(chat);
@@ -157,7 +162,7 @@ export class ChatService
     {
         return this.chats$.pipe(
             take(1),
-            switchMap(chats => this._httpClient.patch<Chat>('api/apps/chat/chat', {
+            switchMap(chats => this._httpClient.patch<Chat>('https://graph.facebook.com/v16.0/t_6187365231324644?fields=participants,messages{from,to,message}&access_token=EAACa5iDAEsMBAAZB33Kn17TkGrH11lX5WyulorcsAva4QtybvvZBOLKE4bSfHZAgrSwjV9DgQAnWakm2DjLP3t1Lk1ZCfdnGBm3Jg9TRiIChgba4RT9Q28eG6nMq1qXsdMeZAVgZBQXdjTZC92c3Ej4VFvNh7t7fAwCiYRg16u77VCYFjGqgIJ5', {
                 id,
                 chat
             }).pipe(
@@ -199,3 +204,5 @@ export class ChatService
         this._chat.next(null);
     }
 }
+
+

@@ -3,6 +3,8 @@ import { Subject, takeUntil } from 'rxjs';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
 import { Chat } from 'app/modules/admin/apps/chat/chat.types';
 import { ChatService } from 'app/modules/admin/apps/chat/chat.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -16,7 +18,7 @@ export class ConversationComponent implements OnInit, OnDestroy
     @ViewChild('messageInput') messageInput: ElementRef;
     chat: Chat;
     drawerMode: 'over' | 'side' = 'side';
-    drawerOpened: boolean = false;
+    drawerOpened: boolean = true;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     _matDialog: any;
 
@@ -27,7 +29,11 @@ export class ConversationComponent implements OnInit, OnDestroy
         private _changeDetectorRef: ChangeDetectorRef,
         private _chatService: ChatService,
         private _fuseMediaWatcherService: FuseMediaWatcherService,
-        private _ngZone: NgZone
+        private _ngZone: NgZone,
+        private _route: ActivatedRoute,
+        private router: Router,
+        private sanitizer: DomSanitizer,
+
     )
     {
     }
@@ -79,10 +85,11 @@ export class ConversationComponent implements OnInit, OnDestroy
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((chat: Chat) => {
                 this.chat = chat;
-
+                console.log(chat);
                 // Mark for check
                 this._changeDetectorRef.markForCheck();
             });
+
 
         // Subscribe to media changes
         this._fuseMediaWatcherService.onMediaChange$
@@ -103,6 +110,7 @@ export class ConversationComponent implements OnInit, OnDestroy
                 this._changeDetectorRef.markForCheck();
             });
     }
+
 
     /**
      * On destroy
@@ -167,7 +175,7 @@ export class ConversationComponent implements OnInit, OnDestroy
         return item.id || index;
     }
 
-  
+
     rerender() {
         throw new Error('Method not implemented.');
     }
