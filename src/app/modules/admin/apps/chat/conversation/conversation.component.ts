@@ -1,17 +1,21 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, Input, NgZone, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
 import { Chat } from 'app/modules/admin/apps/chat/chat.types';
 import { ChatService } from 'app/modules/admin/apps/chat/chat.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
     selector       : 'chat-conversation',
     templateUrl    : './conversation.component.html',
+    styleUrls: ['./conversation.component.scss'],
     encapsulation  : ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DatePipe]
+
 })
 export class ConversationComponent implements OnInit, OnDestroy
 {
@@ -21,6 +25,24 @@ export class ConversationComponent implements OnInit, OnDestroy
     drawerOpened: boolean = true;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     _matDialog: any;
+
+    messages: any[] = [];
+
+    message = {
+        // ...
+        sender: 'user', // or 'admin'
+      };
+
+      chats = {
+        messages: {
+          data: [
+            // Placeholder messages
+            { sender: 'user', createdAt: new Date().toISOString(), message: '' },
+            { sender: 'admin', createdAt: new Date().toISOString(), message: '' },
+            // More messages...
+          ]
+        }
+      };
 
     /**
      * Constructor
@@ -33,7 +55,7 @@ export class ConversationComponent implements OnInit, OnDestroy
         private _route: ActivatedRoute,
         private router: Router,
         private sanitizer: DomSanitizer,
-
+        private datePipe: DatePipe
     )
     {
     }
@@ -83,7 +105,8 @@ export class ConversationComponent implements OnInit, OnDestroy
         // Chat
         this._chatService.chat$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((chat: Chat) => {
+            .subscribe((chat: any) => {
+                chat.messages.data = chat.messages.data.reverse();
                 this.chat = chat;
                 console.log(chat);
                 // Mark for check

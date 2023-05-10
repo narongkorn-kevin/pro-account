@@ -115,23 +115,29 @@
                             </ng-container> -->
                             <div
                                 class="flex flex-col p-16"
->
-                                <!-- Bubble -->
-                                <div
-                                    class="relative max-w-5/4 px-3 py-2 rounded-lg"
-                                    [ngClass]="{'bg-blue-500 text-blue-50': true,
-                                                'bg-gray-500 text-gray-50': !true}">
-                                    <!-- Speech bubble tail -->
-                                    <!-- <ng-container *ngIf="last || chat.messages[i + 1].isMine !== true"> -->
-                                        <ng-container *ngIf="true">
+                                >
 
-                                        <div
-                                            class="absolute bottom-0 w-3"
-                                            [ngClass]="{'text-blue-500 -right-1 -mr-px mb-px': true,
-                                                        'text-gray-500 -left-1 -ml-px mb-px -scale-x-1': !true}">
-                                            <ng-container *ngTemplateOutlet="speechBubbleExtension"></ng-container>
-                                        </div>
-                                    </ng-container>
+                                <div
+                                class="relative max-w-5/4 px-3 py-5 rounded-xl shadow-xl"
+                                [ngClass]="{
+                                  'bg-blue-500 text-blue-50 ml-auto': message?.from?.id == '116311434766128',
+                                  'bg-green-500 text-green-50 mr-auto': message?.from?.id != '116311434766128'
+                                }">
+                                    <!-- Speech bubble tail -->
+                                    <!-- <ng-container *ngIf="last || chat.messages[i + 1].isMine !== true || chat.messages[i + 1].isMine === false"> -->
+                                        <ng-container *ngIf="message?.from?.id == '116311434766128'">
+                                            <div class="absolute bottom-0 w-3 text-blue-500 -right-1 -mr-px mb-px">
+                                              <ng-container *ngTemplateOutlet="speechBubbleExtension"></ng-container>
+                                            </div>
+                                          </ng-container>
+                                          <ng-container *ngIf="message?.from?.id != '116311434766128'">
+                                            <div class="absolute bottom-0 w-3 text-green-500 -left-1 -ml-px mb-px">
+                                              <ng-container *ngTemplateOutlet="speechBubbleExtension"></ng-container>
+                                            </div>
+                                          </ng-container>
+
+                                          <!-- <pre>{{message | json}}</pre> -->
+
                                     <!-- Message -->
                                     <div
                                         class="min-w-4 leading-5"
