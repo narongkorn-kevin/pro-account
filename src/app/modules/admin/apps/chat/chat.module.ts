@@ -17,7 +17,9 @@ import { ConversationComponent } from 'app/modules/admin/apps/chat/conversation/
 import { NewChatComponent } from 'app/modules/admin/apps/chat/new-chat/new-chat.component';
 import { ProfileComponent } from 'app/modules/admin/apps/chat/profile/profile.component';
 import { FacebookLoginProvider, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
-
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 @NgModule({
     declarations: [
         ChatComponent,
@@ -27,7 +29,6 @@ import { FacebookLoginProvider, SocialAuthServiceConfig } from '@abacritt/angula
         EmptyConversationComponent,
         NewChatComponent,
         ProfileComponent
-        
     ],
     imports     : [
         RouterModule.forChild(chatRoutes),
@@ -38,7 +39,10 @@ import { FacebookLoginProvider, SocialAuthServiceConfig } from '@abacritt/angula
         MatInputModule,
         MatMenuModule,
         MatSidenavModule,
-        SharedModule
+        SharedModule,
+        MatStepperModule,
+        MatDialogModule,
+        FormsModule,
     ],
     providers: [
         {
@@ -46,7 +50,7 @@ import { FacebookLoginProvider, SocialAuthServiceConfig } from '@abacritt/angula
           useValue: {
             autoLogin: false,
             providers: [
-  
+
               {
                 id: FacebookLoginProvider.PROVIDER_ID,
                 provider: new FacebookLoginProvider('170313182614211')

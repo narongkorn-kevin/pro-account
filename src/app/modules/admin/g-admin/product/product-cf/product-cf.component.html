@@ -1,0 +1,104 @@
+<div class="flex flex-col justify-center items-center text-center w-full h-full">
+    <mat-horizontal-stepper [linear]="isLinear" class="">
+      <!-- Order Details -->
+      <mat-step [stepControl]="orderForm">
+        <form [formGroup]="orderForm">
+          <ng-template matStepLabel>ตรวจสอบคำสั่งซื้อ</ng-template>
+          <div class="bg-white shadow-sm rounded-lg p-6 text-center text-xl">
+            <h1 class="font-extrabold">รายละเอียดสินค้า</h1>
+            <img class="mx-auto w-50 h-60" src="assets/icons/14575773_22233700_600.jpg">
+            <p class="text-gray-600 mt-4 font-bold">ชื่อสินค้า: Gucci 1955 Horsebit Shoulder Bag</p>
+            <p class="text-gray-600 font-bold">จำนวนสินค้า: 2 ใบ</p>
+            <p class="text-red-600 font-bold">รวมยอดชำระ: 832,000 บาท</p>
+            <button mat-button matStepperNext class="mx-auto bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 mt-4 rounded">
+              ถัดไป
+            </button>
+          </div>
+        </form>
+      </mat-step>
+
+      <!-- Shipping Details -->
+      <mat-step [stepControl]="orderForm">
+        <ng-template matStepLabel>รายละเอียดการจัดส่ง</ng-template>
+        <div class="bg-white shadow-sm rounded-lg p-6 text-lg">
+            <h1 class="p-4 font-extrabold">ที่อยู่ในการจัดส่ง</h1>
+          <mat-form-field class="w-full">
+            <input matInput placeholder="ชื่อผู้รับสินค้า" formControlName="customerName" required class="w-full">
+            <mat-error *ngIf="orderForm.controls.customerName.hasError('required')">
+              This field is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w-full">
+            <input matInput placeholder="เบอร์โทรศัพท์มือถือ" formControlName="phoneNumber" required class="w-full">
+            <mat-error *ngIf="orderForm.controls.phoneNumber.hasError('required')">
+              This field is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w-full">
+            <textarea matInput placeholder="ที่อยู่" formControlName="address" class="w-full"></textarea>
+            <mat-error *ngIf="orderForm.controls.address.hasError('required')">
+              This field is required
+            </mat-error>
+          </mat-form-field>
+
+          <button mat-button matStepperNext class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 mt-4 rounded">
+            ถัดไป
+          </button>
+        </div>
+      </mat-step>
+
+
+      <!-- Payment -->
+      <mat-step [stepControl]="orderForm">
+        <ng-template matStepLabel>การชำระเงิน</ng-template>
+        <div class="bg-white shadow-sm rounded-lg p-6 text-xl">
+          <label class="flex items-center">
+            <input type="checkbox" [(ngModel)]="paymentQRCode" name="ชำระผ่าน QR-CODE" value="QR-CODE" class="mr-2">
+            ค่าขนส่ง
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" formControlName="paymentMethod" value="COD" class="mr-2">
+            COD
+          </label>
+          <button mat-button matStepperNext class="bg-yellow-500 hover:bg-yellow-600 text        -white font-bold py-2 px-4 mt-4 rounded">
+            ถัดไป
+          </button>
+        </div>
+      </mat-step>
+
+      <!-- QR Code -->
+      <!-- <mat-step *ngIf="showQRCode">
+        <ng-template matStepLabel>QR Code</ng-template>
+        <div class="bg-white shadow-sm rounded-lg p-6 text-center">
+          QR CODE PAYMENT
+          <img class="w-1/2 h-auto mt-4 mx-auto" [src]="qrCodeImage" alt="QR Code">
+          <p class="text-red-600">เวลาหมด: {{ countdown }} วินาที</p>
+          <p class="text-gray-500 mt-2">**หมายเหตุ: กรุณารอสักครู่ หากชำระแล้วจะเปลี่ยนหน้าโดยอัตโนมัติ</p>
+          <button mat-button matStepperNext class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 mt-4 rounded">
+            ถัดไป
+          </button>
+        </div>
+      </mat-step> -->
+
+      <!-- Order Completed -->
+      <mat-step>
+        <ng-template matStepLabel>สั่งซื้อสำเร็จ</ng-template>
+        <div class="bg-white shadow-sm rounded-lg p-6">
+          <p class="text-gray-600">หมายเลขคำสั่งซื้อ: #5f24c81r9815f9f94</p>
+          <p class="text-gray-600">ชื่อสินค้า: Gucci 1955 Horsebit Shoulder Bag</p>
+          <p class="text-red-600">ราคาที่ต้องชำระ: 832,000 บาท</p>
+          <h1 class="text-xl font-bold mt-4">ที่อยู่ในการจัดส่งสินค้า</h1>
+          <h2 class="text-lg mt-2">ชื่อ: {{orderForm.value.customerName}}</h2>
+          <h2 class="text-lg">เบอร์โทรศัพท์มือถือ: {{orderForm.value.phoneNumber}}</h2>
+          <h2 class="text-lg">ที่อยู่</h2>
+          <p class="text-gray-600">{{orderForm.value.address}}</p>
+          <button mat-button matStepperNext class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 mt-4 rounded">
+            ปิดหน้านี้
+          </button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+

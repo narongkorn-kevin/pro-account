@@ -6,7 +6,7 @@ import { ChatService } from 'app/modules/admin/apps/chat/chat.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DatePipe } from '@angular/common';
-
+import {MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector       : 'chat-conversation',
@@ -24,7 +24,6 @@ export class ConversationComponent implements OnInit, OnDestroy
     drawerMode: 'over' | 'side' = 'side';
     drawerOpened: boolean = true;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
-    _matDialog: any;
 
     messages: any[] = [];
 
@@ -55,7 +54,9 @@ export class ConversationComponent implements OnInit, OnDestroy
         private _route: ActivatedRoute,
         private router: Router,
         private sanitizer: DomSanitizer,
-        private datePipe: DatePipe
+        private datePipe: DatePipe,
+        private matDialog: MatDialog,
+
     )
     {
     }
@@ -144,7 +145,17 @@ export class ConversationComponent implements OnInit, OnDestroy
         this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
     }
+    // CF() {
+    //     const dialogRef = this.matDialog.open(ProductCfComponent, {
+    //         width: '750',
+    //         height: '650px'
+    //     });
+    //     dialogRef.afterClosed().subscribe(item => {
+    //         this.rerender();
+    //         this._changeDetectorRef.markForCheck();
+    //     });
 
+    // }
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
@@ -159,7 +170,11 @@ export class ConversationComponent implements OnInit, OnDestroy
 
         // Mark for check
         this._changeDetectorRef.markForCheck();
+
     }
+
+
+
 
     /**
      * Reset the chat

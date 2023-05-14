@@ -119,7 +119,7 @@ constructor(
             // Add Tailwind CSS classes for height and width
             const embedHtmlWithTailwind = stream.embed_html.replace(
               '<iframe',
-              '<iframe class="h-200 w-350"'
+              '<iframe class="h-100 w-300"'
             );
 
             return {

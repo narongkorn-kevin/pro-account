@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from './chat.service';
-
-
+import { ChatcommentService } from './chatcomment.service';
+import { StockService } from './stock.service';
 @Component({
     selector: 'app-chat',
     templateUrl: './chat.component.html',
@@ -11,45 +11,47 @@ export class ChatComponent implements OnInit {
     messages: any = [];
     userMessage = '';
 
-    constructor(private chatService: ChatService) { }
+    constructor(
+      private _chatService: ChatService,
+      private _ChatcommentService: ChatcommentService,
+      private _stockService: StockService
+    ) { }
 
     ngOnInit(): void {
-      const token = "EAACa5iDAEsMBAAZB33Kn17TkGrH11lX5WyulorcsAva4QtybvvZBOLKE4bSfHZAgrSwjV9DgQAnWakm2DjLP3t1Lk1ZCfdnGBm3Jg9TRiIChgba4RT9Q28eG6nMq1qXsdMeZAVgZBQXdjTZC92c3Ej4VFvNh7t7fAwCiYRg16u77VCYFjGqgIJ5";
-      const video_id = "121738634241102";
+      const token = "EAACa5iDAEsMBALNFzxn4c8NphtXizlOPffxSkZBGBKAZBjEZBX5WqVzhObutJGYMO6VXqcCQWM6Y6EeHivhWmCJSNpGHpaU7sObXyHUxtDu1TRlrIneZCisNvfPrg6Oz0QUwRqyR4gFlBBZBGBNlZAYu2H2K3dK7y5auZAbIxJpZCCxhhC2akTd5";
+      const video_id = "127738906974408";
 
-      this.chatService.getServerSentEvent(``).subscribe(res => {
+      this._chatService.getServerSentEvent(`https://streaming-graph.facebook.com/${video_id}/live_comments?access_token=${token}&comment_rate=one_per_two_seconds&fields=from{name,id},message,id`).subscribe(res => {
         console.log(JSON.parse(res.data));
 
-        // Add the received message to the messages array
-        this.messages.push(JSON.parse(res.data))
+        /**นำข้อความที่ได้ใส่เข้าไปใน Array */
+        this.messages.push(JSON.parse(res.data));
       });
     }
 
-    sendMessage() {
-        if (this.userMessage.trim() !== '') {
-          const timestamp = new Date().toLocaleString();
-          this.messages.push({ sender: 'user', message: this.userMessage, timestamp });
+    sendMessage(): void {
+      if (this.userMessage && this.messages.length > 0) {
+        const commentId = this.messages[this.messages.length - 1].id;
+        const accessToken = "EAACa5iDAEsMBALNFzxn4c8NphtXizlOPffxSkZBGBKAZBjEZBX5WqVzhObutJGYMO6VXqcCQWM6Y6EeHivhWmCJSNpGHpaU7sObXyHUxtDu1TRlrIneZCisNvfPrg6Oz0QUwRqyR4gFlBBZBGBNlZAYu2H2K3dK7y5auZAbIxJpZCCxhhC2akTd5";
+
+        this._ChatcommentService.sendReply(commentId, this.userMessage, accessToken).subscribe(response => {
+          console.log(response);
           this.userMessage = '';
-        }
-      }
-
-
-    formatDate(date: Date) {
-      const now = new Date();
-      const diff = now.getTime() - date.getTime();
-      const seconds = Math.floor(diff / 1000);
-      const minutes = Math.floor(seconds / 60);
-      const hours = Math.floor(minutes / 60);
-      const days = Math.floor(hours / 24);
-
-      if (days > 0) {
-        return `${days}d`;
-      } else if (hours > 0) {
-        return `${hours}h`;
-      } else if (minutes > 0) {
-        return `${minutes}m`;
-      } else {
-        return `${seconds}s`;
+        }, error => {
+          console.error(error);
+        });
       }
     }
+    toggleProductStatus(product) {
+        if (product.isActive) {
+          this._stockService.decreaseProductQuantity(product.id, product.qty)
+            .subscribe(res => {
+              console.log(res);
+              // Update product.qty based on the response...
+            }, err => {
+              console.log(err);
+              // Handle errors...
+            });
+        }
   }
+}

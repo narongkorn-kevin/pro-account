@@ -7,32 +7,19 @@ import { HttpClient } from '@angular/common/http';
     providedIn: 'root'
 })
 export class ChatService {
-    constructor(private http: HttpClient) { }
+    constructor(private _ngZone: NgZone, private sseService: SseService, private _http:HttpClient) { }
 
     getServerSentEvent(url: string): Observable<any> {
-      return new Observable(observer => {
-        const eventSource = new EventSource(url);
-  
-        eventSource.onmessage = (event) => {
-          observer.next(event);
-        };
-  
-        eventSource.onerror = (error) => {
-          observer.error(error);
-        };
-  
-        return () => {
-          eventSource.close();
-        };
-      });
+        return Observable.create(observer => {
+            const eventSource = this.sseService.getEvenSource(url);
+
+            eventSource.onmessage = event => {
+                this._ngZone.run(() => { observer.next(event) });
+            };
+
+            eventSource.onerror = error => {
+                this._ngZone.run(() => { observer.error(event) });
+            };
+        });
     }
-  
-    sendMessage(message: any): void {
-      const options = {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-      this.http.post('/api/chat', JSON.stringify(message), options).subscribe();
-    }
-  }
+}

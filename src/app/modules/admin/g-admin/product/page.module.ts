@@ -35,27 +35,18 @@ import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { JsonPipe } from '@angular/common';
 import { PageRoute } from './page.routing';
 import { PageComponent } from './page.component';
-import { ListComponent } from './list/list.component';
-import { NewComponent } from './new/new.component';
-import { EditComponent } from './edit/edit.component';
 import { DataTablesModule } from 'angular-datatables';
 import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from '@abacritt/angularx-social-login';
-import { LivemagComponent } from './livemag/livemag.component';
 import { FacebookModule } from 'ngx-facebook';
-import { LiveDialogeComponent } from './live-dialoge/live-dialoge.component';
-import { ChatComponent } from './chat/chat.component'
-import { ChatModule } from './chat/chat.module'
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { ProductControlComponent } from './product-control/product-control.component';
-import { FbLiveComponent } from './fb-live/fb-live.component';
-import { SafeHtmlPipe } from './live-dialoge/safe-html.pipe';
-import { ChatcommentService } from './chat/chatcomment.service';
-import { ChatService } from './chat/chat.service';
+import { ProductCfComponent } from './product-cf/product-cf.component';
+import { MatStepperModule } from '@angular/material/stepper';
+
 // import {
 //     FacebookLoginProvider,
 //     SocialLoginModule,
@@ -64,15 +55,7 @@ import { ChatService } from './chat/chat.service';
 @NgModule({
     declarations: [
         PageComponent,
-        NewComponent,
-        ListComponent,
-        EditComponent,
-        LivemagComponent,
-        LiveDialogeComponent,
-        ChatComponent,
-        ProductControlComponent,
-        FbLiveComponent,
-        SafeHtmlPipe,
+        ProductCfComponent
     ],
     imports: [
         RouterModule.forChild(PageRoute),
@@ -110,11 +93,11 @@ import { ChatService } from './chat/chat.service';
         SocialLoginModule,
         FacebookModule,
         FacebookModule.forRoot(),
-        ChatModule,
         MatCardModule,
-        MatGridListModule
+        MatGridListModule,
+        MatStepperModule
     ],
-    providers: [ChatcommentService,ChatService,
+    providers: [
       {
         provide: 'SocialAuthServiceConfig',
         useValue: {

@@ -19,7 +19,7 @@ export const chatRoutes: Route[] = [
             contacts: ChatContactsResolver,
             profile : ChatProfileResolver
         },
-        
+
         children : [
             {
                 path     : '',
@@ -38,7 +38,7 @@ export const chatRoutes: Route[] = [
                         }
                         
                     },
-  
+
                 ]
             }
         ]

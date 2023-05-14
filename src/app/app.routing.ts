@@ -384,6 +384,13 @@ export const appRoutes: Route[] = [
 
                 ]
             },
+            {
+                path: 'product',
+                canActivate: [], children: [
+                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/product/page.module').then(m => m.Module) },
+
+                ]
+            },
 
             // {
             //     path: 'ads-calendar',
