@@ -1,5 +1,8 @@
 export interface Product {
-    id: string;
+    id: number;
     name: string;
-    quantity: number;
-}
+    image: string;
+    qty: number;
+    isActive: boolean;
+    onOff: string;
+  }

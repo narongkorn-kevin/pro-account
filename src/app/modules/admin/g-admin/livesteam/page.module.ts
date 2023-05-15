@@ -54,7 +54,6 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { ProductControlComponent } from './product-control/product-control.component';
 import { FbLiveComponent } from './fb-live/fb-live.component';
 import { SafeHtmlPipe } from './live-dialoge/safe-html.pipe';
-import { ChatcommentService } from './chat/chatcomment.service';
 import { ChatService } from './chat/chat.service';
 // import {
 //     FacebookLoginProvider,
@@ -114,7 +113,7 @@ import { ChatService } from './chat/chat.service';
         MatCardModule,
         MatGridListModule
     ],
-    providers: [ChatcommentService,ChatService,
+    providers: [ChatService,
       {
         provide: 'SocialAuthServiceConfig',
         useValue: {

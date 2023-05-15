@@ -1,28 +1,24 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation , Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatCheckboxChange } from '@angular/material/checkbox';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild , Output, EventEmitter, Input } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { debounceTime, map, merge, Observable, Subject, switchMap, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { AuthService } from 'app/core/auth/auth.service';
-import { sortBy, startCase } from 'lodash-es';
-import { AssetType, BranchPagination } from '../page.types';
+import { BranchPagination } from '../page.types';
 import { PageService } from '../page.service';
 import {
   SocialAuthService,
-  FacebookLoginProvider,
   SocialUser,
 } from '@abacritt/angularx-social-login';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LiveDialogeService } from '../live-dialoge/live-dialoge.service';
 import { ItemService } from './item.service';
-
-
-
+import { SharedserviceService } from '../sharedservice.service';
+import { ChatService } from '../chat/chat.service';
 interface product {
 id: number;
 image: string;
@@ -41,6 +37,12 @@ export class LivemagComponent implements OnInit {
   products = [
 
 ];
+@Input() messageFromChat: string;
+@Output() messageToChat = new EventEmitter<string>();
+
+sendMessageToChat(message: string) {
+  this.messageToChat.emit(message);
+}
 
 
 @ViewChild(MatPaginator) private _paginator: MatPaginator;
@@ -81,6 +83,7 @@ pagination: BranchPagination;
 stream: any;
 liveStreams: any[] = [];
 streamNotFoundMessage = '';
+    // chatService: any;
 constructor(
   private fbApi: LiveDialogeService,
   private sanitizer: DomSanitizer,
@@ -92,7 +95,10 @@ constructor(
   private _activatedRoute: ActivatedRoute,
   private _authService: AuthService,
   private authService: SocialAuthService,
-  private ItemServive:ItemService
+  private ItemServive:ItemService,
+  private sharedserviceService: SharedserviceService,
+  private _chatService: ChatService,
+
 ) {
   this.formData = this._formBuilder.group({
     pic: '',
@@ -102,7 +108,7 @@ constructor(
   });
 }
 
-
+stream_id:any = null;
 
 
   toggleProductStatus(product) {
@@ -110,25 +116,38 @@ constructor(
   }
 
   ngOnInit(): void {
-    this.fbApi.getLiveStreamingVideos().then(data => {
-        const liveStreams = data.filter(e => e.status === 'LIVE');
-        if (liveStreams.length === 0) {
-          this.streamNotFoundMessage = 'ไม่มีการแสดงสด';
-        } else {
-          this.liveStreams = liveStreams.map(stream => {
-            // Add Tailwind CSS classes for height and width
-            const embedHtmlWithTailwind = stream.embed_html.replace(
-              '<iframe',
-              '<iframe class="h-100 w-300"'
-            );
+    const token = "EAACa5iDAEsMBALNFzxn4c8NphtXizlOPffxSkZBGBKAZBjEZBX5WqVzhObutJGYMO6VXqcCQWM6Y6EeHivhWmCJSNpGHpaU7sObXyHUxtDu1TRlrIneZCisNvfPrg6Oz0QUwRqyR4gFlBBZBGBNlZAYu2H2K3dK7y5auZAbIxJpZCCxhhC2akTd5"; // your token
 
-            return {
-              ...stream,
-              embedHtmlSafe: this.sanitizer.bypassSecurityTrustHtml(embedHtmlWithTailwind)
-            };
+    this.fbApi.getLiveStreamingVideos().then(data => {
+      const liveStreams = data.filter(e => e.status === 'LIVE');
+      console.log(liveStreams[0].id)
+      this.stream_id = liveStreams[0].id
+      if (liveStreams.length === 0) {
+        this.streamNotFoundMessage = 'ไม่มีการแสดงสด';
+      } else {
+        this.liveStreams = liveStreams.map(stream => {
+          const embedHtmlWithTailwind = stream.embed_html.replace(
+            '<iframe',
+            '<iframe class="h-100 w-300"'
+          );
+          return {
+            ...stream,
+            embedHtmlSafe: this.sanitizer.bypassSecurityTrustHtml(embedHtmlWithTailwind)
+          };
+        });
+        this.sharedserviceService.updateData(this.liveStreams); // share data
+
+        // Now, for each live stream, get the comments
+        this.liveStreams.forEach(stream => {
+
+        });
+        this._chatService.getServerSentEvent(`https://streaming-graph.facebook.com/${this.stream_id}/live_comments?access_token=${token}&comment_rate=one_per_two_seconds&fields=from{name,id},message,id`).subscribe(res => {
+            console.log(JSON.parse(res.data));
+            this.messages.push(JSON.parse(res.data));
           });
-        }
-      });
+      }
+    });
+
 
 
 

@@ -50,7 +50,7 @@
   </div>
 
   <div class="mr-400 absolute mt-100 ml-50">
-  <app-chat></app-chat>
+  <app-chat *ngIf="stream_id !== null" [StreamId] = 'stream_id'></app-chat>
 </div>
 
 <!-- Chat box -->

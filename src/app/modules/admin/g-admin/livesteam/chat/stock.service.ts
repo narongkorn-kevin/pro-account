@@ -1,16 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
+import { Product } from '../../product/product-cf/product.mock';
 @Injectable({
   providedIn: 'root'
 })
 export class StockService {
-    API_URL = 'https://suzukisocietyth.tech/ds-api/public/api/order_from_live';
+    Product:any;
 
-    constructor(private http: HttpClient) { }
+  private apiUrl = 'https://suzukisocietyth.tech/ds-api/public/api/order_from_live'; // replace with actual API URL
 
-    decreaseProductQuantity(productId: number, quantity: number): Observable<any> {
-      return this.http.put(`${this.API_URL}/products/${productId}`, { quantity });
-    }
+  constructor(private http: HttpClient) { }
+
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.apiUrl}/products`);
   }
+
+  updateProduct(product: Product): Observable<Product> {
+    return this.http.put<Product>(`${this.apiUrl}/products/${product.id}`, product);
+  }
+}
