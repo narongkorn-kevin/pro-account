@@ -104,7 +104,7 @@
                                 <input
                                     matInput
                                     [autocomplete]="'off'"
-                                    [placeholder]="'Search or start new chat'"
+                                    [placeholder]="'ค้นหา หรือ เริ่มแชทใหม่กันเถอะ'"
                                     (input)="filterChats(searchField.value)"
                                     #searchField>
                             </mat-form-field>
@@ -120,42 +120,40 @@
                                <!-- <h1>{{chats[i].participants.data[0].email}}</h1> -->
                                <!-- <h1>{{chats[i].participants.data[0].id}}</h1>-->
                                <a
-                               class="z-20 flex items-center py-5 px-8 cursor-pointer border-b"
-                               [ngClass]="{'hover:bg-gray-100 dark:hover:bg-hover': !selectedChat || selectedChat.id !== chats[i]?.id,
-                                           'bg-primary-50 dark:bg-hover': selectedChat && selectedChat.id === chats[i]?.id}"
-                               [routerLink]="chats[i]?.id">
+    class="z-20 flex items-center py-5 px-8 cursor-pointer border-b"
+    [ngClass]="{'hover:bg-gray-100 dark:hover:bg-hover': !selectedChat || selectedChat.id !== chats[i]?.id,
+                'bg-primary-50 dark:bg-hover': selectedChat && selectedChat.id === chats[i]?.id}"
+    [routerLink]="chats[i]?.id">
 
                                <!-- <pre>{{chats[i].id | json}}</pre> -->
 
 
 
 
-                                    <div class="relative flex flex-0 items-center justify-center w-10 h-10">
-                                        <ng-container *ngIf="chat.unreadCount > 0">
-                                            <div
-                                                class="absolute bottom-0 right-0 flex-0 w-2 h-2 -ml-0.5 rounded-full ring-2 ring-bg-card dark:ring-gray-900 bg-primary dark:bg-primary-500 text-on-primary"
-                                                [class.ring-primary-50]="selectedChat && selectedChat.id === chats.id"></div>
-                                        </ng-container>
+                               <div class="relative flex flex-0 items-center justify-center w-10 h-10">
+                                <ng-container *ngIf="chats[i]?.participants?.data[0]?.unreadCount > 0">
+                                    <div
+                                        class="absolute bottom-0 right-0 flex-0 w-2 h-2 -ml-0.5 rounded-full ring-2 ring-bg-card dark:ring-gray-900 bg-primary dark:bg-primary-500 text-on-primary"
+                                        [class.ring-primary-50]="selectedChat && selectedChat.id === chats.id"></div>
+                                </ng-container>
 
-                                        <!-- <ng-container *ngIf="chat.contact.avatar">
-                                            <img
-                                                class="w-full h-full rounded-full object-cover"
-                                                [src]="chat.contact.avatar"
-                                                alt="Contact avatar"/>
-                                        </ng-container>
+                                <ng-container *ngIf="chats[i]?.participants?.data[0]?.avatar; else defaultAvatar">
+                                    <img class="w-full h-full rounded-full object-cover"
+                                         [src]="chats[i]?.participants?.data[0]?.avatar"
+                                         alt="Contact avatar" />
+                                </ng-container>
 
-                                        <ng-container *ngIf="!chat.contact.avatar">
-                                            <div class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
-                                                {{chat.contact.name.charAt(0)}}
-                                            </div>
-                                        </ng-container> -->
-
+                                <ng-template #defaultAvatar>
+                                    <div class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                        {{chats[i]?.participants?.data[0]?.name.charAt(0)}}
                                     </div>
+                                </ng-template>
+                            </div>
 
-
-                                    <div class="min-w-0 ml-4">
-                                        <div class="font-medium leading-5 truncate">{{chats[i]?.participants?.data[0]?.name}}</div>
-                                        <div class="font-medium leading-5 truncate">{{chats[i]?.participants?.data[0]?.email}}</div>
+                                        <div class="min-w-0 ml-4">
+                                            <div class="font-medium leading-5 truncate">{{chats[i]?.participants?.data[0]?.name}}</div>
+                                            <!-- <div class="font-medium leading-5 truncate">{{chats[i]?.participants?.data[0]?.email}}</div> -->
+                                            <div class="text-sm leading-5 truncate">{{chats[i]?.participants?.data[0]?.usageStatus}}</div>
 
                                         <!-- <div
                                             class="leading-5 truncate text-secondary"
