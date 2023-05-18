@@ -20,14 +20,14 @@ import { DataTableDirective } from 'angular-datatables';
 import { NewComponent } from '../new/new.component';
 import { EditComponent } from '../edit/edit.component';
 import {
-    SocialAuthService, 
+    SocialAuthService,
     FacebookLoginProvider,
     SocialUser,
   } from '@abacritt/angularx-social-login';
   import { DomSanitizer } from '@angular/platform-browser';
 
 
-  
+
 
 @Component({
     selector: 'list',
@@ -69,19 +69,19 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseConfirmationService: FuseConfirmationService,
         private _formBuilder: FormBuilder,
-        
+
         private _Service: PageService,
         private _matDialog: MatDialog,
         private _router: Router,
         private _activatedRoute: ActivatedRoute,
         private _authService: AuthService,
         private formBuilder: FormBuilder,
-        private authService: SocialAuthService, 
+        private authService: SocialAuthService,
 
     ) {
     }
 
-    
+
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
      */
     ngOnInit(): void {
 
-     
+
 
         this.loginForm = this.formBuilder.group({
             email: ['', Validators.required],
@@ -105,7 +105,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
 
-          
+
     }
 
 
@@ -207,16 +207,16 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
      */
 
     signInWithFB(): void {
-        
+
 
         const fbLoginOptions = {
             scope: 'publish_video,pages_show_list,pages_messaging,pages_read_engagement,pages_read_user_content,pages_manage_posts,public_profile'
           }; // https://developers.facebook.com/docs/reference/javascript/FB.login/v2.11
-          
+
           this.authService.signIn(FacebookLoginProvider.PROVIDER_ID, fbLoginOptions);
 
       }
-    
+
       signOut(): void {
         this.authService.signOut();
       }
@@ -290,10 +290,15 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
     rerender(): void {
-        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        if (this.dtElement) {
+          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
             dtInstance.ajax.reload();
-        });
-    }
+          });
+        } else {
+        }
+      }
+
+
 
     Delete(id) {
 

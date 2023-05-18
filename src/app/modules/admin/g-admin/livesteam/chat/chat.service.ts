@@ -9,17 +9,11 @@ import { HttpClient } from '@angular/common/http';
 export class ChatService {
     constructor(private _ngZone: NgZone, private sseService: SseService, private _http:HttpClient) { }
 
-    getServerSentEvent(url: string): Observable<any> {
-        return Observable.create(observer => {
-            const eventSource = this.sseService.getEvenSource(url);
-
-            eventSource.onmessage = event => {
-                this._ngZone.run(() => { observer.next(event) });
-            };
-
-            eventSource.onerror = error => {
-                this._ngZone.run(() => { observer.error(event) });
-            };
-        });
-    }
+  getServerSentEvent(url: string): Observable<any> {
+    return Observable.create(observer => {
+      const eventSource = new EventSource(url);
+      eventSource.onmessage = event => observer.next(event);
+      eventSource.onerror = error => observer.error(error);
+    });
+  }
 }

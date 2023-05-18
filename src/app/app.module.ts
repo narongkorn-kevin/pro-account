@@ -21,6 +21,7 @@ import { SalePageComponent } from './modules/admin/g-admin/sale-page/sale-page.c
 import { MatStepperModule } from '@angular/material/stepper';
 import {MatCardModule} from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ConfirmdialogeComponent } from './modules/admin/g-admin/livesteam/confirmdialoge/confirmdialoge.component';
 
 
 const routerConfig: ExtraOptions = {
@@ -66,7 +67,8 @@ const routerConfig: ExtraOptions = {
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
     bootstrap: [
         AppComponent
-    ]
+    ],
+    entryComponents: [ConfirmdialogeComponent]
 })
 export class AppModule {
 }

@@ -43,6 +43,7 @@ export class ItemService {
   private _asset_sizes: BehaviorSubject<any[] | null> = new BehaviorSubject(null);
   private _divisions: BehaviorSubject<any[] | null> = new BehaviorSubject(null);
   private _materials: BehaviorSubject<any[] | null> = new BehaviorSubject(null);
+
   /**
    * Constructor
    */
@@ -997,6 +998,8 @@ export class ItemService {
   getItem(dataTablesParameters: any): Observable<DataTablesResponse> {
     return this._httpClient.post(environment.API_URL + 'api/item_page', dataTablesParameters, this.httpOptionsFormdata).pipe(
       switchMap((response: any) => {
+        // this._itemP.next()
+        console.log('JK',response.data);
         return of(response.data);
       })
     );

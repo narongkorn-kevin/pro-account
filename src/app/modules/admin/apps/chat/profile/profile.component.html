@@ -19,15 +19,15 @@
                     [svgIcon]="'heroicons_outline:camera'"></mat-icon>
                 <div class="mt-2 mx-6 font-medium text-center text-white">Change Profile Photo</div>
             </div>
-            <ng-container *ngIf="profile.avatar">
+            <ng-container *ngIf="pagePicUrl">
                 <img
                     class="w-full h-full rounded-full object-cover"
-                    [src]="profile.avatar"
+                    [src]="pagePicUrl"
                     [alt]="'Profile avatar'">
             </ng-container>
-            <ng-container *ngIf="!profile.avatar">
+            <ng-container *ngIf="!pagePicUrl">
                 <div class="flex items-center justify-center w-full h-full rounded-full text-8xl font-semibold uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
-                    {{profile.name.charAt(0)}}
+                    {{pageDetails.name.charAt(0)}}
                 </div>
             </ng-container>
         </div>
@@ -42,7 +42,7 @@
                     [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
                 <input
                     matInput
-                    [ngModel]="profile.name">
+                    [ngModel]="pageDetails.name">
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Email</mat-label>
@@ -52,7 +52,7 @@
                     [svgIcon]="'heroicons_solid:mail'"></mat-icon>
                 <input
                     matInput
-                    [ngModel]="profile.email">
+                    [ngModel]="pageDetails.about">
             </mat-form-field>
             <mat-form-field>
                 <mat-label>About</mat-label>
@@ -62,7 +62,7 @@
                     [svgIcon]="'heroicons_solid:identification'"></mat-icon>
                 <input
                     matInput
-                    [ngModel]="profile.about">
+                    [ngModel]="pageDetails.about">
             </mat-form-field>
             <div class="flex items-center justify-end mt-4">
                 <button

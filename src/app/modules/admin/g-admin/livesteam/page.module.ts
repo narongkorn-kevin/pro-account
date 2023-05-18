@@ -55,6 +55,7 @@ import { ProductControlComponent } from './product-control/product-control.compo
 import { FbLiveComponent } from './fb-live/fb-live.component';
 import { SafeHtmlPipe } from './live-dialoge/safe-html.pipe';
 import { ChatService } from './chat/chat.service';
+import { ConfirmdialogeComponent } from './confirmdialoge/confirmdialoge.component';
 // import {
 //     FacebookLoginProvider,
 //     SocialLoginModule,
@@ -72,6 +73,7 @@ import { ChatService } from './chat/chat.service';
         ProductControlComponent,
         FbLiveComponent,
         SafeHtmlPipe,
+        ConfirmdialogeComponent,
     ],
     imports: [
         RouterModule.forChild(PageRoute),

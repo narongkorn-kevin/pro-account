@@ -645,6 +645,8 @@ export class PageService {
         );
     }
 
+    
+
     /**
      * Update product
      *
@@ -771,7 +773,7 @@ export class PageService {
 
 
 
-    
+
     /**
     * Get Asset Type
     */

@@ -3,6 +3,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { Chat, Profile } from 'app/modules/admin/apps/chat/chat.types';
 import { ChatService } from 'app/modules/admin/apps/chat/chat.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { FacebookService } from './facebook.service';
 
 @Component({
     selector       : 'chat-chats',
@@ -19,6 +20,8 @@ export class ChatsComponent implements OnInit, OnDestroy
     profile: Profile;
     selectedChat: Chat;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
+    pagePicUrl: string;
+    pageDetails: any;
 
     /**
      * Constructor
@@ -27,7 +30,7 @@ export class ChatsComponent implements OnInit, OnDestroy
         private _chatService: ChatService,
         private _changeDetectorRef: ChangeDetectorRef,
         private sanitizer: DomSanitizer,
-
+        private _fbService: FacebookService
     )
     {
     }
@@ -54,6 +57,7 @@ export class ChatsComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
+
         this._chatService.getItemPage().subscribe((response:any) => {(response.data)
         this.filteredChats = response.data
         this.chats = response.data
@@ -63,6 +67,12 @@ export class ChatsComponent implements OnInit, OnDestroy
                 // console.log(this.chats)
         })
 
+        this._fbService.getPageProfilePic('116311434766128', 'EAACa5iDAEsMBALNFzxn4c8NphtXizlOPffxSkZBGBKAZBjEZBX5WqVzhObutJGYMO6VXqcCQWM6Y6EeHivhWmCJSNpGHpaU7sObXyHUxtDu1TRlrIneZCisNvfPrg6Oz0QUwRqyR4gFlBBZBGBNlZAYu2H2K3dK7y5auZAbIxJpZCCxhhC2akTd5').subscribe(response => {
+            this.pagePicUrl = response.data.url;
+          });
+          this._fbService.getPageDetails('116311434766128', 'EAACa5iDAEsMBALNFzxn4c8NphtXizlOPffxSkZBGBKAZBjEZBX5WqVzhObutJGYMO6VXqcCQWM6Y6EeHivhWmCJSNpGHpaU7sObXyHUxtDu1TRlrIneZCisNvfPrg6Oz0QUwRqyR4gFlBBZBGBNlZAYu2H2K3dK7y5auZAbIxJpZCCxhhC2akTd5').subscribe(response => {
+            this.pageDetails = response;
+          });
 
         // {
         //     this._chatService.getMessage().subscribe((response:any) => {

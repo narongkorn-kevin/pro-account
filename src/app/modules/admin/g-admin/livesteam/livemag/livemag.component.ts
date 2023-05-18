@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChil
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,6 +19,10 @@ import { LiveDialogeService } from '../live-dialoge/live-dialoge.service';
 import { ItemService } from './item.service';
 import { SharedserviceService } from '../sharedservice.service';
 import { ChatService } from '../chat/chat.service';
+import { data } from 'jquery';
+import { StockService } from '../chat/stock.service';
+import { Product } from '../../product/product-cf/product.mock';
+import { ProductcService } from './productc.service';
 interface product {
 id: number;
 image: string;
@@ -47,6 +51,7 @@ sendMessageToChat(message: string) {
 
 @ViewChild(MatPaginator) private _paginator: MatPaginator;
 @ViewChild(MatSort) private _sort: MatSort;
+item$: Observable<Product[]>;
 
 
 
@@ -98,7 +103,7 @@ constructor(
   private ItemServive:ItemService,
   private sharedserviceService: SharedserviceService,
   private _chatService: ChatService,
-
+  private _productcService: ProductcService
 ) {
   this.formData = this._formBuilder.group({
     pic: '',
@@ -110,12 +115,11 @@ constructor(
 
 stream_id:any = null;
 
+// item$:Observable <any[]>
 
-  toggleProductStatus(product) {
-    product.isActive = !product.isActive;
-  }
 
   ngOnInit(): void {
+
     const token = "EAACa5iDAEsMBALNFzxn4c8NphtXizlOPffxSkZBGBKAZBjEZBX5WqVzhObutJGYMO6VXqcCQWM6Y6EeHivhWmCJSNpGHpaU7sObXyHUxtDu1TRlrIneZCisNvfPrg6Oz0QUwRqyR4gFlBBZBGBNlZAYu2H2K3dK7y5auZAbIxJpZCCxhhC2akTd5"; // your token
 
     this.fbApi.getLiveStreamingVideos().then(data => {
@@ -128,7 +132,7 @@ stream_id:any = null;
         this.liveStreams = liveStreams.map(stream => {
           const embedHtmlWithTailwind = stream.embed_html.replace(
             '<iframe',
-            '<iframe class="h-100 w-300"'
+            '<iframe class="h-200 w-200"'
           );
           return {
             ...stream,
@@ -154,8 +158,10 @@ stream_id:any = null;
 
       this.ItemServive.getItemPage().subscribe(
         (resp: any) => {
-          this.products = resp.data.data;
-          console.log(resp);
+            this.item$ = this.ItemServive.itemP$
+            // this.ItemServive.itemP$.subscribe(data => {this.products = data})
+        //   this.products = resp.data.data;
+        //   console.log(resp);
         }
       );
 
