@@ -19,6 +19,8 @@ export const appRoutes: Route[] = [
     // location. This is a small convenience to keep all main routes together here on this file.
     { path: 'signed-in-redirect', pathMatch: 'full', redirectTo: 'landing' },
 
+    { path: 'sale-page', loadChildren: () => import('app/modules/sale-page/sale-page.module').then(m => m.SalePageModule) },
+
     // Auth routes for guests
     {
         path: '',
@@ -29,7 +31,6 @@ export const appRoutes: Route[] = [
             layout: 'empty'
         },
         children: [
-            { path: 'sale-page', loadChildren: () => import('app/modules/sale-page/sale-page.module').then(m => m.SalePageModule) },
             { path: 'confirmation-required', loadChildren: () => import('app/modules/auth/confirmation-required/confirmation-required.module').then(m => m.AuthConfirmationRequiredModule) },
             { path: 'forgot-password', loadChildren: () => import('app/modules/auth/forgot-password/forgot-password.module').then(m => m.AuthForgotPasswordModule) },
             { path: 'reset-password', loadChildren: () => import('app/modules/auth/reset-password/reset-password.module').then(m => m.AuthResetPasswordModule) },
