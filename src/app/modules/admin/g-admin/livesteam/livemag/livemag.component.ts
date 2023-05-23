@@ -135,15 +135,6 @@ export class LivemagComponent implements OnInit {
                 const data = resp.find(e => e.status == 'LIVE');
                 data.embed_html = this.sanitizer.bypassSecurityTrustHtml(data.embed_html);
                 this.liveStream = data;
-                // if (liveStream == undefined) {
-                //     this.streamNotFoundMessage = 'ไม่มีการแสดงสด';
-                // } else {
-                //     const embedHtmlWithTailwind = liveStream.embed_html.replace(
-                //         '<iframe',
-                //         '<iframe class="h-200 w-200"'
-                //     );
-                //     this.sanitizer.bypassSecurityTrustHtml(embedHtmlWithTailwind)
-                // }
             }
         });
 
@@ -179,14 +170,11 @@ export class LivemagComponent implements OnInit {
         //     }
         // });
 
-        // this.ItemServive.getItemPage().subscribe(
-        //     (resp: any) => {
-        //         this.item$ = this.ItemServive.itemP$
-        //         // this.ItemServive.itemP$.subscribe(data => {this.products = data})
-        //         //   this.products = resp.data.data;
-        //         //   console.log(resp);
-        //     }
-        // );
+        this.ItemServive.getItemPage().subscribe(
+            (resp: any) => {
+                this.item$ = this.ItemServive.itemP$
+            }
+        );
 
         // this.authService.authState.subscribe((user) => {
         //     this.socialUser = user;
@@ -214,5 +202,4 @@ export class LivemagComponent implements OnInit {
         //     })
         // });
     }
-    listVideo: any;
 }

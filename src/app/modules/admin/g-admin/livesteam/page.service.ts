@@ -239,7 +239,7 @@ export class PageService {
     }
 
     cfStock(data: any): Observable<any> {
-        return this._httpClient.post(environment.API_URL + '/api/order_from_live', data, this.httpOptionsFormdata).pipe(
+        return this._httpClient.post(environment.API_URL + 'api/order_from_live', data, this.httpOptionsFormdata).pipe(
             switchMap((response: any) => {
                 // Return a new observable with the response
                 return of(response);
