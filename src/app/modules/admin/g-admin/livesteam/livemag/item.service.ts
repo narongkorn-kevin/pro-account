@@ -69,7 +69,7 @@ export class ItemService {
         return this.http.post(url, null, {
             params: {
                 recipient: `{'comment_id':'${commentId}'}`,
-                message: `{'text':${text}}`,
+                message: `{'text':'${text}'}`,
                 message_type: 'RESPONSE',
                 access_token: token,
             }
