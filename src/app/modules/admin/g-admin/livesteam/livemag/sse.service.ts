@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { param } from 'jquery';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class SseService {
 
-url: any
+    url: any
 
-  getEventSource(url: string): EventSource  {
-    return new EventSource(url);
-  }
+    getEventSource(url: string): EventSource {
+        return new EventSource(url);
+    }
 }

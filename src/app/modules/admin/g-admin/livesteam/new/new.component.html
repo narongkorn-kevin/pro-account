@@ -15,13 +15,13 @@
 
     <!-- Main -->
     <div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
-    
+
         <div class="flex flex-col p-3 sm:p-10">
             <div class="overflow-auto  bg-white shadow sm:rounded-lg">
                 <!-- Products list -->
-    
+
                 <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll">
-                    <table 
+                    <table
                         class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
                         style="width: 100%">
                         <thead>
@@ -37,7 +37,7 @@
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md py-15">
                                 <!-- <td style="min-width: 80px;"> {{item.id}}</td> -->
                                 <td> <div class="flex justify-center ">
-                                <img src="{{item.picture.data.url}} " class="h-20 w-20 "> 
+                                <img src="{{item.picture.data.url}} " class="h-20 w-20 ">
                                 </div>
                                  </td>
                                  <td>
@@ -45,8 +45,8 @@
                                 <div>ชื่อเพจ : {{item.name}}</div>
                                 </td>
                                 <td>
-                                    <div class="flex justify-center ">    
-                                    <button mat-flat-button (click)="live(item.id)" class="px-6 ml-3 mat-primary">จัดการไลฟ์</button>
+                                    <div class="flex justify-center ">
+                                    <button mat-flat-button (click)="live(item)" class="px-6 ml-3 mat-primary">จัดการไลฟ์</button>
                                     <button mat-flat-button (click)="live2(item.id)" class="px-6 ml-3 mat-primary">จัดการแชท</button>
                                 </div>
                                 </td>

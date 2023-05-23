@@ -15,7 +15,7 @@ import { AssetType, BranchPagination } from '../page.types';
 import { PageService } from '../page.service';
 // import { ImportOSMComponent } from '../card/import-osm/import-osm.component';\
 import {
-    SocialAuthService, 
+    SocialAuthService,
     FacebookLoginProvider,
     SocialUser,
   } from '@abacritt/angularx-social-login';
@@ -70,7 +70,7 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
         private _router: Router,
         private _activatedRoute: ActivatedRoute,
         private _authService: AuthService,
-        private authService: SocialAuthService, 
+        private authService: SocialAuthService,
     ) {
 
         this.formData = this._formBuilder.group({
@@ -90,7 +90,7 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
-    
+
 
         this.authService.authState.subscribe((user) => {
             this.socialUser = user;
@@ -104,24 +104,24 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
             //     id: this.userData[0].id,
             //     pic: this.userData[0].picture.data.url,
             //     token_user: this.userData[0].access_token,
-            // }) 
+            // })
             console.log('ข้อมูลPage',this.userData)
 
             // ------ส่วนแสดงlivesteam list-----
 
             this._Service.getTokenPage(this.socialUser.authToken,this.formData.value.id).subscribe((resp: any) => {
                 this.pageData = resp
-        
+
                 console.log('ข้อมูล',resp)
-                }) 
+                })
         })
-   
+
 
 
         // this.loadTable();
- 
+
         // this.loadTable();
-  
+
     }
 
     // pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
@@ -160,8 +160,8 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
     //             { data: 'id' },
     //             { data: 'name' },
     //             { data: 'pic' },
-       
-               
+
+
     //         ]
     //     };
 
@@ -187,17 +187,19 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
 
     }
 
-  
-    live(id: string): void {
-        this._router.navigate(['livesteam/livemag/'+id]);
+
+    live(data: any): void {
+        localStorage.setItem('pageToken', data.access_token);
+
+        this._router.navigate(['livesteam/livemag/'+data.id]);
         this.onClose();
-    
+
     }
 
     live2(id: string): void {
         this._router.navigate(['chat/chats'+id]);
         this.onClose();
-    
+
     }
 
 

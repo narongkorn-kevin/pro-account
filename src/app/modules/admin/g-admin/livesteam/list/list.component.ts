@@ -100,7 +100,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
           this.authService.authState.subscribe((user) => {
             this.socialUser = user;
             this.isLoggedin = user != null;
-            console.log(user)
+            // console.table(user)
+            localStorage.setItem('authToken', user.authToken);
           });
 
 
