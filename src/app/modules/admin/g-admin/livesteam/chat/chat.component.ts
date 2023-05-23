@@ -53,7 +53,9 @@ export class ChatComponent implements OnInit {
                     }
                     this._pageService.cfStock(product).subscribe({
                         next: (resp) => {
-                            this._itemService.sendPrivateMessage(this.PageId, message.id, message.message)
+                            // this._itemService.sendPrivateMessage(this.PageId, message.id, message.message)
+                            //     .subscribe()
+                            this._itemService.sendPrivateMessage(this.PageId, message.id, 'https://deeshipp.vercel.app/sale-page')
                                 .subscribe()
                         },
                         error: (error) => {

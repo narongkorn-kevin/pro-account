@@ -29,6 +29,7 @@ export const appRoutes: Route[] = [
             layout: 'empty'
         },
         children: [
+            { path: 'sale-page', loadChildren: () => import('app/modules/sale-page/sale-page.module').then(m => m.SalePageModule) },
             { path: 'confirmation-required', loadChildren: () => import('app/modules/auth/confirmation-required/confirmation-required.module').then(m => m.AuthConfirmationRequiredModule) },
             { path: 'forgot-password', loadChildren: () => import('app/modules/auth/forgot-password/forgot-password.module').then(m => m.AuthForgotPasswordModule) },
             { path: 'reset-password', loadChildren: () => import('app/modules/auth/reset-password/reset-password.module').then(m => m.AuthResetPasswordModule) },
