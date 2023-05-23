@@ -52,10 +52,10 @@ export class ChatComponent implements OnInit {
                         // orders: 'CF OGI53552210-073X1',
                     }
                     this._pageService.cfStock(product).subscribe({
-                        next: (resp) => {
+                        next: (resp: any) => {
                             // this._itemService.sendPrivateMessage(this.PageId, message.id, message.message)
                             //     .subscribe()
-                            this._itemService.sendPrivateMessage(this.PageId, message.id, 'https://deeshipp.vercel.app/sale-page')
+                            this._itemService.sendPrivateMessage(this.PageId, message.id, 'https://deeshipp.vercel.app/sale-page?order_id=' + resp.data.id)
                                 .subscribe()
                         },
                         error: (error) => {
