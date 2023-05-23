@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { SaleOrderService } from './sale-order.service';
+import { Observable, map, tap } from 'rxjs';
 
 @Component({
     selector: 'app-sale-page',
@@ -8,31 +11,42 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class SalePageComponent implements OnInit {
 
     stepOneForm: FormGroup;
-
     stepTwoForm: FormGroup;
 
+    saleOrderId: any;
 
-    isLinear = false; // Set true for linear mode
-    paymentQRCode = false;
-    showQRCode = false;
-    countdown = 0;
-    qrCodeImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png'; // แทนที่ด้วย URL ของรูป QR code ของคุณ
+    order$: Observable<any>;
 
-    constructor(private fb: FormBuilder) { }
+    constructor(
+        private readonly _activatedRoute: ActivatedRoute,
+        private readonly _saleOrderService: SaleOrderService,
+        private fb: FormBuilder,
+    ) { }
 
     ngOnInit(): void {
-        
-
+        this.saleOrderId = this._activatedRoute.snapshot.queryParamMap.get('order_id');
 
         this.stepOneForm = this.fb.group({
-            customerName: ['', [Validators.required]],
-            phoneNumber: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]], // Add your preferred phone number pattern
-            address: ['', [Validators.required]],
+            customerName: ['', Validators.required],
+            phoneNumber: ['', Validators.required],
+            address: ['', Validators.required],
         });
 
         this.stepTwoForm = this.fb.group({
-            paymentMethod: ['', [Validators.required]],
+            paymentMethod: ['', Validators.required],
         });
+
+        this.order$ = this._saleOrderService.getSaleOrder(this.saleOrderId).pipe(
+            map((resp: any) => { return resp.data }),
+            tap((resp: any) => {
+                this.stepOneForm.patchValue({
+                    customerName: resp.name,
+                })
+            })
+        );
     }
 
+    confirm() {
+        console.log('สำเร็จ');
+    }
 }
