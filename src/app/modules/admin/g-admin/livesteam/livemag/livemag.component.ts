@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChil
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, map, tap } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -133,7 +133,11 @@ export class LivemagComponent implements OnInit {
             next: (resp) => {
 
                 const data = resp.find(e => e.status == 'LIVE');
-                data.embed_html = this.sanitizer.bypassSecurityTrustHtml(data.embed_html);
+                    const embedHtmlWithTailwind = data.embed_html.replace(
+                        '<iframe',
+                        '<iframe class="w-200"'
+                    );
+                data.embed_html = this.sanitizer.bypassSecurityTrustHtml(embedHtmlWithTailwind);
                 this.liveStream = data;
             }
         });
@@ -170,11 +174,16 @@ export class LivemagComponent implements OnInit {
         //     }
         // });
 
-        this.ItemServive.getItemPage().subscribe(
-            (resp: any) => {
-                this.item$ = this.ItemServive.itemP$
-            }
-        );
+        this.item$ = this.ItemServive.getItemPage().pipe(
+            map((resp: any) => {
+                return resp.data.data
+            })
+        )
+        // .subscribe(
+        //     (resp: any) => {
+        //         this.item$ = this.ItemServive.itemP$
+        //     }
+        // );
 
         // this.authService.authState.subscribe((user) => {
         //     this.socialUser = user;
