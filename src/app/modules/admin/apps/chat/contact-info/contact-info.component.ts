@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Chat } from 'app/modules/admin/apps/chat/chat.types';
+import { ItemService } from 'app/modules/admin/g-admin/livesteam/livemag/item.service';
+import { Observable, map } from 'rxjs';
 
 @Component({
     selector       : 'chat-contact-info',
@@ -8,15 +10,30 @@ import { Chat } from 'app/modules/admin/apps/chat/chat.types';
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ContactInfoComponent
+export class ContactInfoComponent implements OnInit
 {
+
+    item$: Observable<any>;
+
     @Input() chat: Chat;
     @Input() drawer: MatDrawer;
 
     /**
      * Constructor
      */
-    constructor()
+    constructor(
+        private itemService: ItemService,
+    )
     {
     }
+
+    ngOnInit(): void {
+        this.item$ = this.itemService.getItemPage().pipe(
+            map((resp: any) => {
+                return resp.data.data
+            })
+        );
+    }
+
+
 }
