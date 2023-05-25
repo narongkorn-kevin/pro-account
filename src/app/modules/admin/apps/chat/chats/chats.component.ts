@@ -5,6 +5,7 @@ import { ChatService } from 'app/modules/admin/apps/chat/chat.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FacebookService } from './facebook.service';
 import { ActivatedRoute } from '@angular/router';
+import { PageService } from 'app/modules/admin/g-admin/livesteam/page.service';
 
 @Component({
     selector: 'chat-chats',
@@ -17,7 +18,7 @@ export class ChatsComponent implements OnInit, OnDestroy {
     drawerComponent: 'profile' | 'new-chat';
     drawerOpened: boolean = false;
     filteredChats: Chat[];
-    profile: Profile;
+    profile: any;
     selectedChat: Chat;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     pagePicUrl: string;
@@ -32,6 +33,7 @@ export class ChatsComponent implements OnInit, OnDestroy {
         private sanitizer: DomSanitizer,
         private _fbService: FacebookService,
         private _activatedRoute: ActivatedRoute,
+        private pageService: PageService,
     ) {
     }
 
@@ -96,14 +98,19 @@ export class ChatsComponent implements OnInit, OnDestroy {
             });
 
         // Profile
-        this._chatService.profile$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((profile: Profile) => {
-                this.profile = profile;
+        this.pageService.getPage(this.pageId).subscribe(
+            (resp: any) => {
+                this.profile = resp
+            }
+        );
+        // this._chatService.profile$
+        //     .pipe(takeUntil(this._unsubscribeAll))
+        //     .subscribe((profile: Profile) => {
+        //         this.profile = profile;
 
-                // Mark for check
-                this._changeDetectorRef.markForCheck();
-            });
+        //         // Mark for check
+        //         this._changeDetectorRef.markForCheck();
+        //     });
 
         // Selected chat
         this._chatService.chat$

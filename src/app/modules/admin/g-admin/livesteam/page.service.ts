@@ -1084,4 +1084,13 @@ export class PageService {
             .pipe();
     }
 
+    /**ข้อมูลเพจ */
+    getPage(pageId: any) {
+
+        const userToken = localStorage.getItem('authToken');
+
+        return this._httpClient.get(`https://graph.facebook.com/v16.0/${pageId}?fields=name,access_token&access_token=${userToken}`)
+            .pipe();
+    }
+
 }

@@ -52,19 +52,18 @@ export class ClassicLayoutComponent implements OnInit, OnDestroy {
         this._navigationService.navigation$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((navigation: Navigation) => {
-                console.log(navigation);
                 const user = JSON.parse(localStorage.getItem('user')) || null;
                 if (user.position.name == 'นักพัฒนาระบบ') {
-                    AuthService._Manager = false;  
-                    AuthService._Ads = false;  
-                    AuthService._Telesale = false;  
-                    AuthService._Admin = false;  
-                    AuthService._Packing = false;  
-                    AuthService._Hr = false;  
-                    AuthService._Report = false; 
+                    AuthService._Manager = false;
+                    AuthService._Ads = false;
+                    AuthService._Telesale = false;
+                    AuthService._Admin = false;
+                    AuthService._Packing = false;
+                    AuthService._Hr = false;
+                    AuthService._Report = false;
                     AuthService._Profile = false;
                      this.navigation = navigation;
-                     
+
                  } else if (user.position.name == 'ทีมยิงแอดโฆษณา' ) {
                      AuthService._Ads = false
                      AuthService._Profile = false;
@@ -87,13 +86,13 @@ export class ClassicLayoutComponent implements OnInit, OnDestroy {
                     AuthService._Profile = false;
                     this.navigation = navigation;
                  } else if (user.role.Manager == 'หัวหน้างาน') {
-                    AuthService._Manager = false;  
-                    AuthService._Ads = false;  
-                    AuthService._Telesale = false;  
-                    AuthService._Admin = false;  
-                    AuthService._Packing = false;  
-                    AuthService._Hr = false;  
-                    AuthService._Report = false; 
+                    AuthService._Manager = false;
+                    AuthService._Ads = false;
+                    AuthService._Telesale = false;
+                    AuthService._Admin = false;
+                    AuthService._Packing = false;
+                    AuthService._Hr = false;
+                    AuthService._Report = false;
                     AuthService._Profile = false;
                      this.navigation = navigation;
                  }
