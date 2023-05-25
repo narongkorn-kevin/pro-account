@@ -85,24 +85,24 @@
           </mat-step>
 
 
-          <!-- Order Completed -->
           <mat-step>
             <ng-template matStepLabel>
               <span class="text-xl font-bold">ยืนยันข้อมูล</span>
             </ng-template>
-            <div class="bg-white shadow-sm rounded-lg p-6">
+            <div class="bg-white rounded-lg shadow-md p-6">
               <p class="text-gray-600">หมายเลขคำสั่งซื้อ: #{{order.order_id}}</p>
               <h1 class="text-xl font-bold mt-4">ที่อยู่ในการจัดส่งสินค้า</h1>
               <h2 class="text-lg mt-2">ชื่อ: {{stepOneForm.value.customerName}}</h2>
               <h2 class="text-lg">เบอร์โทรศัพท์มือถือ: {{stepOneForm.value.phoneNumber}}</h2>
               <h2 class="text-lg">ที่อยู่</h2>
               <p class="text-gray-600">{{stepOneForm.value.address}}</p>
-              <button mat-button (click)="confirm()"
-              class="mx-auto bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 mt-4 rounded-xl transition duration-500 ease-in-out transform hover:scale-105">
-              ยืนยัน
+              <button mat-button (click)="confirm()" class="mt-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-xl transition duration-300 ease-in-out transform hover:scale-105">
+                ยืนยัน
               </button>
             </div>
           </mat-step>
+
+
         </mat-vertical-stepper>
       </ng-container>
     </div>
