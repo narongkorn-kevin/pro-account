@@ -120,8 +120,10 @@ export class ChatService {
      *
      * @param id
      */
-    getChatById(id: string): Observable<any> {
-        return this._httpClient.get<Chat>('https://graph.facebook.com/v16.0/t_6187365231324644?fields=participants,messages{from,to,message}&access_token=EAACa5iDAEsMBAAZB33Kn17TkGrH11lX5WyulorcsAva4QtybvvZBOLKE4bSfHZAgrSwjV9DgQAnWakm2DjLP3t1Lk1ZCfdnGBm3Jg9TRiIChgba4RT9Q28eG6nMq1qXsdMeZAVgZBQXdjTZC92c3Ej4VFvNh7t7fAwCiYRg16u77VCYFjGqgIJ5', { params: { id } }).pipe(
+    getChatById(converId: string): Observable<any> {
+        const pageToken = localStorage.getItem('pageToken');
+
+        return this._httpClient.get<Chat>(`https://graph.facebook.com/v16.0/${converId}?fields=participants,messages{from,to,message}&access_token=${pageToken}`).pipe(
             map((chat) => {
 
                 // Update the chat
@@ -130,14 +132,14 @@ export class ChatService {
                 // Return the chat
                 return chat;
             }),
-            switchMap((chat) => {
+            // switchMap((chat) => {
 
-                if (!chat) {
-                    return throwError('Chat with ID ' + id + ' not found. Please check the ID and try again.');
-                }
+            //     if (!chat) {
+            //         return throwError('Chat with ID ' + id + ' not found. Please check the ID and try again.');
+            //     }
 
-                return of(chat);
-            })
+            //     return of(chat);
+            // })
         );
     }
 
@@ -191,7 +193,7 @@ export class ChatService {
         this._chat.next(null);
     }
 
-    
+
 }
 
 
