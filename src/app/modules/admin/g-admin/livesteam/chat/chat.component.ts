@@ -39,7 +39,6 @@ export class ChatComponent implements OnInit {
             .subscribe({
                 next: (res) => {
                     const message = JSON.parse(res.data);
-                    console.log(message);
 
                     this.messages.push(message);
                     const product = {
