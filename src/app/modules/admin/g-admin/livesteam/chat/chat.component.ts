@@ -45,7 +45,7 @@ export class ChatComponent implements OnInit {
                         channal: 'facebook',
                         name: message?.from?.name ?? 'Test',
                         telephone: '',
-                        email: 'test@mail.com',
+                        email: Math.floor(Math.random() * 1000000000) + 'test@mail.com',
                         orders: message.message,
                         // orders: 'CF OGI53552210-073X1',
                     }
