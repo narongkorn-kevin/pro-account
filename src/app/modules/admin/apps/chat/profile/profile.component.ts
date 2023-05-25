@@ -41,10 +41,10 @@ export class ProfileComponent implements OnInit, OnDestroy
             .subscribe((profile: Profile) => {
                 this.profile = profile;
             });
-            this.fbService.getPageProfilePic('116311434766128', 'EAACa5iDAEsMBALNFzxn4c8NphtXizlOPffxSkZBGBKAZBjEZBX5WqVzhObutJGYMO6VXqcCQWM6Y6EeHivhWmCJSNpGHpaU7sObXyHUxtDu1TRlrIneZCisNvfPrg6Oz0QUwRqyR4gFlBBZBGBNlZAYu2H2K3dK7y5auZAbIxJpZCCxhhC2akTd5').subscribe(response => {
+            this.fbService.getPageProfilePic('116311434766128').subscribe(response => {
                 this.pagePicUrl = response.data.url;
               });
-              this.fbService.getPageDetails('116311434766128', 'EAACa5iDAEsMBALNFzxn4c8NphtXizlOPffxSkZBGBKAZBjEZBX5WqVzhObutJGYMO6VXqcCQWM6Y6EeHivhWmCJSNpGHpaU7sObXyHUxtDu1TRlrIneZCisNvfPrg6Oz0QUwRqyR4gFlBBZBGBNlZAYu2H2K3dK7y5auZAbIxJpZCCxhhC2akTd5').subscribe(response => {
+              this.fbService.getPageDetails('116311434766128').subscribe(response => {
                 this.pageDetails = response;
               });
     }

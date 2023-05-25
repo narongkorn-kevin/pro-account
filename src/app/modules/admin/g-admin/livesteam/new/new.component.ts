@@ -206,6 +206,7 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     live2(id: string): void {
+        console.log('pageId', id);
         this._router.navigate(['chat/chats' + id]);
         this.onClose();
 
