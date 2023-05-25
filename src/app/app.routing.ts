@@ -387,9 +387,9 @@ export const appRoutes: Route[] = [
                 ]
             },
             {
-                path: 'product',
+                path: 'sale-page-order',
                 canActivate: [], children: [
-                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/product/page.module').then(m => m.Module) },
+                    { path: '', loadChildren: () => import('app/modules/admin/g-admin/sale-page-order/sale-page.module').then(m => m.SalePageModule) },
 
                 ]
             },
