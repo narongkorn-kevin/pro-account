@@ -39,14 +39,13 @@ export class ChatComponent implements OnInit {
             .subscribe({
                 next: (res) => {
                     const message = JSON.parse(res.data);
-                    console.log(message);
 
                     this.messages.push(message);
                     const product = {
                         channal: 'facebook',
                         name: message?.from?.name ?? 'Test',
                         telephone: '',
-                        email: 'test@mail.com',
+                        email: Math.floor(Math.random() * 1000000000) + 'test@mail.com',
                         orders: message.message,
                         // orders: 'CF OGI53552210-073X1',
                     }
@@ -54,8 +53,13 @@ export class ChatComponent implements OnInit {
                         next: (resp: any) => {
                             // this._itemService.sendPrivateMessage(this.PageId, message.id, message.message)
                             //     .subscribe()
-                                this._itemService.sendPrivateMessage(this.PageId, message.id, `กรุณาตรวจสอบข้อมูล-https://deeshipp.vercel.app/sale-page?order_id=${resp.data.id}`)
-                                .subscribe()
+                            this._itemService.sendPrivateMessage(this.PageId, message.id, `กรุณาตรวจสอบข้อมูล`)
+                                .subscribe({
+                                    complete: () => {
+                                        this._itemService.sendPrivateMessage(this.PageId, message.id, `https://deeshipp.vercel.app/sale-page?order_id=${resp.data.id}`)
+                                            .subscribe()
+                                    }
+                                })
                         },
                         error: (error) => {
                             console.error('Error:', error);

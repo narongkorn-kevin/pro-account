@@ -29,57 +29,72 @@
                 <div class="mt-4  text-secondary w-1/3 px-3">{{chat.contact.about}}</div> -->
             </div>
 
-<div class="max-w-xl max-h-xl mx-auto p-6 bg-white rounded-xl shadow-md">
-  <div class="flex justify-center gap-4 mb-4">
-    <a class="text-blue-500 hover:text-blue-700">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl">
-        เมนูส่งสินค้า
-      </button>
-    </a>
-    <a class="text-blue-500 hover:text-blue-700">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl">
-        เมนูแจ้งโอนสินค้า
-      </button>
-    </a>
-  </div>
-  <form class="mb-4">
-    <label class="block mb-2 font-bold text-gray-700" for="name">
-      ชื่อ-นามสกุล:
-    </label>
-    <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="name" name="name" required>
-    <label class="block mb-2 font-bold text-gray-700" for="phone">
-      เบอร์โทรศัพท์:
-    </label>
-    <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="phone" name="phone" required>
-    <label class="block mb-2 font-bold text-gray-700" for="address">
-      ที่อยู่อาศัย:
-    </label>
-    <textarea class="w-full border border-gray-400 p-2 rounded-md mb-4" id="address" name="address"></textarea>
-  </form>
-  <div class="mb-4">
-    <h1 class="font-bold text-xl mb-2 text-center">รายการสินค้า</h1>
-    <img class="w-full mb-4" src="assets/icons/14575773_22233700_600.jpg">
-    <h1 class="font-bold text-xl mb-2 text-center">สรุปยอดเงิน</h1>
-    <ul class="list-disc pl-4 mb-4">
-        <li class="text-lg font-semibold text-gray-700">ค่าสินค้า: <span class="text-red-500">500</span></li>
-        <li class="text-lg font-semibold text-gray-700">ค่าส่ง: <span class="text-red-500">500</span></li>
-      </ul>
+            <div class="max-w-xl max-h-xl mx-auto p-6 bg-white rounded-xl shadow-md">
+                <div class="flex justify-center gap-4 mb-4">
+                    <a class="text-blue-500 hover:text-blue-700">
+                        <label class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl">
+                            เมนูส่งสินค้า
+                        </label>
+                    </a>
+                    <a class="text-blue-500 hover:text-blue-700">
+                        <input type="file" name="slip" id="slip" style="display: none;">
+                        <label for="slip" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl">
+                            เมนูแจ้งโอนสินค้า
+                        </label>
+                    </a>
+                </div>
+                <form class="mb-4">
+                    <label class="block mb-2 font-bold text-gray-700" for="name">
+                        ชื่อ-นามสกุล:
+                    </label>
+                    <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="name" name="name"
+                        required>
+                    <label class="block mb-2 font-bold text-gray-700" for="phone">
+                        เบอร์โทรศัพท์:
+                    </label>
+                    <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="phone" name="phone"
+                        required>
+                    <label class="block mb-2 font-bold text-gray-700" for="address">
+                        ที่อยู่อาศัย:
+                    </label>
+                    <textarea class="w-full border border-gray-400 p-2 rounded-md mb-4" id="address"
+                        name="address"></textarea>
+                </form>
+                <div class="mb-4">
+                    <h1 class="font-bold text-xl mb-2 text-center">รายการสินค้า</h1>
+                    <ng-container *ngIf="item$ | async as items">
+                        <div class="grid grid-cols-4 gap-4">
+                            <div *ngFor="let item of items" class="cursor-pointer">
+                                <img [src]="item.image" [alt]="item.name" srcset="" class="w-20 h-20">
+                            </div>
+                        </div>
+                    </ng-container>
+                    <!-- <img class="w-full mb-4" src="assets/icons/14575773_22233700_600.jpg"> -->
+                    <h1 class="font-bold text-xl mb-2 text-center">สรุปยอดเงิน</h1>
+                    <ul class="list-disc pl-4 mb-4">
+                        <li class="text-lg font-semibold text-gray-700">ค่าสินค้า:
+                            <input type="text" value="0">
+                        </li>
+                        <li class="text-lg font-semibold text-gray-700">ค่าส่ง:
+                            <input type="text" value="0">
+                        </li>
+                    </ul>
 
-    <div class="mb-4">
-      <label class="flex items-center mb-2">
-        <input class="mr-2 leading-tight" type="checkbox">
-        <h1 class="font-bold text-xl">ชำระค่าขนส่งปลาย</h1>
-      </label>
-      <label class="flex items-center">
-        <input class="mr-2 leading-tight" type="checkbox">
-        <h1 class="font-bold text-xl">ชำระค่าสินค้าปลายทาง</h1>
-      </label>
-    </div>
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl">
-      ยืนยัน
-    </button>
-  </div>
-</div>
+                    <div class="mb-4">
+                        <label class="flex items-center mb-2">
+                            <input class="mr-2 leading-tight" type="checkbox">
+                            <h1 class="font-bold text-xl">ชำระค่าขนส่ง</h1>
+                        </label>
+                        <label class="flex items-center">
+                            <input class="mr-2 leading-tight" type="checkbox">
+                            <h1 class="font-bold text-xl">ชำระค่า COD</h1>
+                        </label>
+                    </div>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl">
+                        ยืนยัน
+                    </button>
+                </div>
+            </div>
             <!-- <div class="flex w-full py-10 px-7">
 
                 <div class="flex items-cente w-1/3 ">
@@ -106,11 +121,11 @@
         <!-- <div class="flex items-center justify-between  font-semibold border-b border-gray-100 mb-4"></div>
 
         <div class=" px-7"> -->
-            <!-- Media -->
-            <!-- <div class="text-lg font-medium">รายละเอียดผู้ซื้อ</div> -->
+        <!-- Media -->
+        <!-- <div class="text-lg font-medium">รายละเอียดผู้ซื้อ</div> -->
 
 
-            <!-- <div class="flex w-full mt-4">
+        <!-- <div class="flex w-full mt-4">
                 <ng-container *ngIf="chat.contact.name.length">
                     <div class="font-medium text-secondary w-1/2">ชื่อ-สกุล</div>
                     <div class="w-1/2">{{chat.contact.name}}</div>
@@ -135,7 +150,7 @@
                     <div class="w-1/2">{{chat.contact.details.emails[0].email}}</div>
                 </ng-container>
             </div> -->
-            <!-- <div class="flex items-center justify-between  font-semibold border-b border-gray-100 mb-4 mt-4"></div>
+        <!-- <div class="flex items-center justify-between  font-semibold border-b border-gray-100 mb-4 mt-4"></div>
             <div class="flex  items-center mt-4">
                 <a href="customer/new-customer" class="ml-6  mr-6 w-full" mat-flat-button [color]="'primary'">
                     <span class="ml-2 mr-1">เลือกสินค้า</span>
@@ -145,15 +160,15 @@
 
 
 
-            <div class="grid grid-cols-2 gap-1 mt-2 ">
-                <!-- <ng-container *ngFor="let media of chat.contact.attachments.media">
+        <div class="grid grid-cols-2 gap-1 mt-2 ">
+            <!-- <ng-container *ngFor="let media of chat.contact.attachments.media">
                     <img class="h-40 w-40 rounded object-cover " [src]="media" />
                 </ng-container> -->
-            </div>
-            <!-- Details -->
+        </div>
+        <!-- Details -->
 
 
-                <!-- <ng-container *ngIf="chat.contact.details.phoneNumbers.length">
+        <!-- <ng-container *ngIf="chat.contact.details.phoneNumbers.length">
                     <div>
                         <div class="font-medium text-secondary">Phone number</div>
                         <div class="">{{chat.contact.details.phoneNumbers[0].phoneNumber}}</div>
@@ -184,7 +199,7 @@
                     </div>
                 </ng-container> -->
 
-        </div>
     </div>
+</div>
 
 <!-- </div> -->

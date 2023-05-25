@@ -4,20 +4,21 @@ import { Chat, Profile } from 'app/modules/admin/apps/chat/chat.types';
 import { ChatService } from 'app/modules/admin/apps/chat/chat.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FacebookService } from './facebook.service';
+import { ActivatedRoute } from '@angular/router';
+import { PageService } from 'app/modules/admin/g-admin/livesteam/page.service';
 
 @Component({
-    selector       : 'chat-chats',
-    templateUrl    : './chats.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'chat-chats',
+    templateUrl: './chats.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChatsComponent implements OnInit, OnDestroy
-{
+export class ChatsComponent implements OnInit, OnDestroy {
     chats: Chat[];
     drawerComponent: 'profile' | 'new-chat';
     drawerOpened: boolean = false;
     filteredChats: Chat[];
-    profile: Profile;
+    profile: any;
     selectedChat: Chat;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     pagePicUrl: string;
@@ -30,9 +31,10 @@ export class ChatsComponent implements OnInit, OnDestroy
         private _chatService: ChatService,
         private _changeDetectorRef: ChangeDetectorRef,
         private sanitizer: DomSanitizer,
-        private _fbService: FacebookService
-    )
-    {
+        private _fbService: FacebookService,
+        private _activatedRoute: ActivatedRoute,
+        private pageService: PageService,
+    ) {
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -52,27 +54,31 @@ export class ChatsComponent implements OnInit, OnDestroy
     //     }
     // }
 
+    pageId: string;
+
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
 
-        this._chatService.getItemPage().subscribe((response:any) => {(response.data)
-        this.filteredChats = response.data
-        this.chats = response.data
+        this.pageId = this._activatedRoute.snapshot.queryParamMap.get('page_id')
 
-                        // Mark for check
-                this._changeDetectorRef.markForCheck();
-                // console.log(this.chats)
+        this._chatService.getItemPage(this.pageId).subscribe((response: any) => {
+            (response.data)
+            this.filteredChats = response.data
+            this.chats = response.data
+
+            // Mark for check
+            this._changeDetectorRef.markForCheck();
+            // console.log(this.chats)
         })
 
-        this._fbService.getPageProfilePic('116311434766128', 'EAACa5iDAEsMBALNFzxn4c8NphtXizlOPffxSkZBGBKAZBjEZBX5WqVzhObutJGYMO6VXqcCQWM6Y6EeHivhWmCJSNpGHpaU7sObXyHUxtDu1TRlrIneZCisNvfPrg6Oz0QUwRqyR4gFlBBZBGBNlZAYu2H2K3dK7y5auZAbIxJpZCCxhhC2akTd5').subscribe(response => {
+        this._fbService.getPageProfilePic(this.pageId).subscribe(response => {
             this.pagePicUrl = response.data.url;
-          });
-          this._fbService.getPageDetails('116311434766128', 'EAACa5iDAEsMBALNFzxn4c8NphtXizlOPffxSkZBGBKAZBjEZBX5WqVzhObutJGYMO6VXqcCQWM6Y6EeHivhWmCJSNpGHpaU7sObXyHUxtDu1TRlrIneZCisNvfPrg6Oz0QUwRqyR4gFlBBZBGBNlZAYu2H2K3dK7y5auZAbIxJpZCCxhhC2akTd5').subscribe(response => {
+        });
+        this._fbService.getPageDetails(this.pageId).subscribe(response => {
             this.pageDetails = response;
-          });
+        });
 
         // {
         //     this._chatService.getMessage().subscribe((response:any) => {
@@ -92,14 +98,19 @@ export class ChatsComponent implements OnInit, OnDestroy
             });
 
         // Profile
-        this._chatService.profile$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((profile: Profile) => {
-                this.profile = profile;
+        this.pageService.getPage(this.pageId).subscribe(
+            (resp: any) => {
+                this.profile = resp
+            }
+        );
+        // this._chatService.profile$
+        //     .pipe(takeUntil(this._unsubscribeAll))
+        //     .subscribe((profile: Profile) => {
+        //         this.profile = profile;
 
-                // Mark for check
-                this._changeDetectorRef.markForCheck();
-            });
+        //         // Mark for check
+        //         this._changeDetectorRef.markForCheck();
+        //     });
 
         // Selected chat
         this._chatService.chat$
@@ -115,8 +126,7 @@ export class ChatsComponent implements OnInit, OnDestroy
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
@@ -131,11 +141,9 @@ export class ChatsComponent implements OnInit, OnDestroy
      *
      * @param query
      */
-    filterChats(query: string): void
-    {
+    filterChats(query: string): void {
         // Reset the filter
-        if ( !query )
-        {
+        if (!query) {
             this.filteredChats = this.chats;
             return;
         }
@@ -146,8 +154,7 @@ export class ChatsComponent implements OnInit, OnDestroy
     /**
      * Open the new chat sidebar
      */
-    openNewChat(): void
-    {
+    openNewChat(): void {
         this.drawerComponent = 'new-chat';
         this.drawerOpened = true;
 
@@ -158,8 +165,7 @@ export class ChatsComponent implements OnInit, OnDestroy
     /**
      * Open the profile sidebar
      */
-    openProfile(): void
-    {
+    openProfile(): void {
         this.drawerComponent = 'profile';
         this.drawerOpened = true;
 
@@ -173,8 +179,7 @@ export class ChatsComponent implements OnInit, OnDestroy
      * @param index
      * @param item
      */
-    trackByFn(index: number, item: any): any
-    {
+    trackByFn(index: number, item: any): any {
         return item.id || index;
     }
 }

@@ -9,10 +9,14 @@ export class FacebookService {
 
   constructor(private http: HttpClient) { }
 
-  getPageProfilePic(pageId: string, accessToken: string): Observable<any> {
+  getPageProfilePic(pageId: string): Observable<any> {
+    const accessToken = localStorage.getItem('pageToken');
+
     return this.http.get(`https://graph.facebook.com/v4.0/${pageId}/picture?redirect=false&access_token=${accessToken}`);
   }
-  getPageDetails(pageId: string, accessToken: string): Observable<any> {
+  getPageDetails(pageId: string): Observable<any> {
+    const accessToken = localStorage.getItem('pageToken');
+
     return this.http.get(`https://graph.facebook.com/v4.0/${pageId}?fields=name,about&access_token=${accessToken}`);
   }
 }
