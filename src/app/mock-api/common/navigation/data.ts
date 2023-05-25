@@ -104,11 +104,11 @@ export const defaultNavigation: FuseNavigationItem[] = [
                                 link: '/livesteam/livemag',
                             },
                             {
-                                id: 'product-cf',
+                                id: 'sale-page-order',
                                 title: 'หน้าสั่งซื้อ',
                                 icon: 'heroicons_outline:chat',
                                 type: 'basic',
-                                link: '/product/product-cf',
+                                link: '/sale-page-order',
                             },
                         ]
                     },

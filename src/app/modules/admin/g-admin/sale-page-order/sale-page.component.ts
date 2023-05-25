@@ -49,5 +49,4 @@ export class SalePageComponent implements OnInit {
     confirm() {
         console.log('สำเร็จ');
     }
-
 }
