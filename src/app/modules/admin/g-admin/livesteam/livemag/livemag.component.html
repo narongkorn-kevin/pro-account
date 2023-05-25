@@ -40,12 +40,12 @@
 </div> -->
 <div class="steamer">
     <div *ngIf="liveStream != undefined">
-        <div [innerHTML]="liveStream.embed_html" class="border border-gray-300 rounded-lg overflow-hidden shadow-md">
+        <div [innerHTML]="liveStream.embed_html" class="w-320 h-180 border border-gray-300 rounded-lg overflow-hidden shadow-md">
         </div>
     </div>
 </div>
 
-<div class="mr-400 absolute mt-100 ml-50">
+<div class="mr-400 absolute mt-140 ml-50 w-full">
     <app-chat *ngIf="liveStream !== undefined" [StreamId]='liveStream.id' [PageId]="pageId"></app-chat>
 </div>
 

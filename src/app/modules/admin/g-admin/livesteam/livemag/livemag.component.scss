@@ -50,3 +50,7 @@ table {
     width: 100%;
 }
 
+::ng-deep iframe {
+    height: 1920px;
+    width: 1200px;
+  }

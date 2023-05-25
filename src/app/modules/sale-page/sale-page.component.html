@@ -1,9 +1,9 @@
-<div class="flex flex-col text-center w-full h-full bg-white">
+<div class="flex flex-col justify-center items-center w-full h-full bg-gray-100">
     <ng-container *ngIf="order$ | async as order">
-        <mat-vertical-stepper linear #stepper>
+        <mat-vertical-stepper linear #stepper class="bg-gray-200 rounded-md p-6 w-3/4">
             <mat-step>
                 <ng-template matStepLabel>ตรวจสอบคำสั่งซื้อ</ng-template>
-                <div class="bg-white rounded-lg p-6 text-center text-xl">
+                <div class="bg-white rounded-md p-6 text-center text-xl shadow-lg">
                     <h1 class="font-extrabold">รายละเอียดสินค้า</h1>
                     <ng-container *ngFor="let sale_order_line of order.sale_order_lines">
                         <img class="mx-auto w-50 h-60" [src]="sale_order_line.item.image">
@@ -12,7 +12,7 @@
                     </ng-container>
                     <p class="text-red-600 font-bold">รวมยอดชำระ: {{order.total | currency:'฿'}} บาท</p>
                     <button mat-button matStepperNext
-                        class="mx-auto bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 mt-4 rounded">
+                        class="mx-auto bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 mt-4 rounded transition duration-200 ease-in-out transform hover:scale-105">
                         ถัดไป
                     </button>
                 </div>
@@ -22,7 +22,7 @@
             <mat-step [stepControl]="stepOneForm">
                 <form [formGroup]="stepOneForm">
                     <ng-template matStepLabel>รายละเอียดการจัดส่ง</ng-template>
-                    <div class="bg-white rounded-lg p-6 text-lg">
+                    <div class="bg-white rounded-md p-6 text-lg shadow-lg">
                         <h1 class="p-4 font-extrabold">ที่อยู่ในการจัดส่ง</h1>
                         <mat-form-field class="w-full">
                             <input matInput placeholder="ชื่อผู้รับสินค้า" [formControlName]="'customerName'" required
@@ -49,7 +49,7 @@
                         </mat-form-field>
 
                         <button mat-button matStepperNext
-                            class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 mt-4 rounded">
+                            class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 mt-4 rounded transition duration-200 ease-in-out transform hover:scale-105">
                             ถัดไป
                         </button>
                     </div>
@@ -60,7 +60,7 @@
             <mat-step [stepControl]="stepTwoForm">
                 <form [formGroup]="stepTwoForm">
                     <ng-template matStepLabel>การชำระเงิน</ng-template>
-                    <div class="bg-white rounded-lg p-6 text-xl">
+                    <div class="bg-white rounded-md p-6 text-xl shadow-lg">
                         <label class="flex items-center">
                             <input type="checkbox" name="ชำระผ่าน QR-CODE" value="QR-CODE" class="mr-2">
                             ค่าขนส่ง
@@ -70,7 +70,7 @@
                             COD
                         </label>
                         <button mat-button matStepperNext
-                            class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 mt-4 rounded">
+                            class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 mt-4 rounded transition duration-200 ease-in-out transform hover:scale-105">
                             ถัดไป
                         </button>
                     </div>
@@ -80,7 +80,7 @@
             <!-- Order Completed -->
             <mat-step>
                 <ng-template matStepLabel>ยืนยันข้อมูล</ng-template>
-                <div class="bg-white shadow-sm rounded-lg p-6">
+                <div class="bg-white shadow-md rounded-md p-6">
                     <p class="text-gray-600">หมายเลขคำสั่งซื้อ: #{{order.order_id}}</p>
                     <h1 class="text-xl font-bold mt-4">ที่อยู่ในการจัดส่งสินค้า</h1>
                     <h2 class="text-lg mt-2">ชื่อ: {{stepOneForm.value.customerName}}</h2>
@@ -88,7 +88,7 @@
                     <h2 class="text-lg">ที่อยู่</h2>
                     <p class="text-gray-600">{{stepOneForm.value.address}}</p>
                     <button mat-button (click)="confirm()"
-                        class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 mt-4 rounded">
+                        class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 mt-4 rounded transition duration-200 ease-in-out transform hover:scale-105">
                         ยืนยัน
                     </button>
                 </div>
