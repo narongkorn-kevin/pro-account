@@ -133,11 +133,11 @@ export class LivemagComponent implements OnInit {
             next: (resp) => {
 
                 const data = resp.find(e => e.status == 'LIVE');
-                    const embedHtmlWithTailwind = data.embed_html.replace(
-                        '<iframe',
-                        '<iframe class="w-200"'
-                    );
-                data.embed_html = this.sanitizer.bypassSecurityTrustHtml(embedHtmlWithTailwind);
+                    // const embedHtmlWithTailwind = data.embed_html.replace(
+                    //     '<iframe',
+                    //     '<iframe class="w-200"'
+                    // );
+                data.embed_html = this.sanitizer.bypassSecurityTrustHtml(data.embed_html);
                 this.liveStream = data;
             }
         });
