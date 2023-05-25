@@ -43,7 +43,6 @@ export class ChatComponent implements OnInit {
 
                     this.messages.push(message);
                     const product = {
-                        sale_id: 1,
                         channal: 'facebook',
                         name: message?.from?.name ?? 'Test',
                         telephone: '',
@@ -55,7 +54,7 @@ export class ChatComponent implements OnInit {
                         next: (resp: any) => {
                             // this._itemService.sendPrivateMessage(this.PageId, message.id, message.message)
                             //     .subscribe()
-                            this._itemService.sendPrivateMessage(this.PageId, message.id, 'https://deeshipp.vercel.app/sale-page?order_id=' + resp.data.id)
+                                this._itemService.sendPrivateMessage(this.PageId, message.id, `กรุณาตรวจสอบข้อมูล-https://deeshipp.vercel.app/sale-page?order_id=${resp.data.id}`)
                                 .subscribe()
                         },
                         error: (error) => {

@@ -564,13 +564,13 @@ export class PageService {
     */
     getItem(dataTablesParameters: any): Observable<DataTablesResponse> {
         return this._httpClient.post(environment.API_URL + 'api/item_page', dataTablesParameters, this.httpOptionsFormdata).pipe(
-          switchMap((response: any) => {
-            // this._itemP.next()
-            console.log('JK',response.data);
-            return of(response.data);
-          })
+            switchMap((response: any) => {
+                // this._itemP.next()
+                console.log('JK', response.data);
+                return of(response.data);
+            })
         );
-      }
+    }
     /**
      * Create product
      */
@@ -762,28 +762,28 @@ export class PageService {
         );
     }
 
-    getTokenUser(data:any): Observable<AssetType[]> {
-        return this._httpClient.get<AssetType[]>('https://graph.facebook.com/v16.0/me/accounts?fields=name,access_token,tasks,picture&access_token='+data).pipe(
+    getTokenUser(data: any): Observable<AssetType[]> {
+        return this._httpClient.get<AssetType[]>('https://graph.facebook.com/v16.0/me/accounts?fields=name,access_token,tasks,picture&access_token=' + data).pipe(
             tap((asset_types) => {
                 this._asset_types.next(asset_types);
             })
         );
     }
-    getTokenPage(data:any,dataId:any): Observable<AssetType[]> {
-        return this._httpClient.get<AssetType[]>('https://graph.facebook.com/'+dataId+'/live_videos?access_token='+data).pipe(
+    getTokenPage(token: any, pageId: any): Observable<AssetType[]> {
+        return this._httpClient.get<AssetType[]>('https://graph.facebook.com/' + pageId + '/live_videos?access_token=' + token).pipe(
             tap((asset_types) => {
                 this._asset_types.next(asset_types);
             })
         );
     }
 
-    getPage(data:any): Observable<AssetType[]> {
-        return this._httpClient.get<AssetType[]>('https://graph.facebook.com/:page_id/live_videos?access_token='+data).pipe(
-            tap((asset_types) => {
-                this._asset_types.next(asset_types);
-            })
-        );
-    }
+    // getPage(data: any): Observable<AssetType[]> {
+    //     return this._httpClient.get<AssetType[]>('https://graph.facebook.com/:page_id/live_videos?access_token=' + data).pipe(
+    //         tap((asset_types) => {
+    //             this._asset_types.next(asset_types);
+    //         })
+    //     );
+    // }
 
 
 
@@ -1074,6 +1074,14 @@ export class PageService {
                 }),
                 catchError((err) => this.handlerError(err))
             );
+    }
+
+    getPageToken(pageId: any) {
+
+        const userToken = localStorage.getItem('authToken');
+
+        return this._httpClient.get(`https://graph.facebook.com/v16.0/${pageId}?fields=name,access_token&access_token=${userToken}`)
+            .pipe();
     }
 
 }

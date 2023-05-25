@@ -18,7 +18,7 @@ import {
     SocialAuthService,
     FacebookLoginProvider,
     SocialUser,
-  } from '@abacritt/angularx-social-login';
+} from '@abacritt/angularx-social-login';
 
 @Component({
     selector: 'new',
@@ -77,7 +77,7 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
             pic: '',
             name: '',
             id: '',
-            token_user:'',
+            token_user: '',
         })
 
     }
@@ -96,8 +96,9 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
             this.socialUser = user;
             this.isLoggedin = user != null;
             console.log(user)
-          });
+        });
         this._Service.getTokenUser(this.socialUser.authToken).subscribe((resp: any) => {
+
             this.userData = resp
             // this.formData.patchValue({
             //     name: this.userData[0].name,
@@ -105,15 +106,15 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
             //     pic: this.userData[0].picture.data.url,
             //     token_user: this.userData[0].access_token,
             // })
-            console.log('ข้อมูลPage',this.userData)
+            // console.log('ข้อมูลPage', this.userData)
 
             // ------ส่วนแสดงlivesteam list-----
 
-            this._Service.getTokenPage(this.socialUser.authToken,this.formData.value.id).subscribe((resp: any) => {
+            this._Service.getTokenPage(this.socialUser.authToken, this.formData.value.id).subscribe((resp: any) => {
                 this.pageData = resp
 
-                console.log('ข้อมูล',resp)
-                })
+                console.log('ข้อมูล', resp)
+            })
         })
 
 
@@ -189,15 +190,23 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
     live(data: any): void {
-        localStorage.setItem('pageToken', data.access_token);
 
-        this._router.navigate(['livesteam/livemag/'+data.id]);
-        this.onClose();
+        this._Service.getPageToken(data.id).subscribe({
+            next: (resp) => {
+
+                localStorage.setItem('pageToken', data.access_token);
+
+                this._router.navigate(['livesteam/livemag/' + data.id]);
+                this.onClose();
+
+            },
+        })
+
 
     }
 
     live2(id: string): void {
-        this._router.navigate(['chat/chats'+id]);
+        this._router.navigate(['chat/chats' + id]);
         this.onClose();
 
     }
