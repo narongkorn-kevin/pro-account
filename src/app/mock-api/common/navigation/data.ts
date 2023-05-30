@@ -94,7 +94,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                                 title: 'กล่องข้อความ',
                                 icon: 'heroicons_outline:chat',
                                 type: 'basic',
-                                link: '/chat/chats',
+                                link: '/chat',
                             },
                             {
                                 id: 'livemag',

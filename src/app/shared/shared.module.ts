@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ThaiDatePipe } from './thai-date.pipe';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
     imports: [
@@ -13,7 +14,8 @@ import { MatInputModule } from '@angular/material/input';
         ReactiveFormsModule,
         MatFormFieldModule,
         MatInputModule,
-        MatStepperModule
+        MatStepperModule,
+        MatSelectModule,
     ],
     exports: [
         CommonModule,
@@ -22,7 +24,8 @@ import { MatInputModule } from '@angular/material/input';
         MatFormFieldModule,
         ThaiDatePipe,
         MatStepperModule,
-        MatInputModule
+        MatInputModule,
+        MatSelectModule,
     ],
     declarations: [
         ThaiDatePipe

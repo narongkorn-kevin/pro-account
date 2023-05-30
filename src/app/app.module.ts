@@ -59,7 +59,7 @@ const routerConfig: ExtraOptions = {
         MarkdownModule.forRoot({}),
         MatStepperModule,
         MatCardModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
 
     ],
 
@@ -68,7 +68,8 @@ const routerConfig: ExtraOptions = {
     bootstrap: [
         AppComponent
     ],
-    entryComponents: [ConfirmdialogeComponent]
+    entryComponents: [ConfirmdialogeComponent],
+
 })
 export class AppModule {
 }

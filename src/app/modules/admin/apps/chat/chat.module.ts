@@ -16,10 +16,10 @@ import { EmptyConversationComponent } from 'app/modules/admin/apps/chat/empty-co
 import { ConversationComponent } from 'app/modules/admin/apps/chat/conversation/conversation.component';
 import { NewChatComponent } from 'app/modules/admin/apps/chat/new-chat/new-chat.component';
 import { ProfileComponent } from 'app/modules/admin/apps/chat/profile/profile.component';
-import { FacebookLoginProvider, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
+import { FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 @NgModule({
     declarations: [
         ChatComponent,
@@ -30,7 +30,7 @@ import { FormsModule } from '@angular/forms';
         NewChatComponent,
         ProfileComponent
     ],
-    imports     : [
+    imports: [
         RouterModule.forChild(chatRoutes),
         MatButtonModule,
         MatCheckboxModule,
@@ -43,14 +43,16 @@ import { FormsModule } from '@angular/forms';
         MatStepperModule,
         MatDialogModule,
         FormsModule,
+        SocialLoginModule,
+        SharedModule,
     ],
     providers: [
         {
           provide: 'SocialAuthServiceConfig',
           useValue: {
             autoLogin: false,
+            scope: 'publish_video,pages_show_list,pages_messaging,pages_read_engagement,pages_read_user_content,pages_manage_posts,public_profile,email',
             providers: [
-
               {
                 id: FacebookLoginProvider.PROVIDER_ID,
                 provider: new FacebookLoginProvider('170313182614211')
@@ -62,7 +64,6 @@ import { FormsModule } from '@angular/forms';
           } as SocialAuthServiceConfig,
         }
       ],
-  })
-export class ChatModule
-{
+})
+export class ChatModule {
 }

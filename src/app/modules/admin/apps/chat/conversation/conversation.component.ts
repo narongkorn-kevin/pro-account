@@ -114,7 +114,6 @@ export class ConversationComponent implements OnInit, OnDestroy
                 this._changeDetectorRef.markForCheck();
             });
 
-
         // Subscribe to media changes
         this._fuseMediaWatcherService.onMediaChange$
             .pipe(takeUntil(this._unsubscribeAll))

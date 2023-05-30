@@ -62,6 +62,8 @@ export class ChatChatResolver implements Resolve<any>
      */
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Chat>
     {
+        // console.log(`-- Conversation ID ${route.paramMap.get('id')} --`);
+
         return this._chatService.getChatById(route.paramMap.get('id'))
                    .pipe(
                        // Error here means the requested chat is not available

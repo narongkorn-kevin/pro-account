@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
-import { Chat, Profile } from 'app/modules/admin/apps/chat/chat.types';
+import { Subject } from 'rxjs';
+import { Chat } from 'app/modules/admin/apps/chat/chat.types';
 import { ChatService } from 'app/modules/admin/apps/chat/chat.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FacebookService } from './facebook.service';
 import { ActivatedRoute } from '@angular/router';
 import { PageService } from 'app/modules/admin/g-admin/livesteam/page.service';
+import { FacebookLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 
 @Component({
     selector: 'chat-chats',
@@ -14,6 +15,13 @@ import { PageService } from 'app/modules/admin/g-admin/livesteam/page.service';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatsComponent implements OnInit, OnDestroy {
+
+    socialUser!: SocialUser;
+    isLoggedin?: boolean = undefined;
+
+    pages: any[] = [];
+    pageSelect: any;
+
     chats: Chat[];
     drawerComponent: 'profile' | 'new-chat';
     drawerOpened: boolean = false;
@@ -21,19 +29,20 @@ export class ChatsComponent implements OnInit, OnDestroy {
     profile: any;
     selectedChat: Chat;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
-    pagePicUrl: string;
-    pageDetails: any;
+    // pagePicUrl: string;
+    // pageDetails: any;
 
     /**
      * Constructor
      */
     constructor(
         private _chatService: ChatService,
-        private _changeDetectorRef: ChangeDetectorRef,
         private sanitizer: DomSanitizer,
         private _fbService: FacebookService,
         private _activatedRoute: ActivatedRoute,
         private pageService: PageService,
+        private authService: SocialAuthService,
+        private _changeDetectorRef: ChangeDetectorRef,
     ) {
     }
 
@@ -54,31 +63,42 @@ export class ChatsComponent implements OnInit, OnDestroy {
     //     }
     // }
 
-    pageId: string;
+    // pageId: string;
 
     /**
      * On init
      */
-    ngOnInit(): void {
+    ngOnInit() {
+        //ดึงข้อมูอ user facebook
+        this.socialUser = JSON.parse(localStorage.getItem('fb'));
+        // this.authService.authState.subscribe((user) => {
+        //     this.socialUser = user;
+        //     this.isLoggedin = user != null;
+        //     localStorage.setItem('fb', JSON.stringify(user));
+        //     localStorage.setItem('authToken', user.authToken);
+        // });
 
-        this.pageId = this._activatedRoute.snapshot.queryParamMap.get('page_id')
+        //get page
+        this._chatService.getTokenPages(this.socialUser.authToken).subscribe(
+            (resp: any) => {
+                this.pages = resp.data;
 
-        this._chatService.getItemPage(this.pageId).subscribe((response: any) => {
-            (response.data)
-            this.filteredChats = response.data
-            this.chats = response.data
+                this.pageSelect = resp.data[0];
 
-            // Mark for check
-            this._changeDetectorRef.markForCheck();
-            // console.log(this.chats)
-        })
+                this._chatService.setPageData(resp.data[0])
 
-        this._fbService.getPageProfilePic(this.pageId).subscribe(response => {
-            this.pagePicUrl = response.data.url;
-        });
-        this._fbService.getPageDetails(this.pageId).subscribe(response => {
-            this.pageDetails = response;
-        });
+                this.profile = resp.data[0];
+
+                this._changeDetectorRef.markForCheck();
+
+                this._chatService.getItemPage(resp.data[0]).subscribe((response: any) => {
+                    (response.data)
+                    this.chats = this.filteredChats = response.data
+
+                    this._changeDetectorRef.markForCheck();
+                })
+            }
+        );
 
         // {
         //     this._chatService.getMessage().subscribe((response:any) => {
@@ -88,21 +108,21 @@ export class ChatsComponent implements OnInit, OnDestroy {
         //      })
         // }
         // Chats
-        this._chatService.chats$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((chats: Chat[]) => {
-                this.chats = this.filteredChats = chats;
+        // this._chatService.chats$
+        //     .pipe(takeUntil(this._unsubscribeAll))
+        //     .subscribe((chats: Chat[]) => {
+        //         this.chats = this.filteredChats = chats;
 
-                // Mark for check
-                this._changeDetectorRef.markForCheck();
-            });
+        //         // Mark for check
+        //         this._changeDetectorRef.markForCheck();
+        //     });
 
         // Profile
-        this.pageService.getPage(this.pageId).subscribe(
-            (resp: any) => {
-                this.profile = resp
-            }
-        );
+        // this.pageService.getPage(this.pageId).subscribe(
+        //     (resp: any) => {
+        //         this.profile = resp
+        //     }
+        // );
         // this._chatService.profile$
         //     .pipe(takeUntil(this._unsubscribeAll))
         //     .subscribe((profile: Profile) => {
@@ -113,14 +133,14 @@ export class ChatsComponent implements OnInit, OnDestroy {
         //     });
 
         // Selected chat
-        this._chatService.chat$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((chat: Chat) => {
-                this.selectedChat = chat;
+        // this._chatService.chat$
+        //     .pipe(takeUntil(this._unsubscribeAll))
+        //     .subscribe((chat: Chat) => {
+        //         this.selectedChat = chat;
 
-                // Mark for check
-                this._changeDetectorRef.markForCheck();
-            });
+        //         // Mark for check
+        //         this._changeDetectorRef.markForCheck();
+        //     });
     }
 
     /**
@@ -159,7 +179,6 @@ export class ChatsComponent implements OnInit, OnDestroy {
         this.drawerOpened = true;
 
         // Mark for check
-        this._changeDetectorRef.markForCheck();
     }
 
     /**
@@ -170,7 +189,6 @@ export class ChatsComponent implements OnInit, OnDestroy {
         this.drawerOpened = true;
 
         // Mark for check
-        this._changeDetectorRef.markForCheck();
     }
 
     /**
@@ -181,5 +199,30 @@ export class ChatsComponent implements OnInit, OnDestroy {
      */
     trackByFn(index: number, item: any): any {
         return item.id || index;
+    }
+
+    signInWithFB(): void {
+        // const fbLoginOptions = {
+        //     scope: 'publish_video,pages_show_list,pages_messaging,pages_read_engagement,pages_read_user_content,pages_manage_posts,public_profile,email'
+        // }; // https://developers.facebook.com/docs/reference/javascript/FB.login/v2.11
+
+        this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+
+    }
+
+    changePage(event: any) {
+        this._chatService.setPageData(event.value)
+
+        this.profile = event.value;
+
+        this._changeDetectorRef.markForCheck();
+
+        this._chatService.getItemPage(event.value).subscribe((response: any) => {
+            (response.data)
+            this.chats = this.filteredChats = response.data
+
+            this._changeDetectorRef.markForCheck();
+        })
+
     }
 }
