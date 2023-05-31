@@ -10,33 +10,32 @@ export const chatRoutes: Route[] = [
     {
         path: 'livestream/list',
         component: ListComponent,
-      },
+    },
     {
-        path     : '',
+        path: '',
         component: ChatComponent,
-        resolve  : {
-            chats   : ChatChatsResolver,
-            contacts: ChatContactsResolver,
-            profile : ChatProfileResolver
+        resolve: {
+            // chats: ChatChatsResolver,
+            // contacts: ChatContactsResolver,
+            // profile: ChatProfileResolver
         },
-
-        children : [
+        children: [
             {
-                path     : '',
+                path: '',
                 component: ChatsComponent,
-                children : [
+                children: [
                     {
-                        path     : '',
+                        path: '',
                         pathMatch: 'full',
                         component: EmptyConversationComponent
                     },
                     {
-                        path     : ':id',
+                        path: ':id',
                         component: ConversationComponent,
-                        resolve  : {
+                        resolve: {
                             conversation: ChatChatResolver
                         }
-                        
+
                     },
 
                 ]

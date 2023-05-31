@@ -36,12 +36,6 @@ import { JsonPipe } from '@angular/common';
 import { PageRoute } from './page.routing';
 import { PageComponent } from './page.component';
 import { DataTablesModule } from 'angular-datatables';
-import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
-import {
-  GoogleLoginProvider,
-  FacebookLoginProvider
-} from '@abacritt/angularx-social-login';
-import { FacebookModule } from 'ngx-facebook';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ProductCfComponent } from './product-cf/product-cf.component';
@@ -90,30 +84,9 @@ import { MatStepperModule } from '@angular/material/stepper';
         MatExpansionModule,
         NgxMatTimepickerModule.setLocale('en-GB'),
         DataTablesModule,
-        SocialLoginModule,
-        FacebookModule,
-        FacebookModule.forRoot(),
         MatCardModule,
         MatGridListModule,
         MatStepperModule
-    ],
-    providers: [
-      {
-        provide: 'SocialAuthServiceConfig',
-        useValue: {
-          autoLogin: false,
-          providers: [
-
-            {
-              id: FacebookLoginProvider.PROVIDER_ID,
-              provider: new FacebookLoginProvider('170313182614211')
-            }
-          ],
-          onError: (err) => {
-            console.error(err);
-          }
-        } as SocialAuthServiceConfig,
-      }
     ],
 })
 export class Module {

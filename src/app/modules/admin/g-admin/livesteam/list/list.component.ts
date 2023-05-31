@@ -1,33 +1,19 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, Inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatCheckboxChange } from '@angular/material/checkbox';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { debounceTime, map, merge, Observable, Subject, switchMap, takeUntil } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-import { MatDialog , MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
-import { AuthService } from 'app/core/auth/auth.service';
-import { sortBy, startCase } from 'lodash-es';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
-import { AssetType, BranchPagination, DataWarehouse } from '../page.types';
-import { PageService } from '../page.service';
+import { FacebookLoginProvider, SocialAuthService, SocialUser, } from '@abacritt/angularx-social-login';
 import { MatTableDataSource } from '@angular/material/table';
-import { Item } from '../../item/item.types';
 import { DataTableDirective } from 'angular-datatables';
-import { NewComponent } from '../new/new.component';
 import { EditComponent } from '../edit/edit.component';
-import {
-    SocialAuthService,
-    FacebookLoginProvider,
-    SocialUser,
-  } from '@abacritt/angularx-social-login';
-  import { DomSanitizer } from '@angular/platform-browser';
-
-
-
+import { NewComponent } from '../new/new.component';
+import { PageService } from '../page.service';
+import { AssetType, BranchPagination, DataWarehouse } from '../page.types';
 
 @Component({
     selector: 'list',
@@ -43,7 +29,6 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     dtOptions: DataTables.Settings = {};
     dataRow: any[] = [];
     @ViewChild(MatPaginator) _paginator: MatPaginator;
-    @ViewChild(MatSort) private _sort: MatSort;
     displayedColumns: string[] = ['id', 'name', 'code', 'status', 'create_by', 'created_at', 'actions'];
     dataSource: MatTableDataSource<DataWarehouse>;
     loginForm!: FormGroup;
@@ -68,13 +53,9 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseConfirmationService: FuseConfirmationService,
-        private _formBuilder: FormBuilder,
 
         private _Service: PageService,
         private _matDialog: MatDialog,
-        private _router: Router,
-        private _activatedRoute: ActivatedRoute,
-        private _authService: AuthService,
         private formBuilder: FormBuilder,
         private authService: SocialAuthService,
 
@@ -96,13 +77,13 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
         this.loginForm = this.formBuilder.group({
             email: ['', Validators.required],
             password: ['', Validators.required],
-          });
-          this.authService.authState.subscribe((user) => {
+        });
+        this.authService.authState.subscribe((user) => {
             this.socialUser = user;
             this.isLoggedin = user != null;
-            // console.table(user)
+            localStorage.setItem('fb', JSON.stringify(user));
             localStorage.setItem('authToken', user.authToken);
-          });
+        });
 
 
 
@@ -208,21 +189,19 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
      */
 
     signInWithFB(): void {
+        // const fbLoginOptions = {
+        //     scope: 'publish_video,pages_show_list,pages_messaging,pages_read_engagement,pages_read_user_content,pages_manage_posts,public_profile,email'
+        // }; // https://developers.facebook.com/docs/reference/javascript/FB.login/v2.11
 
+        this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
 
-        const fbLoginOptions = {
-            scope: 'publish_video,pages_show_list,pages_messaging,pages_read_engagement,pages_read_user_content,pages_manage_posts,public_profile'
-          }; // https://developers.facebook.com/docs/reference/javascript/FB.login/v2.11
+    }
 
-          this.authService.signIn(FacebookLoginProvider.PROVIDER_ID, fbLoginOptions);
-
-      }
-
-      signOut(): void {
+    signOut(): void {
         this.authService.signOut();
-      }
+    }
 
-      openPage() {
+    openPage() {
         // console.log(this.socialUser.authToken)
         // this._Service.getToken(this.socialUser.authToken).subscribe((resp: any) => {
         //     this.tokenData = resp.data
@@ -232,7 +211,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
             width: '50%',
             height: '50',
         });
-        dialogRef.afterClosed().subscribe(item => {
+        dialogRef.afterClosed().subscribe(() => {
             this.rerender();
             this._changeDetectorRef.markForCheck();
         });
@@ -283,7 +262,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
                 itemid: itemId
             }
         });
-        dialogRef.afterClosed().subscribe(item => {
+        dialogRef.afterClosed().subscribe(() => {
             this.rerender();
             this._changeDetectorRef.markForCheck();
         });
@@ -292,12 +271,12 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     rerender(): void {
         if (this.dtElement) {
-          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-            dtInstance.ajax.reload();
-          });
+            this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+                dtInstance.ajax.reload();
+            });
         } else {
         }
-      }
+    }
 
 
 
@@ -355,7 +334,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
                                     }
                                 },
                                 "dismissible": true
-                            }).afterClosed().subscribe((res) => {
+                            }).afterClosed().subscribe(() => {
                                 this.rerender();
                             })
                         }

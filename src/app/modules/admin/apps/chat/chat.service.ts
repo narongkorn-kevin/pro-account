@@ -7,6 +7,10 @@ import { environment } from 'environments/environment';
     providedIn: 'root'
 })
 export class ChatService {
+
+    //ข้อมูลเพจที่เลือก
+    pageData: any;
+
     private _chat: BehaviorSubject<Chat> = new BehaviorSubject(null);
     private _chats: BehaviorSubject<Chat[]> = new BehaviorSubject(null);
     private _contact: BehaviorSubject<Contact> = new BehaviorSubject(null);
@@ -19,8 +23,14 @@ export class ChatService {
     constructor(private _httpClient: HttpClient) {
     }
 
-    getItemPage(pageId: string) {
-        const pageToken = localStorage.getItem('pageToken');
+    setPageData(data: any) {
+        this.pageData = data;
+    }
+
+    getItemPage(page: any) {
+        const pageToken = page.access_token
+
+        const pageId = page.id;
 
         return this._httpClient.get(`https://graph.facebook.com/v16.0/${pageId}/conversations?fields=participants&access_token=${pageToken}`)
     }
@@ -121,7 +131,8 @@ export class ChatService {
      * @param id
      */
     getChatById(converId: string): Observable<any> {
-        const pageToken = localStorage.getItem('pageToken');
+
+        const pageToken = this.pageData.access_token;
 
         return this._httpClient.get<Chat>(`https://graph.facebook.com/v16.0/${converId}?fields=participants,messages{from,to,message}&access_token=${pageToken}`).pipe(
             map((chat) => {
@@ -193,6 +204,9 @@ export class ChatService {
         this._chat.next(null);
     }
 
+    getTokenPages(token: any): Observable<any> {
+        return this._httpClient.get('https://graph.facebook.com/v16.0/me/accounts?fields=name,access_token,tasks,picture&access_token=' + token);
+    }
 
 }
 

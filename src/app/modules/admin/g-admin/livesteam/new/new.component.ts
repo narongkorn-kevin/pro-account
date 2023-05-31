@@ -111,29 +111,28 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
         this.authService.authState.subscribe((user) => {
             this.socialUser = user;
             this.isLoggedin = user != null;
-            console.log(user)
+            // console.log(user)
+            this._Service.getTokenUser(this.socialUser.authToken).subscribe((resp: any) => {
+                console.log(resp);
+
+                this.userData = resp
+                // this.formData.patchValue({
+                //     name: this.userData[0].name,
+                //     id: this.userData[0].id,
+                //     pic: this.userData[0].picture.data.url,
+                //     token_user: this.userData[0].access_token,
+                // })
+                // console.log('ข้อมูลPage', this.userData)
+
+                // ------ส่วนแสดงlivesteam list-----
+
+                this._Service.getTokenPage(this.socialUser.authToken, this.formData.value.id).subscribe((resp: any) => {
+                    this.pageData = resp
+
+                    console.log('ข้อมูล', resp)
+                })
+            });
         });
-        this._Service.getTokenUser(this.socialUser.authToken).subscribe((resp: any) => {
-
-            this.userData = resp
-            // this.formData.patchValue({
-            //     name: this.userData[0].name,
-            //     id: this.userData[0].id,
-            //     pic: this.userData[0].picture.data.url,
-            //     token_user: this.userData[0].access_token,
-            // })
-            // console.log('ข้อมูลPage', this.userData)
-
-            // ------ส่วนแสดงlivesteam list-----
-
-            this._Service.getTokenPage(this.socialUser.authToken, this.formData.value.id).subscribe((resp: any) => {
-                this.pageData = resp
-
-                console.log('ข้อมูล', resp)
-            })
-        })
-
-
 
         // this.loadTable();
 
