@@ -41,14 +41,21 @@
 <div class="flex flex-row">
     <div class="flex flex-col w-[500px] h-[200px]">
         <div class="steamer">
-            <div *ngIf="liveStream != undefined">
+            <div *ngIf="liveStream != undefined; else noLiveStream">
+                <p class="text-xl text-green-500 bg-green-100 font-semibold py-3 px-10 text-center mb-2 rounded-lg w-[900px] ml-10 mt-10">กำลังแสดงสดอยู่</p>
                 <div [innerHTML]="liveStream.embed_html"
                     class="h-180 border border-gray-300 rounded-lg overflow-hidden shadow-md">
                 </div>
+                <!-- <p class="text-4xl bg-red-500 rounded text-white">Live Streaming now</p> -->
             </div>
+            <ng-template #noLiveStream>
+                <p class="absolute ml-[410px] mt-120 text-xl text-red-500 bg-red-100 font-semibold py-3 px-10 text-center mb-2 rounded-lg">ไม่มีการแสดงสด</p>
+            </ng-template>
         </div>
     </div>
-        <div class="flex ml-4">
+
+
+        <div class="absolute ml-[520px] mt-[100px]">
             <app-chat *ngIf="liveStream !== undefined" [StreamId]='liveStream.id' [PageId]="pageId"></app-chat>
         </div>
     <div
