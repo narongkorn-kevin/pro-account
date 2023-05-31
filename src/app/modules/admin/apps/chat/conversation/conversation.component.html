@@ -123,17 +123,17 @@
                                 <div
                                 class="relative max-w-5/4 px-3 py-5 rounded-xl shadow-xl"
                                 [ngClass]="{
-                                  'bg-blue-500 text-blue-50 ml-auto': message?.from?.id == '116311434766128',
-                                  'bg-green-500 text-green-50 mr-auto': message?.from?.id != '116311434766128'
+                                  'bg-blue-500 text-blue-50 ml-auto': message?.from?.id == page.id,
+                                  'bg-green-500 text-green-50 mr-auto': message?.from?.id != page.id
                                 }">
                                     <!-- Speech bubble tail -->
                                     <!-- <ng-container *ngIf="last || chat.messages[i + 1].isMine !== true || chat.messages[i + 1].isMine === false"> -->
-                                        <ng-container *ngIf="message?.from?.id == '116311434766128'">
+                                        <ng-container *ngIf="message?.from?.id == page.id">
                                             <div class="absolute bottom-0 w-3 text-blue-500 -right-1 -mr-px mb-px">
                                               <ng-container *ngTemplateOutlet="speechBubbleExtension"></ng-container>
                                             </div>
                                           </ng-container>
-                                          <ng-container *ngIf="message?.from?.id != '116311434766128'">
+                                          <ng-container *ngIf="message?.from?.id != page.id">
                                             <div class="absolute bottom-0 w-3 text-green-500 -left-1 -ml-px mb-px">
                                               <ng-container *ngTemplateOutlet="speechBubbleExtension"></ng-container>
                                             </div>
@@ -192,7 +192,7 @@
                     </mat-form-field>
                     <div class="flex items-center h-11 my-px ml-4">
                         <button
-                            mat-icon-button>
+                            mat-icon-button (click)="sendMessage(chat)">
                             <mat-icon
                                 class="rotate-90"
                                 [svgIcon]="'heroicons_outline:paper-airplane'"></mat-icon>

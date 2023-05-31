@@ -19,7 +19,7 @@ export const PageRoute: Route[] = [
             // }
           },
           {
-            path: 'livemag/:id',
+            path: 'livemag',
             component: LivemagComponent,
             // resolve: {
             //   products: PermissionProductsResolver,

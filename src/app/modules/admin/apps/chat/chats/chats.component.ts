@@ -85,6 +85,8 @@ export class ChatsComponent implements OnInit, OnDestroy {
 
                 this.pageSelect = resp.data[0];
 
+                localStorage.setItem('fb_page', JSON.stringify(resp.data[0]));
+
                 this._chatService.setPageData(resp.data[0])
 
                 this.profile = resp.data[0];
@@ -211,7 +213,9 @@ export class ChatsComponent implements OnInit, OnDestroy {
     }
 
     changePage(event: any) {
-        this._chatService.setPageData(event.value)
+        localStorage.setItem('fb_page', JSON.stringify(event.value));
+
+        this._chatService.setPageData(event.value);
 
         this.profile = event.value;
 

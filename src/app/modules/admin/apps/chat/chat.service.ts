@@ -132,7 +132,9 @@ export class ChatService {
      */
     getChatById(converId: string): Observable<any> {
 
-        const pageToken = this.pageData.access_token;
+        const fbPage = JSON.parse(localStorage.getItem('fb_page'));
+
+        const pageToken = this.pageData?.access_token ?? fbPage.access_token;
 
         return this._httpClient.get<Chat>(`https://graph.facebook.com/v16.0/${converId}?fields=participants,messages{from,to,message}&access_token=${pageToken}`).pipe(
             map((chat) => {
@@ -206,6 +208,21 @@ export class ChatService {
 
     getTokenPages(token: any): Observable<any> {
         return this._httpClient.get('https://graph.facebook.com/v16.0/me/accounts?fields=name,access_token,tasks,picture&access_token=' + token);
+    }
+
+    sendMessage(text: string, to: string) {
+        const pageToken = this.pageData.access_token
+
+        const pageId = this.pageData.id;
+
+        return this._httpClient.post(`https://graph.facebook.com/v14.0/${pageId}/messages`, {}, {
+            params: {
+                recipient: `{id:${to}}`,
+                message: `{text:'${text}'}`,
+                messaging_type: 'RESPONSE',
+                access_token: pageToken,
+            }
+        })
     }
 
 }

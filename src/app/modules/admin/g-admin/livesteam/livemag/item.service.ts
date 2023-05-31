@@ -79,6 +79,16 @@ export class ItemService {
             })
         );
     }
+
+    updateProductCode(product: any) {
+        const body = {
+            item_id: product.item_id,
+            code: product.barcode,
+            qty: product.balance,
+        };
+
+        return this.http.post(environment.API_URL + "api/product_live", body)
+    }
 }
 
 
