@@ -37,6 +37,7 @@ interface product {
     animations: fuseAnimations
 })
 export class LivemagComponent implements OnInit {
+    files: File[] = [];
 
     token = localStorage.getItem('pageToken');
 
@@ -238,5 +239,10 @@ export class LivemagComponent implements OnInit {
                 })
             )
         });
+
+    }
+    ngOnDestroy(): void {
+        // Unsubscribe from all subscriptions
+
     }
 }
