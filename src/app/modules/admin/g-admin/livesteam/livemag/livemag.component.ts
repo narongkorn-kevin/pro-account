@@ -37,6 +37,7 @@ interface product {
     animations: fuseAnimations
 })
 export class LivemagComponent implements OnInit {
+    files: File[] = [];
 
     token = localStorage.getItem('pageToken');
 
@@ -231,6 +232,19 @@ export class LivemagComponent implements OnInit {
         // .subscribe();
         this.ItemServive.updateProductCode(product).pipe(
             takeUntil(this._unsubscribeAll),
+            debounceTime(300),
+        ).subscribe(() => {
+            this.item$ = this.ItemServive.getItemPage().pipe(
+                map((resp: any) => {
+                    return resp.data.data
+                })
+            )
+        });
+
+    }
+    ngOnDestroy(): void {
+        // Unsubscribe from all subscriptions
+
             debounceTime(1000),
             tap((query) => {
                 this.item$ = this.ItemServive.getProductLivePage().pipe(
