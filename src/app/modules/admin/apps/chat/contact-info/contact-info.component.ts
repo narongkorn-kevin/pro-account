@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Chat } from 'app/modules/admin/apps/chat/chat.types';
 import { ItemService } from 'app/modules/admin/g-admin/livesteam/livemag/item.service';
 import { Observable, map } from 'rxjs';
+import { AddProductComponent } from '../chats/add-product/add-product.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector       : 'chat-contact-info',
@@ -12,7 +14,7 @@ import { Observable, map } from 'rxjs';
 })
 export class ContactInfoComponent implements OnInit
 {
-
+    rerender: any;
     item$: Observable<any>;
 
     @Input() chat: Chat;
@@ -23,6 +25,9 @@ export class ContactInfoComponent implements OnInit
      */
     constructor(
         private itemService: ItemService,
+        private _changeDetectorRef: ChangeDetectorRef,
+        private _matDialog: MatDialog,
+
     )
     {
     }
@@ -34,6 +39,16 @@ export class ContactInfoComponent implements OnInit
             })
         );
     }
+    New2() {
+        const dialogRef = this._matDialog.open(AddProductComponent, {
+            width: '900px',
+            height: '750px'
+        });
 
+        dialogRef.afterClosed().subscribe(item => {
+            this.rerender();
+            this._changeDetectorRef.markForCheck();
+        });
+    }
 
 }

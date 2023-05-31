@@ -39,7 +39,7 @@
 <div class="grid grid-cols-3 mr-10 mb-60 gap-4 pt-2">
 </div> -->
 <div class="flex flex-row">
-    <div class="flex flex-col">
+    <div class="flex flex-col w-[500px] h-[200px]">
         <div class="steamer">
             <div *ngIf="liveStream != undefined">
                 <div [innerHTML]="liveStream.embed_html"
@@ -47,17 +47,14 @@
                 </div>
             </div>
         </div>
-
-        <div class="flex w-full">
+    </div>
+        <div class="flex ml-4">
             <app-chat *ngIf="liveStream !== undefined" [StreamId]='liveStream.id' [PageId]="pageId"></app-chat>
         </div>
-
-    </div>
-
     <div
-        class="flex flex-col text-lg mr-auto p-1 pl-8 items-center justify-between text-center w-full md:w-2/5 lg:w-1/3 fixed right-0 top-0 bottom-0 bg-white overflow-hidden">
-        <h1 class="p-1 mt-8 mb-20 font-bold text-xl mr-4 shadow-slate-500 rounded-full text-black">รายการสินค้า</h1>
-        <table class="shadow-slate-300 rounded-xl pr-4 mr-2 w-full mb-100">
+        class="flex flex-col text-lg ml-30 p-1 pl-8 items-center justify-between text-center w-[700px] md:w-2/5 lg:w-1/3 fixed right-0 top-0 bottom-0 bg-white overflow-hidden">
+        <h1 class="p-1 mt-10 mb-16 font-bold text-xl mr-4 shadow-slate-500 rounded-full text-black">รายการสินค้า</h1>
+        <table class="shadow-slate-300 rounded-xl pr-4 mr-2 w-full mb-200">
             <thead>
                 <tr>
                     <th class="py-2">Code</th>

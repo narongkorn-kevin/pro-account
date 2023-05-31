@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SaleOrderService } from './sale-order.service';
 import { Observable, map, tap } from 'rxjs';
-import { Router } from '@angular/router';
+
 @Component({
     selector: 'app-sale-page',
     templateUrl: './sale-page.component.html'
@@ -21,7 +21,7 @@ export class SalePageComponent implements OnInit {
         private readonly _activatedRoute: ActivatedRoute,
         private readonly _saleOrderService: SaleOrderService,
         private fb: FormBuilder,
-        private router: Router
+        private router:Router
     ) { }
 
     ngOnInit(): void {
@@ -48,10 +48,11 @@ export class SalePageComponent implements OnInit {
     }
 
     confirm() {
-        console.log('สำเร็จ');
-        this.router.navigate(['/chat']);
+        // console.log('สำเร็จ');
+        window.close();
     }
-
-
+closePage() {
+  window.close();
+}
 
 }

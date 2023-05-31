@@ -96,9 +96,10 @@
               <h2 class="text-lg">เบอร์โทรศัพท์มือถือ: {{stepOneForm.value.phoneNumber}}</h2>
               <h2 class="text-lg">ที่อยู่</h2>
               <p class="text-gray-600">{{stepOneForm.value.address}}</p>
-              <button mat-button (click)="confirm()" class="mt-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-xl transition duration-300 ease-in-out transform hover:scale-105">
+              <button mat-button (click)="closePage()" class="mt-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-xl transition duration-300 ease-in-out transform hover:scale-105">
                 ยืนยัน
-              </button>
+            </button>
+            
             </div>
           </mat-step>
 

@@ -17,10 +17,10 @@
     <div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
 
         <div class="flex flex-col p-3 sm:p-10">
-            <div class="overflow-auto  bg-white shadow sm:rounded-lg">
+            <div class="overflow-auto  bg-white shadow sm:rounded-lg w-[500]">
                 <!-- Products list -->
 
-                <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll">
+                <div class="flex flex-col flex-auto p-0 sm:overflow-auto overflow-x-scroll w-[500px]">
                     <table
                         class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
                         style="width: 100%">
@@ -50,6 +50,18 @@
                                     <button mat-flat-button (click)="live2(item.id)" class="px-6 ml-3 mat-primary">จัดการแชท</button>
                                 </div>
                                 </td>
+                                <div class="flex justify-center">
+                                    <h1 class="text-xl font-bold mb-4"></h1>
+                                    <ng-container *ngIf="liveStream">
+                                      <!-- Live status button -->
+                                      <button class="px-6 ml-3 bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded" (click)="goToLiveStream()">ไปยังหน้าไลฟ์</button>
+                                    </ng-container>
+                                    <ng-container *ngIf="!liveStream">
+                                      <!-- No live message -->
+                                      <p class="text-red-500 bg-red-100 font-bold py-3 px-10 mt-[20px] ml-2 text-center mb-2 rounded-2xl">ไม่มีการไลฟ์สด</p>
+                                    </ng-container>
+                                  </div>
+
                                 <!-- <td style="min-width: 80px;" *ngIf="item.image === null || ''"> </td>
                                 <td style="min-width: 80px;" *ngIf="item.image !== null || ''"><img src="{{item.image}}"
                                         class="h-10 w-10"> </td>

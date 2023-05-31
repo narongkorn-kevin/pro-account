@@ -19,6 +19,7 @@ import { ProfileComponent } from 'app/modules/admin/apps/chat/profile/profile.co
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
+import { AddProductComponent } from './chats/add-product/add-product.component';
 import { FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import { FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule } fro
         ConversationComponent,
         EmptyConversationComponent,
         NewChatComponent,
-        ProfileComponent
+        ProfileComponent,
+        AddProductComponent
     ],
     imports: [
         RouterModule.forChild(chatRoutes),

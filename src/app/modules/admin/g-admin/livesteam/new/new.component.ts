@@ -19,6 +19,8 @@ import {
     FacebookLoginProvider,
     SocialUser,
 } from '@abacritt/angularx-social-login';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ItemService } from '../livemag/item.service';
 
 @Component({
     selector: 'new',
@@ -44,7 +46,8 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
     tagsEditMode: boolean = false;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     env_path = environment.API_URL;
-
+    pageId: string;
+    liveStream: any;
     // me: any | null;
     // get roleType(): string {
     //     return 'marketing';
@@ -68,9 +71,11 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
         private _Service: PageService,
         private _matDialog: MatDialog,
         private _router: Router,
-        private _activatedRoute: ActivatedRoute,
         private _authService: AuthService,
         private authService: SocialAuthService,
+        private _activatedRoute: ActivatedRoute,
+        private sanitizer: DomSanitizer,
+        private itemService: ItemService
     ) {
 
         this.formData = this._formBuilder.group({
@@ -90,6 +95,17 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
+        this.pageId = this._activatedRoute.snapshot.paramMap.get('id');
+
+        this.itemService.getListVideoLive(this.pageId).subscribe({
+          next: (resp) => {
+            const data = resp.find(e => e.status === 'LIVE');
+            if (data) {
+              data.embed_html = this.sanitizer.bypassSecurityTrustHtml(data.embed_html);
+              this.liveStream = data;
+            }
+          }
+        });
 
 
         this.authService.authState.subscribe((user) => {
