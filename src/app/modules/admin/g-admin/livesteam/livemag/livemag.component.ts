@@ -108,7 +108,8 @@ export class LivemagComponent implements OnInit {
         private ItemServive: ItemService,
         private sharedserviceService: SharedserviceService,
         private _chatService: ChatService,
-        private _productcService: ProductcService
+        private _productcService: ProductcService,
+
     ) {
         this.formData = this._formBuilder.group({
             pic: '',
