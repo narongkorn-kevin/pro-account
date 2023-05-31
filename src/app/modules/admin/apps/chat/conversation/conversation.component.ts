@@ -18,11 +18,14 @@ import { MatDialog } from '@angular/material/dialog';
 
 })
 export class ConversationComponent implements OnInit, OnDestroy {
-    @ViewChild('messageInput') messageInput: ElementRef;
+    // @ViewChild('messageInput') messageInput: ElementRef;
+    @ViewChild('messageInput') messageInput: any;
     chat: Chat;
     drawerMode: 'over' | 'side' = 'side';
     drawerOpened: boolean = true;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
+
+    page: any;
 
     messages: any[] = [];
 
@@ -57,6 +60,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
         private matDialog: MatDialog,
 
     ) {
+        this.page = JSON.parse(localStorage.getItem('fb_page'));
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -99,6 +103,8 @@ export class ConversationComponent implements OnInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
+        console.log(this.page);
+
         // Chat
         this._chatService.chat$
             .pipe(takeUntil(this._unsubscribeAll))
@@ -203,5 +209,19 @@ export class ConversationComponent implements OnInit, OnDestroy {
 
     rerender() {
         throw new Error('Method not implemented.');
+    }
+
+    sendMessage(to:string) {
+        console.log(to);
+
+        console.log(this.messageInput.value);
+
+
+        return
+        // this._chatService.sendMessage(this.messageText, to).subscribe(
+        //     (resp) => {
+        //         this.messageText = '';
+        //     }
+        // );
     }
 }
