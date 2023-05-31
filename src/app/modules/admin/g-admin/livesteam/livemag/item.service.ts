@@ -49,6 +49,37 @@ export class ItemService {
             }),)
     }
 
+    getProductLivePage() {
+        return this.http.post(environment.API_URL + "api/product_live_page", {
+            // "item_type_id": null,
+            // "set_type": "normal",
+            "draw": 1,
+            "columns": [
+
+            ],
+            "order": [
+                {
+                    "column": 0,
+                    "dir": "asc"
+                }
+            ],
+            "start": 0,
+            "length": 1000000,
+            "search": {
+                "value": "",
+                "regex": false
+            }
+        }).pipe(
+            map((data: any) => {
+                // console.log('dfdsa', data)
+                // Update the chat
+                this._itemP.next(data.data.data);
+
+                // Return the chat
+                return data;
+            }),)
+    }
+
     getListVideoLive(pageId: string) {
         const token = localStorage.getItem('pageToken');
 
@@ -82,12 +113,12 @@ export class ItemService {
 
     updateProductCode(product: any) {
         const body = {
-            item_id: product.id,
-            code: product.barcode,
-            qty: product.balance,
+            item_id: product.item_id,
+            code: product.code,
+            qty: product.qty,
         };
 
-        return this.http.post(environment.API_URL + "api/product_live", body)
+        return this.http.put(environment.API_URL + "api/product_live/" + product.id, body)
     }
 }
 

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChil
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Observable, Subject, debounceTime, map, takeUntil, tap } from 'rxjs';
+import { Observable, Subject, debounceTime, map, of, switchMap, takeUntil, tap } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -175,7 +175,7 @@ export class LivemagComponent implements OnInit {
         //     }
         // });
 
-        this.item$ = this.ItemServive.getItemPage().pipe(
+        this.item$ = this.ItemServive.getProductLivePage().pipe(
             map((resp: any) => {
                 return resp.data.data
             })
@@ -214,6 +214,7 @@ export class LivemagComponent implements OnInit {
     }
 
     productCodeChange(product: any) {
+
         // this.searchInputControl.valueChanges
         // .pipe(
         //     takeUntil(this._unsubscribeAll),
@@ -230,13 +231,17 @@ export class LivemagComponent implements OnInit {
         // .subscribe();
         this.ItemServive.updateProductCode(product).pipe(
             takeUntil(this._unsubscribeAll),
-            debounceTime(300),
-        ).subscribe(() => {
-            this.item$ = this.ItemServive.getItemPage().pipe(
-                map((resp: any) => {
-                    return resp.data.data
-                })
-            )
-        });
+            debounceTime(1000),
+            switchMap((query) => {
+                return this.ItemServive.getProductLivePage().pipe(
+                    map((resp: any) => {
+                        return resp.data.data
+                    })
+                )
+            }),
+            map((resp) => {
+                return this.item$ = of(resp);
+            })
+        ).subscribe();
     }
 }
