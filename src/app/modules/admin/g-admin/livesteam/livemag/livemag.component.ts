@@ -232,16 +232,13 @@ export class LivemagComponent implements OnInit {
         this.ItemServive.updateProductCode(product).pipe(
             takeUntil(this._unsubscribeAll),
             debounceTime(1000),
-            switchMap((query) => {
-                return this.ItemServive.getProductLivePage().pipe(
+            tap((query) => {
+                this.item$ = this.ItemServive.getProductLivePage().pipe(
                     map((resp: any) => {
                         return resp.data.data
                     })
                 )
             }),
-            map((resp) => {
-                return this.item$ = of(resp);
-            })
         ).subscribe();
     }
 }
