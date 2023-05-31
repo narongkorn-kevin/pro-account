@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   selector: 'app-sale-order',
   templateUrl: './sale-order.component.html',
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class SaleOrderComponent {
 
