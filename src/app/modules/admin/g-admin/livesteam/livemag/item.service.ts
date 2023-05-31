@@ -33,7 +33,7 @@ export class ItemService {
                 }
             ],
             "start": 0,
-            "length": 10,
+            "length": 1000000,
             "search": {
                 "value": "",
                 "regex": false
