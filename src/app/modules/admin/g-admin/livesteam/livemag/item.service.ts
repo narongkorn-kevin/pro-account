@@ -82,7 +82,7 @@ export class ItemService {
 
     updateProductCode(product: any) {
         const body = {
-            item_id: product.item_id,
+            item_id: product.id,
             code: product.barcode,
             qty: product.balance,
         };
