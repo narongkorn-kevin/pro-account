@@ -76,43 +76,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         link: '/bank/list',
                     },
 
-                    {
-                        id: 'livesteam',
-                        title: 'เข้าสู่ระบบจัดการไลฟ์สด',
-                        icon: 'heroicons_outline:video-camera',
-                        type: 'basic',
-                        link: '/livesteam/list',
-                    },
-                    {
-                        id: 'g-Admin',
-                        title: 'จัดการเพจ',
-                        type: 'collapsable',
-                        icon: 'heroicons_outline:home',
-                        children: [
-                            {
-                                id: 'chat',
-                                title: 'กล่องข้อความ',
-                                icon: 'heroicons_outline:chat',
-                                type: 'basic',
-                                link: '/chat',
-                            },
-                            {
-                                id: 'livemag',
-                                title: 'จัดการไลฟ์สด',
-                                icon: 'heroicons_outline:video-camera',
-                                type: 'basic',
-                                link: '/livesteam/livemag',
-                            },
-                            {
-                                id: 'sale-page-order',
-                                title: 'หน้าสั่งซื้อ',
-                                icon: 'heroicons_outline:chat',
-                                type: 'basic',
-                                link: '/sale-page-order',
-                            },
-                        ]
-                    },
-
+    
                     {
                         id: 'wallet-bag',
                         title: 'กระเป๋าเงิน',
@@ -574,12 +538,43 @@ export const defaultNavigation: FuseNavigationItem[] = [
             return AuthService._Hr;
         },
         children: [
-            // {
-            //     title: 'ห้องพูดคุยกับลูกค้า',
-            //     type: 'basic',
-            //     icon: 'heroicons_outline:chat',
-            //     link: '/chat/list/data',
-            // },
+            {
+                id: 'livesteam',
+                title: 'เข้าสู่ระบบจัดการไลฟ์สด',
+                icon: 'heroicons_outline:video-camera',
+                type: 'basic',
+                link: '/livesteam/list',
+            },
+            {
+                id: 'g-Admin',
+                title: 'จัดการเพจ',
+                type: 'collapsable',
+                icon: 'heroicons_outline:home',
+                children: [
+                    {
+                        id: 'chat',
+                        title: 'กล่องข้อความ',
+                        icon: 'heroicons_outline:chat',
+                        type: 'basic',
+                        link: '/chat',
+                    },
+                    {
+                        id: 'livemag',
+                        title: 'จัดการไลฟ์สด',
+                        icon: 'heroicons_outline:video-camera',
+                        type: 'basic',
+                        link: '/livesteam/livemag',
+                    },
+                    // {
+                    //     id: 'sale-page-order',
+                    //     title: 'หน้าสั่งซื้อ',
+                    //     icon: 'heroicons_outline:chat',
+                    //     type: 'basic',
+                    //     link: '/sale-page-order',
+                    // },
+                ]
+            },
+
 
             {
                 id: 'position',

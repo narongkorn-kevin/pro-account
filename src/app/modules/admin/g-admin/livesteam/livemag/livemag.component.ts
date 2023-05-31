@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChil
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Observable, Subject, debounceTime, map, takeUntil, tap } from 'rxjs';
+import { Observable, Subject, debounceTime, map, of, switchMap, takeUntil, tap } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -176,7 +176,7 @@ export class LivemagComponent implements OnInit {
         //     }
         // });
 
-        this.item$ = this.ItemServive.getItemPage().pipe(
+        this.item$ = this.ItemServive.getProductLivePage().pipe(
             map((resp: any) => {
                 return resp.data.data
             })
@@ -215,6 +215,7 @@ export class LivemagComponent implements OnInit {
     }
 
     productCodeChange(product: any) {
+
         // this.searchInputControl.valueChanges
         // .pipe(
         //     takeUntil(this._unsubscribeAll),
@@ -244,5 +245,14 @@ export class LivemagComponent implements OnInit {
     ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
 
+            debounceTime(1000),
+            tap((query) => {
+                this.item$ = this.ItemServive.getProductLivePage().pipe(
+                    map((resp: any) => {
+                        return resp.data.data
+                    })
+                )
+            }),
+        ).subscribe();
     }
 }

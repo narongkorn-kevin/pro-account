@@ -46,8 +46,8 @@
                 <div [innerHTML]="liveStream.embed_html"
                     class="h-180 border border-gray-300 rounded-lg overflow-hidden shadow-md">
                 </div> -->
-                <!-- <p class="text-4xl bg-red-500 rounded text-white">Live Streaming now</p> -->
-            <!-- </div>
+<!-- <p class="text-4xl bg-red-500 rounded text-white">Live Streaming now</p> -->
+<!-- </div>
             <ng-template #noLiveStream>
                 <p class="absolute ml-[410px] mt-120 text-xl text-red-500 bg-red-100 font-semibold py-3 px-10 text-center mb-2 rounded-lg">ไม่มีการแสดงสด</p>
             </ng-template>
@@ -118,50 +118,53 @@
     <!-- 2 -->
 
 
-        <!-- <div class="absolute ml-[520px] mt-[100px]">
+<!-- <div class="absolute ml-[520px] mt-[100px]">
             <app-chat *ngIf="liveStream !== undefined" [StreamId]='liveStream.id' [PageId]="pageId"></app-chat>
         </div> -->
-    <div
-        class="flex flex-col text-lg ml-30 p-1 pl-8 items-center justify-between text-center md:w-2/5 lg:w-1/3 fixed right-0 top-0 bottom-0 bg-white overflow-y-auto">
-        <h1 class="p-1 mt-10 mb-16 font-bold text-xl mr-4 shadow-slate-500 rounded-full text-black">รายการสินค้า</h1>
-        <table class="shadow-slate-300 rounded-xl pr-4 mr-2 w-full">
-            <thead>
-                <tr>
-                    <th class="py-2">Code</th>
-                    <th class="py-2">No.</th>
-                    <th class="py-2">Pic</th>
-                    <th class="py-2">Name</th>
-                    <th class="py-2">Qty</th>
-                    <th class="py-2">On/Off</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let product of item$ | async">
-                    <td class="py-2">
-                        <!-- {{ product.item_id }} -->
-                        <input type="text" class="border border-gray-300 rounded-md py-2 w-5/6 h-1/6"
-                            [(ngModel)]="product.barcode" (ngModelChange)="productCodeChange(product)">
-                    </td>
-                    <td class="py-2">{{ product.id }}</td>
-                    <td class="py-2"><img src="{{product.image}}" alt="" class="w-12"></td>
-                    <td class="py-2">{{ product.name }}</td>
-                    <td class="py-2">{{ product.balance }}</td>
-                    <td class="py-2">
-                        <label class="relative inline-flex items-center mr-8 ml-8 cursor-pointer">
-                            <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="true"
-                                class="sr-only peer" checked>
-                            <div class="w-11 h-6 bg-red-600 rounded-full peer
+<div
+    class="flex flex-col text-lg ml-30 p-1 pl-8 items-center text-center md:w-2/5 lg:w-1/3 fixed right-0 top-0 bottom-0 bg-white overflow-y-auto">
+    <h1 class="p-1 mt-10 mb-16 font-bold text-xl mr-4 shadow-slate-500 rounded-full text-black">รายการสินค้า</h1>
+    <table class="shadow-slate-300 rounded-xl pr-4 mr-2 w-full">
+        <thead>
+            <tr>
+                <th class="py-2">Code</th>
+                <th class="py-2">No.</th>
+                <th class="py-2">Pic</th>
+                <th class="py-2">Name</th>
+                <th class="py-2">Qty</th>
+                <th class="py-2">On/Off</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of item$ | async">
+                <td class="py-2">
+                    <!-- {{ product.item_id }} -->
+                    <input type="text" class="p-2 border border-gray-300 rounded-md py-2 w-5/6 h-1/6"
+                        [(ngModel)]="product.code" (ngModelChange)="productCodeChange(product)">
+                </td>
+                <td class="py-2">{{ product.id }}</td>
+                <td class="py-2"><img src="{{product.item.image}}" alt="" class="w-12"></td>
+                <td class="py-2">{{ product.item.name }}</td>
+                <td class="py-2">
+                    <input type="text" class="p-2 border border-gray-300 rounded-md py-2 w-5/6 h-1/6"
+                        [(ngModel)]="product.qty" (ngModelChange)="productCodeChange(product)">
+                </td>
+                <td class="py-2">
+                    <label class="relative inline-flex items-center mr-8 ml-8 cursor-pointer">
+                        <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="true"
+                            class="sr-only peer" checked>
+                        <div class="w-11 h-6 bg-red-600 rounded-full peer
               peer-focus:ring-primary-300 dark:peer-focus:ring-primary-800 dark:bg-gray-700
               peer-checked:after:translate-x-full peer-checked:after:border-white after:content-['']
               after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300
               after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600
               peer-checked:bg-primary-600">
-                            </div>
-                        </label>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                        </div>
+                    </label>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 <!-- </div> -->
