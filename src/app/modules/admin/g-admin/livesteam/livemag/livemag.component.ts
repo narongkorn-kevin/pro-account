@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChil
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Observable, Subject, map, tap } from 'rxjs';
+import { Observable, Subject, debounceTime, map, takeUntil, tap } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -133,10 +133,10 @@ export class LivemagComponent implements OnInit {
             next: (resp) => {
 
                 const data = resp.find(e => e.status == 'LIVE');
-                    // const embedHtmlWithTailwind = data.embed_html.replace(
-                    //     '<iframe',
-                    //     '<iframe class="w-200"'
-                    // );
+                // const embedHtmlWithTailwind = data.embed_html.replace(
+                //     '<iframe',
+                //     '<iframe class="w-200"'
+                // );
                 data.embed_html = this.sanitizer.bypassSecurityTrustHtml(data.embed_html);
                 this.liveStream = data;
             }
@@ -210,5 +210,32 @@ export class LivemagComponent implements OnInit {
 
         //     })
         // });
+    }
+
+    productCodeChange(product: any) {
+        // this.searchInputControl.valueChanges
+        // .pipe(
+        //     takeUntil(this._unsubscribeAll),
+        //     debounceTime(300),
+        //     switchMap((query) => {
+        //         this.closeDetails();
+        //         this.isLoading = true;
+        //         return this._inventoryService.getProducts(0, 10, 'name', 'asc', query);
+        //     }),
+        //     map(() => {
+        //         this.isLoading = false;
+        //     })
+        // )
+        // .subscribe();
+        this.ItemServive.updateProductCode(product).pipe(
+            takeUntil(this._unsubscribeAll),
+            debounceTime(300),
+        ).subscribe(() => {
+            this.item$ = this.ItemServive.getItemPage().pipe(
+                map((resp: any) => {
+                    return resp.data.data
+                })
+            )
+        });
     }
 }
