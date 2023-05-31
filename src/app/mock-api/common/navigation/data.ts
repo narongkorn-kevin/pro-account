@@ -565,13 +565,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/livesteam/livemag',
                     },
-                    {
-                        id: 'sale-page-order',
-                        title: 'หน้าสั่งซื้อ',
-                        icon: 'heroicons_outline:chat',
-                        type: 'basic',
-                        link: '/sale-page-order',
-                    },
+                    // {
+                    //     id: 'sale-page-order',
+                    //     title: 'หน้าสั่งซื้อ',
+                    //     icon: 'heroicons_outline:chat',
+                    //     type: 'basic',
+                    //     link: '/sale-page-order',
+                    // },
                 ]
             },
 
