@@ -1,6 +1,6 @@
-<div class="flex flex-col w-5/6 md:w-1/2 lg:w-2/3 xl:w-3/6 bg-gray-100 border-b-4 border-green-500 shadow-xl mt-0 mr-72 p-2 h-[720px]">
-    <div class="flex-grow p-6 overflow-auto h-5/6">
-      <div class="mx-auto bg-white rounded-xl shadow-md p-6 space-y-4">
+<div class="flex flex-col w-5/6 md:w-11/12 lg:w-11/12 xl:w-11/12 bg-gray-100 border-b-4 border-green-500 shadow-xl mt-0 mr-72 p-2 h-[720px]">
+    <div class="flex-grow p-6 overflow-auto">
+      <div class="h-[85%] mx-auto bg-white rounded-xl shadow-md p-16 space-y-4">
         <div class="space-y-2" *ngFor="let message of messages">
           <div class="flex items-end mb-2" [ngClass]="{ 'justify-end': message.sender === 'user', 'justify-start': message.sender === 'bot' }">
             <div class="px-4 py-2 rounded-lg text-base" [ngClass]="{
@@ -14,3 +14,4 @@
       </div>
     </div>
   </div>
+
