@@ -283,16 +283,21 @@
                             name="receiver-position"></textarea>
                     </form>
                     <div class="mb-4">
-                        <h1 class="font-bold text-xl mb-2 text-center">รายการสินค้า</h1>
+                        <!-- <h1 class="font-bold text-xl mb-2 text-center">รายการสินค้า</h1>
                         <ng-container *ngIf="item$ | async as items">
                             <div class="grid grid-cols-4 gap-4">
                                 <div *ngFor="let item of items" class="cursor-pointer">
                                     <img [src]="item.image" [alt]="item.name" srcset="" class="w-20 h-18">
                                 </div>
                             </div>
-                        </ng-container>
+                        </ng-container> -->
 
+                        <a (click)="New2()">
 
+                        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 rounded-3xl w-[80%]" matStepperNext>
+                            เลือกสินค้า
+                        </button>
+                    </a>
                         <ng-container>
                             <div class="mt-20">
                                 <h1 class="font-extrabold text-2xl">รายละเอียดสินค้า</h1>
