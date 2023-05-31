@@ -26,7 +26,8 @@
       "default",
       {
         "dlitem": "off",
-        "definition-list": "off"
+        "definition-list": "off",
+        "list": "off"
       }
     ],
     "no-inline-styles": "off",
