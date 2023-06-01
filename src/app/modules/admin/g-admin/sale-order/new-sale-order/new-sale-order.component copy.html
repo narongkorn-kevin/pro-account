@@ -56,7 +56,7 @@
                                 ช่องทางการขายอื่นๆ
                             </div>
 
-                            <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 100%!important;">
+                            <mat-form-field class="w-3/12 pr-2 flex-initial " style="width: 100%!important;">
                                 <input matInput placeholder="ระบุช่องทางการขายอื่น"
                                     [formControlName]="'channal_remark'">
                             </mat-form-field>
@@ -72,7 +72,7 @@
                         <!-- <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 100%!important;">
                             <input matInput placeholder="ชื่อลูกค้า" [formControlName]="'name'">
                         </mat-form-field> -->
-                        <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 100%!important;">
+                        <mat-form-field class="w-3/12 pr-2 flex-initial " style="width: 100%!important;">
                             <input type="text" placeholder="ชื่อลูกค้า" aria-label="Number" matInput
                                 [formControl]="myControl" [matAutocomplete]="auto" [formControlName]="'name'">
                             <mat-autocomplete #auto="matAutocomplete" style="width: 100%!important;">
@@ -87,7 +87,7 @@
                             เบอร์โทรศัพท์
                         </div>
                         <!-- <div class="flex-initial w-full"> -->
-                        <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 100%!important;">
+                        <mat-form-field class="w-3/12 pr-2 flex-initial " style="width: 100%!important;">
                             <input matInput placeholder="เบอร์โทรศัพท์" [formControlName]="'telephone'" maxlength="10">
                         </mat-form-field>
                         <!-- </div> -->
@@ -97,7 +97,7 @@
                             อีเมลล์
                         </div>
                         <!-- <div class="flex-initial w-full"> -->
-                        <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 100%!important;">
+                        <mat-form-field class="w-3/12 pr-2 flex-initial " style="width: 100%!important;">
                             <input matInput placeholder="อีเมลล์" [formControlName]="'email'">
                         </mat-form-field>
                         <!-- </div> -->
@@ -107,7 +107,7 @@
                             ที่อยู่
                         </div>
                         <!-- <div class="flex-initial w-full"> -->
-                        <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 100%!important;">
+                        <mat-form-field class="w-3/12 pr-2 flex-initial " style="width: 100%!important;">
                             <textarea matInput placeholder="ที่อยู่" [formControlName]="'address'"></textarea>
 
                         </mat-form-field>
@@ -197,7 +197,7 @@
                             <div class="flex-none h-12 w-32" style="text-align: center;">
                                 จำนวนเงิน
                             </div>
-                            <mat-form-field class="w-3/12 pr-2 flex-initial w-full">
+                            <mat-form-field class="w-3/12 pr-2 flex-initial ">
                                 <input type="number" matInput placeholder="จำนวนเงิน" [formControlName]="'payment_qty'"
                                     (change)="sumPrice()">
                             </mat-form-field>
@@ -225,7 +225,7 @@
                             <div class="flex-none h-12 w-32">
                                 หมายเลขบัญชีผู้โอน
                             </div>
-                            <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 100%!important;">
+                            <mat-form-field class="w-3/12 pr-2 flex-initial " style="width: 100%!important;">
                                 <input matInput placeholder="หมายเลขบัญชีผู้โอน" [formControlName]="'account_number'">
                             </mat-form-field>
                         </div>
@@ -357,7 +357,7 @@
 
 
 
-                            <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 150px!important;">
+                            <mat-form-field class="w-3/12 pr-2 flex-initial " style="width: 150px!important;">
                                 <input type="number" matInput placeholder="ภาษีมูลค่าเพิ่ม" [formControlName]="'vat'"
                                     (change)="sumPrice()">
                             </mat-form-field>
@@ -376,7 +376,7 @@
                                 <div class="flex-none h-12 w-60">
                                     ค่าบริการเก็บเงินปลายทาง(COD)
                                 </div>
-                                <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 150px!important;">
+                                <mat-form-field class="w-3/12 pr-2 flex-initial " style="width: 150px!important;">
                                     <input type="number" matInput placeholder="ค่าบริการเก็บเงินปลายทาง(COD)"
                                         [formControlName]="'cod_price_surcharge'" (change)="sumPrice()">
                                 </mat-form-field>
@@ -387,7 +387,7 @@
                             <div class="flex-none h-12 w-60">
                                 ค่าขนส่ง
                             </div>
-                            <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 150px!important;">
+                            <mat-form-field class="w-3/12 pr-2 flex-initial " style="width: 150px!important;">
                                 <input type="number" matInput placeholder="ค่าขนส่ง"
                                     [formControlName]="'shipping_price'" (change)="sumPrice()">
                             </mat-form-field>
@@ -412,7 +412,7 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 150px!important;">
+                            <mat-form-field class="w-3/12 pr-2 flex-initial " style="width: 150px!important;">
                                 <input type="number" matInput placeholder="ค่าขนส่ง" [formControlName]="'main_discount'"
                                     (change)="sumPrice()">
                             </mat-form-field>
@@ -421,7 +421,7 @@
                             <div class="flex-none h-12 w-60">
                                 ราคาทั้งหมด
                             </div>
-                            <mat-form-field class="w-3/12 pr-2 flex-initial w-full" style="width: 150px!important;">
+                            <mat-form-field class="w-3/12 pr-2 flex-initial " style="width: 150px!important;">
                                 <input type="number" matInput placeholder="ราคาทั้งหมด" [formControlName]="'total'"
                                     readonly>
                             </mat-form-field>

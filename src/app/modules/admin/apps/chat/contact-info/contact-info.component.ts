@@ -5,7 +5,10 @@ import { ItemService } from 'app/modules/admin/g-admin/livesteam/livemag/item.se
 import { Observable, map } from 'rxjs';
 import { AddProductComponent } from '../chats/add-product/add-product.component';
 import { MatDialog } from '@angular/material/dialog';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SaleOrderService } from 'app/modules/admin/g-admin/sale-order/sale-order.service';
+import { ChatService } from '../chat.service';
+
 
 @Component({
     selector       : 'chat-contact-info',
@@ -15,12 +18,14 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class ContactInfoComponent implements OnInit
 {
-
+  Data: any;
     selectedBank: string;
     banks: string[] = ['Kasikorn Bank', 'Bank of America', 'HSBC', 'Citibank'];
     images: any[] = [];
-
-
+    dataRow: any;
+  
+    rawDataFilter: any[] = []
+    formData: FormGroup
     handleFileInput(event: any): void {
       this.ngZone.run(() => {
         const files: FileList = event.target.files;
@@ -61,11 +66,18 @@ export class ContactInfoComponent implements OnInit
         private _changeDetectorRef: ChangeDetectorRef,
         private _matDialog: MatDialog,
         private _formBuilder: FormBuilder,
-        private ngZone: NgZone
+        private ngZone: NgZone,
+        private _Service: ChatService,
 
     )
     {
-    }
+    
+
+    this.formData = this._formBuilder.group({
+      weight: [''],
+
+    })
+  }
 
     ngOnInit(): void {
         this.item$ = this.itemService.getItemPage().pipe(
@@ -73,17 +85,42 @@ export class ContactInfoComponent implements OnInit
                 return resp.data.data
             })
         );
+
+        this._Service.getOrder().subscribe((resp: any) => {
+          this.dataRow = resp.data;
+          this.rawDataFilter = this.dataRow
+          // console.log('dataRow',this.dataRow)
+      })
+
     }
+
+
+
+
+
+
     New2() {
         const dialogRef = this._matDialog.open(AddProductComponent, {
             width: '900px',
             height: '750px'
         });
-
         dialogRef.afterClosed().subscribe(item => {
+      
             this.rerender();
             this._changeDetectorRef.markForCheck();
+            this.formData.patchValue({
+              weight: item,
+              
+            });
+        
+            console.log(this.formData.value.item[1].name)
         });
+        
+        
+
+
+
+
     }
 
 }

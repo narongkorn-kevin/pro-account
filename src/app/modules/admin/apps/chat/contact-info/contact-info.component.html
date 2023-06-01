@@ -261,9 +261,24 @@
 
                     </div>
                     <form class="mb-4">
+
+                        <label class="block mb-2 font-bold text-gray-700" for="name">
+                            <b class="text-red-500">*</b>กรอกเลขคำสั่งซื้อ
+                        </label>
+
+                        <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="order_id" name="order_id"
+                        required>
+
+
+             
+           
+
+
+
                         <label class="block mb-2 font-bold text-gray-700" for="name">
                             <b class="text-red-500">*</b>ชื่อ-นามสกุล:
                         </label>
+
                         <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="name" name="name"
                             required>
                         <label class="block mb-2 font-bold text-gray-700" for="phone">
@@ -276,11 +291,11 @@
                         </label>
                         <textarea class="w-full border border-gray-400 p-2 rounded-md mb-4" id="address"
                             name="address"></textarea>
-                        <label class="block mb-2 font-bold text-gray-700" for="receiver-position">
+                        <!-- <label class="block mb-2 font-bold text-gray-700" for="receiver-position">
                             <b class="text-red-500">*</b>ตำแหน่งของผู้รับ:
                         </label>
                         <textarea class="w-full border border-gray-400 p-2 rounded-md mb-4" id="receiver-position"
-                            name="receiver-position"></textarea>
+                            name="receiver-position"></textarea> -->
                     </form>
                     <div class="mb-4">
                         <!-- <h1 class="font-bold text-xl mb-2 text-center">รายการสินค้า</h1>
@@ -294,26 +309,29 @@
 
                         <a (click)="New2()">
 
-                        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 rounded-3xl w-[80%]" matStepperNext>
+                        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 rounded-3xl w-[80%]" >
                             เลือกสินค้า
                         </button>
                     </a>
                         <ng-container>
                             <div class="mt-20">
-                                <h1 class="font-extrabold text-2xl">รายละเอียดสินค้า</h1>
+                                <h1 class="font-extrabold text-2xl mb-3">รายละเอียดสินค้า</h1>
                                 <!-- other detail -->
                             </div>
-                            <div>
-                                <label class="block mb-2 font-bold text-gray-700" for="weight">
+                            <div >
+                    
+                                <label class="block mb-2 font-bold text-gray-700" for="weight" >
                                     <b class="text-red-500">*</b>น้ำหนักสินค้า:
                                 </label>
+
                                 <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="weight"
-                                    name="weight" required>
+                                    name="weight" >
 
                                 <div class="grid grid-cols-2 gap-4">
                                     <label class="block mb-2 font-bold text-gray-700" for="shippingCost">
                                         <b class="text-red-500">*</b>ค่าจัดส่ง:
                                     </label>
+                                    
                                     <input class="w-[90%] border border-gray-400 p-2 rounded-md mb-4" type="text"
                                         id="shippingCost" name="shippingCost" required>
 
@@ -326,7 +344,7 @@
                             </div>
                         </ng-container>
 
-                        <a (click)="New2()"><h1 class="font-extrabold text-2xl mb-2">ยอดรวมสุทธิ</h1></a>
+                        <h1 class="font-extrabold text-2xl mb-2">ยอดรวมสุทธิ</h1>
                         <div class="flex columns-2 space-x-2">
                             <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-3 rounded-3xl w-[80%]">
                                 ยกเลิก
@@ -348,14 +366,14 @@
 
     <!-- แจ้งโอนเงิน -->
     <mat-step label="แจ้งชำระเงิน">
-        <div class="flex justify-center">
+        <!-- <div class="flex justify-center">
             <mat-form-field class="w-full text-center">
                 <mat-label class="text-center justify-center">วิธีการชำระเงิน</mat-label>
                 <mat-select class="text-center" [(value)]="selectedBank">
                   <mat-option class="text-center" *ngFor="let bank of banks" [value]="bank">{{ bank }}</mat-option>
                 </mat-select>
               </mat-form-field>
-        </div>
+        </div> -->
         <div>
             <h1 class="text-2xl font-bold mb-4">แนบหลักฐานการโอนเงิน</h1>
             <input type="file" accept="image/jpeg, image/png" multiple (change)="handleFileInput($event)" class="mb-4">
@@ -373,15 +391,19 @@
                 </div>
                 <div>
                     <label for="optional"><b class="text-red-600">*</b>จำนวนเงินที่โอน</label>
-                    <input type="text" id="optional" placeholder="ระบุจำนวนเงิน" required>
+           
+                    <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="order_id" name="order_id"
+                    required>
                 </div>
                 <div>
                     <label for="optional"><b class="text-red-600">*</b>วันที่โอน</label>
-                    <input type="text" id="optional" placeholder="" required>
+                    <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="order_id" name="order_id"
+                    required>
                 </div>
                 <div>
                     <label for="optional"><b class="text-red-600">*</b>เวลาที่โอน</label>
-                    <input type="text" id="optional" placeholder="" required>
+                    <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="order_id" name="order_id"
+                    required>
                 </div>
                 <div>
                     <label for="receive-money">ผู้รับเงิน</label>

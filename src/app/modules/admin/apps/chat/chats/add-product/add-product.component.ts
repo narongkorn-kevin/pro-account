@@ -56,6 +56,14 @@ export class AddProductComponent implements OnInit {
       0
     );
   }
+  
+  AddItem(): number {
+    return this.products.reduce(
+      (total, product) => total + product.unit_price * product.quantity,
+      0
+    );
+  }
+
 
   decreaseQuantity(product: Product): void {
     if (product.quantity > 0) {
@@ -72,8 +80,12 @@ export class AddProductComponent implements OnInit {
 
   confirmSelection(): void {
     const selectedProducts = this.products.filter((product) => product.quantity > 0);
-    console.log(selectedProducts);
+    // console.log(selectedProducts);
+this._matDialogRef.close(selectedProducts)
   }
+
+
+
 
   resetSelection(): void {
     this.products.forEach((product) => (product.quantity = 0));

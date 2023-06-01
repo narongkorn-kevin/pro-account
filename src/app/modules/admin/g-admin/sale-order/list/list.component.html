@@ -50,7 +50,7 @@
                                             <!-- <th>บริการขนส่ง</th> -->
                                             <th>การชำระเงิน</th>
                                             <th>ยอดรวม</th>
-                                            <th>จ่ายแล้ว</th>
+                                            <!-- <th>จ่ายแล้ว</th> -->
                                         </tr>
                                     </thead>
                                     <tbody *ngIf="dataRow_t?.length != 0">
@@ -135,7 +135,7 @@
                         </mat-tab>
                         <mat-tab>
                             <ng-template mat-tab-label>
-                                ยังไม่จ่าย
+                                ยังไม่ชำระ
                                 <div matBadge="{{total_o}}" matBadgePosition="before" class="job-badge"></div>
                             </ng-template>
                             <div class="table-responsive">
@@ -154,11 +154,113 @@
                                             <!-- <th>บริการขนส่ง</th> -->
                                             <th>การชำระเงิน</th>
                                             <th>ยอดรวม</th>
-                                            <th>จ่ายแล้ว</th>
+                                            <!-- <th>จ่ายแล้ว</th> -->
                                         </tr>
                                     </thead>
                                     <tbody *ngIf="dataRow_o?.length != 0">
                                         <tr *ngFor="let item of dataRow_o; let i = index" 
+                                            style="cursor: pointer;">
+                                            <td style="width: 100px; min-width: 100px;">
+                                                <button mat-icon-button color="" (click)="edit(item.id)" title="แก้ไขข้อมูล">
+                                                    <mat-icon>edit</mat-icon>
+                                                </button>
+                                                <button mat-icon-button color="" (click)="view(item.id)" title="ดูรายละเอียดข้อมูล">
+                                                    <mat-icon>remove_red_eye</mat-icon>
+                                                </button>
+                                               <!-- <button mat-icon-button color="" (click)="print(item.id)" title="พิมพ์ใบคำสั่งซื้อ">
+                                                    <mat-icon>print</mat-icon>
+                                                </button> -->
+                                            </td>
+                                            <td style="width: 50px;">{{ pages.begin + (i + 1) }}</td>
+                                            <td *ngIf="item.channal === 'SP'"><img [src]='sp'
+                                                    style="height: 25px;width: 25px">
+                                            <td *ngIf="item.channal === 'line'"><img [src]='line'
+                                                    style="height: 25px;width: 25px"></td>
+                                            <td *ngIf="item.channal === 'facebook'"><img [src]='facebook'
+                                                    style="height: 25px;width: 25px"></td>
+                                            <td *ngIf="item.channal === 'tiktok'"> <img [src]='tiktok'
+                                                    style="height: 25px;width: 25px"></td>
+    
+                                            <!-- <td>{{ item.channal }}</td> -->
+                                            <td style="width: 100px; min-width: 100px;">{{ item.date_time  }}</td>
+                                            <td style="width: 80px; min-width: 80px;" *ngIf="item.channal === 'other'">
+                                                {{item.channal}}</td>
+                                            <td style="width: 150px; min-width: 150px;">{{ item.order_id }}</td>
+                                            <td style="width: 180px; min-width: 180px;">{{ item.name }}</td>
+    
+                                            <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'order'">
+                                                <span
+                                                    class="bg-yellow-100 text-yellow-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">ยังไม่จ่าย</span>
+                                            </td>
+                                            <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'paid'">
+                                                <span
+                                                    class="bg-green-300 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">จ่ายแล้ว</span>
+                                            </td>
+                                            <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'confirm'">
+                                                <span
+                                                    class="bg-blue-100 text-blue-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">ยืนยัน</span>
+                                            </td>
+                                            <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'packing'">
+                                                <span
+                                                    class="bg-gray-100 text-gray-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">กำลังแพ็ค</span>
+                                            </td>
+                                            <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'delivery'">
+                                                <span
+                                                    class="bg-purple-100 text-purple-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">กำลังจัดส่ง</span>
+                                            </td>
+                                            <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'finish'">
+                                                <span
+                                                    class="bg-green-100 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">สำเร็จ</span>
+                                            </td>
+                                            <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'failed'">
+                                                <span
+                                                    class="bg-red-100 text-red-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ไม่สำเร็จ</span>
+                                            </td>
+                                            <td style="width: 100px; min-width: 100px;" *ngIf="item.payment_type === 'COD'">
+                                                COD</td>
+                                            <td style="width: 100px; min-width: 100px;"
+                                                *ngIf="item.payment_type === 'transfer'"> โอนเงิน</td>
+                                            <td style="width: 100px; min-width: 100px;">{{ item.total | number : '1.2-2' }}</td>
+                                            <!-- <td style="width: 100px; min-width: 100px;">{{ item.payment_qty | number : '1.2-2' }}</td> -->
+                                            <!-- <td>{{ item.date_time | thaiDate}}</td> -->
+                                            <!-- <td>{{ item.created_at | date: 'dd/MM/yyyy hh:mm' }}</td> -->
+
+                                        </tr>
+                                    </tbody>
+                                    <tbody *ngIf="dataRow_o?.length == 0">
+                                        <tr>
+                                            <td colspan="6" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </mat-tab>
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                ชำระแล้ว
+                                <div matBadge="{{total_p}}" matBadgePosition="before" class="job-badge"></div>
+                            </ng-template>
+                            <div class="table-responsive">
+                                <table datatable [dtOptions]="dtOptionsPaid"
+                                    class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                                    style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>จัดการ</th>
+                                            <th>ลำดับ</th>
+                                            <th>ช่องทาง</th>
+                                            <th>วันที่สั่งซื้อ</th>
+                                            <th>หมายเลขคำสั่งซื้อ</th>
+                                            <th>ลูกค้า</th>
+                                            <th>สถานะ</th>
+                                            <!-- <th>บริการขนส่ง</th> -->
+                                            <th>การชำระเงิน</th>
+                                            <th>ยอดรวม</th>
+                                            <th>จ่ายแล้ว</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="dataRow_p?.length != 0">
+                                        <tr *ngFor="let item of dataRow_p; let i = index" 
                                             style="cursor: pointer;">
                                             <td style="width: 100px; min-width: 100px;">
                                                 <button mat-icon-button color="" (click)="edit(item.id)" title="แก้ไขข้อมูล">
@@ -227,18 +329,17 @@
 
                                         </tr>
                                     </tbody>
-                                    <tbody *ngIf="dataRow_o?.length == 0">
+                                    <tbody *ngIf="dataRow_p?.length == 0">
                                         <tr>
                                             <td colspan="6" class="no-data-available text-center">ไม่มีข้อมูล !</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-    
                         </mat-tab>
                         <mat-tab>
                             <ng-template mat-tab-label>
-                                จ่ายแล้ว
+                                ชำระมีเงื่อนไข
                                 <div matBadge="{{total_p}}" matBadgePosition="before" class="job-badge"></div>
                             </ng-template>
                             <div class="table-responsive">

@@ -242,17 +242,17 @@ export class LivemagComponent implements OnInit {
         });
 
     }
-    ngOnDestroy(): void {
-        // Unsubscribe from all subscriptions
+    // ngOnDestroy(): void {
+    //     // Unsubscribe from all subscriptions
 
-            debounceTime(1000),
-            tap((query) => {
-                this.item$ = this.ItemServive.getProductLivePage().pipe(
-                    map((resp: any) => {
-                        return resp.data.data
-                    })
-                )
-            }),
-        ).subscribe();
-    }
+    //         debounceTime(1000),
+    //         tap((query) => {
+    //             this.item$ = this.ItemServive.getProductLivePage().pipe(
+    //                 map((resp: any) => {
+    //                     return resp.data.data
+    //                 })
+    //             )
+    //         }),
+    //     ).subscribe();
+    // }
 }
