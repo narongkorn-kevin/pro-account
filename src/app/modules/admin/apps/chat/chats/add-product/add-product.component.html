@@ -1,4 +1,4 @@
-<div class="flex flex-auto text-center ml-100">
+<!-- <div class="flex flex-auto text-center ml-100">
     <div class="text-2xl font-bold">เพิ่มสินค้า</div>
   </div>
   <div class="flex">
@@ -6,10 +6,10 @@
       <ul class="p-4">
         <li class="mb-2 text-center text-xl font-bold">ยอดรวม</li>
         <li *ngFor="let item of itemP$ | async">{{ item.name }}</li>
-        <div class="pagination mt-4">
+        <div class="pagination mt-4"> -->
           <!-- <p class="text-gray-600">Number of pages: {{ totalPages }}</p>
           <p class="text-gray-600">Number of products: {{ products.length }}</p> -->
-          <p class="text-gray-600">Total Price: {{ calculateTotalPrice() }}</p>
+          <!-- <p class="text-gray-600">Total Price: {{ calculateTotalPrice() }}</p>
           <p class="text-gray-600">Item: {{ AddItem() }}</p>
         </div>
       </ul>
@@ -24,9 +24,9 @@
               <th class="px-4 py-2">จำนวนคงเหลือ</th>
               <th class="px-4 py-2">ราคา</th>
               <th class="px-4 py-2">จำนวนสินค้า</th>
-              <th class="px-4 py-2">เพิ่มลบ/สินค้า</th>
+              <th class="px-4 py-2">เพิ่มลบ/สินค้า</th> -->
               <!-- <th class="px-4 py-2">ลบสินค้า</th> -->
-            </tr>
+            <!-- </tr>
           </thead>
           <tbody>
             <tr *ngFor="let product of products" class="border-b">
@@ -39,26 +39,78 @@
               <td class="text-center item-center space-x-10">
                 <button (click)="increaseQuantity(product); updateItem(item)" class="px-3 py-1 text-white bg-blue-500 rounded">+</button>
                 <button (click)="decreaseQuantity(product); updateItem(item)" class="px-3 py-1 text-white bg-blue-500 rounded">-</button>
-              </td>
+              </td> -->
 
               <!-- <td class="text-center item-center">
                 <button (click)="removeProduct(product)" class="px-3 py-1 text-white bg-red-500 rounded">Remove</button>
               </td> -->
+            <!-- </tr>
+          </tbody>
+        </table>
+      </div> -->
+
+
+
+      <!-- <div class="total-price mt-4 space-x-6">
+
+        <button (click)="confirmSelection()" class="px-10 py-2 text-white bg-blue-500 rounded">ยืนยัน</button>
+        <button (click)="resetSelection()" class="px-10 py-2 text-white bg-red-500 rounded">ล้าง</button>
+      </div> -->
+
+      <!-- <div class="selected-product mt-4">
+        <p class="text-gray-600">Number of selected products: {{ getNumberOfSelectedProducts() }}</p>
+      </div> -->
+    <!-- </div>
+  </div> -->
+
+
+  <div class="flex flex-auto justify-center ml-72">
+    <div class="text-4xl font-bold text-green-700">เพิ่มสินค้า</div>
+  </div>
+  <div class="flex">
+    <div class="w-1/5 bg-green-100 mt-5 rounded-lg p-4">
+      <ul>
+        <li class="mb-2 text-center text-2xl font-bold text-green-700">ยอดรวม</li>
+        <li *ngFor="let item of itemP$ | async" class="text-green-700">{{ item.name }}</li>
+        <div class="pagination mt-4">
+          <p class="text-gray-600">Total Price: {{ calculateTotalPrice() }}</p>
+          <p class="text-gray-600">Item: {{ AddItem() }}</p>
+        </div>
+      </ul>
+    </div>
+
+    <div class="w-4/5">
+      <div class="product-table">
+        <table class="w-full bg-white rounded-lg shadow-lg">
+          <thead>
+            <tr>
+              <th class="px-4 py-3 bg-green-500 text-white">สินค้า</th>
+              <th class="px-4 py-3 bg-green-500 text-white">จำนวนคงเหลือ</th>
+              <th class="px-4 py-3 bg-green-500 text-white">ราคา</th>
+              <th class="px-4 py-3 bg-green-500 text-white">จำนวนสินค้า</th>
+              <th class="px-4 py-3 bg-green-500 text-white">เพิ่มลบ/สินค้า</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of products" class="border-b">
+              <td class="px-4 py-3">{{ product.name }}</td>
+              <td class="px-4 py-3">{{ product.qty }}</td>
+              <td class="px-4 py-3">{{ product.unit_price }}</td>
+              <td class="px-4 py-3 text-center">
+                {{ product.quantity }}
+              </td>
+              <td class="text-center space-x-6">
+                <button (click)="increaseQuantity(product); updateItem(item)" class="px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600 transition-colors duration-300">+</button>
+                <button (click)="decreaseQuantity(product); updateItem(item)" class="px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600 transition-colors duration-300">-</button>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
 
-
-
       <div class="total-price mt-4 space-x-6">
-      
-        <button (click)="confirmSelection()" class="px-10 py-2 text-white bg-blue-500 rounded">ยืนยัน</button>
-        <button (click)="resetSelection()" class="px-10 py-2 text-white bg-red-500 rounded">Reset</button>
+        <button (click)="confirmSelection()" class="px-8 py-3 text-white bg-green-500 rounded-lg hover:bg-green-600 transition-colors duration-300">ยืนยัน</button>
+        <button (click)="resetSelection()" class="px-8 py-3 text-white bg-green-700 rounded-lg hover:bg-green-800 transition-colors duration-300">ล้าง</button>
       </div>
-
-      <!-- <div class="selected-product mt-4">
-        <p class="text-gray-600">Number of selected products: {{ getNumberOfSelectedProducts() }}</p>
-      </div> -->
     </div>
   </div>
