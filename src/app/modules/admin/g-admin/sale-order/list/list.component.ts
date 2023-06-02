@@ -66,6 +66,7 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
     public dtOptionsTotal: DataTables.Settings = {};
     public dtOptionsOrder: DataTables.Settings = {};
     public dtOptionsPaid: DataTables.Settings = {};
+    public dtOptionsCondition: DataTables.Settings = {};
     public dtOptionsConfirm: DataTables.Settings = {};
     public dtOptionsDelivery: DataTables.Settings = {};
     public dtOptionsPacking: DataTables.Settings = {};
@@ -113,6 +114,7 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
         this.loadTableTotal();
         this.loadTableOrder();
         this.loadTablePaid();
+        this.loadTableCondition();
         this.loadTableConfirm();
         this.loadTablePacking();
         this.loadTableDelivery();
@@ -126,6 +128,13 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     
     pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
+
+
+
+
+
+
+
     loadTableTotal(): void {
         const that = this;
         this.dtOptionsTotal = {
@@ -169,7 +178,7 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
                 { data: 'status' },
                 // { data: 'delivery_by_id' },
                 { data: 'payment_type' },
-                { data: 'total' },
+             
                 { data: 'payment_qty' },
             ]
         };
@@ -220,12 +229,13 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
                 // { data: 'delivery_by_id' },
                 { data: 'payment_type' },
                 { data: 'total' },
-                { data: 'payment_qty' },
+            
             ]
         };
 
     }
     // pagespaid = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
+    
     loadTablePaid(): void {
         const that = this;
         this.dtOptionsPaid = {
@@ -275,6 +285,56 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
 
     }
     // pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
+
+    loadTableCondition(): void {
+        const that = this;
+        this.dtOptionsCondition = {
+            pagingType: 'full_numbers',
+            pageLength: 10,
+            serverSide: true,
+            processing: true,
+            language: {
+                "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
+            },
+            ajax: (dataTablesParameters: any, callback) => {
+                dataTablesParameters.status = 'paid';
+                that._Service.getsaleorderPage(dataTablesParameters).subscribe((resp) => {
+                    this.dataRow_p = resp.data
+                    this.total_p = resp.total
+                    // console.log(resp.total, 'resp_paid')
+                    this.pages.current_page = resp.current_page;
+                    this.pages.last_page = resp.last_page;
+                    this.pages.per_page = resp.per_page;
+                    if (resp.current_page > 1) {
+                        this.pages.begin = resp.per_page * resp.current_page - 1;
+                    } else {
+                        this.pages.begin = 0;
+                    }
+                    callback({
+                        recordsTotal: resp.total,
+                        recordsFiltered: resp.total,
+                        data: []
+                    });
+                    this._changeDetectorRef.markForCheck();
+                })
+            },
+            columns: [
+                { data: 'actice', orderable: false },
+                { data: 'id' },
+                { data: 'channal' },
+                { data: 'date_time' },
+                { data: 'order_id' },
+                { data: 'name' },
+                { data: 'status' },
+                // { data: 'delivery_by_id' },
+                { data: 'payment_type' },
+                { data: 'total' },
+                { data: 'payment_qty' },
+            ]
+        };
+
+    }
+
     loadTableConfirm(): void {
         const that = this;
         this.dtOptionsConfirm = {

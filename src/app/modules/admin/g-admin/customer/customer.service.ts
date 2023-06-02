@@ -990,6 +990,14 @@ export class CustomerService {
     );
   }
 
+
+  getCus(): Observable<any[]> {
+    return this._httpClient.get<any[]>(environment.API_URL + 'api/get_customer').pipe(
+      tap((meterial) => {
+        this._materials.next(meterial);
+      })
+    );
+  }
   //* get department by id
   getCustomerById(customerId: any): Observable<any[]> {
     return this._httpClient.get<any[]>(environment.API_URL + 'api/customer/' + customerId).pipe(

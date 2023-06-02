@@ -16,7 +16,7 @@ export class ChatService {
     private _contact: BehaviorSubject<Contact> = new BehaviorSubject(null);
     private _contacts: BehaviorSubject<Contact[]> = new BehaviorSubject(null);
     private _profile: BehaviorSubject<Profile> = new BehaviorSubject(null);
-
+    private _materials: BehaviorSubject<any[] | null> = new BehaviorSubject(null);
     /**
      * Constructor
      */
@@ -202,6 +202,16 @@ export class ChatService {
     /**
      * Reset the selected chat
      */
+
+    getOrder(): Observable<any[]> {
+        return this._httpClient.get<any[]>(environment.API_URL + 'api/sale_order_page').pipe(
+          tap((meterial) => {
+            this._materials.next(meterial);
+          })
+        );
+      }
+
+
     resetChat(): void {
         this._chat.next(null);
     }
