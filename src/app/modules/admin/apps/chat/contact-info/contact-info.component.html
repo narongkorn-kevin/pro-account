@@ -260,36 +260,42 @@
                     <div class="flex justify-center gap-4 mb-4">
 
                     </div>
-                    <form class="mb-4">
 
-                        <label class="block mb-2 font-bold text-gray-700" for="name">
+                    <div class="flex">
+                        <mat-form-field class="flex-auto">
+                            <mat-label>กรอกเลขคำสั่งซื้อ</mat-label>
+                            <input matInput [formControl]="searchOrderField" (keyup.enter)="searchOrder()">
+                            <button mat-icon-button matSuffix (click)="searchOrder()">
+                                <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye-off'"></mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+
+                    <form class="mb-4" [formGroup]="formData">
+
+                        <!-- <label class="block mb-2 font-bold text-gray-700" for="name">
                             <b class="text-red-500">*</b>กรอกเลขคำสั่งซื้อ
-                        </label>
-
-                        <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="order_id" name="order_id"
-                        required>
+                        </label> -->
 
 
-
-
-
-
+                        <!-- <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="order_id" name="order_id"
+                        required> -->
 
                         <label class="block mb-2 font-bold text-gray-700" for="name">
                             <b class="text-red-500">*</b>ชื่อ-นามสกุล:
                         </label>
 
-                        <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="name" name="name"
+                        <input [formControlName]="'customerName'" class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="name" name="name"
                             required>
                         <label class="block mb-2 font-bold text-gray-700" for="phone">
                             <b class="text-red-500">*</b>เบอร์ติดต่อ:
                         </label>
-                        <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="phone" name="phone"
+                        <input [formControlName]="'phone'" class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="phone" name="phone"
                             required>
                         <label class="block mb-2 font-bold text-gray-700" for="address">
                             <b class="text-red-500">*</b>ที่อยู่:
                         </label>
-                        <textarea class="w-full border border-gray-400 p-2 rounded-md mb-4" id="address"
+                        <textarea [formControlName]="'address'" class="w-full border border-gray-400 p-2 rounded-md mb-4" id="address"
                             name="address"></textarea>
                         <!-- <label class="block mb-2 font-bold text-gray-700" for="receiver-position">
                             <b class="text-red-500">*</b>ตำแหน่งของผู้รับ:

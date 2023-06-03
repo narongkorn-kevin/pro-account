@@ -204,7 +204,7 @@ export class ChatService {
      */
 
     getOrder(): Observable<any[]> {
-        return this._httpClient.get<any[]>(environment.API_URL + 'api/sale_order_page').pipe(
+        return this._httpClient.post<any[]>(environment.API_URL + 'api/sale_order_page', {}).pipe(
           tap((meterial) => {
             this._materials.next(meterial);
           })
