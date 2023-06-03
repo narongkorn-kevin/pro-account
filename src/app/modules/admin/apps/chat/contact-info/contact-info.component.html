@@ -313,12 +313,27 @@
                             </div>
                         </ng-container> -->
 
-                        <a (click)="New2()">
-
-                        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 rounded-3xl w-[80%]" >
+                        <button (click)="New2()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 rounded-3xl w-[80%] mb-5" >
                             เลือกสินค้า
                         </button>
-                    </a>
+
+                        <div class="flex">
+                            <fuse-card *ngIf="newSelectProducts.length" class="flex flex-col max-w-80 w-full px-8 pt-6 pb-4 filter-list">
+                                <div *ngFor="let newSelectProduct of newSelectProducts" class="flex flex-col mt-5">
+                                    <div class="flex items-center">
+                                        <img
+                                            class="w-14 h-14 mr-4 rounded-full"
+                                            [src]="newSelectProduct.image"
+                                            alt="Card cover image">
+                                        <div class="flex flex-col min-w-0">
+                                            <div class="font-medium leading-none">{{newSelectProduct.name}}</div>
+                                            <div class="text-md leading-none text-secondary mt-1">{{newSelectProduct.quantity}} ชิ้น</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fuse-card>
+                        </div>
+
                         <ng-container>
                             <div class="mt-20">
                                 <h1 class="font-extrabold text-2xl mb-3">รายละเอียดสินค้า</h1>

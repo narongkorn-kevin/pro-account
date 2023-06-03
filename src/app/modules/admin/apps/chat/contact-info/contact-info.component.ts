@@ -26,6 +26,8 @@ export class ContactInfoComponent implements OnInit {
     rawDataFilter: any[] = []
     formData: FormGroup
 
+    newSelectProducts: any[] = [];
+
     searchOrderField: FormControl = new FormControl(null, Validators.required);
 
     handleFileInput(event: any): void {
@@ -106,16 +108,17 @@ export class ContactInfoComponent implements OnInit {
             width: '900px',
             height: '750px'
         });
-        dialogRef.afterClosed().subscribe(item => {
+        dialogRef.afterClosed().subscribe(items => {
 
-            this.rerender();
+            this.newSelectProducts = items;
+            // this.rerender();
             this._changeDetectorRef.markForCheck();
-            this.formData.patchValue({
-                weight: item,
+            // this.formData.patchValue({
+            //     weight: item,
 
-            });
+            // });
 
-            console.log(this.formData.value.item[1].name)
+            // console.log(this.formData.value.item[1].name)
         });
 
 
@@ -134,6 +137,8 @@ export class ContactInfoComponent implements OnInit {
                     phone: [resp.telephone],
                     address: [resp.address],
                 })
+
+                this._changeDetectorRef.markForCheck();
             },
             error: (err) => {
                 alert(JSON.parse(err));
