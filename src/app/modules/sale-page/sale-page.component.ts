@@ -21,7 +21,7 @@ export class SalePageComponent implements OnInit {
         private readonly _activatedRoute: ActivatedRoute,
         private readonly _saleOrderService: SaleOrderService,
         private fb: FormBuilder,
-        private router:Router
+        private router: Router
     ) { }
 
     ngOnInit(): void {
@@ -49,10 +49,10 @@ export class SalePageComponent implements OnInit {
 
     confirm() {
         // console.log('สำเร็จ');
-        window.close();
+
     }
-closePage() {
-  window.close();
-}
+    closePage() {
+        window.self.close();
+    }
 
 }
