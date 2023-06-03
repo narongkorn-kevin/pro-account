@@ -20,7 +20,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class ConversationComponent implements OnInit, OnDestroy {
     // @ViewChild('messageInput') messageInput: ElementRef;
     @ViewChild('messageInput') messageInput: any;
-    chat: Chat;
+    chat: any;
     drawerMode: 'over' | 'side' = 'side';
     drawerOpened: boolean = true;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
@@ -211,17 +211,23 @@ export class ConversationComponent implements OnInit, OnDestroy {
         throw new Error('Method not implemented.');
     }
 
-    sendMessage(to:string) {
-        console.log(to);
+    sendMessage() {
+        console.log(this.chat);
 
-        console.log(this.messageInput.value);
+        if (!!this.messageInput.nativeElement.value) {
+            const user = this.chat.participants.data[0]
 
+            this._chatService.sendMessage(this.messageInput.nativeElement.value, user.id).subscribe(
+                (resp) => {
+                    this.messageInput.nativeElement.value = '';
 
-        return
-        // this._chatService.sendMessage(this.messageText, to).subscribe(
-        //     (resp) => {
-        //         this.messageText = '';
-        //     }
-        // );
+                    this._chatService.getChatById(this.chat.id).subscribe(
+                        (resp) => {
+                            this._changeDetectorRef.markForCheck();
+                        }
+                    )
+                }
+            );
+        }
     }
 }
