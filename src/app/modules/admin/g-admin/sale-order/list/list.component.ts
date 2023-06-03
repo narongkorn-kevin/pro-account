@@ -178,7 +178,8 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
                 { data: 'status' },
                 // { data: 'delivery_by_id' },
                 { data: 'payment_type' },
-             
+               
+                { data: 'payment_qty' },
                 { data: 'payment_qty' },
             ]
         };

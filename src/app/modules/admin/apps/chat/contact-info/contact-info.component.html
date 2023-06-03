@@ -260,36 +260,42 @@
                     <div class="flex justify-center gap-4 mb-4">
 
                     </div>
-                    <form class="mb-4">
 
-                        <label class="block mb-2 font-bold text-gray-700" for="name">
+                    <div class="flex">
+                        <mat-form-field class="flex-auto">
+                            <mat-label>กรอกเลขคำสั่งซื้อ</mat-label>
+                            <input matInput [formControl]="searchOrderField" (keyup.enter)="searchOrder()">
+                            <button mat-icon-button matSuffix (click)="searchOrder()">
+                                <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye-off'"></mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+
+                    <form class="mb-4" [formGroup]="formData">
+
+                        <!-- <label class="block mb-2 font-bold text-gray-700" for="name">
                             <b class="text-red-500">*</b>กรอกเลขคำสั่งซื้อ
-                        </label>
-
-                        <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="order_id" name="order_id"
-                        required>
+                        </label> -->
 
 
-
-
-
-
+                        <!-- <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="order_id" name="order_id"
+                        required> -->
 
                         <label class="block mb-2 font-bold text-gray-700" for="name">
                             <b class="text-red-500">*</b>ชื่อ-นามสกุล:
                         </label>
 
-                        <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="name" name="name"
+                        <input [formControlName]="'customerName'" class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="name" name="name"
                             required>
                         <label class="block mb-2 font-bold text-gray-700" for="phone">
                             <b class="text-red-500">*</b>เบอร์ติดต่อ:
                         </label>
-                        <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="phone" name="phone"
+                        <input [formControlName]="'phone'" class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="phone" name="phone"
                             required>
                         <label class="block mb-2 font-bold text-gray-700" for="address">
                             <b class="text-red-500">*</b>ที่อยู่:
                         </label>
-                        <textarea class="w-full border border-gray-400 p-2 rounded-md mb-4" id="address"
+                        <textarea [formControlName]="'address'" class="w-full border border-gray-400 p-2 rounded-md mb-4" id="address"
                             name="address"></textarea>
                         <!-- <label class="block mb-2 font-bold text-gray-700" for="receiver-position">
                             <b class="text-red-500">*</b>ตำแหน่งของผู้รับ:
@@ -307,12 +313,27 @@
                             </div>
                         </ng-container> -->
 
-                        <a (click)="New2()">
-
-                        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 rounded-3xl w-[80%]" >
+                        <button (click)="New2()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 rounded-3xl w-[80%] mb-5" >
                             เลือกสินค้า
                         </button>
-                    </a>
+
+                        <div class="flex">
+                            <fuse-card *ngIf="newSelectProducts.length" class="flex flex-col max-w-80 w-full px-8 pt-6 pb-4 filter-list">
+                                <div *ngFor="let newSelectProduct of newSelectProducts" class="flex flex-col mt-5">
+                                    <div class="flex items-center">
+                                        <img
+                                            class="w-14 h-14 mr-4 rounded-full"
+                                            [src]="newSelectProduct.image"
+                                            alt="Card cover image">
+                                        <div class="flex flex-col min-w-0">
+                                            <div class="font-medium leading-none">{{newSelectProduct.name}}</div>
+                                            <div class="text-md leading-none text-secondary mt-1">{{newSelectProduct.quantity}} ชิ้น</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fuse-card>
+                        </div>
+
                         <ng-container>
                             <div class="mt-20">
                                 <h1 class="font-extrabold text-2xl mb-3">รายละเอียดสินค้า</h1>

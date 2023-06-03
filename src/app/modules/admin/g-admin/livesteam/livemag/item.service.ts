@@ -120,6 +120,14 @@ export class ItemService {
 
         return this.http.put(environment.API_URL + "api/product_live/" + product.id, body)
     }
+
+    searchOrder(orderNo: any) {
+        return this.http.get(environment.API_URL + "api/sale_order/" + orderNo).pipe(
+            map((resp: any) => {
+                return resp.data;
+            })
+        );
+    }
 }
 
 

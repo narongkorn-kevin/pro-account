@@ -21,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { AddProductComponent } from './chats/add-product/add-product.component';
 import { FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { FuseCardModule } from '@fuse/components/card';
 @NgModule({
     declarations: [
         ChatComponent,
@@ -47,6 +48,7 @@ import { FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule } fro
         FormsModule,
         SocialLoginModule,
         SharedModule,
+        FuseCardModule,
     ],
     providers: [
         {
