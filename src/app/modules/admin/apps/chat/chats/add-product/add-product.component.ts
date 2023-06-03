@@ -21,6 +21,7 @@ export class AddProductComponent implements OnInit {
   pageSize = 5;
   totalPages = 0;
   itemP$: any;
+  selectedImage: any;
 
   constructor(
     private itemService: ItemService,
@@ -56,7 +57,7 @@ export class AddProductComponent implements OnInit {
       0
     );
   }
-  
+
   AddItem(): number {
     return this.products.reduce(
       (total, product) => total + product.unit_price * product.quantity,

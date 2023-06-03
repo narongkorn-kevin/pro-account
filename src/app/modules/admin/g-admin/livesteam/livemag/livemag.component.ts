@@ -23,6 +23,9 @@ import { data } from 'jquery';
 import { StockService } from '../chat/stock.service';
 import { Product } from '../../product/product-cf/product.mock';
 import { ProductcService } from './productc.service';
+import { MatDialogRef } from '@angular/material/dialog';
+
+
 interface product {
     id: number;
     image: string;
@@ -55,10 +58,7 @@ export class LivemagComponent implements OnInit {
     @ViewChild(MatPaginator) private _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
     item$: Observable<Product[]>;
-
-
-
-
+    liveStream: any;
     public dataRow: any[];
     public dtOptions: DataTables.Settings = {};
     formData: FormGroup
@@ -90,7 +90,6 @@ export class LivemagComponent implements OnInit {
 
     stream: any;
     liveStreams: any[] = [];
-    liveStream: any;
     streamNotFoundMessage = '';
 
     videoId: string;
@@ -110,7 +109,7 @@ export class LivemagComponent implements OnInit {
         private sharedserviceService: SharedserviceService,
         private _chatService: ChatService,
         private _productcService: ProductcService,
-
+        private itemService: ItemService
     ) {
         this.formData = this._formBuilder.group({
             pic: '',
@@ -143,6 +142,24 @@ export class LivemagComponent implements OnInit {
                 this.liveStream = data;
             }
         });
+
+
+        this.authService.authState.subscribe((user) => {
+            this.socialUser = user;
+            this.isLoggedin = user != null;
+            // console.log(user)
+            this._Service.getTokenUser(this.socialUser.authToken).subscribe((resp: any) => {
+                console.log(resp);
+
+                this.userData = resp
+                this._Service.getTokenPage(this.socialUser.authToken, this.formData.value.id).subscribe((resp: any) => {
+                    this.pageData = resp
+
+                    console.log('ข้อมูล', resp)
+                })
+            });
+        });
+
 
         // this.fbApi.getLiveStreamingVideos().then(data => {
         //     console.warn(data);
@@ -181,6 +198,8 @@ export class LivemagComponent implements OnInit {
                 return resp.data.data
             })
         )
+
+
         // .subscribe(
         //     (resp: any) => {
         //         this.item$ = this.ItemServive.itemP$
@@ -255,4 +274,30 @@ export class LivemagComponent implements OnInit {
     //         }),
     //     ).subscribe();
     // }
+    live(data: any): void {
+
+        this._Service.getPageToken(data.id).subscribe({
+            next: (resp) => {
+
+                localStorage.setItem('pageToken', data.access_token);
+
+                this._router.navigate(['livesteam/livemag/' + data.id]);
+                this.onClose();
+
+            },
+        })
+
+
+    }
+
+    live2(id: string): void {
+        console.log('pageId', id);
+        window.open('chat?page_id=' + id);
+        // this._router.navigate(['chat/chats' + id]);
+        this.onClose();
+
+    }
+    onClose() {
+    }
+
 }

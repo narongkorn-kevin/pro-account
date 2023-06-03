@@ -23,7 +23,7 @@ export class ContactInfoComponent implements OnInit
     banks: string[] = ['Kasikorn Bank', 'Bank of America', 'HSBC', 'Citibank'];
     images: any[] = [];
     dataRow: any;
-  
+
     rawDataFilter: any[] = []
     formData: FormGroup
     handleFileInput(event: any): void {
@@ -71,7 +71,7 @@ export class ContactInfoComponent implements OnInit
 
     )
     {
-    
+
 
     this.formData = this._formBuilder.group({
       weight: [''],
@@ -105,18 +105,18 @@ export class ContactInfoComponent implements OnInit
             height: '750px'
         });
         dialogRef.afterClosed().subscribe(item => {
-      
+
             this.rerender();
             this._changeDetectorRef.markForCheck();
             this.formData.patchValue({
               weight: item,
-              
+
             });
-        
+
             console.log(this.formData.value.item[1].name)
         });
-        
-        
+
+
 
 
 
