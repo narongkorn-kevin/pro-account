@@ -16,11 +16,13 @@ interface Product {
     styleUrls: ['./add-product.component.scss']
 })
 export class AddProductComponent implements OnInit {
-    products: Product[] = [];
-    currentPage = 1;
-    pageSize = 5;
-    totalPages = 0;
-    itemP$: any;
+  products: Product[] = [];
+  currentPage = 1;
+  pageSize = 5;
+  totalPages = 0;
+  itemP$: any;
+  selectedImage: any;
+
 
     constructor(
         private itemService: ItemService,
@@ -28,10 +30,49 @@ export class AddProductComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) public data: any
     ) { }
 
+  ngOnInit() {
+    this.loadProducts();
+  }
+
+  loadProducts() {
+    this.itemService.itemP$.subscribe((items: any[]) => {
+      this.products = items.map((item: any) => {
+        return {
+          name: item.name,
+          unit_price: item.unit_price,
+          qty: item.qty,
+          quantity: 0, // Set the default quantity to 0
+          remainingAmount: item.remainingAmount // Assuming remaining amount is available in the item object
+        };
+      });
+
+      this.totalPages = Math.ceil(this.products.length / this.pageSize);
+    });
+
+    this.itemService.getItemPage().subscribe(); // Trigger the API call
+  }
+
+  calculateTotalPrice(): number {
+    return this.products.reduce(
+      (total, product) => total + product.unit_price * product.quantity,
+      0
+    );
+  }
+
+  AddItem(): number {
+    return this.products.reduce(
+      (total, product) => total + product.unit_price * product.quantity,
+      0
+    );
+  }
+
+
+  decreaseQuantity(product: Product): void {
+    if (product.quantity > 0) {
+      product.quantity--;
     ngOnInit() {
         this.loadProducts();
     }
-
     loadProducts() {
         this.itemService.itemP$.subscribe((items: any[]) => {
             this.products = items.map((item: any) => {
@@ -50,6 +91,7 @@ export class AddProductComponent implements OnInit {
 
         this.itemService.getItemPage().subscribe(); // Trigger the API call
     }
+    }
 
     calculateTotalPrice(): number {
         return this.products.reduce(
@@ -57,14 +99,14 @@ export class AddProductComponent implements OnInit {
             0
         );
     }
-
+  }
     AddItem(): number {
         return this.products.reduce(
             (total, product) => total + product.unit_price * product.quantity,
             0
         );
     }
-
+}
 
     decreaseQuantity(product: Product): void {
         if (product.quantity > 0) {
@@ -96,4 +138,3 @@ export class AddProductComponent implements OnInit {
     getNumberOfSelectedProducts(): number {
         return this.products.reduce((total, product) => total + (product.quantity > 0 ? 1 : 0), 0);
     }
-}

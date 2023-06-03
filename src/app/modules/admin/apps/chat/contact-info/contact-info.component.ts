@@ -73,7 +73,10 @@ export class ContactInfoComponent implements OnInit {
         private ngZone: NgZone,
         private _Service: ChatService,
 
-    ) {
+    )
+
+
+     {
 
 
         this.formData = this._formBuilder.group({
@@ -108,6 +111,16 @@ export class ContactInfoComponent implements OnInit {
             width: '900px',
             height: '750px'
         });
+        dialogRef.afterClosed().subscribe(item => {
+
+            this.rerender();
+            this._changeDetectorRef.markForCheck();
+            this.formData.patchValue({
+              weight: item,
+
+            });
+
+            console.log(this.formData.value.item[1].name)
         dialogRef.afterClosed().subscribe(items => {
 
             this.newSelectProducts = items;
@@ -127,7 +140,7 @@ export class ContactInfoComponent implements OnInit {
 
 
     }
-
+    )}
 
     searchOrder() {
         this.itemService.searchOrder(this.searchOrderField.value).subscribe({
