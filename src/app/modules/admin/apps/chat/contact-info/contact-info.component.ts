@@ -140,7 +140,7 @@ export class ContactInfoComponent implements OnInit {
 
 
     }
-    }
+    )}
 
     searchOrder() {
         this.itemService.searchOrder(this.searchOrderField.value).subscribe({
