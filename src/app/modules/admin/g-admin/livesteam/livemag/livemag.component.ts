@@ -49,6 +49,7 @@ export class LivemagComponent implements OnInit {
     ];
     @Input() messageFromChat: string;
     @Output() messageToChat = new EventEmitter<string>();
+item: any;
 
     sendMessageToChat(message: string) {
         this.messageToChat.emit(message);

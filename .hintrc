@@ -41,6 +41,12 @@
     ],
     "meta-viewport": "off",
     "typescript-config/consistent-casing": "off",
-    "typescript-config/target": "off"
+    "typescript-config/target": "off",
+    "axe/keyboard": [
+      "default",
+      {
+        "nested-interactive": "off"
+      }
+    ]
   }
 }
