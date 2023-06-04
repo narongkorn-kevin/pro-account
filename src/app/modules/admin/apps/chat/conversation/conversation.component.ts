@@ -226,6 +226,9 @@ export class ConversationComponent implements OnInit, OnDestroy {
                             this._changeDetectorRef.markForCheck();
                         }
                     )
+                },
+                (err) => {
+                    alert(err.error.error.message);
                 }
             );
         }
