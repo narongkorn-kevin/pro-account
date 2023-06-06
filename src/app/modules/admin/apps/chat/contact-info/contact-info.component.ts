@@ -160,6 +160,14 @@ export class ContactInfoComponent implements OnInit {
                     address: [resp.address],
                 });
 
+                resp.sale_order_lines[0].item.quantity = resp.sale_order_lines[0].qty
+
+                this.newSelectProducts = [resp.sale_order_lines[0].item]
+
+                this.formData.patchValue({
+                    total: this.totalPrice(+this.formData.value.weight, +this.formData.value.shippingCost, +this.formData.value.discount),
+                })
+
                 this._changeDetectorRef.markForCheck();
             },
             error: (err) => {
