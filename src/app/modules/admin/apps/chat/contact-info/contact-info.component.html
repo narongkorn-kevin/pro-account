@@ -236,43 +236,42 @@
 
 
 <mat-stepper #stepper>
-    <mat-step label="เปิดบิล">
-        <div class="flex flex-col flex-auto h-full bg-card dark:bg-default">
-            <!-- Header -->
-            <div class="flex flex-0 items-center h-18 px-4 border-b bg-gray-50 dark:bg-transparent">
-                <button class="p-2" (click)="drawer.close()">
-                    <svg class="w-6 h-6 text-gray-700 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
-                        </path>
-                    </svg>
-                </button>
-                <div class="ml-2 text-lg font-medium"></div>
-            </div>
-
-            <div class="">
-                <!-- Contact avatar & info -->
-                <div class="flex flex-col items-center">
-
+    <mat-step label="เปิดบิล" [stepControl]="formData">
+        <form [formGroup]="formData">
+            <div class="flex flex-col flex-auto h-full bg-card dark:bg-default">
+                <!-- Header -->
+                <div class="flex flex-0 items-center h-18 px-4 border-b bg-gray-50 dark:bg-transparent">
+                    <button class="p-2" (click)="drawer.close()">
+                        <svg class="w-6 h-6 text-gray-700 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div class="ml-2 text-lg font-medium"></div>
                 </div>
 
-                <div class="max-w-xl max-h-xl mx-auto p-6 bg-white rounded-2xl shadow-md">
-                    <div class="flex justify-center gap-4 mb-4">
+                <div class="">
+                    <!-- Contact avatar & info -->
+                    <div class="flex flex-col items-center">
 
                     </div>
 
-                    <div class="flex">
-                        <mat-form-field class="flex-auto">
-                            <mat-label>กรอกเลขคำสั่งซื้อ</mat-label>
-                            <input matInput [formControl]="searchOrderField" (keyup.enter)="searchOrder()">
-                            <button mat-icon-button matSuffix (click)="searchOrder()">
-                                <mat-icon class="icon-size-5"
-                                    [svgIcon]="'heroicons_solid:magnifying-glass-circle'"></mat-icon>
-                            </button>
-                        </mat-form-field>
-                    </div>
+                    <div class="max-w-xl max-h-xl mx-auto p-6 bg-white rounded-2xl shadow-md">
+                        <div class="flex justify-center gap-4 mb-4">
 
-                    <form class="mb-4" [formGroup]="formData">
+                        </div>
+
+                        <div class="flex">
+                            <mat-form-field class="flex-auto">
+                                <mat-label>กรอกเลขคำสั่งซื้อ</mat-label>
+                                <input matInput [formControl]="searchOrderField" (keyup.enter)="searchOrder()">
+                                <button mat-icon-button matSuffix (click)="searchOrder()">
+                                    <mat-icon class="icon-size-5"
+                                        [svgIcon]="'heroicons_solid:magnifying-glass-circle'"></mat-icon>
+                                </button>
+                            </mat-form-field>
+                        </div>
 
                         <label class="block mb-2 font-bold text-gray-700" for="name">
                             <b class="text-red-500">*</b>ชื่อ-นามสกุล:
@@ -297,111 +296,91 @@
                         </label>
                         <textarea class="w-full border border-gray-400 p-2 rounded-md mb-4" id="receiver-position"
                             name="receiver-position"></textarea> -->
-                    </form>
-                    <div class="mb-4">
-                        <!-- <h1 class="font-bold text-xl mb-2 text-center">รายการสินค้า</h1>
-                        <ng-container *ngIf="item$ | async as items">
-                            <div class="grid grid-cols-4 gap-4">
-                                <div *ngFor="let item of items" class="cursor-pointer">
-                                    <img [src]="item.image" [alt]="item.name" srcset="" class="w-20 h-18">
-                                </div>
-                            </div>
-                        </ng-container> -->
-
-                        <button (click)="New2()"
-                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 rounded-3xl w-[100%] mb-5">
-                            เลือกสินค้า
-                        </button>
-
-                        <div class="flex">
-                            <fuse-card *ngIf="newSelectProducts.length"
-                                class="flex flex-col max-w-80 w-full px-8 pt-6 pb-4 filter-list">
-                                <div *ngFor="let newSelectProduct of newSelectProducts" class="flex flex-col mt-5">
-                                    <div class="flex items-center">
-                                        <img class="w-14 h-14 mr-4 rounded-full" [src]="newSelectProduct.image"
-                                            alt="Card cover image">
-                                        <div class="flex flex-col min-w-0">
-                                            <div class="font-medium leading-none">{{newSelectProduct.name}}</div>
-                                            <div class="text-md leading-none text-secondary mt-1">
-                                                {{newSelectProduct.quantity}} ชิ้น</div>
-                                        </div>
+                        <div class="mb-4">
+                            <!-- <h1 class="font-bold text-xl mb-2 text-center">รายการสินค้า</h1>
+                            <ng-container *ngIf="item$ | async as items">
+                                <div class="grid grid-cols-4 gap-4">
+                                    <div *ngFor="let item of items" class="cursor-pointer">
+                                        <img [src]="item.image" [alt]="item.name" srcset="" class="w-20 h-18">
                                     </div>
                                 </div>
-                            </fuse-card>
-                        </div>
+                            </ng-container> -->
 
-                        <ng-container>
+                            <button (click)="New2()"
+                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 rounded-3xl w-[100%] mb-5">
+                                เลือกสินค้า
+                            </button>
 
-                            <!-- <input type="file" (change)="onFileSelected($event)">
-<div *ngIf="selectedImage">
-  <img [src]="selectedImage" alt="Preview">
-  <button (click)="selectProduct()">Select Product</button>
-</div> -->
-
-                            <div *ngIf="showProductList">
-                                <div class="mt-20">
-                                    <h1 class="font-extrabold text-2xl mb-3">รายละเอียดสินค้า</h1>
-                                    <!-- Other product details here -->
-                                </div>
-                                <div>
-                                    <h3>Product List</h3>
-                                    <ul>
-                                        <li *ngFor="let product of productList">{{ product }}</li>
-                                    </ul>
-                                </div>
+                            <div class="flex">
+                                <fuse-card *ngIf="newSelectProducts.length"
+                                    class="flex flex-col max-w-80 w-full px-8 pt-6 pb-4 filter-list">
+                                    <div *ngFor="let newSelectProduct of newSelectProducts" class="flex flex-col mt-5">
+                                        <div class="flex items-center">
+                                            <img class="w-14 h-14 mr-4 rounded-full" [src]="newSelectProduct.image"
+                                                alt="Card cover image">
+                                            <div class="flex flex-col min-w-0">
+                                                <div class="font-medium leading-none">{{newSelectProduct.name}}</div>
+                                                <div class="text-md leading-none text-secondary mt-1">
+                                                    จำนวน {{newSelectProduct.quantity}} ชิ้น</div>
+                                                <div class="">
+                                                    ราคา {{newSelectProduct.unit_price | currency:' '}} ต่อชิ้น
+                                                </div>
+                                                <div class="font-bold">
+                                                    ราคารวม {{ newSelectProduct.quantity * newSelectProduct.unit_price |
+                                                    currency:' ' }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fuse-card>
                             </div>
 
-                            <ng-template #productDialog>
-                                <h3>Select a Product</h3>
-                                <ul>
-                                    <li *ngFor="let product of products" (click)="onProductSelected(product)">{{ product
-                                        }}</li>
-                                </ul>
-                            </ng-template>
+                            <ng-container>
 
-
-                            <label class="block mb-2 font-bold text-gray-700 mt-10" for="weight">
-                                <b class="text-red-500">*</b>น้ำหนักสินค้า:
-                            </label>
-
-                            <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="weight"
-                                name="weight">
-
-                            <div class="grid grid-cols-2 gap-4">
-                                <label class="block mb-2 font-bold text-gray-700" for="shippingCost">
-                                    <b class="text-red-500">*</b>ค่าจัดส่ง:
+                                <label class="block mb-2 font-bold text-gray-700 mt-10" for="weight">
+                                    <b class="text-red-500">*</b>น้ำหนักสินค้า:
                                 </label>
 
-                                <input class="w-[90%] border border-gray-400 p-2 rounded-md mb-4" type="text"
-                                    id="shippingCost" name="shippingCost" required>
+                                <input class="w-full border border-gray-400 p-2 rounded-md mb-4" type="text" id="weight" [formControlName]="'weight'"
+                                    name="weight">
 
-                                <label class="block mb-2 font-bold text-gray-700" for="discount">
-                                    <b class="text-red-500">*</b>ส่วนลด:
-                                </label>
-                                <input class="w-[90%] border border-gray-400 p-2 rounded-md mb-4" type="text"
-                                    id="discount" name="discount" required>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <label class="block mb-2 font-bold text-gray-700" for="shippingCost">
+                                        <b class="text-red-500">*</b>ค่าจัดส่ง:
+                                    </label>
+
+                                    <input class="w-[90%] border border-gray-400 p-2 rounded-md mb-4" type="text" [formControlName]="'shippingCost'"
+                                        id="shippingCost" name="shippingCost">
+
+                                    <label class="block mb-2 font-bold text-gray-700" for="discount">
+                                        <b class="text-red-500">*</b>ส่วนลด:
+                                    </label>
+                                    <input class="w-[90%] border border-gray-400 p-2 rounded-md mb-4" type="text" [formControlName]="'discount'"
+                                        id="discount" name="discount">
+                                </div>
+                            </ng-container>
+
+                            <h1 class="font-extrabold text-2xl mb-2">ยอดรวมสุทธิ {{formData.value.total | currency:' '}}</h1>
+
+                            <div class="flex columns-2 space-x-2">
+                                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-3 rounded-3xl w-[80%]">
+                                    ยกเลิก
+                                </button>
+                                <button
+                                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 rounded-3xl w-[80%]"
+                                    matStepperNext>
+                                    ยืนยัน
+                                </button>
                             </div>
-                        </ng-container>
-
-                        <h1 class="font-extrabold text-2xl mb-2">ยอดรวมสุทธิ</h1>
-                        <div class="flex columns-2 space-x-2">
-                            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-3 rounded-3xl w-[80%]">
-                                ยกเลิก
-                            </button>
-                            <button
-                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 rounded-3xl w-[80%]"
-                                matStepperNext>
-                                ยืนยัน
-                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="grid grid-cols-2 gap-1 mt-2">
+                <div class="grid grid-cols-2 gap-1 mt-2">
 
+                </div>
             </div>
-        </div>
+        </form>
 
     </mat-step>
 
