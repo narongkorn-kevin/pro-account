@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SaleOrderService } from 'app/modules/admin/g-admin/sale-order/sale-order.service';
 import { ChatService } from '../chat.service';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
     selector: 'chat-contact-info',
@@ -33,7 +34,7 @@ export class ContactInfoComponent implements OnInit {
     rerender: any;
     item$: Observable<any>;
 
-    @Input() chat: Chat;
+    @Input() chat: any;
     @Input() drawer: MatDrawer;
     firstFormGroup = this._formBuilder.group({
         firstCtrl: ['', Validators.required],
@@ -60,7 +61,7 @@ export class ContactInfoComponent implements OnInit {
         private _matDialog: MatDialog,
         private _formBuilder: FormBuilder,
         private ngZone: NgZone,
-        private _Service: ChatService,
+        private _chatService: ChatService,
     ) {
         this.formData = this._formBuilder.group({
             customerName: [null],
@@ -76,10 +77,22 @@ export class ContactInfoComponent implements OnInit {
             })
         );
 
-        this._Service.getOrder().subscribe((resp: any) => {
-            this.dataRow = resp.data;
-            this.rawDataFilter = this.dataRow;
-        });
+        console.log(this.chat);
+
+
+        // Chat
+        // this._chatService.chat$
+        //     .subscribe((chat: any) => {
+        //         chat.messages.data = chat.messages.data.reverse();
+        //         this.chat = chat;
+        //         // Mark for check
+        //         this._changeDetectorRef.markForCheck();
+        //     });
+
+        // this._Service.getOrder().subscribe((resp: any) => {
+        //     this.dataRow = resp.data;
+        //     this.rawDataFilter = this.dataRow;
+        // });
     }
 
     handleFileInput(event: any): void {
@@ -166,4 +179,47 @@ export class ContactInfoComponent implements OnInit {
             this.showProductList = true;
         }
     }
+
+    //call api ยืนยันการชำระเงิน
+    //จากนั้นส่งข้อความไปที่ช่องแชทของลูกค้า
+    //ไปสเตปถัดไป
+    confirmPayment(stepper: MatStepper) {
+        this._chatService.sendMessage('ชำระเรียบร้อยแล้ว', this.chat.participants.data[0].id).subscribe(
+            (resp) => {
+                this._chatService.getChatById(this.chat.id).subscribe(
+                    (resp) => {
+                        stepper.next();
+                        this._changeDetectorRef.markForCheck();
+                    }
+                )
+            },
+            (err) => {
+                alert(err.error.error.message);
+            }
+        );
+
+    }
+
+    // sendMessage() {
+    //     console.log(this.chat);
+
+    //     if (!!this.messageInput.nativeElement.value) {
+    //         const user = this.chat.participants.data[0]
+
+    //         this._chatService.sendMessage(this.messageInput.nativeElement.value, user.id).subscribe(
+    //             (resp) => {
+    //                 this.messageInput.nativeElement.value = '';
+
+    //                 this._chatService.getChatById(this.chat.id).subscribe(
+    //                     (resp) => {
+    //                         this._changeDetectorRef.markForCheck();
+    //                     }
+    //                 )
+    //             },
+    //             (err) => {
+    //                 alert(err.error.error.message);
+    //             }
+    //         );
+    //     }
+    // }
 }
