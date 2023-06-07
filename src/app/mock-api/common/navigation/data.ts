@@ -34,9 +34,6 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         link: '/faq/list',
                     },
                 ],
-
-
-
             },
             {
                 id: 'g-Admin',
@@ -44,7 +41,6 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 type: 'collapsable',
                 icon: 'heroicons_outline:home',
                 children: [
-
                     {
                         id: 'customer',
                         title: 'ข้อมูลลูกค้า',
@@ -76,7 +72,6 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         link: '/bank/list',
                     },
 
-    
                     {
                         id: 'wallet-bag',
                         title: 'กระเป๋าเงิน',
@@ -84,12 +79,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                         type: 'basic',
                         link: '/wallet-bag/list',
                     },
-
-
                 ],
-
-
-
             },
 
             // {
@@ -359,13 +349,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 type: 'basic',
                 link: '/bank-user/list',
             },
-          //  {
-          //      id: 'wallet-bag-owner',
-          //      title: 'กระเป๋าตัง',
-          //      icon: 'mat_outline:account_balance_wallet',
-          //      type: 'basic',
-           //     link: '/wallet-bag-owner/list',
-          //  },
+            //  {
+            //      id: 'wallet-bag-owner',
+            //      title: 'กระเป๋าตัง',
+            //      icon: 'mat_outline:account_balance_wallet',
+            //      type: 'basic',
+            //     link: '/wallet-bag-owner/list',
+            //  },
             // {
             //     id: 'position',
             //     title: 'เช็คยอดขาย',
@@ -572,9 +562,8 @@ export const defaultNavigation: FuseNavigationItem[] = [
                     //     type: 'basic',
                     //     link: '/sale-page-order',
                     // },
-                ]
+                ],
             },
-
 
             {
                 id: 'position',
@@ -598,10 +587,17 @@ export const defaultNavigation: FuseNavigationItem[] = [
             },
             {
                 id: 'sale-order',
-                title: 'ตรวจสอบคำสั่งซื้อ',
+                title: 'คำสั่งซื้อรอดำเนินการ',
                 type: 'basic',
                 icon: 'heroicons_outline:shopping-cart',
                 link: '/sale-order/list',
+            },
+            {
+                id: 'sale-order-finish',
+                title: 'คำสั่งซื้อสำเร็จ',
+                type: 'basic',
+                icon: 'heroicons_outline:shopping-cart',
+                link: '/sale-order-finish/list',
             },
             {
                 id: 'customer',
@@ -646,13 +642,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
 
             //     link: '/position/list',
             // },
-           // {
-           //     id: 'position',
-          //      title: 'เช็คยอดเงิน',
-           //     type: 'basic',
-           //     icon: 'mat_outline:attach_money',
+            // {
+            //     id: 'position',
+            //      title: 'เช็คยอดเงิน',
+            //     type: 'basic',
+            //     icon: 'mat_outline:attach_money',
             //    link: '/position/list',
-           // },
+            // },
         ],
     },
 

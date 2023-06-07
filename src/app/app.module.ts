@@ -22,6 +22,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import {MatCardModule} from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmdialogeComponent } from './modules/admin/g-admin/livesteam/confirmdialoge/confirmdialoge.component';
+import { SaleOrderFinishComponent } from './modules/admin/g-admin/sale-order-finish/sale-order.component';
+import { SaleOrderFinishModule } from './modules/admin/g-admin/sale-order-finish/sale-order.module';
 
 
 const routerConfig: ExtraOptions = {
@@ -35,6 +37,7 @@ const routerConfig: ExtraOptions = {
     declarations: [
         AppComponent,
         SaleOrderComponent,
+
         SalePageComponent,
 
     ],
@@ -60,6 +63,8 @@ const routerConfig: ExtraOptions = {
         MatStepperModule,
         MatCardModule,
         ReactiveFormsModule,
+        SaleOrderFinishModule
+
 
     ],
 
