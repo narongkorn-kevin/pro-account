@@ -8,12 +8,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SaleOrderService } from 'app/modules/admin/g-admin/sale-order/sale-order.service';
 import { ChatService } from '../chat.service';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
     selector: 'chat-contact-info',
     templateUrl: './contact-info.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.Default,
 })
 export class ContactInfoComponent implements OnInit {
     @ViewChild('productDialog') productDialog!: TemplateRef<any>;
@@ -30,17 +31,17 @@ export class ContactInfoComponent implements OnInit {
 
     searchOrderField: FormControl = new FormControl(null, Validators.required);
 
-    rerender: any;
+    // rerender: any;
     item$: Observable<any>;
 
-    @Input() chat: Chat;
+    @Input() chat: any;
     @Input() drawer: MatDrawer;
-    firstFormGroup = this._formBuilder.group({
-        firstCtrl: ['', Validators.required],
-    });
-    secondFormGroup = this._formBuilder.group({
-        secondCtrl: ['', Validators.required],
-    });
+    // firstFormGroup = this._formBuilder.group({
+    //     firstCtrl: ['', Validators.required],
+    // });
+    // secondFormGroup = this._formBuilder.group({
+    //     secondCtrl: ['', Validators.required],
+    // });
 
     selectedImage: string | undefined;
     showProductList = false;
@@ -60,12 +61,16 @@ export class ContactInfoComponent implements OnInit {
         private _matDialog: MatDialog,
         private _formBuilder: FormBuilder,
         private ngZone: NgZone,
-        private _Service: ChatService,
+        private _chatService: ChatService,
     ) {
         this.formData = this._formBuilder.group({
             customerName: [null],
             phone: [null],
             address: [null],
+            weight: [0],
+            shippingCost: [0],
+            discount: [0],
+            total: [0],
         });
     }
 
@@ -76,10 +81,19 @@ export class ContactInfoComponent implements OnInit {
             })
         );
 
-        this._Service.getOrder().subscribe((resp: any) => {
-            this.dataRow = resp.data;
-            this.rawDataFilter = this.dataRow;
-        });
+        this.formData.valueChanges.subscribe(
+            (value: any) => {
+                this.formData.patchValue({
+                    total: this.totalPrice(+value.weight, +value.shippingCost, +value.discount),
+                })
+            }
+        )
+    }
+
+    totalPrice(weight: number, shippingCost: number, discount: number): number {
+        const total = weight + shippingCost + discount
+
+        return total + +this.newSelectProducts.reduce((sum, curr) => sum + (curr.quantity * curr.unit_price), 0);
     }
 
     handleFileInput(event: any): void {
@@ -108,18 +122,31 @@ export class ContactInfoComponent implements OnInit {
             width: '900px',
             height: '750px'
         });
-        dialogRef.afterClosed().subscribe(item => {
-            this.rerender();
-            this._changeDetectorRef.markForCheck();
-            this.formData.patchValue({
-                weight: item,
-            });
+        // dialogRef.afterClosed().subscribe(item => {
+        //     this.rerender();
+        //     this._changeDetectorRef.markForCheck();
+        //     this.formData.patchValue({
+        //         weight: item,
+        //     });
 
-            console.log(this.formData.value.item[1].name);
-        });
+        //     console.log(this.formData.value.item[1].name);
+        // });
 
         dialogRef.afterClosed().subscribe(items => {
-            this.newSelectProducts = items;
+            for (const item of items) {
+                //เช็คว่าเคยเพิ่มไว้หรือยัง
+                const hasItem = this.newSelectProducts.find(e => e.id == item.id);
+                if (hasItem) {
+                    hasItem.quantity += item.quantity;
+                } else {
+                    this.newSelectProducts.push(item)
+                }
+            }
+
+            this.formData.patchValue({
+                total: this.totalPrice(+this.formData.value.weight, +this.formData.value.shippingCost, +this.formData.value.discount),
+            })
+
             this._changeDetectorRef.markForCheck();
         });
     }
@@ -132,6 +159,14 @@ export class ContactInfoComponent implements OnInit {
                     phone: [resp.telephone],
                     address: [resp.address],
                 });
+
+                resp.sale_order_lines[0].item.quantity = resp.sale_order_lines[0].qty
+
+                this.newSelectProducts = [resp.sale_order_lines[0].item]
+
+                this.formData.patchValue({
+                    total: this.totalPrice(+this.formData.value.weight, +this.formData.value.shippingCost, +this.formData.value.discount),
+                })
 
                 this._changeDetectorRef.markForCheck();
             },
@@ -166,4 +201,47 @@ export class ContactInfoComponent implements OnInit {
             this.showProductList = true;
         }
     }
+
+    //call api ยืนยันการชำระเงิน
+    //จากนั้นส่งข้อความไปที่ช่องแชทของลูกค้า
+    //ไปสเตปถัดไป
+    confirmPayment(stepper: MatStepper) {
+        this._chatService.sendMessage('ชำระเรียบร้อยแล้ว', this.chat.participants.data[0].id).subscribe(
+            (resp) => {
+                this._chatService.getChatById(this.chat.id).subscribe(
+                    (resp) => {
+                        stepper.next();
+                        this._changeDetectorRef.markForCheck();
+                    }
+                )
+            },
+            (err) => {
+                alert(err.error.error.message);
+            }
+        );
+
+    }
+
+    // sendMessage() {
+    //     console.log(this.chat);
+
+    //     if (!!this.messageInput.nativeElement.value) {
+    //         const user = this.chat.participants.data[0]
+
+    //         this._chatService.sendMessage(this.messageInput.nativeElement.value, user.id).subscribe(
+    //             (resp) => {
+    //                 this.messageInput.nativeElement.value = '';
+
+    //                 this._chatService.getChatById(this.chat.id).subscribe(
+    //                     (resp) => {
+    //                         this._changeDetectorRef.markForCheck();
+    //                     }
+    //                 )
+    //             },
+    //             (err) => {
+    //                 alert(err.error.error.message);
+    //             }
+    //         );
+    //     }
+    // }
 }

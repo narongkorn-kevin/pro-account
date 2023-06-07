@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, Input, NgZone, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, interval, mergeMap, takeUntil } from 'rxjs';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
 import { Chat } from 'app/modules/admin/apps/chat/chat.types';
 import { ChatService } from 'app/modules/admin/apps/chat/chat.service';
@@ -33,6 +33,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
         // ...
         sender: 'user', // or 'admin'
     };
+    observableRef: any;
 
     // chats = {
     //     messages: {
@@ -131,6 +132,13 @@ export class ConversationComponent implements OnInit, OnDestroy {
                 // Mark for check
                 this._changeDetectorRef.markForCheck();
             });
+
+
+            this.observableRef = interval(5 * 1000)
+            .pipe(
+                mergeMap(() => this._chatService.getChatById(this.chat.id))
+            )
+            .subscribe(data => this._changeDetectorRef.markForCheck())
     }
 
 
@@ -139,6 +147,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
      */
     ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
+        this.observableRef.unsubscribe();
         this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
     }
