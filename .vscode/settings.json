@@ -1,4 +1,5 @@
 {
-        "angular.enable-strict-mode-prompt": false,
-        "livePreview.defaultPreviewPath": "/src/app/modules/admin/g-admin/sale-page-order/sale-page.component.html"
+    "files.autoSave": "afterDelay",
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

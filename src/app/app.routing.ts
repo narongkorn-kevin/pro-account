@@ -614,19 +614,6 @@ export const appRoutes: Route[] = [
                 ],
             },
             {
-                path: 'sale-order-finish',
-                canActivate: [],
-                children: [
-                    {
-                        path: '',
-                        loadChildren: () =>
-                            import(
-                                'app/modules/admin/g-admin/sale-order-finish/sale-order.module'
-                            ).then((m) => m.SaleOrderFinishModule),
-                    },
-                ],
-            },
-            {
                 path: 'sale-page',
                 canActivate: [],
                 children: [
@@ -796,6 +783,14 @@ export const appRoutes: Route[] = [
                             ).then((m) => m.SaleOrderReportModule),
                     },
                 ],
+            },
+
+            {
+                path: 'sale-finish',
+                loadChildren: () =>
+                    import(
+                        'app/modules/admin/g-admin/sale-finish/sale-finish.module'
+                    ).then((m) => m.SaleFinishModule),
             },
 
             // 404 & Catch all

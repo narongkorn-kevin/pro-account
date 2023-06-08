@@ -593,11 +593,11 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 link: '/sale-order/list',
             },
             {
-                id: 'sale-order-finish',
-                title: 'คำสั่งซื้อสำเร็จ',
+                id: 'sale-finish',
+                title: 'คำสั่งซื้อเสร็จสิ้น',
                 type: 'basic',
                 icon: 'heroicons_outline:shopping-cart',
-                link: '/sale-order-finish/list',
+                link: '/sale-finish/list',
             },
             {
                 id: 'customer',

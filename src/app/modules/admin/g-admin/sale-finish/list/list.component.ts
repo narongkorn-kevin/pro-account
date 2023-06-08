@@ -1,32 +1,25 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatCheckboxChange } from '@angular/material/checkbox';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { debounceTime, map, merge, Observable, Subject, switchMap, takeUntil } from 'rxjs';
-import { fuseAnimations } from '@fuse/animations';
-import { FuseConfirmationService } from '@fuse/services/confirmation';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-import { environment } from 'environments/environment';
-import { AuthService } from 'app/core/auth/auth.service';
-import { sortBy, startCase } from 'lodash-es';
-import { AssetType, DataSaleOrder, saleOrderPagination } from '../sale-order.types';
-import { SaleOrderService } from '../sale-order.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-// import { ImportOSMComponent } from '../card/import-osm/import-osm.component';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
+import { AuthService } from 'app/core/auth/auth.service';
+import { environment } from 'environments/environment';
+import { startCase } from 'lodash';
+import { Observable, Subject } from 'rxjs';
+import { AssetType } from '../../permission/permission.types';
+import { SaleOrderService } from '../../sale-order/sale-order.service';
+import { DataSaleOrder, saleOrderPagination } from '../../sale-order/sale-order.types';
 
 @Component({
-    selector: 'app-list',
-    templateUrl: './list.component.html',
-    styleUrls: ['./list.component.scss'],
-    // encapsulation: ViewEncapsulation.None,
-    // changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: fuseAnimations
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.scss']
 })
-
-
-export class SaleOrderListFinishComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(MatPaginator) private _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
     displayedColumns: string[] = ['id',
