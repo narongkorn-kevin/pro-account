@@ -1,0 +1,48 @@
+<div class="flex flex-auto overflow-x-scroll">
+    <div class="flex flex-col flex-auto p-5 sm:overflow-y-auto">
+        <table datatable [dtOptions]="dtOptions" class="table row-border hover w-full overflow-auto">
+            <thead>
+                <tr>
+                    <th>ลำดับ</th>
+                    <th>สินค้า</th>
+                    <th>ราคาต่อชิ้น</th>
+                    <th>จำนวนทั้งหมด</th>
+                    <th>จำนวนที่จอง</th>
+                    <th>คงเหลือ</th>
+                    <th>โค๊ด</th>
+                    <th>ประเภท</th>
+                    <th>โค๊ดโกดัง</th>
+                    <th>โกดัง</th>
+                    <th>จัดการ</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="dataRow?.length != 0">
+                <tr *ngFor="let item of dataRow; let i = index">
+                    <td style="width: 5%;">{{ pages.begin + (i + 1) }}</td>
+                    <td>{{ item?.name??"-" }}</td>
+                    <td>{{ item?.unit_price??"-" }}</td>
+                    <td>{{ item?.qty??"-" }}</td>
+                    <td>{{ item?.booking??"-" }}</td>
+                    <td>{{ item?.balance??"-" }}</td>
+                    <td>{{ item?.item_type?.code??"-" }}</td>
+                    <td>{{ item?.item_type?.name??"-" }}</td>
+                    <td>{{ item?.location?.code??"-" }}</td>
+                    <td>{{ item?.location?.name??"-" }}</td>
+                    <td>
+                        <button mat-button (click)="Addproduct(item.id)">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                        <!-- <button mat-button (click)="Delete(item.id)">
+                            <mat-icon svgIcon="heroicons_solid:trash"></mat-icon>
+                        </button> -->
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="dataRow?.length == 0">
+                <tr>
+                    <td colspan="11" class="no-data-available text-center">No data !</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

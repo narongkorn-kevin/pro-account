@@ -53,50 +53,97 @@ export class ClassicLayoutComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((navigation: Navigation) => {
                 const user = JSON.parse(localStorage.getItem('user')) || null;
-                if (user.position.name == 'นักพัฒนาระบบ') {
-                    AuthService._Manager = false;
-                    AuthService._Ads = false;
-                    AuthService._Telesale = false;
-                    AuthService._Admin = false;
-                    AuthService._Packing = false;
-                    AuthService._Hr = false;
-                    AuthService._Report = false;
-                    AuthService._Profile = false;
+                //this.navigation = navigation;
+                
+                if (user.permission.name == 'เจ้าของแพลตฟอร์ม') {
+                //   AuthService._Manager = true;
+                  AuthService._Broker = true;
+                  AuthService._Profile = true;
+                  AuthService._Shop = true;
+                
                      this.navigation = navigation;
 
-                 } else if (user.position.name == 'ทีมยิงแอดโฆษณา' ) {
-                     AuthService._Ads = false
-                     AuthService._Profile = false;
-                     this.navigation = navigation;
-                 } else if (user.position.name == 'ทีมแอดมินตอบแชท') {
-                     AuthService._Admin = false;
-                     AuthService._Profile = false;
-                     this.navigation = navigation;
-                 } else if (user.position.name == 'ทีมเทเลเซล') {
-                     AuthService._Telesale = false;
-                     AuthService._Profile = false;
-                     this.navigation = navigation;
-                 } else if (user.position.name == 'ทีมแพ็คของ') {
-                     AuthService._Packing = false;
-                     AuthService._Profile = false;
+                }
+                else if (user.permission.name == 'ตัวแทน') {
+                //    AuthService._Manager = true;
+                //   //AuthService._Broker = true;
+                //   AuthService._Profile = true;
+                //   AuthService._Shop = true;
+                
                      this.navigation = navigation;
 
-                 } else if (user.position.name == 'ฝ่ายบุคคล') {
-                    AuthService._Hr = false;
-                    AuthService._Profile = false;
-                    this.navigation = navigation;
-                 } else if (user.role.Manager == 'หัวหน้างาน') {
-                    AuthService._Manager = false;
-                    AuthService._Ads = false;
-                    AuthService._Telesale = false;
-                    AuthService._Admin = false;
-                    AuthService._Packing = false;
-                    AuthService._Hr = false;
-                    AuthService._Report = false;
-                    AuthService._Profile = false;
+                }
+                else if (user.permission.name == 'ร้านค้า') {
+                   AuthService._Manager = true;
+                  AuthService._Broker = true;
+                  AuthService._Profile = true;
+                  //AuthService._Shop = true;
+                
                      this.navigation = navigation;
-                 }
-                this.navigation = navigation;
+
+                }
+                else if (user.permission.name == 'ผู้ดูแลร้านค้า') {
+                   AuthService._Manager = true;
+                  AuthService._Broker = true;
+                  AuthService._Profile = true;
+                  //AuthService._Shop = true;
+                
+                     this.navigation = navigation;
+
+                }
+                else if (user.permission.name == 'test') {
+                //    AuthService._Manager = true;
+                //   AuthService._Broker = true;
+                //   AuthService._Profile = true;
+                  //AuthService._Shop = true;
+                
+                     this.navigation = navigation;
+
+                }
+                //  else if (user.position.name == 'ตัวแทน') {
+                //     AuthService._Manager = false;
+                //     AuthService._Ads = false;
+                //     AuthService._Telesale = false;
+                //     AuthService._Admin = false;
+                //     AuthService._Packing = false;
+                //     AuthService._Hr = false;
+                //     AuthService._Report = false;
+                //     AuthService._Profile = false;
+                //      this.navigation = navigation;
+
+                //  } else if (user.position.name == 'ทีมยิงแอดโฆษณา' ) {
+                //      AuthService._Ads = false
+                //      AuthService._Profile = false;
+                //      this.navigation = navigation;
+                //  } else if (user.position.name == 'ทีมแอดมินตอบแชท') {
+                //      AuthService._Admin = false;
+                //      AuthService._Profile = false;
+                //      this.navigation = navigation;
+                //  } else if (user.position.name == 'ทีมเทเลเซล') {
+                //      AuthService._Telesale = false;
+                //      AuthService._Profile = false;
+                //      this.navigation = navigation;
+                //  } else if (user.position.name == 'ทีมแพ็คของ') {
+                //      AuthService._Packing = false;
+                //      AuthService._Profile = false;
+                //      this.navigation = navigation;
+
+                //  } else if (user.position.name == 'ฝ่ายบุคคล') {
+                //     AuthService._Hr = false;
+                //     AuthService._Profile = false;
+                //     this.navigation = navigation;
+                //  } else if (user.role.Manager == 'หัวหน้างาน') {
+                //     AuthService._Manager = false;
+                //     AuthService._Ads = false;
+                //     AuthService._Telesale = false;
+                //     AuthService._Admin = false;
+                //     AuthService._Packing = false;
+                //     AuthService._Hr = false;
+                //     AuthService._Report = false;
+                //     AuthService._Profile = false;
+                //      this.navigation = navigation;
+                //  }
+                // this.navigation = navigation;
             });
         // Subscribe to media changes
         this._fuseMediaWatcherService.onMediaChange$

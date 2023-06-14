@@ -332,7 +332,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'group',
         icon: 'heroicons_outline:home',
         hidden: function () {
-            return AuthService._Hr;
+            return AuthService._Broker;
         },
         children: [
             {
@@ -525,7 +525,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'group',
         icon: 'heroicons_outline:home',
         hidden: function () {
-            return AuthService._Hr;
+            return AuthService._Shop;
         },
         children: [
             {

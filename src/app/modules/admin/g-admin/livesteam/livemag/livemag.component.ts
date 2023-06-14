@@ -23,7 +23,9 @@ import { data } from 'jquery';
 import { StockService } from '../chat/stock.service';
 import { Product } from '../../product/product-cf/product.mock';
 import { ProductcService } from './productc.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ProductControlComponent } from '../product-control/product-control.component';
+import { TableComponent } from '../table/table.component';
 
 
 interface product {
@@ -110,7 +112,8 @@ item: any;
         private sharedserviceService: SharedserviceService,
         private _chatService: ChatService,
         private _productcService: ProductcService,
-        private itemService: ItemService
+        private itemService: ItemService,
+        private _matDialog: MatDialog,
     ) {
         this.formData = this._formBuilder.group({
             pic: '',
@@ -128,6 +131,7 @@ item: any;
     ngOnInit(): void {
         //ดึง id จาก url
         this.pageId = this._activatedRoute.snapshot.paramMap.get('id');
+        console.log(this.pageId,'Data');
 
         // const token = "EAACa5iDAEsMBALNFzxn4c8NphtXizlOPffxSkZBGBKAZBjEZBX5WqVzhObutJGYMO6VXqcCQWM6Y6EeHivhWmCJSNpGHpaU7sObXyHUxtDu1TRlrIneZCisNvfPrg6Oz0QUwRqyR4gFlBBZBGBNlZAYu2H2K3dK7y5auZAbIxJpZCCxhhC2akTd5"; // your token
 
@@ -140,6 +144,7 @@ item: any;
                 //     '<iframe class="w-200"'
                 // );
                 data.embed_html = this.sanitizer.bypassSecurityTrustHtml(data.embed_html);
+                
                 this.liveStream = data;
             }
         });
@@ -150,13 +155,14 @@ item: any;
             this.isLoggedin = user != null;
             // console.log(user)
             this._Service.getTokenUser(this.socialUser.authToken).subscribe((resp: any) => {
-                console.log(resp);
+                
 
                 this.userData = resp
                 this._Service.getTokenPage(this.socialUser.authToken, this.formData.value.id).subscribe((resp: any) => {
+                    console.log('ข้อมูล', resp);
                     this.pageData = resp
 
-                    console.log('ข้อมูล', resp)
+                    
                 })
             });
         });
@@ -300,5 +306,26 @@ item: any;
     }
     onClose() {
     }
+    openPackageDialog(): void {
+        //console.log(id, "test id");
+        this._matDialog
+          .open(TableComponent, {
+            disableClose: false,
+            autoFocus: false,
+            height: "80%",
+            //recive brandId
+            // data: { userId: id },
+          })
+          .afterClosed()
+          .subscribe((res) => {
+            console.log(res);
+            /**ถ้าส่ง successfull มาจะทำการรีโหลดตาราง */
+            this.item$ = this.ItemServive.getProductLivePage().pipe(
+                map((resp: any) => {
+                    return resp.data.data
+                })
+            )
+          });
+      }
 
 }

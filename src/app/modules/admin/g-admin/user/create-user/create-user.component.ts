@@ -70,6 +70,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit, OnDestroy {
 
     supplierId: string | null;
     pagination: UserPagination;
+    station$: Observable<any>;
 
     /**
      * Constructor
@@ -103,7 +104,8 @@ export class CreateUserComponent implements OnInit, AfterViewInit, OnDestroy {
             salary: ['', Validators.required,],
             image: ['',],
             type:'',
-            image_signature: ['',]
+            image_signature: ['',],
+            
         })
     }
 

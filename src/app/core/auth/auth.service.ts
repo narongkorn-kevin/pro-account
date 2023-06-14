@@ -22,16 +22,19 @@ export class AuthService {
     private _authenticated: boolean = false;
     private _requireResetPassword: boolean = false;
     private _jwt: string = null;
-    public static _Ads: boolean = true;
-    public static _Telesale: boolean = true;
-    public static _Packing: boolean = true;
-    public static _Admin: boolean = true;
-    public static _Hr: boolean = true;
-    public static _Manager: boolean = true;
-    public static _Report: boolean = true;
-    public static _Profile: boolean = true;
+    public static _Ads: boolean = false;
+    public static _Telesale: boolean = false;
+    public static _Packing: boolean = false;
+    public static _Admin: boolean = false;
+    public static _Hr: boolean = false;
+    public static _Manager: boolean = false;
+    public static _Report: boolean = false;
+    public static _Profile: boolean = false;
+    public static _Broker: boolean = false;
+    public static _Shop: boolean = false;
+    public static _AdminShop: boolean = false;
 
-    public static _adminSupplier: boolean = true;
+    public static _adminSupplier: boolean = false;
 
     public _me: BehaviorSubject<any[] | null> = new BehaviorSubject(null);
 

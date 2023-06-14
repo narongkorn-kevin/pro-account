@@ -50,6 +50,7 @@ import { PageComponent } from './page.component';
 import { PageRoute } from './page.routing';
 import { ProductControlComponent } from './product-control/product-control.component';
 import { FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { TableComponent } from './table/table.component';
 // import {
 //     FacebookLoginProvider,
 //     SocialLoginModule,
@@ -68,6 +69,7 @@ import { FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule } fro
         FbLiveComponent,
         SafeHtmlPipe,
         ConfirmdialogeComponent,
+        TableComponent,
     ],
     imports: [
         RouterModule.forChild(PageRoute),

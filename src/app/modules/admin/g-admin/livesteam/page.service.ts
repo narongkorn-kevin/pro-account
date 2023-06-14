@@ -1,6 +1,7 @@
 import {
     HttpClient,
-    HttpHeaders} from '@angular/common/http';
+    HttpHeaders
+} from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, of, switchMap, tap, throwError } from 'rxjs';
@@ -9,7 +10,8 @@ import {
     AssetType,
     Chat,
     // PermissionProductDetailOSM,
-    BranchPagination, BranchProduct, StoreType} from './page.types';
+    BranchPagination, BranchProduct, StoreType
+} from './page.types';
 import { environment } from 'environments/environment';
 import { DataTablesResponse } from 'app/shared/datatable.types';
 // import { access } from 'fs';
@@ -222,8 +224,8 @@ export class PageService {
         );
     }
 
-    getTokenUser(data: any): Observable<AssetType[]> {
-        return this._httpClient.get<AssetType[]>('https://graph.facebook.com/v16.0/me/accounts?fields=name,access_token,tasks,picture&access_token=' + data).pipe(
+    getTokenUser(data: any): Observable<any> {
+        return this._httpClient.get<any>('https://graph.facebook.com/v16.0/me/accounts?fields=name,access_token,tasks,picture&access_token=' + data).pipe(
             tap((asset_types) => {
                 this._asset_types.next(asset_types);
             })
@@ -331,4 +333,21 @@ export class PageService {
             .pipe();
     }
 
+    getProductById(id: any) {
+        return this._httpClient.get(environment.API_URL + "/api/item/" + id).pipe(
+            map((resp: any) => {
+                return resp.data;
+            })
+        );
+    }
+    getPage1(dataTablesParameters: any): Observable<DataTablesResponse> {
+        return this._httpClient.post(environment.API_URL + 'api/item_page', dataTablesParameters, this.httpOptionsFormdata).pipe(
+            switchMap((response: any) => {
+                return of(response.data);
+            })
+        );
+    }
+    create(data: any) {
+        return this._httpClient.post(environment.API_URL + "api/product_live", data);
+      }
 }
