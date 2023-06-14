@@ -84,6 +84,29 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     supplierId: string | null;
     pagination: saleOrderPagination;
 
+
+    allComplete_all: boolean = false;
+    allComplete_pack: boolean = false;
+    allComplete_send: boolean = false;
+    allComplete_success: boolean = false;
+    allComplete_notsuccess: boolean = false;
+
+    items : any = [
+        {
+            id: 1,
+            name:"A",
+        },
+        {
+            id: 2,
+            name:"B",
+        },
+        {
+            id: 3,
+            name:"C",
+        },
+    ]
+
+
     /**
      * Constructor
      */
@@ -720,6 +743,24 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     textStatus(status: string): string {
         return startCase(status);
+    }
+
+
+
+    setAll(completed: boolean) {
+        this.allComplete_all = completed;
+    }
+    setpack(completed: boolean) {
+        this.allComplete_pack = completed;
+    }
+    setsend(completed: boolean) {
+        this.allComplete_send = completed;
+    }
+    setsuccess(completed: boolean) {
+        this.allComplete_success = completed;
+    }
+    setnotsuccess(completed: boolean) {
+        this.allComplete_notsuccess = completed;
     }
 
 

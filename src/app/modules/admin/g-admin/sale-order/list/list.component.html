@@ -33,7 +33,9 @@
                         <mat-tab>
                             <ng-template mat-tab-label>
                                 <div>ทั้งหมด</div>
-                                <div class="pop-up absolute w-[30px] h-[30px] right-[10px] leading-[30px] rounded-full text-center bg-[#bbb] text-[#fff]">{{total_t}}</div>
+                                <div
+                                    class="pop-up absolute w-[30px] h-[30px] right-[10px] leading-[30px] rounded-full text-center bg-[#bbb] text-[#fff]">
+                                    {{total_t}}</div>
 
                             </ng-template>
                             <div class="table-responsive overflow-auto">
@@ -41,7 +43,13 @@
                                     class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400">
                                     <thead>
                                         <tr>
-                                            <th> <input class="mb-2" type="checkbox"></th>
+                                            <th>
+                                                <mat-checkbox class="example-margin" [checked]="allComplete_all"
+                                                    (change)="setAll($event.checked)">
+
+
+                                                </mat-checkbox>
+                                            </th>
                                             <th>ดูข้อมูล</th>
                                             <th>ลำดับ</th>
                                             <th>ช่องทาง</th>
@@ -58,8 +66,13 @@
                                     <tbody *ngIf="dataRow_t?.length != 0">
                                         <tr *ngFor="let item of dataRow_t; let i = index" style="cursor: pointer;">
 
+                                            <td style="min-width: 50px;">
+                                                <mat-checkbox [checked]="allComplete_all">
+
+
+                                                </mat-checkbox>
+                                            </td>
                                             <td style="width: 100px; min-width: 100px;">
-                                                <input class="mb-2" type="checkbox">
                                                 <button mat-icon-button color="" (click)="view(item.id)"
                                                     title="ดูรายละเอียดข้อมูล">
                                                     <mat-icon>remove_red_eye</mat-icon>
@@ -121,10 +134,14 @@
                                                 COD</td>
                                             <td style="width: 100px; min-width: 100px;"
                                                 *ngIf="item.payment_type === 'transfer'"> โอนเงิน</td>
+                                            <td style="width: 100px; min-width: 100px;"
+                                                *ngIf="item.payment_type !== 'COD' && item.payment_type !== 'transfer'">
+                                                -</td>
+
                                             <td style="width: 100px; min-width: 100px;">{{ item.total | number : '1.2-2'
                                                 }}</td>
-                                            <td style="width: 100px; min-width: 100px;">{{ item.payment_qty | number :
-                                                '1.2-2' }}</td>
+                                            <!-- <td style="width: 100px; min-width: 100px;">{{ item.payment_qty | number :
+                                                '1.2-2' }}</td> -->
                                             <!-- <td>{{ item.date_time | thaiDate}}</td> -->
                                             <!-- <td>{{ item.created_at | date: 'dd/MM/yyyy hh:mm' }}</td> -->
                                             <td>
@@ -147,7 +164,9 @@
                         <mat-tab>
                             <ng-template mat-tab-label>
                                 <div>ยังไม่ชำระ</div>
-                                <div class="pop-up absolute w-[30px] h-[30px] right-[10px] leading-[30px] rounded-full text-center bg-[#bbb] text-[#fff]">{{total_o}}</div>
+                                <div
+                                    class="pop-up absolute w-[30px] h-[30px] right-[10px] leading-[30px] rounded-full text-center bg-[#bbb] text-[#fff]">
+                                    {{total_o}}</div>
 
                             </ng-template>
                             <div class="table-responsive">
@@ -156,9 +175,16 @@
                                     style="width: 100%">
                                     <thead>
                                         <tr>
+                                            <th>
+                                                <mat-checkbox class="example-margin" [checked]="allComplete_notfinish"
+                                                    (change)="setnotfinish($event.checked)">
+
+
+                                                </mat-checkbox>
+                                            </th>
                                             <th>จัดการ</th>
                                             <th>ลำดับ</th>
-                                            <th>ช่องทาง</th>
+                                            <th style="width: 100px;">ช่องทาง</th>
                                             <th>วันที่สั่งซื้อ</th>
                                             <th>หมายเลขคำสั่งซื้อ</th>
                                             <th>ลูกค้า</th>
@@ -171,6 +197,12 @@
                                     </thead>
                                     <tbody *ngIf="dataRow_o?.length != 0">
                                         <tr *ngFor="let item of dataRow_o; let i = index" style="cursor: pointer;">
+                                            <td style="min-width: 50px;">
+                                                <mat-checkbox [checked]="allComplete_notfinish">
+
+
+                                                </mat-checkbox>
+                                            </td>
                                             <td style="width: 100px; min-width: 100px;">
                                                 <button mat-icon-button color="" (click)="edit(item.id)"
                                                     title="แก้ไขข้อมูล">
@@ -239,6 +271,10 @@
                                                 COD</td>
                                             <td style="width: 100px; min-width: 100px;"
                                                 *ngIf="item.payment_type === 'transfer'"> โอนเงิน</td>
+                                            <td style="width: 100px; min-width: 100px;"
+                                                *ngIf="item.payment_type !== 'COD' && item.payment_type !== 'transfer'">
+                                                -</td>
+
                                             <td style="width: 100px; min-width: 100px;">{{ item.total | number : '1.2-2'
                                                 }}</td>
                                             <!-- <td style="width: 100px; min-width: 100px;">{{ item.payment_qty | number : '1.2-2' }}</td> -->
@@ -258,7 +294,9 @@
                         <mat-tab>
                             <ng-template mat-tab-label>
                                 <div>ชำระแล้ว</div>
-                                <div class="pop-up absolute w-[30px] h-[30px] right-[10px] leading-[30px] rounded-full text-center bg-[#bbb] text-[#fff]">{{total_p}}</div>
+                                <div
+                                    class="pop-up absolute w-[30px] h-[30px] right-[10px] leading-[30px] rounded-full text-center bg-[#bbb] text-[#fff]">
+                                    {{total_p}}</div>
 
                             </ng-template>
                             <div class="table-responsive">
@@ -267,9 +305,16 @@
                                     style="width: 100%">
                                     <thead>
                                         <tr>
-                                            <th><input class="mb-2" type="checkbox"></th>
+                                            <th>
+                                                <mat-checkbox class="example-margin" [checked]="allComplete_finish"
+                                                    (change)="setfinish($event.checked)">
+
+
+                                                </mat-checkbox>
+                                            </th>
+                                            <th>ดูข้อมูล</th>
                                             <th>ลำดับ</th>
-                                            <th>ช่องทาง</th>
+                                            <th style="width: 100px;">ช่องทาง</th>
                                             <th>วันที่สั่งซื้อ</th>
                                             <th>หมายเลขคำสั่งซื้อ</th>
                                             <th>ลูกค้า</th>
@@ -285,9 +330,13 @@
                                     <tbody *ngIf="dataRow_p?.length != 0">
                                         <tr *ngFor="let item of dataRow_p; let i = index" style="cursor: pointer;">
 
-                                            <td style="width: 100px; min-width: 100px;">
-                                                <input class="mb-2" type="checkbox">
+                                            <td style="min-width: 50px;">
+                                                <mat-checkbox [checked]="allComplete_finish">
 
+
+                                                </mat-checkbox>
+                                            </td>
+                                            <td style="width: 100px; min-width: 100px;">
                                                 <button mat-icon-button color="" (click)="view(item.id)"
                                                     title="รหัส{{ item.order_id }}  ชื่อ {{ item.name  }}  จำนวน{{ item.payment_qty | number : '1.2-2' }}  ยอดรวมสุทธิ{{ item.total | number : '1.2-2' }} ">
                                                     <mat-icon>remove_red_eye</mat-icon>
@@ -350,6 +399,13 @@
                                                 COD</td>
                                             <td style="width: 100px; min-width: 100px;"
                                                 *ngIf="item.payment_type === 'transfer'"> โอนเงิน</td>
+
+
+                                            <td style="width: 100px; min-width: 100px;"
+                                                *ngIf="item.payment_type !== 'COD' && item.payment_type !== 'transfer'">
+                                                -</td>
+
+
                                             <td style="width: 100px; min-width: 100px;">{{ item.total | number : '1.2-2'
                                                 }}</td>
                                             <td style="width: 100px; min-width: 100px;">{{ item.payment_qty | number :
@@ -375,7 +431,9 @@
                         <mat-tab>
                             <ng-template mat-tab-label>
                                 <div>ชำระมีเงื่อนไข</div>
-                                <div class="pop-up absolute w-[30px] h-[30px] right-[10px] leading-[30px] rounded-full text-center bg-[#bbb] text-[#fff]">{{total_p}}</div>
+                                <div
+                                    class="pop-up absolute w-[30px] h-[30px] right-[10px] leading-[30px] rounded-full text-center bg-[#bbb] text-[#fff]">
+                                    {{total_p}}</div>
 
                             </ng-template>
                             <div class="table-responsive">
@@ -384,9 +442,16 @@
                                     style="width: 100%">
                                     <thead>
                                         <tr>
+                                            <th>
+                                                <mat-checkbox class="example-margin" [checked]="allComplete_condition"
+                                                    (change)="setcondition($event.checked)">
+
+
+                                                </mat-checkbox>
+                                            </th>
                                             <th>จัดการ</th>
                                             <th>ลำดับ</th>
-                                            <th>ช่องทาง</th>
+                                            <th style="width: 100px;">ช่องทาง</th>
                                             <th>วันที่สั่งซื้อ</th>
                                             <th>หมายเลขคำสั่งซื้อ</th>
                                             <th>ลูกค้า</th>
@@ -399,6 +464,12 @@
                                     </thead>
                                     <tbody *ngIf="dataRow_p?.length != 0">
                                         <tr *ngFor="let item of dataRow_p; let i = index" style="cursor: pointer;">
+                                            <td style="min-width: 50px;">
+                                                <mat-checkbox [checked]="allComplete_condition">
+
+
+                                                </mat-checkbox>
+                                            </td>
                                             <td style="width: 100px; min-width: 100px;">
                                                 <button mat-icon-button color="" (click)="edit(item.id)"
                                                     title="แก้ไขข้อมูล">
@@ -467,6 +538,10 @@
                                                 COD</td>
                                             <td style="width: 100px; min-width: 100px;"
                                                 *ngIf="item.payment_type === 'transfer'"> โอนเงิน</td>
+                                            <td style="width: 100px; min-width: 100px;"
+                                                *ngIf="item.payment_type !== 'COD' && item.payment_type !== 'transfer'">
+                                                -</td>
+
                                             <td style="width: 100px; min-width: 100px;">{{ item.total | number : '1.2-2'
                                                 }}</td>
                                             <td style="width: 100px; min-width: 100px;">{{ item.payment_qty | number :
@@ -487,7 +562,9 @@
                         <mat-tab>
                             <ng-template mat-tab-label>
                                 <div>ยืนยัน</div>
-                                <div class="pop-up absolute w-[30px] h-[30px] right-[10px] leading-[30px] rounded-full text-center bg-[#bbb] text-[#fff]">{{total_c}}</div>
+                                <div
+                                    class="pop-up absolute w-[30px] h-[30px] right-[10px] leading-[30px] rounded-full text-center bg-[#bbb] text-[#fff]">
+                                    {{total_c}}</div>
 
                             </ng-template>
                             <div class="table-responsive">
@@ -496,9 +573,16 @@
                                     style="width: 100%">
                                     <thead>
                                         <tr>
+                                            <th>
+                                                <mat-checkbox class="example-margin" [checked]="allComplete_submit"
+                                                    (change)="setsubmit($event.checked)">
+
+
+                                                </mat-checkbox>
+                                            </th>
                                             <th>จัดการ</th>
                                             <th>ลำดับ</th>
-                                            <th>ช่องทาง</th>
+                                            <th style="width: 100px;">ช่องทาง</th>
                                             <th>วันที่สั่งซื้อ</th>
                                             <th>หมายเลขคำสั่งซื้อ</th>
                                             <th>ลูกค้า</th>
@@ -511,6 +595,12 @@
                                     </thead>
                                     <tbody *ngIf="dataRow_c?.length != 0">
                                         <tr *ngFor="let item of dataRow_c; let i = index" style="cursor: pointer;">
+                                            <td style="min-width: 50px;">
+                                                <mat-checkbox [checked]="allComplete_submit">
+
+
+                                                </mat-checkbox>
+                                            </td>
                                             <td style="width: 100px; min-width: 100px;">
                                                 <button mat-icon-button color="" (click)="edit(item.id)"
                                                     title="แก้ไขข้อมูล">
@@ -579,6 +669,10 @@
                                                 COD</td>
                                             <td style="width: 100px; min-width: 100px;"
                                                 *ngIf="item.payment_type === 'transfer'"> โอนเงิน</td>
+                                            <td style="width: 100px; min-width: 100px;"
+                                                *ngIf="item.payment_type !== 'COD' && item.payment_type !== 'transfer'">
+                                                -</td>
+
                                             <td style="width: 100px; min-width: 100px;">{{ item.total | number : '1.2-2'
                                                 }}</td>
                                             <td style="width: 100px; min-width: 100px;">{{ item.payment_qty | number :
@@ -596,7 +690,7 @@
                                 </table>
                             </div>
                         </mat-tab>
-                        
+
                     </mat-tab-group>
                 </div>
             </div>

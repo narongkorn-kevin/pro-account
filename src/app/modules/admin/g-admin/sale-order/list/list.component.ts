@@ -1,9 +1,31 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    OnDestroy,
+    OnInit,
+    ViewChild,
+    ViewEncapsulation,
+} from '@angular/core';
+import {
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators,
+} from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { debounceTime, map, merge, Observable, Subject, switchMap, takeUntil } from 'rxjs';
+import {
+    debounceTime,
+    map,
+    merge,
+    Observable,
+    Subject,
+    switchMap,
+    takeUntil,
+} from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,7 +33,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { AuthService } from 'app/core/auth/auth.service';
 import { sortBy, startCase } from 'lodash-es';
-import { AssetType, DataSaleOrder, saleOrderPagination } from '../sale-order.types';
+import {
+    AssetType,
+    DataSaleOrder,
+    saleOrderPagination,
+} from '../sale-order.types';
 import { SaleOrderService } from '../sale-order.service';
 import { MatTableDataSource } from '@angular/material/table';
 // import { ImportOSMComponent } from '../card/import-osm/import-osm.component';
@@ -22,21 +48,23 @@ import { MatTableDataSource } from '@angular/material/table';
     styleUrls: ['./list.component.scss'],
     // encapsulation: ViewEncapsulation.None,
     // changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: fuseAnimations
+    animations: fuseAnimations,
 })
-
-
-export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SaleOrderListComponent
+    implements OnInit, AfterViewInit, OnDestroy
+{
     @ViewChild(MatPaginator) private _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
-    displayedColumns: string[] = ['id',
+    displayedColumns: string[] = [
+        'id',
         'first_name',
         'last_name',
         'email',
         'status',
         'create_by',
         'created_at',
-        'actions'];
+        'actions',
+    ];
 
     dataSource: MatTableDataSource<DataSaleOrder>;
     name: string;
@@ -55,14 +83,14 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
     facebook: string;
     sp: string;
     tiktok: string;
-    dataRow_t: any = []
-    dataRow_o: any = []
-    dataRow_p: any = []
-    dataRow_c: any = []
-    dataRow_pc: any = []
-    dataRow_d: any = []
-    dataRow_reject: any = []
-    dataRow_f: any = []
+    dataRow_t: any = [];
+    dataRow_o: any = [];
+    dataRow_p: any = [];
+    dataRow_c: any = [];
+    dataRow_pc: any = [];
+    dataRow_d: any = [];
+    dataRow_reject: any = [];
+    dataRow_f: any = [];
     public dtOptionsTotal: DataTables.Settings = {};
     public dtOptionsOrder: DataTables.Settings = {};
     public dtOptionsPaid: DataTables.Settings = {};
@@ -91,6 +119,12 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
     supplierId: string | null;
     pagination: saleOrderPagination;
 
+    allComplete_all: boolean = false;
+    allComplete_notfinish: boolean = false;
+    allComplete_finish: boolean = false;
+    allComplete_condition: boolean = false;
+    allComplete_submit: boolean = false;
+
     /**
      * Constructor
      */
@@ -102,15 +136,10 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
         private _matDialog: MatDialog,
         private _router: Router,
         private _activatedRoute: ActivatedRoute,
-        private _authService: AuthService,
-    ) {
-
-    }
-
+        private _authService: AuthService
+    ) {}
 
     ngOnInit(): void {
-
-
         this.loadTableTotal();
         this.loadTableOrder();
         this.loadTablePaid();
@@ -120,20 +149,14 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
         this.loadTableDelivery();
         this.loadTableFinish();
         this.loadTableReject();
-        this.line = 'assets/images/line.png'
-        this.tiktok = 'assets/images/tiktok.png'
-        this.facebook = 'assets/images/facebook.png'
-        this.sp = 'assets/images/sp.png'
+        this.line = 'assets/images/line.png';
+        this.tiktok = 'assets/images/tiktok.png';
+        this.facebook = 'assets/images/facebook.png';
+        this.sp = 'assets/images/sp.png';
         // console.log('stest',this.line)
     }
-    
-    pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
 
-
-
-
-
-
+    pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 };
 
     loadTableTotal(): void {
         const that = this;
@@ -144,29 +167,32 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
             processing: true,
             order: [[4, 'desc']],
             language: {
-                "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
+                url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
             },
             ajax: (dataTablesParameters: any, callback) => {
                 // dataTablesParameters.status = 1;
-                that._Service.getsaleorderPage(dataTablesParameters).subscribe((resp) => {
-                    this.dataRow_t = resp.data
-                    this.total_t = resp.total
-                    console.log(this.dataRow_t, 'resp')
-                    this.pages.current_page = resp.current_page;
-                    this.pages.last_page = resp.last_page;
-                    this.pages.per_page = resp.per_page;
-                    if (resp.current_page > 1) {
-                        this.pages.begin = resp.per_page * resp.current_page - 1;
-                    } else {
-                        this.pages.begin = 0;
-                    }
-                    callback({
-                        recordsTotal: resp.total,
-                        recordsFiltered: resp.total,
-                        data: []
+                that._Service
+                    .getsaleorderPage(dataTablesParameters)
+                    .subscribe((resp) => {
+                        this.dataRow_t = resp.data;
+                        this.total_t = resp.total;
+                        console.log(this.dataRow_t, 'resp');
+                        this.pages.current_page = resp.current_page;
+                        this.pages.last_page = resp.last_page;
+                        this.pages.per_page = resp.per_page;
+                        if (resp.current_page > 1) {
+                            this.pages.begin =
+                                resp.per_page * resp.current_page - 1;
+                        } else {
+                            this.pages.begin = 0;
+                        }
+                        callback({
+                            recordsTotal: resp.total,
+                            recordsFiltered: resp.total,
+                            data: [],
+                        });
+                        this._changeDetectorRef.markForCheck();
                     });
-                    this._changeDetectorRef.markForCheck();
-                })
             },
             columns: [
                 { data: 'actice', orderable: false },
@@ -178,12 +204,11 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
                 { data: 'status' },
                 // { data: 'delivery_by_id' },
                 { data: 'payment_type' },
-               
-                { data: 'payment_qty' },
-                { data: 'payment_qty' },
-            ]
-        };
 
+                { data: 'payment_qty' },
+                { data: 'payment_qty' },
+            ],
+        };
     }
 
     loadTableOrder(): void {
@@ -194,30 +219,33 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
             serverSide: true,
             processing: true,
             language: {
-                "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
+                url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
             },
             ajax: (dataTablesParameters: any, callback) => {
                 dataTablesParameters.status = 'order';
-                that._Service.getsaleorderPage(dataTablesParameters).subscribe((resp) => {
-                    this.dataRow_o = resp.data
-                    this.total_o = resp.total
-                    console.log(this.dataRow_o, 'resp')
-                    console.log(resp.total, 'resp.total')
-                    this.pages.current_page = resp.current_page;
-                    this.pages.last_page = resp.last_page;
-                    this.pages.per_page = resp.per_page;
-                    if (resp.current_page > 1) {
-                        this.pages.begin = resp.per_page * resp.current_page - 1;
-                    } else {
-                        this.pages.begin = 0;
-                    }
-                    callback({
-                        recordsTotal: resp.total,
-                        recordsFiltered: resp.total,
-                        data: []
+                that._Service
+                    .getsaleorderPage(dataTablesParameters)
+                    .subscribe((resp) => {
+                        this.dataRow_o = resp.data;
+                        this.total_o = resp.total;
+                        console.log(this.dataRow_o, 'resp');
+                        console.log(resp.total, 'resp.total');
+                        this.pages.current_page = resp.current_page;
+                        this.pages.last_page = resp.last_page;
+                        this.pages.per_page = resp.per_page;
+                        if (resp.current_page > 1) {
+                            this.pages.begin =
+                                resp.per_page * resp.current_page - 1;
+                        } else {
+                            this.pages.begin = 0;
+                        }
+                        callback({
+                            recordsTotal: resp.total,
+                            recordsFiltered: resp.total,
+                            data: [],
+                        });
+                        this._changeDetectorRef.markForCheck();
                     });
-                    this._changeDetectorRef.markForCheck();
-                })
             },
             columns: [
                 { data: 'actice', orderable: false },
@@ -230,13 +258,11 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
                 // { data: 'delivery_by_id' },
                 { data: 'payment_type' },
                 { data: 'total' },
-            
-            ]
+            ],
         };
-
     }
     // pagespaid = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
-    
+
     loadTablePaid(): void {
         const that = this;
         this.dtOptionsPaid = {
@@ -245,29 +271,32 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
             serverSide: true,
             processing: true,
             language: {
-                "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
+                url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
             },
             ajax: (dataTablesParameters: any, callback) => {
                 dataTablesParameters.status = 'paid';
-                that._Service.getsaleorderPage(dataTablesParameters).subscribe((resp) => {
-                    this.dataRow_p = resp.data
-                    this.total_p = resp.total
-                    // console.log(resp.total, 'resp_paid')
-                    this.pages.current_page = resp.current_page;
-                    this.pages.last_page = resp.last_page;
-                    this.pages.per_page = resp.per_page;
-                    if (resp.current_page > 1) {
-                        this.pages.begin = resp.per_page * resp.current_page - 1;
-                    } else {
-                        this.pages.begin = 0;
-                    }
-                    callback({
-                        recordsTotal: resp.total,
-                        recordsFiltered: resp.total,
-                        data: []
+                that._Service
+                    .getsaleorderPage(dataTablesParameters)
+                    .subscribe((resp) => {
+                        this.dataRow_p = resp.data;
+                        this.total_p = resp.total;
+                        // console.log(resp.total, 'resp_paid')
+                        this.pages.current_page = resp.current_page;
+                        this.pages.last_page = resp.last_page;
+                        this.pages.per_page = resp.per_page;
+                        if (resp.current_page > 1) {
+                            this.pages.begin =
+                                resp.per_page * resp.current_page - 1;
+                        } else {
+                            this.pages.begin = 0;
+                        }
+                        callback({
+                            recordsTotal: resp.total,
+                            recordsFiltered: resp.total,
+                            data: [],
+                        });
+                        this._changeDetectorRef.markForCheck();
                     });
-                    this._changeDetectorRef.markForCheck();
-                })
             },
             columns: [
                 { data: 'actice', orderable: false },
@@ -281,9 +310,8 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
                 { data: 'payment_type' },
                 { data: 'total' },
                 { data: 'payment_qty' },
-            ]
+            ],
         };
-
     }
     // pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
 
@@ -295,29 +323,32 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
             serverSide: true,
             processing: true,
             language: {
-                "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
+                url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
             },
             ajax: (dataTablesParameters: any, callback) => {
                 dataTablesParameters.status = 'paid';
-                that._Service.getsaleorderPage(dataTablesParameters).subscribe((resp) => {
-                    this.dataRow_p = resp.data
-                    this.total_p = resp.total
-                    // console.log(resp.total, 'resp_paid')
-                    this.pages.current_page = resp.current_page;
-                    this.pages.last_page = resp.last_page;
-                    this.pages.per_page = resp.per_page;
-                    if (resp.current_page > 1) {
-                        this.pages.begin = resp.per_page * resp.current_page - 1;
-                    } else {
-                        this.pages.begin = 0;
-                    }
-                    callback({
-                        recordsTotal: resp.total,
-                        recordsFiltered: resp.total,
-                        data: []
+                that._Service
+                    .getsaleorderPage(dataTablesParameters)
+                    .subscribe((resp) => {
+                        this.dataRow_p = resp.data;
+                        this.total_p = resp.total;
+                        // console.log(resp.total, 'resp_paid')
+                        this.pages.current_page = resp.current_page;
+                        this.pages.last_page = resp.last_page;
+                        this.pages.per_page = resp.per_page;
+                        if (resp.current_page > 1) {
+                            this.pages.begin =
+                                resp.per_page * resp.current_page - 1;
+                        } else {
+                            this.pages.begin = 0;
+                        }
+                        callback({
+                            recordsTotal: resp.total,
+                            recordsFiltered: resp.total,
+                            data: [],
+                        });
+                        this._changeDetectorRef.markForCheck();
                     });
-                    this._changeDetectorRef.markForCheck();
-                })
             },
             columns: [
                 { data: 'actice', orderable: false },
@@ -331,9 +362,8 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
                 { data: 'payment_type' },
                 { data: 'total' },
                 { data: 'payment_qty' },
-            ]
+            ],
         };
-
     }
 
     loadTableConfirm(): void {
@@ -344,29 +374,32 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
             serverSide: true,
             processing: true,
             language: {
-                "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
+                url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
             },
             ajax: (dataTablesParameters: any, callback) => {
                 dataTablesParameters.status = 'confirm';
-                that._Service.getsaleorderPage(dataTablesParameters).subscribe((resp) => {
-                    this.dataRow_c = resp.data
-                    this.total_c = resp.total
-                    // console.log(resp.total, 'resp')
-                    this.pages.current_page = resp.current_page;
-                    this.pages.last_page = resp.last_page;
-                    this.pages.per_page = resp.per_page;
-                    if (resp.current_page > 1) {
-                        this.pages.begin = resp.per_page * resp.current_page - 1;
-                    } else {
-                        this.pages.begin = 0;
-                    }
-                    callback({
-                        recordsTotal: resp.total,
-                        recordsFiltered: resp.total,
-                        data: []
+                that._Service
+                    .getsaleorderPage(dataTablesParameters)
+                    .subscribe((resp) => {
+                        this.dataRow_c = resp.data;
+                        this.total_c = resp.total;
+                        // console.log(resp.total, 'resp')
+                        this.pages.current_page = resp.current_page;
+                        this.pages.last_page = resp.last_page;
+                        this.pages.per_page = resp.per_page;
+                        if (resp.current_page > 1) {
+                            this.pages.begin =
+                                resp.per_page * resp.current_page - 1;
+                        } else {
+                            this.pages.begin = 0;
+                        }
+                        callback({
+                            recordsTotal: resp.total,
+                            recordsFiltered: resp.total,
+                            data: [],
+                        });
+                        this._changeDetectorRef.markForCheck();
                     });
-                    this._changeDetectorRef.markForCheck();
-                })
             },
             columns: [
                 { data: 'actice', orderable: false },
@@ -380,9 +413,8 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
                 { data: 'payment_type' },
                 { data: 'total' },
                 { data: 'payment_qty' },
-            ]
+            ],
         };
-
     }
     // pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
     loadTableDelivery(): void {
@@ -393,29 +425,32 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
             serverSide: true,
             processing: true,
             language: {
-                "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
+                url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
             },
             ajax: (dataTablesParameters: any, callback) => {
                 dataTablesParameters.status = 'delivery';
-                that._Service.getsaleorderPage(dataTablesParameters).subscribe((resp) => {
-                    this.dataRow_d = resp.data
-                    this.total_d = resp.total
-                    // console.log(resp.total, 'resp')
-                    this.pages.current_page = resp.current_page;
-                    this.pages.last_page = resp.last_page;
-                    this.pages.per_page = resp.per_page;
-                    if (resp.current_page > 1) {
-                        this.pages.begin = resp.per_page * resp.current_page - 1;
-                    } else {
-                        this.pages.begin = 0;
-                    }
-                    callback({
-                        recordsTotal: resp.total,
-                        recordsFiltered: resp.total,
-                        data: []
+                that._Service
+                    .getsaleorderPage(dataTablesParameters)
+                    .subscribe((resp) => {
+                        this.dataRow_d = resp.data;
+                        this.total_d = resp.total;
+                        // console.log(resp.total, 'resp')
+                        this.pages.current_page = resp.current_page;
+                        this.pages.last_page = resp.last_page;
+                        this.pages.per_page = resp.per_page;
+                        if (resp.current_page > 1) {
+                            this.pages.begin =
+                                resp.per_page * resp.current_page - 1;
+                        } else {
+                            this.pages.begin = 0;
+                        }
+                        callback({
+                            recordsTotal: resp.total,
+                            recordsFiltered: resp.total,
+                            data: [],
+                        });
+                        this._changeDetectorRef.markForCheck();
                     });
-                    this._changeDetectorRef.markForCheck();
-                })
             },
             columns: [
                 { data: 'actice', orderable: false },
@@ -429,9 +464,8 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
                 { data: 'payment_type' },
                 { data: 'total' },
                 { data: 'payment_qty' },
-            ]
+            ],
         };
-
     }
     // pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
     loadTablePacking(): void {
@@ -442,29 +476,32 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
             serverSide: true,
             processing: true,
             language: {
-                "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
+                url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
             },
             ajax: (dataTablesParameters: any, callback) => {
                 dataTablesParameters.status = 'packing';
-                that._Service.getsaleorderPage(dataTablesParameters).subscribe((resp) => {
-                    this.dataRow_pc = resp.data
-                    this.total_pc = resp.total
-                    // console.log(resp.total, 'resp')
-                    this.pages.current_page = resp.current_page;
-                    this.pages.last_page = resp.last_page;
-                    this.pages.per_page = resp.per_page;
-                    if (resp.current_page > 1) {
-                        this.pages.begin = resp.per_page * resp.current_page - 1;
-                    } else {
-                        this.pages.begin = 0;
-                    }
-                    callback({
-                        recordsTotal: resp.total,
-                        recordsFiltered: resp.total,
-                        data: []
+                that._Service
+                    .getsaleorderPage(dataTablesParameters)
+                    .subscribe((resp) => {
+                        this.dataRow_pc = resp.data;
+                        this.total_pc = resp.total;
+                        // console.log(resp.total, 'resp')
+                        this.pages.current_page = resp.current_page;
+                        this.pages.last_page = resp.last_page;
+                        this.pages.per_page = resp.per_page;
+                        if (resp.current_page > 1) {
+                            this.pages.begin =
+                                resp.per_page * resp.current_page - 1;
+                        } else {
+                            this.pages.begin = 0;
+                        }
+                        callback({
+                            recordsTotal: resp.total,
+                            recordsFiltered: resp.total,
+                            data: [],
+                        });
+                        this._changeDetectorRef.markForCheck();
                     });
-                    this._changeDetectorRef.markForCheck();
-                })
             },
             columns: [
                 { data: 'actice', orderable: false },
@@ -478,9 +515,8 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
                 { data: 'payment_type' },
                 { data: 'total' },
                 { data: 'payment_qty' },
-            ]
+            ],
         };
-
     }
     // pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
     loadTableFinish(): void {
@@ -491,29 +527,32 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
             serverSide: true,
             processing: true,
             language: {
-                "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
+                url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
             },
             ajax: (dataTablesParameters: any, callback) => {
                 dataTablesParameters.status = 'finish';
-                that._Service.getsaleorderPage(dataTablesParameters).subscribe((resp) => {
-                    this.dataRow_f = resp.data
-                    this.total_f = resp.total
-                    // console.log(resp.total, 'resp')
-                    this.pages.current_page = resp.current_page;
-                    this.pages.last_page = resp.last_page;
-                    this.pages.per_page = resp.per_page;
-                    if (resp.current_page > 1) {
-                        this.pages.begin = resp.per_page * resp.current_page - 1;
-                    } else {
-                        this.pages.begin = 0;
-                    }
-                    callback({
-                        recordsTotal: resp.total,
-                        recordsFiltered: resp.total,
-                        data: []
+                that._Service
+                    .getsaleorderPage(dataTablesParameters)
+                    .subscribe((resp) => {
+                        this.dataRow_f = resp.data;
+                        this.total_f = resp.total;
+                        // console.log(resp.total, 'resp')
+                        this.pages.current_page = resp.current_page;
+                        this.pages.last_page = resp.last_page;
+                        this.pages.per_page = resp.per_page;
+                        if (resp.current_page > 1) {
+                            this.pages.begin =
+                                resp.per_page * resp.current_page - 1;
+                        } else {
+                            this.pages.begin = 0;
+                        }
+                        callback({
+                            recordsTotal: resp.total,
+                            recordsFiltered: resp.total,
+                            data: [],
+                        });
+                        this._changeDetectorRef.markForCheck();
                     });
-                    this._changeDetectorRef.markForCheck();
-                })
             },
             columns: [
                 { data: 'actice', orderable: false },
@@ -527,9 +566,8 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
                 { data: 'payment_type' },
                 { data: 'total' },
                 { data: 'payment_qty' },
-            ]
+            ],
         };
-
     }
     loadTableReject(): void {
         const that = this;
@@ -539,29 +577,32 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
             serverSide: true,
             processing: true,
             language: {
-                "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
+                url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
             },
             ajax: (dataTablesParameters: any, callback) => {
                 dataTablesParameters.status = 'failed';
-                that._Service.getsaleorderPage(dataTablesParameters).subscribe((resp) => {
-                    this.dataRow_reject = resp.data
-                    this.total_reject = resp.total
-                    // console.log(this.dataRow_reject, 'dataRow_reject')
-                    this.pages.current_page = resp.current_page;
-                    this.pages.last_page = resp.last_page;
-                    this.pages.per_page = resp.per_page;
-                    if (resp.current_page > 1) {
-                        this.pages.begin = resp.per_page * resp.current_page - 1;
-                    } else {
-                        this.pages.begin = 0;
-                    }
-                    callback({
-                        recordsTotal: resp.total,
-                        recordsFiltered: resp.total,
-                        data: []
+                that._Service
+                    .getsaleorderPage(dataTablesParameters)
+                    .subscribe((resp) => {
+                        this.dataRow_reject = resp.data;
+                        this.total_reject = resp.total;
+                        // console.log(this.dataRow_reject, 'dataRow_reject')
+                        this.pages.current_page = resp.current_page;
+                        this.pages.last_page = resp.last_page;
+                        this.pages.per_page = resp.per_page;
+                        if (resp.current_page > 1) {
+                            this.pages.begin =
+                                resp.per_page * resp.current_page - 1;
+                        } else {
+                            this.pages.begin = 0;
+                        }
+                        callback({
+                            recordsTotal: resp.total,
+                            recordsFiltered: resp.total,
+                            data: [],
+                        });
+                        this._changeDetectorRef.markForCheck();
                     });
-                    this._changeDetectorRef.markForCheck();
-                })
             },
             columns: [
                 { data: 'actice', orderable: false },
@@ -575,9 +616,8 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
                 { data: 'payment_type' },
                 { data: 'total' },
                 { data: 'payment_qty' },
-            ]
+            ],
         };
-
     }
     /**
      * After view init
@@ -590,21 +630,17 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
         //         start: 'asc',
         //         disableClear: true
         //     });
-
         //     // Mark for check
         //     this._changeDetectorRef.markForCheck();
-
         //     // If the user changes the sort order...
         //     this._sort.sortChange
         //         .pipe(takeUntil(this._unsubscribeAll))
         //         .subscribe(() => {
         //             // Reset back to the first page
         //             this._paginator.pageIndex = 0;
-
         //             // Close the details
         //             this.closeDetails();
         //         });
-
         //     // Get products if sort or page changes
         //     merge(this._sort.sortChange, this._paginator.page).pipe(
         //         switchMap(() => {
@@ -627,7 +663,6 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
         // }
     }
 
-
     /**
      * On destroy
      */
@@ -641,12 +676,9 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
 
-
-
-
     resetForm(): void {
         this.filterForm.reset();
-        this.filterForm.get('asset_type').setValue("default");
+        this.filterForm.get('asset_type').setValue('default');
         this._changeDetectorRef.markForCheck();
     }
 
@@ -669,7 +701,6 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
 
         // Hide it after 3 seconds
         setTimeout(() => {
-
             this.flashMessage = null;
 
             // Mark for check
@@ -686,28 +717,27 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
         //     return;
         // }
 
-
         this._router.navigate(['marketing/brief-plan/' + productId]);
-
     }
 
     editBrief(productId: string): void {
         this._router.navigate(['marketing/brief-plan/edit/' + productId]);
     }
     edit(saleorderId: string): void {
-        console.log('log', saleorderId)
+        console.log('log', saleorderId);
         this._router.navigate(['sale-order/edit/' + saleorderId]);
     }
 
     view(saleorderId: string): void {
-        console.log('log', saleorderId)
+        console.log('log', saleorderId);
         this._router.navigate(['sale-order/view-sale-order/' + saleorderId]);
     }
     print(saleorderId: string): void {
         // console.log('log', saleorderId)
-        this._router.navigate(['sale-order/sale-order-withdraw/' + saleorderId]);
+        this._router.navigate([
+            'sale-order/sale-order-withdraw/' + saleorderId,
+        ]);
     }
-
 
     openNewBrief(): void {
         this._router.navigateByUrl('marketing/brief-plan/brief/create');
@@ -721,14 +751,31 @@ export class SaleOrderListComponent implements OnInit, AfterViewInit, OnDestroy 
         //     return;
         // }
 
-
-        this._router.navigate(['marketing/data/assets-list/new-order/' + productId]);
+        this._router.navigate([
+            'marketing/data/assets-list/new-order/' + productId,
+        ]);
     }
 
     textStatus(status: string): string {
         return startCase(status);
     }
 
+   
 
+    setAll(completed: boolean) {
+        this.allComplete_all = completed;
+    }
+    setnotfinish(completed: boolean) {
+        this.allComplete_notfinish = completed;
+    }
+    setfinish(completed: boolean) {
+        this.allComplete_finish = completed;
+    }
+    setcondition(completed: boolean) {
+        this.allComplete_condition = completed;
+    }
+    setsubmit(completed: boolean) {
+        this.allComplete_submit = completed;
+    }
 
 }
