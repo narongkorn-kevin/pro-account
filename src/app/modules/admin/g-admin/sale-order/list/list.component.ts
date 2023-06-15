@@ -125,6 +125,14 @@ export class SaleOrderListComponent
     allComplete_condition: boolean = false;
     allComplete_submit: boolean = false;
 
+    ConfirmOrder1: any = [];
+    ConfirmOrder2: any = [];
+    ConfirmOrder3: any = [];
+    DelOrder: any = [];
+
+    delivered_by: any;
+    delivered: any= [];
+
     /**
      * Constructor
      */
@@ -138,6 +146,213 @@ export class SaleOrderListComponent
         private _activatedRoute: ActivatedRoute,
         private _authService: AuthService
     ) {}
+
+    tickConfirmOrder(event: any, id: any, No: any) {
+        switch (No) {
+            case 1:
+                if (event.checked === true) {
+                    this.ConfirmOrder1.push(id);
+                    console.log(event, 'test');
+                    console.log(id, 'test');
+                    console.log(this.ConfirmOrder1, 'test1');
+                } else {
+                    const index = this.ConfirmOrder1.findIndex(
+                        (item) => item === id
+                    );
+                    if (index !== -1) {
+                        this.ConfirmOrder1.splice(index, 1);
+                    }
+                    console.log(this.ConfirmOrder1, 'test....1');
+                }
+
+                break;
+            case 2:
+                if (event.checked === true) {
+                    this.ConfirmOrder2.push(id);
+                    console.log(event, 'test');
+                    console.log(id, 'test');
+                    console.log(this.ConfirmOrder2, 'test2');
+                } else {
+                    const index = this.ConfirmOrder2.findIndex(
+                        (item) => item === id
+                    );
+                    if (index !== -1) {
+                        this.ConfirmOrder2.splice(index, 1);
+                    }
+                    console.log(this.ConfirmOrder2, 'test....2');
+                }
+                break;
+
+            case 3:
+                if (event.checked === true) {
+                    this.ConfirmOrder3.push(id);
+                    console.log(event, 'test');
+                    console.log(id, 'test');
+                    console.log(this.ConfirmOrder3, 'test3');
+                } else {
+                    const index = this.ConfirmOrder3.findIndex(
+                        (item) => item === id
+                    );
+                    if (index !== -1) {
+                        this.ConfirmOrder3.splice(index, 1);
+                    }
+                    console.log(this.ConfirmOrder3, 'test....3');
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+    tickAllConfirmOrder(event: any, item: any, No: any) {
+        switch (No) {
+            case 1:
+                this.allComplete_notfinish = event.checked;
+
+                if (event.checked === true) {
+                    this.ConfirmOrder1 = [];
+                    for (let i = 0; i < item.length; i++) {
+                        const element = item[i];
+
+                        this.ConfirmOrder1.push(element.id);
+                        console.log(event, 'test');
+                        console.log(element, 'test');
+                    }
+                    console.log(this.ConfirmOrder1, 'test1');
+                } else {
+                    this.ConfirmOrder1 = [];
+                    console.log(this.ConfirmOrder1, 'test....1');
+                }
+                break;
+
+            case 2:
+                this.allComplete_finish = event.checked;
+
+                if (event.checked === true) {
+                    this.ConfirmOrder2 = [];
+                    for (let i = 0; i < item.length; i++) {
+                        const element = item[i];
+
+                        this.ConfirmOrder2.push(element.id);
+                        console.log(event, 'test');
+                        console.log(element, 'test');
+                    }
+                    console.log(this.ConfirmOrder2, 'test2');
+                } else {
+                    this.ConfirmOrder2 = [];
+                    console.log(this.ConfirmOrder2, 'test....2');
+                }
+                break;
+
+            case 3:
+                this.allComplete_condition = event.checked;
+
+                if (event.checked === true) {
+                    this.ConfirmOrder3 = [];
+                    for (let i = 0; i < item.length; i++) {
+                        const element = item[i];
+
+                        this.ConfirmOrder3.push(element.id);
+                        console.log(event, 'test');
+                        console.log(element, 'test');
+                    }
+                    console.log(this.ConfirmOrder3, 'test3');
+                } else {
+                    this.ConfirmOrder3 = [];
+                    console.log(this.ConfirmOrder3, 'test....3');
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    tickDelOrder(event: any, id: any) {
+        if (event.checked === true) {
+            this.DelOrder.push(id);
+            console.log(event, 'test');
+            console.log(id, 'test');
+            console.log(this.DelOrder, 'test');
+        } else {
+            const index = this.DelOrder.findIndex((item) => item === id);
+            if (index !== -1) {
+                this.DelOrder.splice(index, 1);
+            }
+            console.log(this.DelOrder, 'test....');
+        }
+    }
+    tickAllDelOrder(event: any, item: any) {
+        this.allComplete_submit = event.checked;
+
+        if (event.checked === true) {
+            this.DelOrder = [];
+            for (let i = 0; i < item.length; i++) {
+                const element = item[i];
+
+                this.DelOrder.push(element.id);
+                console.log(event, 'test');
+                console.log(element, 'test');
+            }
+            console.log(this.DelOrder, 'test');
+        } else {
+            this.DelOrder = [];
+            console.log(this.DelOrder, 'test....');
+        }
+    }
+
+    confirmOrder(No: any) {
+        switch (No) {
+            case 1:
+                if (this.ConfirmOrder1 !== null) {
+                    this._Service
+                        .postConfirmOrder(this.ConfirmOrder1)
+                        .subscribe((res) => {
+                            console.log('1', res);
+                        });
+                    
+                }
+                break;
+
+            case 2:
+                if (this.ConfirmOrder2 !== null) {
+                    this._Service
+                        .postConfirmOrder(this.ConfirmOrder2)
+                        .subscribe((res) => {
+                            console.log('2', res);
+                        });
+                
+                }
+                break;
+
+            case 3:
+                if (this.ConfirmOrder3 !== null) {
+                    this._Service
+                        .postConfirmOrder(this.ConfirmOrder3)
+                        .subscribe((res) => {
+                            console.log('3', res);
+                        });
+                
+                }
+                break;
+
+            default:
+                break;
+        }
+        this._changeDetectorRef.markForCheck();
+
+    }
+
+    DelMulOrder() {
+        if (this.DelOrder !== null) {
+            this._Service.postDelMulOrder(this.DelOrder,this.delivered_by).subscribe((res) => {
+                // console.log('pack', res);
+            });
+                
+        }
+        this._changeDetectorRef.markForCheck();
+
+    }
 
     ngOnInit(): void {
         this.loadTableTotal();
@@ -154,6 +369,18 @@ export class SaleOrderListComponent
         this.facebook = 'assets/images/facebook.png';
         this.sp = 'assets/images/sp.png';
         // console.log('stest',this.line)
+
+        this.ConfirmOrder1 = [];
+        this.ConfirmOrder2 = [];
+        this.ConfirmOrder3 = [];
+        this.DelOrder = [];
+
+        this._Service.get_delivered_by().subscribe(res=>{
+            console.log("del data", res)
+            this.delivered = res
+            console.log("delivered data", this.delivered)
+
+        })
     }
 
     pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 };
@@ -760,8 +987,6 @@ export class SaleOrderListComponent
         return startCase(status);
     }
 
-   
-
     setAll(completed: boolean) {
         this.allComplete_all = completed;
     }
@@ -777,5 +1002,4 @@ export class SaleOrderListComponent
     setsubmit(completed: boolean) {
         this.allComplete_submit = completed;
     }
-
 }

@@ -106,6 +106,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
         },
     ]
 
+    // DelOrder:any = [];
+
 
     /**
      * Constructor
@@ -122,6 +124,44 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     ) {
 
     }
+
+    // tickDelOrder(event:any) {
+    //     console.log(event, "test");
+    // }
+
+    // tickDelOrder(event: any, id: any) {
+    //     if (event.checked === true) {
+    //         this.DelOrder.push(id);
+    //         console.log(event, 'test');
+    //         console.log(id, 'test');
+    //         console.log(this.DelOrder, 'test');
+    //     } else {
+    //         const index = this.DelOrder.findIndex((item) => item === id);
+    //         if (index !== -1) {
+    //             this.DelOrder.splice(index, 1);
+    //         }
+    //         console.log(this.DelOrder, 'test....');
+    //     }
+    // }
+    // tickAllDelOrder(event: any, item: any) {
+    //     this.allComplete_pack = event.checked;
+
+    //     if (event.checked === true) {
+    //         this.DelOrder = [];
+    //         for (let i = 0; i < item.length; i++) {
+    //             const element = item[i];
+                
+    //             this.DelOrder.push(element.id);
+    //             console.log(event, 'test');
+    //             console.log(element, 'test');
+    //         }
+    //         console.log(this.DelOrder, 'test');
+    //     } else {
+    //         this.DelOrder = [];
+    //         console.log(this.DelOrder, 'test....');
+    //     }
+    // }
+
 
 
     ngOnInit(): void {
@@ -141,6 +181,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
         this.facebook = 'assets/images/facebook.png'
         this.sp = 'assets/images/sp.png'
         // console.log('stest',this.line)
+
+        // this.DelOrder = [];
     }
 
     pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
@@ -464,6 +506,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
                 dataTablesParameters.status = 'packing';
                 that._Service.getsaleorderPage(dataTablesParameters).subscribe((resp) => {
                     this.dataRow_pc = resp.data
+                    console.log(this.dataRow_pc);
                     this.total_pc = resp.total
                     // console.log(resp.total, 'resp')
                     this.pages.current_page = resp.current_page;
