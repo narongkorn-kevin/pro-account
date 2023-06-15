@@ -93,27 +93,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit, OnDestroy {
     ) {
 
         this.permission$ = this._Service.getPermission();
-        this.formData = this._formBuilder.group({
-            user_id: ['', Validators.required],
-            first_name: ['', Validators.required],
-            last_name: ['', Validators.required],
-            permission_id: ['2'],
-            department_id: [''],
-            position_id: [''],
-            branch_id: [''],
-            email: ['', Validators.required],
-            password: ['', Validators.required,],
-            salary: [''],
-            image: ['',],
-            type:'',
-            image_signature: [''],
-            user_ref_id: [''],
-            tel2: [''],
-            tel1: [''],
-            shop_name: [''],
-            shop_address: [''],
-            
-        })
+        
     }
 
 
@@ -146,6 +126,27 @@ export class CreateUserComponent implements OnInit, AfterViewInit, OnDestroy {
             this.formData.patchValue({
                 user_id: resp.data.user_last_id,
             })
+        })
+        this.formData = this._formBuilder.group({
+            user_id: ['', Validators.required],
+            first_name: ['', Validators.required],
+            last_name: ['', Validators.required],
+            permission_id: ['2'],
+            department_id: [''],
+            position_id: [''],
+            branch_id: [''],
+            email: ['', Validators.required],
+            password: ['', Validators.required,],
+            salary: [''],
+            image: ['',],
+            type:'',
+            image_signature: [''],
+            user_ref_id: [''],
+            tel2: [''],
+            tel1: [''],
+            shop_name: [''],
+            shop_address: [''],
+            
         })
 
     }

@@ -58,17 +58,17 @@ export class ClassicLayoutComponent implements OnInit, OnDestroy {
                 if (user.permission.name == 'เจ้าของแพลตฟอร์ม') {
                 //   AuthService._Manager = true;
                   AuthService._Broker = true;
-                  AuthService._Profile = true;
+                //   AuthService._Profile = true;
                   AuthService._Shop = true;
                 
                      this.navigation = navigation;
 
                 }
                 else if (user.permission.name == 'ตัวแทน') {
-                //    AuthService._Manager = true;
+                    AuthService._Manager = true;
                 //   //AuthService._Broker = true;
                 //   AuthService._Profile = true;
-                //   AuthService._Shop = true;
+                  AuthService._Shop = true;
                 
                      this.navigation = navigation;
 
@@ -76,7 +76,7 @@ export class ClassicLayoutComponent implements OnInit, OnDestroy {
                 else if (user.permission.name == 'ร้านค้า') {
                    AuthService._Manager = true;
                   AuthService._Broker = true;
-                  AuthService._Profile = true;
+                //   AuthService._Profile = true;
                   //AuthService._Shop = true;
                 
                      this.navigation = navigation;
@@ -85,7 +85,7 @@ export class ClassicLayoutComponent implements OnInit, OnDestroy {
                 else if (user.permission.name == 'ผู้ดูแลร้านค้า') {
                    AuthService._Manager = true;
                   AuthService._Broker = true;
-                  AuthService._Profile = true;
+                //   AuthService._Profile = true;
                   //AuthService._Shop = true;
                 
                      this.navigation = navigation;

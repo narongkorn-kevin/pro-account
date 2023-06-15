@@ -44,6 +44,8 @@ import { EditBankComponent } from './edit-bank/edit-bank.component';
 import { NewBankComponent } from './new-bank/new-bank.component';
 import { BankListComponent } from './bank-list/bank-list.component';
 import { BankNewComponent } from './bank-new/bank-new.component';
+import { BankListShopComponent } from './bank-list-shop/bank-list.component';
+import { BankNewShopComponent } from './bank-new-shop/bank-new.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { BankNewComponent } from './bank-new/bank-new.component';
     NewBankComponent,
     BankListComponent,
     BankNewComponent,
+    BankListShopComponent,
+    BankNewShopComponent
   ],
   imports: [
     RouterModule.forChild(bankRoute),

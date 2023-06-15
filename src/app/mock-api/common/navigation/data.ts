@@ -626,7 +626,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 title: 'ธนาคาร',
                 icon: 'mat_outline:account_balance',
                 type: 'basic',
-                link: '/bank-user/list',
+                link: '/bank-user/bank-list-shop',
             },
             {
                 id: 'wallet-bag-owner',

@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+import { BankListShopComponent } from './bank-list-shop/bank-list.component';
 import { BankListComponent } from './bank-list/bank-list.component';
 import { BankNewComponent } from './bank-new/bank-new.component';
 import { BankComponent } from './bank.component';
@@ -29,6 +30,14 @@ export const bankRoute: Route[] = [
             {
                 path: 'bank-list',
                 component: BankListComponent,
+                // resolve: {
+                //     products: PermissionProductsResolver,
+
+                // }
+            },
+            {
+                path: 'bank-list-shop',
+                component: BankListShopComponent,
                 // resolve: {
                 //     products: PermissionProductsResolver,
 

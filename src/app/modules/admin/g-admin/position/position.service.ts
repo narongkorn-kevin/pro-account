@@ -980,6 +980,13 @@ export class PositionService {
       })
     );
   }
+  getLastUser(): Observable<any[]> {
+    return this._httpClient.get<any[]>(environment.API_URL + 'api/get_last_user_id').pipe(
+        tap((meterial) => {
+            this._materials.next(meterial);
+        })
+    );
+}
 
   // get position //
   getPosition(): Observable<any[]> {

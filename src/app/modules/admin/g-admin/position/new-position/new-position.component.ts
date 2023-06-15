@@ -72,11 +72,17 @@ export class NewPositionComponent implements OnInit, AfterViewInit, OnDestroy {
         //     name: ['', Validators.required]
         // })
 
+        this._Service.getLastUser().subscribe((resp: any) => {
 
+            //  แสดงค่าauto  userid
+            this.formData.patchValue({
+                user_id: resp.data.user_last_id + '2',
+            })
+        })
         this.BrokerId = JSON.parse(localStorage.getItem('user'));
         console.log(this.BrokerId.user_id, 'Broker');
         this.formData = this._formBuilder.group({
-            user_id: this.BrokerId.user_id,
+            user_id: '',
             first_name: ['', Validators.required],
             last_name: ['', Validators.required],
             permission_id: ['3'],
