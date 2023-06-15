@@ -34,6 +34,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
     items: any = []
     itemsPromotion: any = []
+    user: any;
     // flashMessage: 'success' | 'error' | null = null;
     // searchInputControl: FormControl = new FormControl();
     // selectedProduct: any | null = null;
@@ -64,6 +65,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
      */
 
     ngOnInit() {
+        this.user = JSON.parse(localStorage.getItem("user"));
         this.loadTableNormal();
         this.LoadTablePromotion();
 
@@ -84,6 +86,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
             ajax: (dataTablesParameters: any, callback) => {
                 dataTablesParameters.item_type_id = null;
                 dataTablesParameters.set_type = 'normal';
+                dataTablesParameters.user_id = this.user.id;
                 that._Service.getItem(dataTablesParameters).subscribe((resp) => {
                     this.items = resp.data
                     console.log('1', this.items)
@@ -133,6 +136,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
             ajax: (dataTablesParameters: any, callback) => {
                 dataTablesParameters.item_type_id = null;
                 dataTablesParameters.set_type = 'set_products';
+                dataTablesParameters.user_id = this.user.id;
                 that._Service.getItem(dataTablesParameters).subscribe((resp) => {
                     this.itemsPromotion = resp.data
                     console.log(this.itemsPromotion)

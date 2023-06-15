@@ -52,6 +52,7 @@ export class LivemagComponent implements OnInit {
     @Input() messageFromChat: string;
     @Output() messageToChat = new EventEmitter<string>();
 item: any;
+    id: string;
 
     sendMessageToChat(message: string) {
         this.messageToChat.emit(message);
@@ -80,7 +81,7 @@ item: any;
     env_path = environment.API_URL;
 
     loginForm!: FormGroup;
-    socialUser!: SocialUser;
+    socialUser:any;
     isLoggedin?: boolean = undefined;
     userData: any;
     pageData: any;
@@ -143,6 +144,7 @@ item: any;
                 //     '<iframe',
                 //     '<iframe class="w-200"'
                 // );
+                console.log(data,'dataresp');
                 data.embed_html = this.sanitizer.bypassSecurityTrustHtml(data.embed_html);
                 
                 this.liveStream = data;
@@ -150,22 +152,23 @@ item: any;
         });
 
 
-        this.authService.authState.subscribe((user) => {
-            this.socialUser = user;
-            this.isLoggedin = user != null;
+        this.id = this._activatedRoute.snapshot.paramMap.get("id");
+        
+            this.socialUser = localStorage.getItem('authToken');
+            // this.isLoggedin = user != null;
             // console.log(user)
-            this._Service.getTokenUser(this.socialUser.authToken).subscribe((resp: any) => {
-                
-
+            this._Service.getTokenUser(this.socialUser).subscribe((resp: any) => {
+                console.log(resp,'resp Data');
                 this.userData = resp
-                this._Service.getTokenPage(this.socialUser.authToken, this.formData.value.id).subscribe((resp: any) => {
-                    console.log('ข้อมูล', resp);
+                this._Service.getFacebookPage(this.socialUser, this.id).subscribe((resp: any) => {
+                    //console.log('ข้อมูล', resp);
                     this.pageData = resp
 
                     
                 })
             });
-        });
+        
+        
 
 
         // this.fbApi.getLiveStreamingVideos().then(data => {

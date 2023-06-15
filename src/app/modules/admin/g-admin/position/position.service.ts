@@ -1034,4 +1034,11 @@ export class PositionService {
         catchError((err) => this.handlerError(err))
       );
   }
+  getuserpage(dataTablesParameters: any): Observable<DataTablesResponse> {
+    return this._httpClient.post(environment.API_URL + 'api/user_page', dataTablesParameters, this.httpOptionsFormdata).pipe(
+        switchMap((response: any) => {
+            return of(response.data);
+        })
+    );
+}
 }

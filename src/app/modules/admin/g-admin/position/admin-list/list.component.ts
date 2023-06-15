@@ -19,6 +19,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { EditPositionComponent } from '../edit-position/edit-position.component';
 import { NewPositionComponent } from '../new-position/new-position.component';
 import { DataTableDirective } from 'angular-datatables';
+import { NewPositionAdminComponent } from '../new-position-admin/new-position.component';
+
 @Component({
     selector: 'position-list',
     templateUrl: './list.component.html',
@@ -27,7 +29,7 @@ import { DataTableDirective } from 'angular-datatables';
     animations: fuseAnimations
 })
 
-export class PositionListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PositionAdminListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     private destroy$ = new Subject<any>();
     @ViewChild(DataTableDirective)
@@ -85,7 +87,7 @@ export class PositionListComponent implements OnInit, AfterViewInit, OnDestroy {
             },
             ajax: (dataTablesParameters: any, callback) => {
                 // dataTablesParameters.item_type_id = 1;
-                dataTablesParameters.user_ref_id = this.user.user_id;
+                dataTablesParameters.user_ref_id = this.user.id;
                 that._Service.getuserpage(dataTablesParameters).subscribe((resp) => {
                     this.dataRow = resp.data
                     console.log(resp)
@@ -179,7 +181,7 @@ export class PositionListComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     New() {
-        const dialogRef = this._matDialog.open(NewPositionComponent, {
+        const dialogRef = this._matDialog.open(NewPositionAdminComponent, {
             // width: '50%',
             // minHeight: 'calc(100vh - 90px)',
             // height: 'auto'

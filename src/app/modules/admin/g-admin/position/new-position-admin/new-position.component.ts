@@ -22,7 +22,7 @@ import { PositionService } from '../position.service';
     animations: fuseAnimations
 })
 
-export class NewPositionComponent implements OnInit, AfterViewInit, OnDestroy {
+export class NewPositionAdminComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
     formData: FormGroup
@@ -43,7 +43,7 @@ export class NewPositionComponent implements OnInit, AfterViewInit, OnDestroy {
      * Constructor
      */
     constructor(
-        public dialogRef: MatDialogRef<NewPositionComponent>,
+        public dialogRef: MatDialogRef<NewPositionAdminComponent>,
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseConfirmationService: FuseConfirmationService,
         private _formBuilder: FormBuilder,
@@ -85,15 +85,15 @@ export class NewPositionComponent implements OnInit, AfterViewInit, OnDestroy {
             user_id: '',
             first_name: ['', Validators.required],
             last_name: ['', Validators.required],
-            permission_id: ['3'],
+            permission_id: ['4'],
             email: ['', Validators.required],
             password: ['', Validators.required,],
             image: [''],
             user_ref_id: this.BrokerId.id,
             tel2: [''],
             tel1: [''],
-            shop_name: [''],
-            shop_address: [''],
+            shop_name: this.BrokerId.shop_name,
+            shop_address: this.BrokerId.shop_address,
 
         })
 

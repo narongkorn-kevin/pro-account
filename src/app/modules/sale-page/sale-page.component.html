@@ -12,6 +12,7 @@
                       <img class="mx-auto w-1/2 h-48 rounded-xl object-cover" [src]="sale_order_line.item.image">
                       <p class="text-gray-600 mt-6 font-semibold text-lg">ชื่อสินค้า: {{sale_order_line.item.name}}</p>
                       <p class="text-gray-600 font-semibold text-lg pt-4">จำนวนสินค้า: {{sale_order_line.qty}}</p>
+                      <p class="text-gray-600 font-semibold text-lg pt-4">น้ำหนักสินค้า: {{sale_order_line.item.weight}}/ชิ้น</p>
                     </div>
                   </ng-container>
                   <p class="text-red-600 font-bold text-xl mt-2">รวมยอดชำระ: {{order.total | currency:'฿'}} บาท</p>
@@ -31,17 +32,17 @@
               <div class="bg-white rounded-lg p-6 text-lg shadow-lg border border-gray-300">
                 <h1 class="p-4 font-extrabold text-2xl">ที่อยู่ในการจัดส่ง</h1>
                 <mat-form-field class="w-full">
-                  <input matInput placeholder="ชื่อผู้รับสินค้า" [formControlName]="'customerName'" required
+                  <input matInput placeholder="ชื่อผู้รับสินค้า" [formControlName]="'name'" required
                     class="w-full">
-                  <mat-error *ngIf="stepOneForm.controls.customerName.hasError('required')">
+                  <mat-error *ngIf="stepOneForm.controls.name.hasError('required')">
                     กรุณาระบุ
                   </mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="w-full">
-                  <input matInput placeholder="เบอร์โทรศัพท์มือถือ" [formControlName]="'phoneNumber'" required
+                  <input matInput placeholder="เบอร์โทรศัพท์มือถือ" [formControlName]="'telephone'" required
                     class="w-full">
-                  <mat-error *ngIf="stepOneForm.controls.phoneNumber.hasError('required')">
+                  <mat-error *ngIf="stepOneForm.controls.telephone.hasError('required')">
                     กรุณาระบุ
                   </mat-error>
                 </mat-form-field>
@@ -92,11 +93,11 @@
             <div class="bg-white rounded-lg shadow-md p-6">
               <p class="text-gray-600">หมายเลขคำสั่งซื้อ: #{{order.order_id}}</p>
               <h1 class="text-xl font-bold mt-4">ที่อยู่ในการจัดส่งสินค้า</h1>
-              <h2 class="text-lg mt-2">ชื่อ: {{stepOneForm.value.customerName}}</h2>
-              <h2 class="text-lg">เบอร์โทรศัพท์มือถือ: {{stepOneForm.value.phoneNumber}}</h2>
-              <h2 class="text-lg">ที่อยู่</h2>
-              <p class="text-gray-600">{{stepOneForm.value.address}}</p>
-              <button mat-button (click)="closePage()" class="mt-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-xl transition duration-300 ease-in-out transform hover:scale-105">
+              <h2 class="text-lg mt-2">ชื่อ: {{stepOneForm.value.name}}</h2>
+              <h2 class="text-lg">เบอร์โทรศัพท์มือถือ: {{stepOneForm.value.telephone}}</h2>
+              <h2 class="text-lg">ที่อยู่: {{stepOneForm.value.address}}</h2>
+              
+              <button mat-button (click)="update()" class="mt-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-xl transition duration-300 ease-in-out transform hover:scale-105">
                 ยืนยัน
             </button>
             

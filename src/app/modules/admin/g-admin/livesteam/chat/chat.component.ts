@@ -21,6 +21,7 @@ export class ChatComponent implements OnInit {
     @Input() PageId: string;
     @Output() messageToLiveMag = new EventEmitter<string>();
     data: any;
+    user: any;
 
     constructor(
         private _chatService: ChatService,
@@ -34,6 +35,8 @@ export class ChatComponent implements OnInit {
 
         const token = localStorage.getItem('pageToken');
 
+        console.log('PageId',this.PageId);
+        this.user =JSON.parse(localStorage.getItem('user'))
         const video_id = this.StreamId;
         this._chatService.getServerSentEvent(`https://streaming-graph.facebook.com/${video_id}/live_comments?access_token=${token}&comment_rate=one_per_two_seconds&fields=from{name,id},message,id`)
             .subscribe({
@@ -42,6 +45,8 @@ export class ChatComponent implements OnInit {
 
                     this.messages.push(message);
                     const product = {
+                        sale_id: this.user.id,
+                        page_id: this.PageId,
                         channal: 'facebook',
                         name: message?.from?.name ?? 'Test',
                         telephone: '',

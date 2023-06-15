@@ -586,6 +586,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 ],
             },
             {
+                id: 'position',
+                title: 'แม่ค้า',
+                type: 'basic',
+                icon: 'heroicons_outline:user',
+                link: '/position/admin-list',
+            },
+            {
                 id: 'sale-order',
                 title: 'คำสั่งซื้อรอดำเนินการ',
                 type: 'basic',

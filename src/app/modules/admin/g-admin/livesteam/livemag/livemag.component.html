@@ -69,7 +69,7 @@
     </div>
     <div class="flex flex-col mt-10 h-full ">
         <div class="flex flex-auto flex-wrap w-full ">
-            <div class="flex flex-col w-full bg-card rounded-2xl lg:w-2/6 p-10 h-100 ">
+            <div class="flex flex-col w-full bg-card rounded-2xl lg:w-2/6 p-10 h-60 ">
 
                 <div class="flex flex-col  justify-center items-center">
 
@@ -81,12 +81,22 @@
                                 <th class="flex text-xl">สถานะ</th>
                             </tr>
                         </thead>
-                        <tbody class="flex w-full items-center px-10 mt-2 border-b-2 pb-2">
-                            <tr class="flex w-full justify-between">
-                                <td>
+                        <tbody   class="flex w-full items-center px-5 mt-2 border-b-2 pb-2">
+                            <tr  class="flex  w-full justify-between">
+                                <td class="flex flex-row">
                                     <div class="flex justify-center bottom-26">
-                                        <img [src]="item?.picture?.data?.url" class="h-20 w-20" />
+                                        <img [src]="this.pageData?.picture?.data?.url" class="h-20 w-20" />
                                     </div>
+                                    <div class="flex flex-col w-full">
+                                    <div class="flex  mt-4   px-10  w-full">
+                                        <div class="flex w-2/5 items-center justify-center text-lg font-semibold mb-1 rounded-2xl border-2 bg-green-300">รหัสเพจ:</div>
+                                        <div class="text-gray-700 dark:text-gray-300">{{ this.pageData?.id }}</div>
+                                    </div>
+                                    <div class="flex mt-4 px-10 w-full">
+                                        <div class="flex w-2/5 items-center justify-center text-lg font-semibold mb-1 rounded-2xl border-2 bg-green-300">ชื่อเพจ:</div>
+                                        <div class="text-gray-700 dark:text-gray-300">{{ this.pageData?.name }}</div>
+                                    </div>
+                                </div>
                                 </td>
 
                                 <td>
@@ -98,35 +108,35 @@
                                         <!-- Live status button -->
                                         <button
                                             class="px-6 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded"
-                                            (click)="goToLiveStream()">
+                                            >
                                             ไลฟ์
                                         </button>
                                     </ng-container>
                                     <ng-container *ngIf="!liveStream">
                                         <!-- No live message -->
-                                        <p
-                                            class="flex flex-auto text-red-500 bg-red-100 font-semibold justify-center rounded">
+                                        
+                                        <button
+                                            class="px-6 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded"
+                                            >
                                             ไม่มีไลฟ์
-                                        </p>
+                                        </button>
                                     </ng-container>
                                 </td>
+                                
                             </tr>
                         </tbody>
+                        
                     </table>
+                    
+                    
                 </div>
+                
 
-                <div class="mt-4  bottom-36 px-10 pb-2">
-                    <div class="flex w-1/5 items-center justify-center text-lg font-semibold mb-1 rounded-2xl border-2 bg-green-300">รหัสเพจ:</div>
-                    <div class="text-gray-700 dark:text-gray-300">{{ item?.id }}</div>
-                </div>
-                <div class="mt-2 px-10">
-                    <div class="flex w-1/5 items-center justify-center text-lg font-semibold mb-1 rounded-2xl border-2 bg-green-300">ชื่อเพจ:</div>
-                    <div class="text-gray-700 dark:text-gray-300">{{ item?.name }}</div>
-                </div>
+                
 
 
             </div>
-            <div class="flex flex-col w-full lg:w-2/6  rounded-2xl justify-start items-center">
+            <div class="flex flex-col  lg:w-2/6  rounded-2xl justify-start items-center">
                 <app-chat *ngIf="liveStream !== undefined" [StreamId]="liveStream.id" [PageId]="pageId"></app-chat>
             </div>
             <div class="flex flex-col w-full lg:w-2/6 px-10 bg-card h-full rounded-2xl ">
