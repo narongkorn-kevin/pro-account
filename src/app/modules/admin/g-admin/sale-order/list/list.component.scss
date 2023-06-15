@@ -7,3 +7,8 @@
     gap: 15px;
 }
 
+
+
+::ng-deep .mat-form-field.mat-form-field-appearance-fill .mat-form-field-wrapper {
+    margin-bottom: 0px !important;
+}

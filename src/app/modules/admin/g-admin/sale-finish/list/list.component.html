@@ -69,7 +69,7 @@
                                         <tr *ngFor="let item of dataRow_t; let i = index" style="cursor: pointer;">
 
                                             <td style="min-width: 50px;">
-                                                <mat-checkbox [checked]="allComplete_all">
+                                                <mat-checkbox [checked]="allComplete_all" (change)="tick(item.id)">
 
 
                                                 </mat-checkbox>
@@ -186,7 +186,7 @@
                                         <tr>
                                             <th>
                                                 <mat-checkbox class="example-margin" [checked]="allComplete_pack"
-                                                    (change)="setpack($event.checked)">
+                                                    (change)="setAll($event.checked)">
 
 
                                                 </mat-checkbox>
@@ -196,6 +196,7 @@
                                             <th>ลำดับ</th>
                                             <th>ช่องทาง</th>
                                             <th>วันที่สั่งซื้อ</th>
+                                            <th>หมายเลขแท็ก</th>
                                             <th>หมายเลขคำสั่งซื้อ</th>
                                             <th>ลูกค้า</th>
                                             <th>สถานะ</th>
@@ -208,7 +209,7 @@
                                     <tbody *ngIf="dataRow_pc?.length != 0">
                                         <tr *ngFor="let item of dataRow_pc; let i = index" style="cursor: pointer;">
                                             <td style="min-width: 50px;">
-                                                <mat-checkbox [checked]="allComplete_pack">
+                                                <mat-checkbox [checked]="allComplete_pack" (change)="tickDelOrder($event, item.id)">
 
 
                                                 </mat-checkbox>
@@ -238,6 +239,7 @@
 
                                             <!-- <td>{{ item.channal }}</td> -->
                                             <td style="width: 100px; min-width: 100px;">{{ item.date_time }}</td>
+                                            <td style="width: 100px; min-width: 100px;">{{ item.track_no }}</td>
                                             <td style="width: 80px; min-width: 80px;" *ngIf="item.channal === 'other'">
                                                 {{item.channal}}</td>
                                             <td style="width: 150px; min-width: 150px;">{{ item.order_id }}</td>
@@ -335,7 +337,7 @@
                                     <tbody *ngIf="dataRow_d?.length != 0">
                                         <tr *ngFor="let item of dataRow_d; let i = index" style="cursor: pointer;">
                                             <td style="min-width: 50px;">
-                                                <mat-checkbox [checked]="allComplete_send">
+                                                <mat-checkbox [checked]="allComplete_send" (change)="tick(item.id)">
 
 
                                                 </mat-checkbox>
@@ -462,7 +464,7 @@
                                     <tbody *ngIf="dataRow_f?.length != 0">
                                         <tr *ngFor="let item of dataRow_f; let i = index" style="cursor: pointer;">
                                             <td style="min-width: 50px;">
-                                                <mat-checkbox [checked]="allComplete_success">
+                                                <mat-checkbox [checked]="allComplete_success" (change)="tick(item.id)">
 
 
                                                 </mat-checkbox>
@@ -589,7 +591,7 @@
                                     <tbody *ngIf="dataRow_reject?.length != 0">
                                         <tr *ngFor="let item of dataRow_reject; let i = index" style="cursor: pointer;">
                                             <td style="min-width: 50px;">
-                                                <mat-checkbox [checked]="allComplete_notsuccess">
+                                                <mat-checkbox [checked]="allComplete_notsuccess" (change)="tick(item.id)">
 
 
                                                 </mat-checkbox>
@@ -678,6 +680,7 @@
                                     </tbody>
                                 </table>
                             </div>
+
                         </mat-tab>
                     </mat-tab-group>
                 </div>

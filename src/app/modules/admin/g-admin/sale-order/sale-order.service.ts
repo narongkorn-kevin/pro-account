@@ -1127,6 +1127,44 @@ export class SaleOrderService {
         );
     }
 
+    postConfirmOrder(data: any): Observable<DataTablesResponse> {
+        const formdata =
+            {
+                sale_order_id : data,
+                status : "confirm"
+            }
+        
+        return this._httpClient.post(environment.API_URL + 'api/confirm_multi_order', formdata, this.httpOptionsFormdata).pipe(
+            switchMap((response: any) => {
+                return of(response.data);
+            })
+        );
+    }
+
+    postDelMulOrder(data: any, DelId:any): Observable<DataTablesResponse> {
+        const formdata =
+            {
+                sale_order_id : data,
+                delivered_by_id : DelId,
+                payment_qty: 0.00
+            }
+            console.log(formdata)
+        
+        return this._httpClient.post(environment.API_URL + 'api/select_del_multi_order', formdata, this.httpOptionsFormdata).pipe(
+            switchMap((response: any) => {
+                return of(response.data);
+            })
+        );
+    }
+    get_delivered_by(): Observable<DataTablesResponse> {
+               
+        return this._httpClient.get(environment.API_URL + 'api/get_delivered_by', this.httpOptionsFormdata).pipe(
+            switchMap((response: any) => {
+                return of(response.data);
+            })
+        );
+    }
+
 
     uploadImg(img: FormData): Observable<any> {
         return this._httpClient.post(environment.API_URL + 'api/upload_images', img, this.httpOptionsFormdata).pipe(
