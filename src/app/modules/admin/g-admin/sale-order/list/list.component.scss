@@ -1,11 +1,9 @@
-::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
-    background-color: #bbffdd;
+
+
+::ng-deep .mat-tab-labels {
+    justify-content: center !important;
+    background-color: #f1f5f9;
+    border-radius: 25px;
+    gap: 15px;
 }
 
-::ng-deep .mat-tab-list .mat-tab-label {
-    color: blue;
-    border-color: black;
-    border-width: 2px;
-    background-color: #bbffdd;
-    
-}
