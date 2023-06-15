@@ -1,0 +1,97 @@
+
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+    <!-- Header -->
+    <div class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        <!-- Loader -->
+        <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+            <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+        </div>
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">รายการสมาชิก</div>
+        <!-- Actions -->
+
+
+
+        <a (click)="New()" class="ml-4" mat-flat-button [color]="'primary'">
+            <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+            <span class="ml-2 mr-1">เพิ่มช่องทางการจ่ายเงินใหม่</span>
+        </a>
+        
+
+
+    </div>
+
+
+    <!-- Main -->
+    <div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
+
+        <div class="flex flex-col p-3 sm:p-10">
+            <div class="overflow-auto  bg-white shadow sm:rounded-lg">
+                <!-- Products list -->
+
+                <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll">
+                    <table datatable [dtOptions]="dtOptions" class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400" style="width: 100%">
+                        <thead>
+                            <tr>
+                                
+                                <th>ลำดับ</th>
+                                                             
+                                <th>ชื่อ</th>
+                                <th>ธนาคาร</th>
+                                <th>เลขบัญชี</th>
+                                <th>สถานะ</th>
+                                <th>จัดการ</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="dataRow?.length != 0">
+                            <tr *ngFor="let item of dataRow; let i = index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md">
+                                <!-- <td style="width: 80px; min-width: 80px;">
+                                    <button mat-icon-button (click)="edit(item.id)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td> -->
+                                <td>{{ pages.begin + (i + 1) }}</td>
+                                <td>{{ item?.bank?.name??"-" }}</td>
+                                <td style="min-width: 80px;" *ngIf="item.image !== null || ''"><img src="{{item.bank.image}}"
+                                    class="h-10 w-10"> </td>
+                                <td>{{ item?.account_number??"-" }}</td>
+                                <td>
+                                    <div *ngIf="item.bank.status == 1 ">
+                                        <span class="inline-flex items-center font-bold text-xs px-2.5 py-0.5 rounded-full tracking-wide uppercase bg-green-200 text-green-800 dark:bg-green-600 dark:text-green-50">
+                                        <span class="leading-relaxed whitespace-nowrap">
+                                            เปิดการใช้งาน
+                                        </span>
+                                        </span>
+                                    </div>
+                                    <div *ngIf="item.bank.status != 1">
+                                        <span class="inline-flex items-center font-bold text-xs px-2.5 py-0.5 rounded-full tracking-wide uppercase bg-red-200 text-red-800 dark:bg-red-600 dark:text-red-50">
+                                            <span class="leading-relaxed whitespace-nowrap">
+                                                ปิดการใช้งาน
+                                            </span>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td style="width: 80px; min-width: 80px;">
+                                    <button mat-icon-button (click)="delete(item.id)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </td>
+                                
+                                
+                            </tr>
+                        </tbody>
+
+                        
+                        <tbody *ngIf="dataRow?.length == 0">
+                            <tr>
+                                <td colspan="6" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

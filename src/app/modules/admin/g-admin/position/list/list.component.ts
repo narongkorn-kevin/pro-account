@@ -65,55 +65,58 @@ export class PositionListComponent implements OnInit, AfterViewInit, OnDestroy {
     /**
      * On init
      */
+     user: any;
     ngOnInit(): void {
-        // this.loadTable();
+        this.user = JSON.parse(localStorage.getItem("user"));
+        this.loadTable();
 
     }
 
     pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
-    // loadTable(): void {
-    //     const that = this;
-    //     this.dtOptions = {
-    //         pagingType: 'full_numbers',
-    //         pageLength: 10,
-    //         serverSide: true,
-    //         processing: true,
-    //         language: {
-    //             "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
-    //         },
-    //         ajax: (dataTablesParameters: any, callback) => {
-    //             dataTablesParameters.item_type_id = 1;
-    //             that._Service.getPositionPage(dataTablesParameters).subscribe((resp) => {
-    //                 this.dataRow = resp.data
-    //                 console.log(resp)
-    //                 this.pages.current_page = resp.current_page;
-    //                 this.pages.last_page = resp.last_page;
-    //                 this.pages.per_page = resp.per_page;
-    //                 if (resp.current_page > 1) {
-    //                     this.pages.begin = resp.per_page * resp.current_page - 1;
-    //                 } else {
-    //                     this.pages.begin = 0;
-    //                 }
-    //                 callback({
-    //                     recordsTotal: resp.total,
-    //                     recordsFiltered: resp.total,
-    //                     data: []
-    //                 });
-    //                 this._changeDetectorRef.markForCheck();
-    //             })
-    //         },
-    //         columns: [
-    //             { data: 'actice', orderable: false },
-    //             { data: 'id' },
-    //             { data: 'name' },
-    //             { data: 'status' },
-    //             { data: 'create_by' },
-    //             { data: 'created_at' },
+    loadTable(): void {
+        const that = this;
+        this.dtOptions = {
+            pagingType: 'full_numbers',
+            pageLength: 10,
+            serverSide: true,
+            processing: true,
+            language: {
+                "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
+            },
+            ajax: (dataTablesParameters: any, callback) => {
+                // dataTablesParameters.item_type_id = 1;
+                dataTablesParameters.user_ref_id = this.user.user_id;
+                that._Service.getuserpage(dataTablesParameters).subscribe((resp) => {
+                    this.dataRow = resp.data
+                    console.log(resp)
+                    this.pages.current_page = resp.current_page;
+                    this.pages.last_page = resp.last_page;
+                    this.pages.per_page = resp.per_page;
+                    if (resp.current_page > 1) {
+                        this.pages.begin = resp.per_page * resp.current_page - 1;
+                    } else {
+                        this.pages.begin = 0;
+                    }
+                    callback({
+                        recordsTotal: resp.total,
+                        recordsFiltered: resp.total,
+                        data: []
+                    });
+                    this._changeDetectorRef.markForCheck();
+                })
+            },
+            columns: [
+                { data: 'actice', orderable: false },
+                { data: 'id' },
+                { data: 'name' },
+                { data: 'status' },
+                { data: 'create_by' },
+                { data: 'created_at' },
             
-    //         ]
-    //     };
+            ]
+        };
 
-    // }
+    }
 
 
     /**
@@ -180,8 +183,8 @@ export class PositionListComponent implements OnInit, AfterViewInit, OnDestroy {
             // width: '50%',
             // minHeight: 'calc(100vh - 90px)',
             // height: 'auto'
-            width: '700px',
-            height: '400px'
+            width: "100%",
+            height: "100%",
         });
 
         dialogRef.afterClosed().subscribe(item => {

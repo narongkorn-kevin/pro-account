@@ -20,6 +20,7 @@ export class ItemService {
 
     getItemPage() {
         return this.http.post(environment.API_URL + "api/item_page", {
+            "user_id": null,
             "item_type_id": null,
             "set_type": "normal",
             "draw": 1,

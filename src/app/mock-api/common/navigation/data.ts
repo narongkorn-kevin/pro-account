@@ -347,7 +347,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 title: 'ธนาคาร',
                 icon: 'mat_outline:comment_bank',
                 type: 'basic',
-                link: '/bank-user/list',
+                link: '/bank-user/bank-list',
             },
             //  {
             //      id: 'wallet-bag-owner',
@@ -586,6 +586,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 ],
             },
             {
+                id: 'position',
+                title: 'แม่ค้า',
+                type: 'basic',
+                icon: 'heroicons_outline:user',
+                link: '/position/admin-list',
+            },
+            {
                 id: 'sale-order',
                 title: 'คำสั่งซื้อรอดำเนินการ',
                 type: 'basic',
@@ -626,7 +633,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 title: 'ธนาคาร',
                 icon: 'mat_outline:account_balance',
                 type: 'basic',
-                link: '/bank-user/list',
+                link: '/bank-user/bank-list-shop',
             },
             {
                 id: 'wallet-bag-owner',
@@ -765,6 +772,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 icon: 'feather:log-out',
                 link: '/sign-out',
             },
+            
         ],
     },
 ];

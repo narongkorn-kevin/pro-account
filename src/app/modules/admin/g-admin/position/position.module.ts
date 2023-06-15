@@ -40,13 +40,18 @@ import { PositionListComponent } from './list/list.component';
 import { NewPositionComponent } from './new-position/new-position.component';
 import { EditPositionComponent } from './edit-position/edit-position.component';
 import { DataTablesModule } from 'angular-datatables';
+import { PositionAdminListComponent } from './admin-list/list.component';
+import { NewPositionAdminComponent } from './new-position-admin/new-position.component';
+
 
 @NgModule({
   declarations: [
     PositionComponent,
     PositionListComponent,
     NewPositionComponent,
-    EditPositionComponent
+    EditPositionComponent,
+    PositionAdminListComponent,
+    NewPositionAdminComponent
   ],
   imports: [
     RouterModule.forChild(positionRoute),

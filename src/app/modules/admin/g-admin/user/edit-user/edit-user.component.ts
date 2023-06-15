@@ -30,6 +30,7 @@ export class EditUserComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(MatPaginator) private _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
 
+    id: string;
     formData: FormGroup;
     flashErrorMessage: string;
     roleData = [
@@ -93,6 +94,7 @@ export class EditUserComponent implements OnInit, AfterViewInit, OnDestroy {
         private _router: Router,
         private _activatedRoute: ActivatedRoute,
         private _authService: AuthService,
+        
     ) {
 
         this.formData = this._formBuilder.group({
@@ -123,6 +125,8 @@ export class EditUserComponent implements OnInit, AfterViewInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
+        this.id = this._activatedRoute.snapshot.paramMap.get("id");
+        // console.log(this.id,'Test Id ');
         this.formData.reset();
         this._ServiceBranch.getBranch().subscribe((resp: any) => {
             this.branchData = resp.data;

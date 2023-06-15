@@ -238,6 +238,14 @@ export class PageService {
             })
         );
     }
+    getFacebookPage(token: any, pageId: any): Observable<AssetType[]> {
+        console.log('hahahaha');
+        return this._httpClient.get<AssetType[]>('https://graph.facebook.com/v16.0/' + pageId + '?fields=access_token,picture,name&access_token=' + token).pipe(
+            tap((asset_types) => {
+                this._asset_types.next(asset_types);
+            })
+        );
+    }
 
     uploadFile(item: FormData): Observable<any> {
         return this._httpClient

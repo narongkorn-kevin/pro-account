@@ -36,6 +36,8 @@ export class NewPositionComponent implements OnInit, AfterViewInit, OnDestroy {
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     env_path = environment.API_URL;
 
+    BrokerId: any = [];
+
 
     /**
      * Constructor
@@ -54,6 +56,7 @@ export class NewPositionComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
 
+
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -65,8 +68,33 @@ export class NewPositionComponent implements OnInit, AfterViewInit, OnDestroy {
      */
     ngOnInit(): void {
 
+        // this.formData = this._formBuilder.group({
+        //     name: ['', Validators.required]
+        // })
+
+        this._Service.getLastUser().subscribe((resp: any) => {
+
+            //  แสดงค่าauto  userid
+            this.formData.patchValue({
+                user_id: resp.data.user_last_id ,
+            })
+        })
+        this.BrokerId = JSON.parse(localStorage.getItem('user'));
+        console.log(this.BrokerId.user_id, 'Broker');
         this.formData = this._formBuilder.group({
-            name: ['', Validators.required]
+            user_id: '',
+            first_name: ['', Validators.required],
+            last_name: ['', Validators.required],
+            permission_id: ['3'],
+            email: ['', Validators.required],
+            password: ['', Validators.required,],
+            image: [''],
+            user_ref_id: this.BrokerId.id,
+            tel2: [''],
+            tel1: [''],
+            shop_name: [''],
+            shop_address: [''],
+
         })
 
     }
@@ -89,6 +117,27 @@ export class NewPositionComponent implements OnInit, AfterViewInit, OnDestroy {
     ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
 
+    }
+    files: File[] = [];
+    onSelect(event) {
+        console.log(event);
+        this.files.push(...event.addedFiles);
+        // Trigger Image Preview
+        setTimeout(() => {
+            this._changeDetectorRef.detectChanges();
+        }, 150);
+        this.formData.patchValue({
+            image: this.files[0],
+        });
+        console.log(this.formData.value);
+    }
+    onRemove(event) {
+        console.log('1', event);
+        this.files.splice(this.files.indexOf(event), 1);
+        this.formData.patchValue({
+            image: '',
+        });
+        console.log(this.formData.value);
     }
 
 
@@ -127,8 +176,14 @@ export class NewPositionComponent implements OnInit, AfterViewInit, OnDestroy {
 
             // If the confirm button pressed...
             if (result === 'confirmed') {
+                const formData = new FormData();
+                Object.entries(this.formData.value).forEach(([key, value]: any[]) => {
+                    if (value !== '' && value !== 'null' && value !== null) {
+                        formData.append(key, value);
+                    }
+                });
 
-                this._Service.createPosition(this.formData.value).subscribe({
+                this._Service.createUser(formData).subscribe({
                     next: (resp: any) => {
                         this.dialogRef.close();
                     },

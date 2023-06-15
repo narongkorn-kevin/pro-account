@@ -113,7 +113,7 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
             this.isLoggedin = user != null;
             // console.log(user)
             this._Service.getTokenUser(this.socialUser.authToken).subscribe((resp: any) => {
-                console.log(resp);
+                console.log(resp,'tessssss');
 
                 this.userData = resp
                 // this.formData.patchValue({

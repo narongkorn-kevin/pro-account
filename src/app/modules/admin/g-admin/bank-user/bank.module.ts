@@ -42,13 +42,21 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ListBankComponent } from './list-bank/list-bank.component';
 import { EditBankComponent } from './edit-bank/edit-bank.component';
 import { NewBankComponent } from './new-bank/new-bank.component';
+import { BankListComponent } from './bank-list/bank-list.component';
+import { BankNewComponent } from './bank-new/bank-new.component';
+import { BankListShopComponent } from './bank-list-shop/bank-list.component';
+import { BankNewShopComponent } from './bank-new-shop/bank-new.component';
 
 @NgModule({
   declarations: [
     BankComponent,
     ListBankComponent,
     EditBankComponent,
-    NewBankComponent
+    NewBankComponent,
+    BankListComponent,
+    BankNewComponent,
+    BankListShopComponent,
+    BankNewShopComponent
   ],
   imports: [
     RouterModule.forChild(bankRoute),

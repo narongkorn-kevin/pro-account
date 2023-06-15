@@ -57,6 +57,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NewLeaveComponent } from './leave/new.component';
 import { DialogChangePwdComponent } from './dialog-change-pwd/dialog-change-pwd.component';
 import { WithdrawComponent } from './withdraw/withdraw.component';
+import { BankListComponent } from './bank-list/bank-list.component';
+
 
 @NgModule({
     declarations: [
@@ -78,7 +80,9 @@ import { WithdrawComponent } from './withdraw/withdraw.component';
         ProfileUseradminComponent,
         OtListComponent,
         SalaryListComponent,
-        WithdrawComponent
+        WithdrawComponent,
+        BankListComponent,
+       
 
 
 

@@ -5,6 +5,8 @@ import { PositionComponent } from './position.component';
 import { EditPositionComponent } from './edit-position/edit-position.component';
 import { PositionListComponent } from './list/list.component';
 import { NewPositionComponent } from './new-position/new-position.component';
+import { PositionAdminListComponent } from './admin-list/list.component';
+
 // import { AssetTypeResolver, PermissionProductsResolver } from './user.resolvers';
 
 
@@ -27,8 +29,24 @@ export const positionRoute: Route[] = [
                 // }
             },
             {
+                path: 'admin-list',
+                component: PositionAdminListComponent,
+                // resolve: {
+                //     products: PermissionProductsResolver,
+
+                // }
+            },
+            {
                 path: 'new-position',
                 component: NewPositionComponent,
+                // resolve: {
+                //     products: PermissionProductsResolver,
+
+                // }
+            },
+            {
+                path: 'new-position-admin',
+                component: PositionAdminListComponent,
                 // resolve: {
                 //     products: PermissionProductsResolver,
 

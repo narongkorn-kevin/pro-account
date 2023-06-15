@@ -31,6 +31,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(MatSort) private _sort: MatSort;
 
     formData: FormGroup;
+    formData1: FormGroup;
     flashErrorMessage: string;
     roleData = [
         { id: 1, name: 'Admin' },
@@ -70,7 +71,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit, OnDestroy {
 
     supplierId: string | null;
     pagination: UserPagination;
-    station$: Observable<any>;
+    permission$: Observable<any>;
 
     /**
      * Constructor
@@ -91,22 +92,8 @@ export class CreateUserComponent implements OnInit, AfterViewInit, OnDestroy {
         private _authService: AuthService,
     ) {
 
-        this.formData = this._formBuilder.group({
-            user_id: ['', Validators.required],
-            first_name: ['', Validators.required],
-            last_name: ['', Validators.required],
-            permission_id: ['2'],
-            department_id: ['1'],
-            position_id: ['', Validators.required],
-            branch_id: ['', Validators.required],
-            email: ['', Validators.required],
-            password: ['', Validators.required,],
-            salary: ['', Validators.required,],
-            image: ['',],
-            type:'',
-            image_signature: ['',],
-            
-        })
+        this.permission$ = this._Service.getPermission();
+        
     }
 
 
@@ -139,6 +126,27 @@ export class CreateUserComponent implements OnInit, AfterViewInit, OnDestroy {
             this.formData.patchValue({
                 user_id: resp.data.user_last_id,
             })
+        })
+        this.formData = this._formBuilder.group({
+            user_id: ['', Validators.required],
+            first_name: ['', Validators.required],
+            last_name: ['', Validators.required],
+            permission_id: ['2'],
+            department_id: [''],
+            position_id: [''],
+            branch_id: [''],
+            email: ['', Validators.required],
+            password: ['', Validators.required,],
+            salary: [''],
+            image: ['',],
+            type:'',
+            image_signature: [''],
+            user_ref_id: [''],
+            tel2: [''],
+            tel1: [''],
+            shop_name: [''],
+            shop_address: [''],
+            
         })
 
     }
