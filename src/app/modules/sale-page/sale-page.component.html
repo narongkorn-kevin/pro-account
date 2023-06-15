@@ -12,7 +12,7 @@
                       <img class="mx-auto w-1/2 h-48 rounded-xl object-cover" [src]="sale_order_line.item.image">
                       <p class="text-gray-600 mt-6 font-semibold text-lg">ชื่อสินค้า: {{sale_order_line.item.name}}</p>
                       <p class="text-gray-600 font-semibold text-lg pt-4">จำนวนสินค้า: {{sale_order_line.qty}}</p>
-                      <p class="text-gray-600 font-semibold text-lg pt-4">น้ำหนักสินค้า: {{sale_order_line.item.weight}}/ชิ้น</p>
+                      <p class="text-gray-600 font-semibold text-lg pt-4">น้ำหนักสินค้า: {{sale_order_line.item.weight}} กก./ชิ้น</p>
                     </div>
                   </ng-container>
                   <p class="text-red-600 font-bold text-xl mt-2">รวมยอดชำระ: {{order.total | currency:'฿'}} บาท</p>

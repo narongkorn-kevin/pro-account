@@ -47,6 +47,8 @@ export class ChatComponent implements OnInit {
                     const product = {
                         sale_id: this.user.id,
                         page_id: this.PageId,
+                        fb_user_id: message?.from?.id ?? '',
+                        fb_comment_id: message.id,
                         channal: 'facebook',
                         name: message?.from?.name ?? 'Test',
                         telephone: '',
