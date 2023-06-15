@@ -190,7 +190,7 @@
 
                                                 </mat-checkbox>
                                             </th>
-                                            <th>จัดการ</th>
+                                            <th>ดูข้อมูล</th>
                                             <th>ลำดับ</th>
                                             <th style="width: 100px;">ช่องทาง</th>
                                             <th>วันที่สั่งซื้อ</th>
@@ -200,6 +200,7 @@
                                             <!-- <th>บริการขนส่ง</th> -->
                                             <th>การชำระเงิน</th>
                                             <th>ยอดรวม</th>
+                                            <th>แก้ไข</th>
                                             <!-- <th>จ่ายแล้ว</th> -->
                                         </tr>
                                     </thead>
@@ -213,10 +214,7 @@
                                                 </mat-checkbox>
                                             </td>
                                             <td style="width: 100px; min-width: 100px;">
-                                                <button mat-icon-button color="" (click)="edit(item.id)"
-                                                    title="แก้ไขข้อมูล">
-                                                    <mat-icon>edit</mat-icon>
-                                                </button>
+                          
                                                 <button mat-icon-button color="" (click)="view(item.id)"
                                                     title="ดูรายละเอียดข้อมูล">
                                                     <mat-icon>remove_red_eye</mat-icon>
@@ -284,8 +282,13 @@
                                                 *ngIf="item.payment_type !== 'COD' && item.payment_type !== 'transfer'">
                                                 -</td>
 
-                                            <td style="width: 100px; min-width: 100px;">{{ item.total | number : '1.2-2'
-                                                }}</td>
+                                            <td style="width: 100px; min-width: 100px;">{{ item.total | number : '1.2-2'}}</td>
+                                            <td style="width: 100px; min-width: 100px;">
+                                                <button mat-icon-button color="" (click)="edit(item.id)"
+                                                    title="แก้ไขข้อมูล">
+                                                    <mat-icon>edit</mat-icon>
+                                                </button>
+                                            </td>
                                             <!-- <td style="width: 100px; min-width: 100px;">{{ item.payment_qty | number : '1.2-2' }}</td> -->
                                             <!-- <td>{{ item.date_time | thaiDate}}</td> -->
                                             <!-- <td>{{ item.created_at | date: 'dd/MM/yyyy hh:mm' }}</td> -->
