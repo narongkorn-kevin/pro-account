@@ -1,0 +1,180 @@
+<div
+    class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-1 sm:pb-4 sm:px-10 border-b bg-card dark:bg-transparent">
+    <div class="flex-1 min-w-0">
+        <!-- Title -->
+        <div class="mt-2">
+            <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                เพิ่มช่องทางการจ่ายเงิน
+            </h1>
+        </div>
+    </div>
+</div>
+<!-- <div class="flex-auto p-3 sm:p-2">
+    <form [formGroup]="formData">
+        <div class="flex-wrap">
+            <div class="w-full">
+                <div class="flex mt-4 px-5">
+                    <label for="name"
+                        class="text-gray-800 text-lg font-bold leading-tight tracking-normal w-1/3 mt-4">ชื่อบัญชี</label>
+                    <mat-form-field class="w-full pr-2">
+                        <input matInput [formControlName]="'first_name'" placeholder="กรุณาระบุชื่อชื่อบัญชี">
+                    </mat-form-field>
+                </div>
+                <div class="flex mt-2 px-5">
+                    <label for="code"
+                        class="text-gray-800 text-lg font-bold leading-tight tracking-normal w-1/3 mt-4">นามสกุล</label>
+                    <mat-form-field class="w-full pr-2">
+                        <input matInput [formControlName]="'last_name'" placeholder="กรุณาระบุนามสกุล">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="w-full">
+                <div class="flex mt-2 px-5">
+                    <label for="name"
+                        class="text-gray-800 text-lg font-bold leading-tight tracking-normal w-1/3 mt-4">ชื่อธนาคาร</label>
+                    <mat-form-field class="w-full pr-2">
+                        <input matInput [formControlName]="'name'" placeholder="กรุณาระบุชื่อธนาคาร">
+                    </mat-form-field>
+                </div>
+                <div class="flex mt-2 px-5">
+                    <label for="code"
+                        class="text-gray-800 text-lg font-bold leading-tight tracking-normal w-1/3 mt-4">เลขบัญชีธนาคาร</label>
+                    <mat-form-field class="w-full pr-2">
+                        <input matInput [formControlName]="'account_number'" placeholder="กรุณาระบุเลขบัญชีธนาคาร">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="w-full">
+                <div class="flex mt-2 px-5">
+                    <label for="code"
+                        class="text-gray-800 text-lg font-bold leading-tight tracking-normal w-1/3 mt-4">เลือกรูปธนาคาร</label>
+                    <div class="flex justify-start items-start w-full">
+                        <ngx-dropzone style="width: 400px; height: 200px;" (change)="onSelect($event)">
+                            
+                            <ngx-dropzone-label>เลือกรูปธนาคาร </ngx-dropzone-label>
+                            <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" [file]="f"
+                                (removed)="onRemove(f)">
+                               
+                            </ngx-dropzone-image-preview>
+                        </ngx-dropzone>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex items-center justify-end w-full border-t px-8 py-4 mt-4">
+            <div class="flex items-center justify-end">
+                <a class="ml-4" mat-flat-button (click)="onClose()">
+                    <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                    ยกเลิก
+                </a>
+                <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="New()">
+                    <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                    ยืนยัน
+                </button>
+            </div>
+        </div>
+    </form>
+    
+</div> -->
+<div class="flex-auto">
+    <form class="flex flex-col mt-3 p-2 pb-4 bg-card shadow overflow-hidden ng-valid" [formGroup]="formData">
+        <div class="flex flex-col sm:flex-row p-8">
+
+
+            <div class="flex flex-auto flex-wrap">
+                <div class="flex flex-col w-full lg:w-2/4 sm:pl-6">
+                        
+                    <div class="flex flex-col">
+                        <mat-form-field class="w-full">
+                            <mat-label>ชื่อ
+                            </mat-label>
+                            <input matInput [formControlName]="'first_name'">
+                            <mat-error>
+                                กรุณากรอกชื่อ
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="flex flex-col w-full lg:w-2/4 sm:pl-6">
+                        
+                    <div class="flex flex-col">
+                        <mat-form-field class="w-full">
+                            <mat-label>นามสกุล
+                            </mat-label>
+                            <input matInput [formControlName]="'last_name'">
+                            <mat-error>
+                                กรุณากรอกนามสกุล
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                
+                
+                <div class="flex flex-col w-full lg:w-2/4 sm:pl-6">
+                    <!--firstname and lastname-->
+                    <div class="flex">
+
+                        <mat-form-field class="w-full">
+                            <mat-label>ธนาคาร
+                            </mat-label>
+                            <mat-select [formControlName]="'bank_id'">
+                                <mat-option [value]="''">
+                                    <span>เลือกธนาคาร</span>
+                                </mat-option>
+                                <mat-option *ngFor="let item of Bank$ | async "
+                                    [value]="item.id">
+                                    {{item.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formData.get('bank_id').hasError('required')">กรุณาระบุข้อมูล </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="flex flex-col w-full lg:w-2/4 sm:pl-6">
+                        
+                    <div class="flex flex-col">
+                        <mat-form-field class="w-full">
+                            <mat-label>เลขบัญชี
+                            </mat-label>
+                            <input matInput [formControlName]="'account_number'">
+                            <mat-error>
+                                กรุณากรอกเลขบัญชี
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                
+                
+                <!-- <div class="flex flex-col w-full lg:w-4/4 sm:pl-8">
+
+                    <div class="flex ">
+                        <div class="flex justify-center items-center w-full pb-5">
+                            <ngx-dropzone style="width: 100%; height: 300px;" (change)="onSelect($event)">
+                                <ngx-dropzone-label>เลือกรูป โปรไฟล์ </ngx-dropzone-label>
+                                <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" [file]="f" (removed)="onRemove(f)">
+                                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                </ngx-dropzone-image-preview>
+                            </ngx-dropzone>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <!-- button -->
+        <div class="flex items-center justify-end w-full border-t px-8 py-4 mt-4">
+            <div class="flex items-center justify-end">
+                <a class="ml-4" mat-flat-button (click)="onClose()">
+                    <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                    ยกเลิก
+                </a>
+                <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="New()">
+                    <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                    ยืนยัน
+                </button>
+            </div>
+        </div>
+    </form>
+    <pre>
+    </pre>
+</div>

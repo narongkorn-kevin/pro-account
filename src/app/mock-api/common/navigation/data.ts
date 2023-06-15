@@ -347,7 +347,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 title: 'ธนาคาร',
                 icon: 'mat_outline:comment_bank',
                 type: 'basic',
-                link: '/bank-user/list',
+                link: '/bank-user/bank-list',
             },
             //  {
             //      id: 'wallet-bag-owner',
@@ -765,6 +765,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 icon: 'feather:log-out',
                 link: '/sign-out',
             },
+            
         ],
     },
 ];

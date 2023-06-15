@@ -180,8 +180,8 @@ export class PositionListComponent implements OnInit, AfterViewInit, OnDestroy {
             // width: '50%',
             // minHeight: 'calc(100vh - 90px)',
             // height: 'auto'
-            width: '700px',
-            height: '400px'
+            width: "100%",
+            height: "100%",
         });
 
         dialogRef.afterClosed().subscribe(item => {

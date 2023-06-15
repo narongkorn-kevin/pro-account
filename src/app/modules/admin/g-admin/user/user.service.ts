@@ -1129,12 +1129,71 @@ export class UserService {
     }
 
     getuserpage(dataTablesParameters: any): Observable<DataTablesResponse> {
-        return this._httpClient.post(environment.API_URL + 'api/activate_user_page', dataTablesParameters, this.httpOptionsFormdata).pipe(
+        return this._httpClient.post(environment.API_URL + 'api/user_page', dataTablesParameters, this.httpOptionsFormdata).pipe(
             switchMap((response: any) => {
                 return of(response.data);
             })
         );
     }
+    getBankpage(dataTablesParameters: any): Observable<DataTablesResponse> {
+        return this._httpClient.post(environment.API_URL + 'api/user_bank_page', dataTablesParameters, this.httpOptionsFormdata).pipe(
+            switchMap((response: any) => {
+                return of(response.data);
+            })
+        );
+    }
+    private _itemP: BehaviorSubject<any[] | null> = new BehaviorSubject(null);
+    
+    // getBankPage(){
+    //     return this._httpClient.post(environment.API_URL + "api/user_bank_page", {
+    //         "user_id": 1,
+    //         // "item_type_id": null,
+    //         // "set_type": "normal",
+    //         "draw": 1,
+    //         "columns": [
+
+    //         ],
+    //         "order": [
+    //             {
+    //                 "column": 0,
+    //                 "dir": "asc"
+    //             }
+    //         ],
+    //         "start": 0,
+    //         "length": 10,
+    //         "search": {
+    //             "value": "",
+    //             "regex": false
+    //         }
+    //     }).pipe(
+    //         map((data: any) => {
+    //             console.log('dfdsa', data)
+    //             // Update the chat
+    //             this._itemP.next(data.data.data);
+
+    //             // Return the chat
+    //             return data;
+    //         }),)
+    // }
+    getPermission(): Observable<any> {
+        return this._httpClient.get(environment.API_URL + "api/get_permission").pipe(
+          map((resp: any) => {
+            console.log(resp,'resp');
+            return resp.data;
+          })
+        );
+      }
+      getBankById(id: any): Observable<any> {
+        console.log(id);
+        return this._httpClient
+          .get(environment.API_URL + "api/user_bank/" + id)
+          .pipe(
+            map((resp: any) => {
+              console.log("haha", resp);
+              return resp.data;
+            })
+          );
+      }
     
 
 }

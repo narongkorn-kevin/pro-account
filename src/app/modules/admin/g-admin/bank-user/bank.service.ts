@@ -1019,6 +1019,31 @@ export class BankService {
         catchError((err) => this.handlerError(err))
       );
   }
+  getBankpage(dataTablesParameters: any): Observable<DataTablesResponse> {
+    return this._httpClient.post(environment.API_URL + 'api/user_bank_page', dataTablesParameters, this.httpOptionsFormdata).pipe(
+        switchMap((response: any) => {
+            return of(response.data);
+        })
+    );
+}
+createBank(data: any) {
+  return this._httpClient.post(environment.API_URL + "api/user_bank", data);
+}
+getBank(): Observable<any> {
+  return this._httpClient.get(environment.API_URL + "api/get_bank").pipe(
+    map((resp: any) => {
+      return resp.data;
+    })
+  );
+}
+create(data: FormData): Observable<DataBank> {
+  return this._httpClient.post<DataBank>(environment.API_URL + 'api/user_bank', data, { headers: this.httpOptionsFormdata.headers });
+}
+deleteBank(data: any): Observable<any> {
+  return this._httpClient
+    .delete(environment.API_URL + "api/user_bank/" + data)
+    .pipe();
+}
 
 
 }
