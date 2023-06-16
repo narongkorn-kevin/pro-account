@@ -13,6 +13,7 @@ export class SalePageComponent implements OnInit {
 
     stepOneForm: FormGroup;
     stepTwoForm: FormGroup;
+    OrderForm: FormGroup;
 
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
     favoriteSeason: string;
@@ -24,7 +25,7 @@ export class SalePageComponent implements OnInit {
       { value: '4', name: "ไม่จ่ายค่าสินค้าและค่าขนส่ง" },
     ];
     saleOrderId: any;
-
+    check:any =0;
     order$: Observable<any>;
 
     constructor(
@@ -44,12 +45,16 @@ export class SalePageComponent implements OnInit {
             telephone: ['', Validators.required],
             address: ['', Validators.required],
             shipping_price: ['20'],
+            payment_step: [''],
+            
         });
 
         this.stepTwoForm = this.fb.group({
-            paymentMethod: ['', Validators.required],
+          payment_step: ['', Validators.required],
         });
 
+
+        
         this.order$ = this._saleOrderService.getSaleOrder(this.saleOrderId).pipe(
             map((resp: any) => { return resp.data }),
             tap((resp: any) => {
@@ -57,6 +62,7 @@ export class SalePageComponent implements OnInit {
                     name: resp.name,
                     telephone: resp.telephone,
                     address: resp.address,
+                    
                 })
             })
         );
@@ -66,6 +72,27 @@ export class SalePageComponent implements OnInit {
         // console.log('สำเร็จ');
 
     }
+    actionChange(id: number) {
+      this.check = id;
+      this.stepOneForm.patchValue({
+        payment_step: this.check
+    })
+    }
+    // actionChange(event, bankId, action): void {
+    //   let array;
+    //   array = {
+    //   user_id: this.formData.value.user_id,
+    //   bank_id: bankId,
+    //   actions: action,
+    //   };
+      
+    //   this._Service.setPermission(array).subscribe((resp: any) => {
+    //   console.log(resp);
+    //   this._changeDetectorRef.markForCheck();
+    //   });
+    //   }
+    
+    
     closePage() {
         
 
@@ -110,7 +137,7 @@ export class SalePageComponent implements OnInit {
         confirmation.afterClosed().subscribe((result) => {
           // If the confirm button pressed...
           if (result === "confirmed") {
-            const formValue = this.stepOneForm.value;
+            const formValue =  this.stepOneForm.value;
             this._Service.updateOrder(formValue,this.saleOrderId).subscribe({
               next: (resp) => {
                 window.self.close();

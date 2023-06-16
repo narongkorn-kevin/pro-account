@@ -69,20 +69,20 @@
           </ng-template>
           <div class="bg-white rounded-lg p-6 text-xl shadow-lg border border-gray-300">
             <label class="flex items-center mb-4">
-              <input type="checkbox"  formControlName="paymentMethod" value="1" class="mr-2 form-checkbox">
+              <input type="checkbox"  formControlName="payment_step" value="1" class="mr-2 form-checkbox" (change)="actionChange(1)">
               <span class="text-gray-700">จ่ายเฉพาะค่าขนส่ง 15บาทต่อ กก.</span>
             </label>
 
             <label class="flex items-center mb-4">
-              <input type="checkbox" formControlName="paymentMethod" value="2" class="mr-2 form-checkbox">
+              <input type="checkbox" formControlName="payment_step" value="2" class="mr-2 form-checkbox" (change)="actionChange(2)">
               <span class="text-gray-700">จ่ายเฉพาะค่าสินค้า</span>
             </label>
             <label class="flex items-center mb-4">
-              <input type="checkbox" formControlName="paymentMethod" value="3" class="mr-2 form-checkbox">
+              <input type="checkbox" formControlName="payment_step" value="3" class="mr-2 form-checkbox" (change)="actionChange(3)">
               <span class="text-gray-700">จ่ายค่าสินค้าและค่าขนส่ง</span>
             </label>
             <label class="flex items-center mb-4">
-              <input type="checkbox" formControlName="paymentMethod" value="4" class="mr-2 form-checkbox">
+              <input type="checkbox" formControlName="payment_step" value="4" class="mr-2 form-checkbox" (change)="actionChange(4)">
               <span class="text-gray-700">ไม่จ่ายค่าสินค้าและค่าขนส่ง</span>
             </label>
             <!-- <label id="example-radio-group-label">เลือกวิธีการชำระเงิน</label>
