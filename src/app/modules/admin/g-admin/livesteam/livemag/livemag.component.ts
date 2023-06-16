@@ -26,6 +26,7 @@ import { ProductcService } from './productc.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ProductControlComponent } from '../product-control/product-control.component';
 import { TableComponent } from '../table/table.component';
+import { DataTableDirective } from 'angular-datatables';
 
 
 interface product {
@@ -330,5 +331,84 @@ item: any;
             )
           });
       }
+
+
+      delete(id: any): void {
+        this.flashMessage = null;
+        this.flashErrorMessage = null;
+        // Return if the form is invalid
+        // if (this.formData.invalid) {
+        //     return;
+        // }
+        // Open the confirmation dialog
+        const confirmation = this._fuseConfirmationService.open({
+            title: 'Delete',
+            message: 'คุณต้องการลบรายการใช่หรือไม่ ',
+            icon: {
+                show: true,
+                name: 'heroicons_outline:exclamation',
+                color: 'warning',
+            },
+            actions: {
+                confirm: {
+                    show: true,
+                    label: 'ยืนยัน',
+                    color: 'primary',
+                },
+                cancel: {
+                    show: true,
+                    label: 'ยกเลิก',
+                },
+            },
+            dismissible: true,
+        });
+
+        // Subscribe to the confirmation dialog closed action
+        confirmation.afterClosed().subscribe((result) => {
+            // If the confirm button pressed...
+            if (result === 'confirmed') {
+                this._Service.deleteProduct(id).subscribe({
+                    next: (resp) => {
+                        this.item$ = this.ItemServive.getProductLivePage().pipe(
+                            map((resp: any) => {
+                                return resp.data.data
+                            })
+                        )
+                    },
+                    error: (err) => {
+                        this._fuseConfirmationService.open({
+                            title: 'กรุณาระบุข้อมูล',
+                            message: err.error.message,
+                            icon: {
+                                show: true,
+                                name: 'heroicons_outline:exclamation',
+                                color: 'warning',
+                            },
+                            actions: {
+                                confirm: {
+                                    show: false,
+                                    label: 'ยืนยัน',
+                                    color: 'primary',
+                                },
+                                cancel: {
+                                    show: false,
+                                    label: 'ยกเลิก',
+                                },
+                            },
+                            dismissible: true,
+                        });
+                    },
+                });
+            }
+        });
+    }
+    @ViewChild(DataTableDirective)
+    dtElement!: DataTableDirective;
+
+    rerender(): void {
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            dtInstance.ajax.reload();
+        });
+    }
 
 }

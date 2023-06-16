@@ -14,6 +14,15 @@ export class SalePageComponent implements OnInit {
     stepOneForm: FormGroup;
     stepTwoForm: FormGroup;
 
+    seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
+    favoriteSeason: string;
+    
+    delivery: any = [
+      { value: '1', name: "จ่ายเฉพาะค่าขนส่ง 15บาทต่อ กก." },
+      { value: '2', name: "จ่ายเฉพาะค่าสินค้า" },
+      { value: '3', name: "จ่ายค่าสินค้าและค่าขนส่ง" },
+      { value: '4', name: "ไม่จ่ายค่าสินค้าและค่าขนส่ง" },
+    ];
     saleOrderId: any;
 
     order$: Observable<any>;

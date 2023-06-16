@@ -81,23 +81,28 @@
                                 <th class="flex text-xl">สถานะ</th>
                             </tr>
                         </thead>
-                        <tbody   class="flex w-full items-center px-5 mt-2 border-b-2 pb-2">
-                            <tr  class="flex  w-full justify-between">
+                        <tbody class="flex w-full items-center px-5 mt-2 border-b-2 pb-2">
+                            <tr class="flex  w-full justify-between">
                                 <td class="flex flex-row">
                                     <div class="flex justify-center bottom-26">
                                         <img [src]="this.pageData?.picture?.data?.url" class="h-20 w-20" />
                                     </div>
                                     <div class="flex flex-col w-full">
                                         <div class="flex mt-4 px-5 w-full">
-                                            <div class="flex w-2/5 items-center justify-center text-lg font-semibold mb-1 rounded-2xl border-2 bg-green-300">ชื่อเพจ:</div>
-                                            <div class="text-gray-700 dark:text-gray-300">{{ this.pageData?.name }}</div>
+                                            <div
+                                                class="flex w-2/5 items-center justify-center text-lg font-semibold mb-1 rounded-2xl border-2 bg-green-300">
+                                                ชื่อเพจ:</div>
+                                            <div class="text-gray-700 dark:text-gray-300">{{ this.pageData?.name }}
+                                            </div>
                                         </div>
-                                    <div class="flex  mt-4   px-5  w-full">
-                                        <div class="flex w-2/5 items-center justify-center text-lg font-semibold mb-1 rounded-2xl border-2 bg-green-300">รหัสเพจ:</div>
-                                        <div class="text-gray-700 dark:text-gray-300">{{ this.pageData?.id }}</div>
+                                        <div class="flex  mt-4   px-5  w-full">
+                                            <div
+                                                class="flex w-2/5 items-center justify-center text-lg font-semibold mb-1 rounded-2xl border-2 bg-green-300">
+                                                รหัสเพจ:</div>
+                                            <div class="text-gray-700 dark:text-gray-300">{{ this.pageData?.id }}</div>
+                                        </div>
+
                                     </div>
-                                    
-                                </div>
                                 </td>
 
                                 <td>
@@ -108,32 +113,30 @@
                                     <ng-container *ngIf="liveStream">
                                         <!-- Live status button -->
                                         <button
-                                            class="px-6 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded"
-                                            >
+                                            class="px-6 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded">
                                             ไลฟ์
                                         </button>
                                     </ng-container>
                                     <ng-container *ngIf="!liveStream">
                                         <!-- No live message -->
-                                        
+
                                         <button
-                                            class="px-6 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded"
-                                            >
+                                            class="px-6 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded">
                                             ไม่มีไลฟ์
                                         </button>
                                     </ng-container>
                                 </td>
-                                
+
                             </tr>
                         </tbody>
-                        
-                    </table>
-                    
-                    
-                </div>
-                
 
-                
+                    </table>
+
+
+                </div>
+
+
+
 
 
             </div>
@@ -141,38 +144,40 @@
                 <app-chat *ngIf="liveStream !== undefined" [StreamId]="liveStream.id" [PageId]="pageId"></app-chat>
             </div>
             <div class="flex flex-col w-full lg:w-2/6 px-10 bg-card h-full rounded-2xl ">
-                
+
                 <div class="flex justify-center items-center">
                     <h1 class=" font-bold text-2xl  shadow-slate-500 rounded-full text-black m-5">
                         รายการสินค้า
                     </h1>
                 </div>
-                <div class="flex w-1/4 justify-end">
-                <button  class="ml-4 " mat-flat-button (click)="openPackageDialog()">
-                    <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
-                    <span class="ml-2 mr-1">เพิ่มใหม่</span>
-                </button>
-            </div>
+                <div class="flex w-full justify-end mb-5">
+                    <button class="ml-4 mat-primary" mat-flat-button (click)="openPackageDialog()">
+                        <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                        <span class="ml-2 mr-1">เพิ่มใหม่</span>
+                    </button>
+                </div>
 
                 <table class="shadow-slate-300 rounded-xl pr-4 mr-2 w-full">
-                    <thead>
+                    <thead class="bg-green-500 ">
                         <tr>
-                            <th class="py-2">Code</th>
-                            <th class="py-2">No.</th>
-                            <th class="py-2">Pic</th>
-                            <th class="py-2">Name</th>
-                            <th class="py-2">Qty</th>
-                            <th class="py-2">On/Off</th>
+                            <th class="py-2 border-r-2">Code</th>
+                            <th class="py-2 border-r-2">No.</th>
+                            <th class="py-2 border-r-2">Pic</th>
+                            <th class="py-2 border-r-2">Name</th>
+                            <th class="py-2 border-r-2">Qty</th>
+                            <th class="py-2 border-r-2">On/Off</th>
+                            <th class="py-2 border-r-2">Delete</th>
+                            
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr *ngFor="let product of item$ | async">
+                    <tbody >
+                        <tr *ngFor="let product of item$  | async ; let i = index">
                             <td class="py-2">
                                 <!-- {{ product.item_id }} -->
                                 <input type="text" class="p-2 border border-gray-300 rounded-md py-2 w-5/6 h-1/6"
                                     [(ngModel)]="product.code" (ngModelChange)="productCodeChange(product)" />
                             </td>
-                            <td class="py-2">{{ product.id }}</td>
+                            <td class="py-2">{{ i+1 }}</td>
                             <td class="py-2">
                                 <img src="{{ product.item.image }}" alt="" class="w-12" />
                             </td>
@@ -189,6 +194,11 @@
                                         class="w-11 h-6 bg-red-600 rounded-full peer peer-focus:ring-primary-300 dark:peer-focus:ring-primary-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary-600">
                                     </div>
                                 </label>
+                            </td>
+                            <td>
+                                <button mat-button (click)="delete(product.id)">
+                                    <mat-icon svgIcon="heroicons_solid:trash"></mat-icon>
+                                </button>
                             </td>
                         </tr>
                     </tbody>

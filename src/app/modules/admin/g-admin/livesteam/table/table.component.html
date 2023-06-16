@@ -1,6 +1,6 @@
 <div class="flex justify-center text-4xl font-bold text-blue-700">เพิ่มสินค้า</div>
 <div class="flex flex-auto overflow-x-scroll">
-    
+
     <div class="flex flex-col flex-auto p-5 sm:overflow-y-auto">
         <table datatable [dtOptions]="dtOptions" class="table row-border hover w-full overflow-auto mt-14">
             <thead class="bg-green-500 ">
@@ -31,13 +31,21 @@
                     <td>{{ item?.location?.code??"-" }}</td>
                     <td>{{ item?.location?.name??"-" }}</td>
                     <td>
-                        <button mat-button (click)="Addproduct(item.id)" class="bg-green-300">
-                            <mat-icon style="color: black;">add</mat-icon>
-                        </button>
+                        <div *ngIf="item.balance <= '0'">
+                            <button mat-button class="bg-red-500">
+                                <mat-icon style="color: black;">remove_shopping_cart</mat-icon>
+                            </button>
+                        </div>
+                        <div *ngIf="item.balance > '0'">
+                            <button mat-button (click)="Addproduct(item.id)" class="bg-green-300">
+                                <mat-icon style="color: black;">shopping_cart</mat-icon>
+                            </button>
+                        </div>
                         <!-- <button mat-button (click)="Delete(item.id)">
                             <mat-icon svgIcon="heroicons_solid:trash"></mat-icon>
                         </button> -->
                     </td>
+
                 </tr>
             </tbody>
             <tbody *ngIf="dataRow?.length == 0">

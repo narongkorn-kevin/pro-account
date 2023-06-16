@@ -1047,6 +1047,17 @@ export class ItemService {
       })
     );
   }
+  getListVideoLive(pageId: string) {
+    const token = localStorage.getItem('pageToken');
+
+    const url = `https://graph.facebook.com/${pageId}/live_videos?fields=description,status,embed_html&access_token=${token}`;
+
+    return this._httpClient.get(url).pipe(
+        map((resp: any) => {
+            return resp.data;
+        })
+    );
+}
 
 
 
