@@ -40,6 +40,8 @@ import {
 } from '../sale-order.types';
 import { SaleOrderService } from '../sale-order.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { submitDialogComponent } from '../submitDialog/submitDialog.component';
+import { DataTableDirective } from 'angular-datatables';
 // import { ImportOSMComponent } from '../card/import-osm/import-osm.component';
 
 @Component({
@@ -131,7 +133,12 @@ export class SaleOrderListComponent
     DelOrder: any = [];
 
     delivered_by: any;
-    delivered: any= [];
+    delivered: any = [];
+
+    flashErrorMessage: string;
+
+    @ViewChild(DataTableDirective)
+    dtElement!: DataTableDirective;
 
     /**
      * Constructor
@@ -304,54 +311,177 @@ export class SaleOrderListComponent
     confirmOrder(No: any) {
         switch (No) {
             case 1:
-                if (this.ConfirmOrder1 !== null) {
-                    this._Service
-                        .postConfirmOrder(this.ConfirmOrder1)
-                        .subscribe((res) => {
-                            console.log('1', res);
-                        });
-                    
-                }
+                var data = this.ConfirmOrder1;
                 break;
-
             case 2:
-                if (this.ConfirmOrder2 !== null) {
-                    this._Service
-                        .postConfirmOrder(this.ConfirmOrder2)
-                        .subscribe((res) => {
-                            console.log('2', res);
-                        });
-                
-                }
+                var data = this.ConfirmOrder2;
                 break;
-
             case 3:
-                if (this.ConfirmOrder3 !== null) {
-                    this._Service
-                        .postConfirmOrder(this.ConfirmOrder3)
-                        .subscribe((res) => {
-                            console.log('3', res);
-                        });
-                
-                }
+                var data = this.ConfirmOrder3;
                 break;
 
             default:
                 break;
         }
-        this._changeDetectorRef.markForCheck();
+        if (data !== null) {
+            this.flashMessage = null;
+            this.flashErrorMessage = null;
 
+            const confirmation = this._fuseConfirmationService.open({
+                title: 'ยืนยันคำสั่งซื้อ',
+                message: 'คุณต้องการยืนยันคำสั่งซื้อใช่หรือไม่ ?',
+                icon: {
+                    show: true,
+                    name: 'heroicons_outline:plus-circle',
+                    color: 'info',
+                },
+                actions: {
+                    confirm: {
+                        show: true,
+                        label: 'ยืนยัน',
+                        color: 'primary',
+                    },
+                    cancel: {
+                        show: true,
+                        label: 'ยกเลิก',
+                    },
+                },
+                dismissible: true,
+            });
+
+            // Subscribe to the confirmation dialog closed action
+            confirmation.afterClosed().subscribe((result) => {
+                // If the confirm button pressed...
+                if (result === 'confirmed') {
+                    const formData = new FormData();
+
+                    this._Service.postConfirmOrder(data).subscribe({
+                        next: (resp: any) => {
+                            // this.dialogRef.close();
+                            this.rerender();
+                            this._changeDetectorRef.markForCheck();
+                        },
+                        error: (err: any) => {
+                            this._fuseConfirmationService.open({
+                                title: 'กรุณาระบุข้อมูล',
+                                message: err.error.message,
+                                icon: {
+                                    show: true,
+                                    name: 'heroicons_outline:exclamation',
+                                    color: 'warning',
+                                },
+                                actions: {
+                                    confirm: {
+                                        show: false,
+                                        label: 'ยืนยัน',
+                                        color: 'primary',
+                                    },
+                                    cancel: {
+                                        show: false,
+                                        label: 'ยกเลิก',
+                                    },
+                                },
+                                dismissible: true,
+                            });
+                            console.log(err.error.message);
+                        },
+                    });
+                }
+            });
+        }
+        // dialogRef.afterClosed().subscribe((item) => {
+        this.rerender();
+        this._changeDetectorRef.markForCheck();
+        // });
     }
+    createsubmitDialog(): void {}
 
     DelMulOrder() {
         if (this.DelOrder !== null) {
-            this._Service.postDelMulOrder(this.DelOrder,this.delivered_by).subscribe((res) => {
-                // console.log('pack', res);
-            });
-                
-        }
-        this._changeDetectorRef.markForCheck();
+            this._Service
+                .postDelMulOrder(this.DelOrder, this.delivered_by)
+                .subscribe((res) => {
+                    // console.log('pack', res);
+                });
+            this._changeDetectorRef.markForCheck();
 
+            this.flashMessage = null;
+            this.flashErrorMessage = null;
+
+            const confirmation = this._fuseConfirmationService.open({
+                title: 'ยืนยันคำสั่งซื้อ',
+                message: 'คุณต้องการยืนยันคำสั่งซื้อใช่หรือไม่ ?',
+                icon: {
+                    show: true,
+                    name: 'heroicons_outline:plus-circle',
+                    color: 'info',
+                },
+                actions: {
+                    confirm: {
+                        show: true,
+                        label: 'ยืนยัน',
+                        color: 'primary',
+                    },
+                    cancel: {
+                        show: true,
+                        label: 'ยกเลิก',
+                    },
+                },
+                dismissible: true,
+            });
+
+            // Subscribe to the confirmation dialog closed action
+            confirmation.afterClosed().subscribe((result) => {
+                // If the confirm button pressed...
+                if (result === 'confirmed') {
+                    const formData = new FormData();
+
+                    this._Service
+                        .postDelMulOrder(this.DelOrder, this.delivered_by)
+                        .subscribe({
+                            next: (resp: any) => {
+                                // this.dialogRef.close();
+                                this.rerender();
+                                this._changeDetectorRef.markForCheck();
+                            },
+                            error: (err: any) => {
+                                this._fuseConfirmationService.open({
+                                    title: 'กรุณาระบุข้อมูล',
+                                    message: err.error.message,
+                                    icon: {
+                                        show: true,
+                                        name: 'heroicons_outline:exclamation',
+                                        color: 'warning',
+                                    },
+                                    actions: {
+                                        confirm: {
+                                            show: false,
+                                            label: 'ยืนยัน',
+                                            color: 'primary',
+                                        },
+                                        cancel: {
+                                            show: false,
+                                            label: 'ยกเลิก',
+                                        },
+                                    },
+                                    dismissible: true,
+                                });
+                                console.log(err.error.message);
+                            },
+                        });
+                }
+            });
+        }
+        // dialogRef.afterClosed().subscribe((item) => {
+        this.rerender();
+        this._changeDetectorRef.markForCheck();
+        // });
+    }
+
+    rerender(): void {
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            dtInstance.ajax.reload();
+        });
     }
 
     ngOnInit(): void {
@@ -375,12 +505,14 @@ export class SaleOrderListComponent
         this.ConfirmOrder3 = [];
         this.DelOrder = [];
 
-        this._Service.get_delivered_by().subscribe(res=>{
-            console.log("del data", res)
-            this.delivered = res
-            console.log("delivered data", this.delivered)
+        this._Service.get_delivered_by().subscribe((res) => {
+            console.log('del data', res);
+            this.delivered = res;
+            console.log('delivered data', this.delivered);
+        });
 
-        })
+        this._changeDetectorRef.markForCheck();
+
     }
 
     pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 };
@@ -445,6 +577,8 @@ export class SaleOrderListComponent
             pageLength: 10,
             serverSide: true,
             processing: true,
+            order: [[4, 'desc']],
+
             language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
             },
@@ -497,6 +631,8 @@ export class SaleOrderListComponent
             pageLength: 10,
             serverSide: true,
             processing: true,
+            order: [[4, 'desc']],
+
             language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
             },
@@ -549,6 +685,8 @@ export class SaleOrderListComponent
             pageLength: 10,
             serverSide: true,
             processing: true,
+            order: [[4, 'desc']],
+
             language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
             },
@@ -600,6 +738,8 @@ export class SaleOrderListComponent
             pageLength: 10,
             serverSide: true,
             processing: true,
+            order: [[4, 'desc']],
+
             language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
             },
@@ -651,6 +791,8 @@ export class SaleOrderListComponent
             pageLength: 10,
             serverSide: true,
             processing: true,
+            order: [[4, 'desc']],
+
             language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
             },
@@ -702,6 +844,8 @@ export class SaleOrderListComponent
             pageLength: 10,
             serverSide: true,
             processing: true,
+            order: [[4, 'desc']],
+
             language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
             },
@@ -753,6 +897,8 @@ export class SaleOrderListComponent
             pageLength: 10,
             serverSide: true,
             processing: true,
+            order: [[4, 'desc']],
+
             language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
             },
@@ -803,6 +949,8 @@ export class SaleOrderListComponent
             pageLength: 10,
             serverSide: true,
             processing: true,
+            order: [[4, 'desc']],
+
             language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
             },
