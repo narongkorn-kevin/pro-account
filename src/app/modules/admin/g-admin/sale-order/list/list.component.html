@@ -18,6 +18,10 @@
                 <span class="ml-2 mr-1">สร้างคำสั่งซื้อ</span>
             </a>
 
+            <button mat-icon-button color="" (click)="rerender()" title="rerender">
+                <mat-icon>remove_red_eye</mat-icon>
+            </button>
+
         </div>
     </div>
 
@@ -31,15 +35,16 @@
                 <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll border-b">
                     <mat-tab-group animationDuration="0ms">
                         <mat-tab>
-                            <ng-template mat-tab-label>
+                            <ng-template mat-tab-label class="bg-[#bbffdd] rounded-full relative">
                                 <div>ทั้งหมด</div>
                                 <div
                                     class="pop-up absolute w-[30px] h-[30px] right-[10px] leading-[30px] rounded-full text-center bg-[#bbb] text-[#fff]">
                                     {{total_t}}</div>
 
+                                <!-- <div matBadge="" matBadgePosition="before" class="job-badge"></div> -->
                             </ng-template>
                             <div class="table-responsive overflow-auto">
-                                <table datatable [dtOptions]="dtOptionsTotal"
+                                <table datatable [dtOptions]="dtOptionsAll[0]" id="dtOptions0"
                                     class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400">
                                     <thead>
                                         <tr>
@@ -50,6 +55,7 @@
 
                                                 </mat-checkbox>
                                             </th>
+
                                             <th>ดูข้อมูล</th>
                                             <th>ลำดับ</th>
                                             <th>ช่องทาง</th>
@@ -60,23 +66,27 @@
                                             <!-- <th>บริการขนส่ง</th> -->
                                             <th>การชำระเงิน</th>
                                             <th>ยอดรวม</th>
-                                            <th>แก้ไขข้อมูล</th>
+                                            <th>แก้ไข</th>
                                         </tr>
                                     </thead>
                                     <tbody *ngIf="dataRow_t?.length != 0">
                                         <tr *ngFor="let item of dataRow_t; let i = index" style="cursor: pointer;">
 
                                             <td style="min-width: 50px;">
-                                                <mat-checkbox [checked]="allComplete_all">
+                                                <mat-checkbox [checked]="allComplete_all" (change)="tick(item.id)">
 
 
                                                 </mat-checkbox>
                                             </td>
                                             <td style="width: 100px; min-width: 100px;">
+
                                                 <button mat-icon-button color="" (click)="view(item.id)"
                                                     title="ดูรายละเอียดข้อมูล">
                                                     <mat-icon>remove_red_eye</mat-icon>
                                                 </button>
+                                                <!-- <button mat-icon-button color="" (click)="print(item.id)" title="พิมพ์ใบคำสั่งซื้อ">
+                                                    <mat-icon>print</mat-icon>
+                                                </button> -->
                                             </td>
                                             <td style="width: 50px; min-width: 50px;">{{ pages.begin + (i + 1) }}</td>
                                             <!-- <td style="width: 50px; min-width: 50px;">{{ item.No }}</td> -->
@@ -134,14 +144,10 @@
                                                 COD</td>
                                             <td style="width: 100px; min-width: 100px;"
                                                 *ngIf="item.payment_type === 'transfer'"> โอนเงิน</td>
-                                            <td style="width: 100px; min-width: 100px;"
-                                                *ngIf="item.payment_type !== 'COD' && item.payment_type !== 'transfer'">
-                                                -</td>
-
                                             <td style="width: 100px; min-width: 100px;">{{ item.total | number : '1.2-2'
                                                 }}</td>
-                                            <!-- <td style="width: 100px; min-width: 100px;">{{ item.payment_qty | number :
-                                                '1.2-2' }}</td> -->
+                                            <td style="width: 100px; min-width: 100px;">{{ item.payment_qty | number :
+                                                '1.2-2' }}</td>
                                             <!-- <td>{{ item.date_time | thaiDate}}</td> -->
                                             <!-- <td>{{ item.created_at | date: 'dd/MM/yyyy hh:mm' }}</td> -->
                                             <td>
@@ -155,12 +161,14 @@
                                     </tbody>
                                     <tbody *ngIf="dataRow_t?.length == 0">
                                         <tr>
-                                            <td colspan="11" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                            <td colspan="6" class="no-data-available text-center">ไม่มีข้อมูล !</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
+
                         </mat-tab>
+
                         <mat-tab>
                             <ng-template mat-tab-label>
                                 <div>ยังไม่ชำระ</div>
@@ -178,7 +186,7 @@
 
                             </div>
                             <div class="table-responsive">
-                                <table datatable [dtOptions]="dtOptionsOrder"
+                                <table datatable [dtOptions]="dtOptionsAll[1]" id="dtOptions1"
                                     class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
                                     style="width: 100%">
                                     <thead>
@@ -196,12 +204,12 @@
                                             <th>วันที่สั่งซื้อ</th>
                                             <th>หมายเลขคำสั่งซื้อ</th>
                                             <th>ลูกค้า</th>
-                                            <th>สถานะ</th>
+                                            <!-- <th>สถานะ</th> -->
                                             <!-- <th>บริการขนส่ง</th> -->
                                             <th>การชำระเงิน</th>
                                             <th>ยอดรวม</th>
+                                            <th>จ่ายแล้ว</th>
                                             <th>แก้ไข</th>
-                                            <!-- <th>จ่ายแล้ว</th> -->
                                         </tr>
                                     </thead>
                                     <tbody *ngIf="dataRow_o?.length != 0">
@@ -214,7 +222,7 @@
                                                 </mat-checkbox>
                                             </td>
                                             <td style="width: 100px; min-width: 100px;">
-                          
+
                                                 <button mat-icon-button color="" (click)="view(item.id)"
                                                     title="ดูรายละเอียดข้อมูล">
                                                     <mat-icon>remove_red_eye</mat-icon>
@@ -240,15 +248,15 @@
                                             <td style="width: 150px; min-width: 150px;">{{ item.order_id }}</td>
                                             <td style="width: 180px; min-width: 180px;">{{ item.name }}</td>
 
-                                            <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'order'">
+                                            <!-- <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'order'">
                                                 <span
                                                     class="bg-yellow-100 text-yellow-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">ยังไม่จ่าย</span>
                                             </td>
                                             <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'paid'">
                                                 <span
                                                     class="bg-green-300 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">จ่ายแล้ว</span>
-                                            </td>
-                                            <td style="width: 100px; min-width: 100px;"
+                                            </td> -->
+                                            <!-- <td style="width: 100px; min-width: 100px;"
                                                 *ngIf="item.status === 'confirm'">
                                                 <span
                                                     class="bg-blue-100 text-blue-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">ยืนยัน</span>
@@ -272,7 +280,7 @@
                                                 *ngIf="item.status === 'failed'">
                                                 <span
                                                     class="bg-red-100 text-red-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ไม่สำเร็จ</span>
-                                            </td>
+                                            </td> -->
                                             <td style="width: 100px; min-width: 100px;"
                                                 *ngIf="item.payment_type === 'COD'">
                                                 COD</td>
@@ -282,7 +290,10 @@
                                                 *ngIf="item.payment_type !== 'COD' && item.payment_type !== 'transfer'">
                                                 -</td>
 
-                                            <td style="width: 100px; min-width: 100px;">{{ item.total | number : '1.2-2'}}</td>
+                                            <td style="width: 100px; min-width: 100px;">{{ item.total | number :
+                                                '1.2-2'}}</td>
+                                            <td style="width: 100px; min-width: 100px;">{{ item.shipping_price | number
+                                                : '1.2-2'}}</td>
                                             <td style="width: 100px; min-width: 100px;">
                                                 <button mat-icon-button color="" (click)="edit(item.id)"
                                                     title="แก้ไขข้อมูล">
@@ -292,6 +303,7 @@
                                             <!-- <td style="width: 100px; min-width: 100px;">{{ item.payment_qty | number : '1.2-2' }}</td> -->
                                             <!-- <td>{{ item.date_time | thaiDate}}</td> -->
                                             <!-- <td>{{ item.created_at | date: 'dd/MM/yyyy hh:mm' }}</td> -->
+
 
                                         </tr>
                                     </tbody>
@@ -320,7 +332,7 @@
 
                             </div>
                             <div class="table-responsive">
-                                <table datatable [dtOptions]="dtOptionsPaid"
+                                <table datatable [dtOptions]="dtOptionsAll[2]" id="dtOptions2"
                                     class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
                                     style="width: 100%">
                                     <thead>
@@ -338,7 +350,7 @@
                                             <th>วันที่สั่งซื้อ</th>
                                             <th>หมายเลขคำสั่งซื้อ</th>
                                             <th>ลูกค้า</th>
-                                            <th>สถานะ</th>
+                                            <!-- <th>สถานะ</th> -->
                                             <!-- <th>บริการขนส่ง</th> -->
                                             <th>การชำระเงิน</th>
                                             <th>ยอดรวม</th>
@@ -358,10 +370,14 @@
                                                 </mat-checkbox>
                                             </td>
                                             <td style="width: 100px; min-width: 100px;">
+
                                                 <button mat-icon-button color="" (click)="view(item.id)"
-                                                    title="รหัส{{ item.order_id }}  ชื่อ {{ item.name  }}  จำนวน{{ item.payment_qty | number : '1.2-2' }}  ยอดรวมสุทธิ{{ item.total | number : '1.2-2' }} ">
+                                                    title="ดูรายละเอียดข้อมูล">
                                                     <mat-icon>remove_red_eye</mat-icon>
                                                 </button>
+                                                <!-- <button mat-icon-button color="" (click)="print(item.id)" title="พิมพ์ใบคำสั่งซื้อ">
+                                                    <mat-icon>print</mat-icon>
+                                                </button> -->
                                             </td>
 
 
@@ -382,15 +398,15 @@
                                             <td style="width: 150px; min-width: 150px;">{{ item.order_id }}</td>
                                             <td style="width: 180px; min-width: 180px;">{{ item.name }}</td>
 
-                                            <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'order'">
+                                            <!-- <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'order'">
                                                 <span
                                                     class="bg-yellow-100 text-yellow-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">ยังไม่จ่าย</span>
                                             </td>
                                             <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'paid'">
                                                 <span
                                                     class="bg-green-300 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">จ่ายแล้ว</span>
-                                            </td>
-                                            <td style="width: 100px; min-width: 100px;"
+                                            </td> -->
+                                            <!-- <td style="width: 100px; min-width: 100px;"
                                                 *ngIf="item.status === 'confirm'">
                                                 <span
                                                     class="bg-blue-100 text-blue-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">ยืนยัน</span>
@@ -414,7 +430,7 @@
                                                 *ngIf="item.status === 'failed'">
                                                 <span
                                                     class="bg-red-100 text-red-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ไม่สำเร็จ</span>
-                                            </td>
+                                            </td> -->
                                             <td style="width: 100px; min-width: 100px;"
                                                 *ngIf="item.payment_type === 'COD'">
                                                 COD</td>
@@ -466,7 +482,7 @@
 
                             </div>
                             <div class="table-responsive">
-                                <table datatable [dtOptions]="dtOptionsPaid"
+                                <table datatable [dtOptions]="dtOptionsAll[3]" id="dtOptions3"
                                     class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
                                     style="width: 100%">
                                     <thead>
@@ -478,17 +494,18 @@
 
                                                 </mat-checkbox>
                                             </th>
-                                            <th>จัดการ</th>
+                                            <th>ดูข้อมูล</th>
                                             <th>ลำดับ</th>
-                                            <th style="width: 100px;">ช่องทาง</th>
+                                            <th>ช่องทาง</th>
                                             <th>วันที่สั่งซื้อ</th>
                                             <th>หมายเลขคำสั่งซื้อ</th>
                                             <th>ลูกค้า</th>
-                                            <th>สถานะ</th>
+                                            <!-- <th>สถานะ</th> -->
                                             <!-- <th>บริการขนส่ง</th> -->
                                             <th>การชำระเงิน</th>
                                             <th>ยอดรวม</th>
                                             <th>จ่ายแล้ว</th>
+                                            <th>แก้ไข</th>
                                         </tr>
                                     </thead>
                                     <tbody *ngIf="dataRow_p?.length != 0">
@@ -501,10 +518,7 @@
                                                 </mat-checkbox>
                                             </td>
                                             <td style="width: 100px; min-width: 100px;">
-                                                <button mat-icon-button color="" (click)="edit(item.id)"
-                                                    title="แก้ไขข้อมูล">
-                                                    <mat-icon>edit</mat-icon>
-                                                </button>
+
                                                 <button mat-icon-button color="" (click)="view(item.id)"
                                                     title="ดูรายละเอียดข้อมูล">
                                                     <mat-icon>remove_red_eye</mat-icon>
@@ -530,15 +544,15 @@
                                             <td style="width: 150px; min-width: 150px;">{{ item.order_id }}</td>
                                             <td style="width: 180px; min-width: 180px;">{{ item.name }}</td>
 
-                                            <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'order'">
+                                            <!-- <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'order'">
                                                 <span
                                                     class="bg-yellow-100 text-yellow-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">ยังไม่จ่าย</span>
                                             </td>
                                             <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'paid'">
                                                 <span
                                                     class="bg-green-300 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">จ่ายแล้ว</span>
-                                            </td>
-                                            <td style="width: 100px; min-width: 100px;"
+                                            </td> -->
+                                            <!-- <td style="width: 100px; min-width: 100px;"
                                                 *ngIf="item.status === 'confirm'">
                                                 <span
                                                     class="bg-blue-100 text-blue-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">ยืนยัน</span>
@@ -562,7 +576,7 @@
                                                 *ngIf="item.status === 'failed'">
                                                 <span
                                                     class="bg-red-100 text-red-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ไม่สำเร็จ</span>
-                                            </td>
+                                            </td> -->
                                             <td style="width: 100px; min-width: 100px;"
                                                 *ngIf="item.payment_type === 'COD'">
                                                 COD</td>
@@ -578,6 +592,13 @@
                                                 '1.2-2' }}</td>
                                             <!-- <td>{{ item.date_time | thaiDate}}</td> -->
                                             <!-- <td>{{ item.created_at | date: 'dd/MM/yyyy hh:mm' }}</td> -->
+                                            <td style="width: 100px; min-width: 100px;">
+                                                <button mat-icon-button color="" (click)="edit(item.id)"
+                                                    title="แก้ไขข้อมูล">
+                                                    <mat-icon>edit</mat-icon>
+                                                </button>
+
+                                            </td>
 
                                         </tr>
                                     </tbody>
@@ -598,17 +619,19 @@
 
                             </ng-template>
                             <div class="table-responsive">
-                                <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4 justify-end m-5 items-center">
+                                <div
+                                    class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4 justify-end m-5 items-center">
 
-                                    <div>
+                                    <div class="w-80">
                                         <mat-form-field class="w-30">
-                                            <mat-select [(ngModel)]="delivered_by">
-                                                <mat-option *ngFor="let item of delivered" [value]="item.id" >
-                                                    <!-- <img src='{{item.image}}'>  -->
-                                                    {{item.name}}
-                                              </mat-option>
+                                            <mat-select [(ngModel)]="delivered_by" placeholder="- กรุณาเลือกขนส่ง -">
+                                                <mat-option *ngFor="let item of delivered" [value]="item.id"
+                                                    class="flex flex-row items-center justify-center h-16" style="border-bottom: 2px solid #c6c6c655 !important;">
+                                                    <img src='{{item.image}}' class="w-1/3">
+                                                    <span class="w-2/3 text-lg">{{item.name}}</span>
+                                                </mat-option>
                                             </mat-select>
-                                          </mat-form-field>
+                                        </mat-form-field>
                                     </div>
                                     <button class="ml-4" mat-flat-button [color]="'primary'" (click)="DelMulOrder()">
                                         <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
@@ -616,7 +639,7 @@
                                     </button>
 
                                 </div>
-                                <table datatable [dtOptions]="dtOptionsConfirm"
+                                <table datatable [dtOptions]="dtOptionsAll[4]" id="dtOptions4"
                                     class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
                                     style="width: 100%">
                                     <thead>
@@ -628,17 +651,18 @@
 
                                                 </mat-checkbox>
                                             </th>
-                                            <th>จัดการ</th>
+                                            <th>ดูข้อมูล</th>
                                             <th>ลำดับ</th>
                                             <th style="width: 100px;">ช่องทาง</th>
                                             <th>วันที่สั่งซื้อ</th>
                                             <th>หมายเลขคำสั่งซื้อ</th>
                                             <th>ลูกค้า</th>
-                                            <th>สถานะ</th>
+                                            <!-- <th>สถานะ</th> -->
                                             <!-- <th>บริการขนส่ง</th> -->
                                             <th>การชำระเงิน</th>
                                             <th>ยอดรวม</th>
                                             <th>จ่ายแล้ว</th>
+                                            <th>แก้ไข</th>
                                         </tr>
                                     </thead>
                                     <tbody *ngIf="dataRow_c?.length != 0">
@@ -651,10 +675,7 @@
                                                 </mat-checkbox>
                                             </td>
                                             <td style="width: 100px; min-width: 100px;">
-                                                <button mat-icon-button color="" (click)="edit(item.id)"
-                                                    title="แก้ไขข้อมูล">
-                                                    <mat-icon>edit</mat-icon>
-                                                </button>
+
                                                 <button mat-icon-button color="" (click)="view(item.id)"
                                                     title="ดูรายละเอียดข้อมูล">
                                                     <mat-icon>remove_red_eye</mat-icon>
@@ -680,15 +701,15 @@
                                             <td style="width: 150px; min-width: 150px;">{{ item.order_id }}</td>
                                             <td style="width: 180px; min-width: 180px;">{{ item.name }}</td>
 
-                                            <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'order'">
+                                            <!-- <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'order'">
                                                 <span
                                                     class="bg-yellow-100 text-yellow-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">ยังไม่จ่าย</span>
                                             </td>
                                             <td style="width: 100px; min-width: 100px;" *ngIf="item.status === 'paid'">
                                                 <span
                                                     class="bg-green-300 text-green-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">จ่ายแล้ว</span>
-                                            </td>
-                                            <td style="width: 100px; min-width: 100px;"
+                                            </td> -->
+                                            <!-- <td style="width: 100px; min-width: 100px;"
                                                 *ngIf="item.status === 'confirm'">
                                                 <span
                                                     class="bg-blue-100 text-blue-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">ยืนยัน</span>
@@ -712,7 +733,7 @@
                                                 *ngIf="item.status === 'failed'">
                                                 <span
                                                     class="bg-red-100 text-red-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ไม่สำเร็จ</span>
-                                            </td>
+                                            </td> -->
                                             <td style="width: 100px; min-width: 100px;"
                                                 *ngIf="item.payment_type === 'COD'">
                                                 COD</td>
@@ -728,6 +749,13 @@
                                                 '1.2-2' }}</td>
                                             <!-- <td>{{ item.date_time | thaiDate}}</td> -->
                                             <!-- <td>{{ item.created_at | date: 'dd/MM/yyyy hh:mm' }}</td> -->
+                                            <td style="width: 100px; min-width: 100px;">
+                                                <button mat-icon-button color="" (click)="edit(item.id)"
+                                                    title="แก้ไขข้อมูล">
+                                                    <mat-icon>edit</mat-icon>
+                                                </button>
+
+                                            </td>
 
                                         </tr>
                                     </tbody>

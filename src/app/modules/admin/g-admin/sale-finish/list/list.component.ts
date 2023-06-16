@@ -168,10 +168,10 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
         this.loadTableTotal();
-        this.loadTableOrder();
-        this.loadTablePaid();
-        this.loadTableCondition();
-        this.loadTableConfirm();
+        // this.loadTableOrder();
+        // this.loadTablePaid();
+        // this.loadTableCondition();
+        // this.loadTableConfirm();
         this.loadTablePacking();
         this.loadTableDelivery();
         this.loadTableFinish();
@@ -183,6 +183,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
         // console.log('stest',this.line)
 
         // this.DelOrder = [];
+        this._changeDetectorRef.markForCheck();
+
     }
 
     pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
@@ -206,6 +208,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
             },
             ajax: (dataTablesParameters: any, callback) => {
                 // dataTablesParameters.status = 1;
+                console.log('respppp resp.totalresp.totalresp.total9845632189465123')
                 that._Service.getsaleorderPage(dataTablesParameters).subscribe((resp) => {
                     this.dataRow_t = resp.data
                     this.total_t = resp.total
@@ -251,6 +254,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
             pageLength: 10,
             serverSide: true,
             processing: true,
+            order: [[4, 'desc']],
+
             language: {
                 "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
             },
@@ -302,6 +307,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
             pageLength: 10,
             serverSide: true,
             processing: true,
+            order: [[4, 'desc']],
+
             language: {
                 "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
             },
@@ -352,6 +359,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
             pageLength: 10,
             serverSide: true,
             processing: true,
+            order: [[4, 'desc']],
+
             language: {
                 "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
             },
@@ -401,6 +410,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
             pageLength: 10,
             serverSide: true,
             processing: true,
+            order: [[4, 'desc']],
+
             language: {
                 "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
             },
@@ -450,6 +461,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
             pageLength: 10,
             serverSide: true,
             processing: true,
+            order: [[4, 'desc']],
+
             language: {
                 "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
             },
@@ -499,6 +512,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
             pageLength: 10,
             serverSide: true,
             processing: true,
+            order: [[4, 'desc']],
+
             language: {
                 "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
             },
@@ -549,6 +564,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
             pageLength: 10,
             serverSide: true,
             processing: true,
+            order: [[4, 'desc']],
+
             language: {
                 "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
             },
@@ -597,6 +614,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
             pageLength: 10,
             serverSide: true,
             processing: true,
+            order: [[4, 'desc']],
+
             language: {
                 "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
             },
@@ -636,6 +655,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
                 { data: 'payment_qty' },
             ]
         };
+        this._changeDetectorRef.markForCheck();
 
     }
     /**

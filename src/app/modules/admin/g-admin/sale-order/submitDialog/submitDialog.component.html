@@ -1,0 +1,137 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-1 sm:pb-4 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    สร้างตำแหน่งใหม่
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto">
+        <form class="flex flex-col mt-3 p-2 pb-4 bg-card shadow overflow-hidden ng-valid" [formGroup]="formData">
+            <div class="flex flex-col sm:flex-row p-8">
+
+
+                <div class="flex flex-auto flex-wrap">
+
+                    <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                        <!-- name -->
+
+                        <div class="flex mt-4">
+                            <mat-form-field class="w-full pr-2">
+                                <mat-label class="text-xl">ชื่อ</mat-label>
+                                <input matInput [formControlName]="'first_name'">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                        <!-- name -->
+
+                        <div class="flex mt-4">
+                            <mat-form-field class="w-full pr-2">
+                                <mat-label class="text-xl">นามสกุล</mat-label>
+                                <input matInput [formControlName]="'last_name'">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                        <!-- name -->
+
+                        <div class="flex mt-4">
+                            <mat-form-field class="w-full pr-2">
+                                <mat-label class="text-xl">อีเมล์</mat-label>
+                                <input matInput [formControlName]="'email'">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                        <!-- name -->
+
+                        <div class="flex mt-4">
+                            <mat-form-field class="w-full pr-2">
+                                <mat-label class="text-xl">รหัสผ่าน</mat-label>
+                                <input matInput [formControlName]="'password'">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                        <!-- name -->
+
+                        <div class="flex mt-4">
+                            <mat-form-field class="w-full pr-2">
+                                <mat-label class="text-xl">เบอร์</mat-label>
+                                <input matInput [formControlName]="'tel1'">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                        <!-- name -->
+
+                        <div class="flex mt-4">
+                            <mat-form-field class="w-full pr-2">
+                                <mat-label class="text-xl">เบอร์สำรอง</mat-label>
+                                <input matInput [formControlName]="'tel2'">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                        <!-- name -->
+
+                        <div class="flex mt-4">
+                            <mat-form-field class="w-full pr-2">
+                                <mat-label class="text-xl">ชื่อร้าน</mat-label>
+                                <input matInput [formControlName]="'shop_name'">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                        <!-- name -->
+
+                        <div class="flex mt-4">
+                            <mat-form-field class="w-full pr-2">
+                                <mat-label class="text-xl">ที่อยู่</mat-label>
+                                <input matInput [formControlName]="'shop_address'">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-full lg:w-4/4 sm:pl-8">
+
+                        <div class="flex ">
+                            <div class="flex justify-center items-center w-full pb-5">
+                                <ngx-dropzone style="width: 100%; height: 300px;" (change)="onSelect($event)">
+                                    <ngx-dropzone-label>เลือกรูป โปรไฟล์ </ngx-dropzone-label>
+                                    <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" [file]="f" (removed)="onRemove(f)">
+                                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                    </ngx-dropzone-image-preview>
+                                </ngx-dropzone>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- button -->
+            <div class="flex items-center justify-end w-full border-t px-8 py-4">
+                <div class="flex items-center justify-end">
+                    <a class="ml-4" mat-flat-button (click)="onClose()">
+                        <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                        ยกเลิก
+                    </a>
+                    <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="createsubmitDialog()">
+                        <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                        ยืนยัน
+                    </button>
+                </div>
+            </div>
+        </form>
+        <pre>
+        </pre>
+    </div>
+</div>

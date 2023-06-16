@@ -50,6 +50,7 @@ import { ViewSaleOrderComponent } from './view-sale-order/view-sale-order.compon
 import { ListSalePageComponent } from './list -sale-page/list.component';
 import { AddtrackComponent } from './add-track/add-track.component';
 import { ItemReturnComponent } from './item-return/item-return.component';
+import { submitDialogComponent } from './submitDialog/submitDialog.component';
 
 
 
@@ -63,6 +64,8 @@ import { ItemReturnComponent } from './item-return/item-return.component';
         ListSalePageComponent,
         AddtrackComponent,
         ItemReturnComponent,
+        submitDialogComponent,
+        
     ],
     imports: [
         RouterModule.forChild(saleorderRoute),
