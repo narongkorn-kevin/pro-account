@@ -642,6 +642,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 type: 'basic',
                 link: '/wallet-bag-owner/list',
             },
+            {
+                id: 'fb-page',
+                title: 'จัดการเพจ',
+                icon: 'mat_outline:account_balance_wallet',
+                type: 'basic',
+                link: '/fb-page/list',
+            },
             // {
             //     id: 'position',
             //     title: 'ตั้งค่า live สดสินค้า',
