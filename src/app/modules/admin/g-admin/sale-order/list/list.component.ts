@@ -40,6 +40,7 @@ import {
 } from '../sale-order.types';
 import { SaleOrderService } from '../sale-order.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { DataTableDirective } from 'angular-datatables';
 // import { ImportOSMComponent } from '../card/import-osm/import-osm.component';
 
 @Component({
@@ -342,6 +343,14 @@ export class SaleOrderListComponent
         this._changeDetectorRef.markForCheck();
 
     }
+    @ViewChild(DataTableDirective)
+  dtElement!: DataTableDirective;
+
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.ajax.reload();
+    });
+  }
 
     DelMulOrder() {
         if (this.DelOrder !== null) {

@@ -19,7 +19,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { EditPositionComponent } from '../edit-position/edit-position.component';
 import { NewPositionComponent } from '../new-position/new-position.component';
 import { DataTableDirective } from 'angular-datatables';
-import { NewPositionAdminComponent } from '../new-position-admin/new-position.component';
+import { NewPositionAdminComponent } from '../new-position copy/new-position.component';
 
 @Component({
     selector: 'position-list',
