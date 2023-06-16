@@ -75,6 +75,7 @@ export class SaleOrderListComponent
     public total_t = 0;
     public total_o = 0;
     public total_p = 0;
+    public total_co = 0;
     public total_c = 0;
     public total_d = 0;
     public total_f = 0;
@@ -90,7 +91,9 @@ export class SaleOrderListComponent
     dataRow_t: any = [];
     dataRow_o: any = [];
     dataRow_p: any = [];
+    dataRow_co: any = [];
     dataRow_c: any = [];
+
     dataRow_pc: any = [];
     dataRow_d: any = [];
     dataRow_reject: any = [];
@@ -759,12 +762,13 @@ export class SaleOrderListComponent
                 url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
             },
             ajax: (dataTablesParameters: any, callback) => {
-                dataTablesParameters.status = 'paid';
+                dataTablesParameters.status = 'only_item';
+                // only_deriverly , only_item
                 that._Service
                     .getsaleorderPage(dataTablesParameters)
                     .subscribe((resp) => {
-                        this.dataRow_p = resp.data;
-                        this.total_p = resp.total;
+                        this.dataRow_co = resp.data;
+                        this.total_co = resp.total;
                         console.log(resp.total, 'resp_paid condition paid')
                         this.pages.current_page = resp.current_page;
                         this.pages.last_page = resp.last_page;

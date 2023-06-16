@@ -470,7 +470,7 @@
                                 <div>ชำระมีเงื่อนไข</div>
                                 <div
                                     class="pop-up absolute w-[30px] h-[30px] right-[10px] leading-[30px] rounded-full text-center bg-[#bbb] text-[#fff]">
-                                    {{total_p}}</div>
+                                    {{total_co}}</div>
 
                             </ng-template>
                             <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4 justify-end m-5">
@@ -489,7 +489,7 @@
                                         <tr>
                                             <th>
                                                 <mat-checkbox class="example-margin" [checked]="allComplete_condition"
-                                                    (change)="tickAllConfirmOrder($event, dataRow_p, 3) ">
+                                                    (change)="tickAllConfirmOrder($event, dataRow_co, 3) ">
 
 
                                                 </mat-checkbox>
@@ -508,8 +508,8 @@
                                             <th>แก้ไข</th>
                                         </tr>
                                     </thead>
-                                    <tbody *ngIf="dataRow_p?.length != 0">
-                                        <tr *ngFor="let item of dataRow_p; let i = index" style="cursor: pointer;">
+                                    <tbody *ngIf="dataRow_co?.length != 0">
+                                        <tr *ngFor="let item of dataRow_co; let i = index" style="cursor: pointer;">
                                             <td style="min-width: 50px;">
                                                 <mat-checkbox [checked]="allComplete_condition"
                                                     (change)="tickConfirmOrder($event, item.id, 3)">
