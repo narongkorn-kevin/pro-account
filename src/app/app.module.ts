@@ -22,6 +22,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import {MatCardModule} from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmdialogeComponent } from './modules/admin/g-admin/livesteam/confirmdialoge/confirmdialoge.component';
+import { FbPageComponent } from './modules/admin/g-admin/fb-page/fb-page.component';
 
 
 const routerConfig: ExtraOptions = {
@@ -37,6 +38,7 @@ const routerConfig: ExtraOptions = {
         SaleOrderComponent,
 
         SalePageComponent,
+          
 
     ],
 

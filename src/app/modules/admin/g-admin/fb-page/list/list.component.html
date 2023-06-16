@@ -9,15 +9,15 @@
         </div>
         <!-- Title -->
         
-        <div class="text-4xl font-extrabold tracking-tight">ข้อมูลแม่ค้า</div>
+        <div class="text-4xl font-extrabold tracking-tight">ข้อมูลเพจ</div>
         <!-- Actions -->
         <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
 
             <!-- Add product button -->
-            <a (click)="New()" class="ml-4" mat-flat-button [color]="'primary'">
+            <!-- <a (click)="New()" class="ml-4" mat-flat-button [color]="'primary'">
                 <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
-                <span class="ml-2 mr-1">เพิ่มแอดมิน</span>
-            </a>
+                <span class="ml-2 mr-1">เพิ่มประเภท</span>
+            </a> -->
 
         </div>
     </div>
@@ -27,6 +27,7 @@
     <!-- Main -->
     <div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
     
+        <button mat-flat-button (click)="openPage()" class="px-6 ml-3 mat-primary btn btn-success btn-rounded">จัดการเพจ</button>
         
         <div class="flex flex-col p-3 sm:p-10">
             <div class="overflow-auto  bg-white shadow sm:rounded-lg">
@@ -36,34 +37,32 @@
                     <table datatable [dtOptions]="dtOptions" class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400" style="width: 100%">
                         <thead>
                             <tr>
-                                <th>จัดการ</th>
+                                <!-- <th>จัดการ</th> -->
                                 <th>ลำดับ</th>
-                                <th>รหัสสมาชิก</th>                              
-                                <th>ชื่อ</th>
-                                <th>นามสกุล</th>
-                                <th>อีเมลล์</th>
-                                <!-- <th>แผนก</th>                                -->
-                                <th>ตำแหน่ง</th>
-                                <!-- <th>สาขา</th> -->
-                                <!-- <th>สถานะ</th> -->
-                                <!-- <th>สร้างโดย</th> -->
-                                <th>วันที่สร้าง</th>
+                                <th>ไอดีเพจ</th>                              
+                                <th>ชื่อเพจ</th>
+                                <th>รูปปก</th>
+                                
                             </tr>
                         </thead>
                         <tbody *ngIf="dataRow?.length != 0">
                             <tr *ngFor="let item of dataRow; let i = index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md">
-                                <td style="width: 80px; min-width: 80px;">
+                                <!-- <td style="width: 80px; min-width: 80px;">
                                     <button mat-icon-button (click)="edit(item.id)">
                                         <mat-icon>edit</mat-icon>
                                     </button>
+                                </td> -->
+                                <td style="width: 20px; ">{{  i+1 }}</td>
+                                <!-- <td style="width: 20px">{{ item?.user_id??"-" }}</td>                              -->
+                                <td style="width: 100px; min-width: 100px;">{{ item?.page_id??"-" }}</td>
+                                <td style="width: 100px; min-width: 100px;">{{ item?.name??"-" }}</td>
+                                <td>
+                                    <img [src]="item.image" class="h-20 w-20" />
                                 </td>
-                                <td style="width: 20px; ">{{ i+1 }}</td>
-                                <td style="width: 20px">{{ item?.user_id??"-" }}</td>                             
-                                <td style="width: 100px; min-width: 100px;">{{ item?.first_name??"-" }}</td>
-                                <td style="width: 100px; min-width: 100px;">{{ item?.last_name??"-" }}</td>
+                                <!-- <td style="width: 100px; min-width: 100px;">{{ item?.last_name??"-" }}</td>
                                 <td style="width: 100px; min-width: 100px;">{{ item?.email??"-" }}</td>
                          
-                                <td style="width: 100px; min-width: 100px;">{{ item?.permission.name??"-" }}</td>
+                                <td style="width: 100px; min-width: 100px;">{{ item?.permission.name??"-" }}</td> -->
                                 <!-- <td style="width: 100px; min-width: 100px;">{{ item?.branch.name??"-" }}</td> -->
                                 <!-- <td style="width: 120px; min-width: 120px;">
                                     <div *ngIf="item.status == 1">
@@ -78,14 +77,14 @@
                                 <!-- <td style="width: 120px; min-width: 120px;">{{ item.create_by }}
                                 </td> -->
                                 <!--<td>{{ item.created_at | thaiDate }}</td> -->
-                                <td style="width: 120px; min-width: 120px;">{{ item?.created_at??"-" }}</td>
+                                <!-- <td style="width: 120px; min-width: 120px;">{{ item?.created_at??"-" }}</td> -->
                             </tr>
                         </tbody>
 
                         
                         <tbody *ngIf="dataRow?.length == 0">
                             <tr>
-                                <td colspan="8" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                <td colspan="4" class="no-data-available text-center">ไม่มีข้อมูล !</td>
                             </tr>
                         </tbody>
                     </table>

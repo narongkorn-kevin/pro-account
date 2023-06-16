@@ -40,8 +40,6 @@ import {
 } from '../sale-order.types';
 import { SaleOrderService } from '../sale-order.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { submitDialogComponent } from '../submitDialog/submitDialog.component';
-import { DataTableDirective } from 'angular-datatables';
 // import { ImportOSMComponent } from '../card/import-osm/import-osm.component';
 
 @Component({
@@ -327,74 +325,7 @@ export class SaleOrderListComponent
             this.flashMessage = null;
             this.flashErrorMessage = null;
 
-            const confirmation = this._fuseConfirmationService.open({
-                title: 'ยืนยันคำสั่งซื้อ',
-                message: 'คุณต้องการยืนยันคำสั่งซื้อใช่หรือไม่ ?',
-                icon: {
-                    show: true,
-                    name: 'heroicons_outline:plus-circle',
-                    color: 'info',
-                },
-                actions: {
-                    confirm: {
-                        show: true,
-                        label: 'ยืนยัน',
-                        color: 'primary',
-                    },
-                    cancel: {
-                        show: true,
-                        label: 'ยกเลิก',
-                    },
-                },
-                dismissible: true,
-            });
-
-            // Subscribe to the confirmation dialog closed action
-            confirmation.afterClosed().subscribe((result) => {
-                // If the confirm button pressed...
-                if (result === 'confirmed') {
-                    const formData = new FormData();
-
-                    this._Service.postConfirmOrder(data).subscribe({
-                        next: (resp: any) => {
-                            // this.dialogRef.close();
-                            this.rerender();
-                            this._changeDetectorRef.markForCheck();
-                        },
-                        error: (err: any) => {
-                            this._fuseConfirmationService.open({
-                                title: 'กรุณาระบุข้อมูล',
-                                message: err.error.message,
-                                icon: {
-                                    show: true,
-                                    name: 'heroicons_outline:exclamation',
-                                    color: 'warning',
-                                },
-                                actions: {
-                                    confirm: {
-                                        show: false,
-                                        label: 'ยืนยัน',
-                                        color: 'primary',
-                                    },
-                                    cancel: {
-                                        show: false,
-                                        label: 'ยกเลิก',
-                                    },
-                                },
-                                dismissible: true,
-                            });
-                            console.log(err.error.message);
-                        },
-                    });
-                }
-            });
-        }
-        // dialogRef.afterClosed().subscribe((item) => {
-        this.rerender();
-        this._changeDetectorRef.markForCheck();
-        // });
     }
-    createsubmitDialog(): void {}
 
     DelMulOrder() {
         if (this.DelOrder !== null) {
@@ -619,6 +550,7 @@ export class SaleOrderListComponent
                 // { data: 'delivery_by_id' },
                 { data: 'payment_type' },
                 { data: 'total' },
+                { data: 'actice', orderable: false },
             ],
         };
     }

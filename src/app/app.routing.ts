@@ -792,6 +792,13 @@ export const appRoutes: Route[] = [
                         'app/modules/admin/g-admin/sale-finish/sale-finish.module'
                     ).then((m) => m.SaleFinishModule),
             },
+            {
+                path: 'fb-page',
+                loadChildren: () =>
+                    import(
+                        'app/modules/admin/g-admin/fb-page/fb-page.module'
+                    ).then((m) => m.FbPageModule),
+            },
 
             // 404 & Catch all
             {
