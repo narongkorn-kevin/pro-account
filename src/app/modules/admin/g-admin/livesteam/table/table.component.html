@@ -1,18 +1,20 @@
+<div class="flex justify-center text-4xl font-bold text-blue-700">เพิ่มสินค้า</div>
 <div class="flex flex-auto overflow-x-scroll">
+    
     <div class="flex flex-col flex-auto p-5 sm:overflow-y-auto">
-        <table datatable [dtOptions]="dtOptions" class="table row-border hover w-full overflow-auto">
-            <thead>
+        <table datatable [dtOptions]="dtOptions" class="table row-border hover w-full overflow-auto mt-14">
+            <thead class="bg-green-500 ">
                 <tr>
                     <th>ลำดับ</th>
                     <th>สินค้า</th>
-                    <th>ราคาต่อชิ้น</th>
-                    <th>จำนวนทั้งหมด</th>
-                    <th>จำนวนที่จอง</th>
+                    <th>ราคา</th>
+                    <th>ทั้งหมด</th>
+                    <th>จอง</th>
                     <th>คงเหลือ</th>
                     <th>โค๊ด</th>
                     <th>ประเภท</th>
-                    <th>โค๊ดโกดัง</th>
                     <th>โกดัง</th>
+                    <th>ตำแหน่ง</th>
                     <th>จัดการ</th>
                 </tr>
             </thead>
@@ -29,8 +31,8 @@
                     <td>{{ item?.location?.code??"-" }}</td>
                     <td>{{ item?.location?.name??"-" }}</td>
                     <td>
-                        <button mat-button (click)="Addproduct(item.id)">
-                            <mat-icon>add</mat-icon>
+                        <button mat-button (click)="Addproduct(item.id)" class="bg-green-300">
+                            <mat-icon style="color: black;">add</mat-icon>
                         </button>
                         <!-- <button mat-button (click)="Delete(item.id)">
                             <mat-icon svgIcon="heroicons_solid:trash"></mat-icon>
