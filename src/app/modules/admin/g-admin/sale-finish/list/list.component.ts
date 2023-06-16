@@ -168,10 +168,10 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
         this.loadTableTotal();
-        this.loadTableOrder();
-        this.loadTablePaid();
-        this.loadTableCondition();
-        this.loadTableConfirm();
+        // this.loadTableOrder();
+        // this.loadTablePaid();
+        // this.loadTableCondition();
+        // this.loadTableConfirm();
         this.loadTablePacking();
         this.loadTableDelivery();
         this.loadTableFinish();
@@ -208,6 +208,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
             },
             ajax: (dataTablesParameters: any, callback) => {
                 // dataTablesParameters.status = 1;
+                console.log('respppp resp.totalresp.totalresp.total9845632189465123')
                 that._Service.getsaleorderPage(dataTablesParameters).subscribe((resp) => {
                     this.dataRow_t = resp.data
                     this.total_t = resp.total

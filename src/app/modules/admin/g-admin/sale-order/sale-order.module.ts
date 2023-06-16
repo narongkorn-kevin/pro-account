@@ -65,6 +65,7 @@ import { submitDialogComponent } from './submitDialog/submitDialog.component';
         AddtrackComponent,
         ItemReturnComponent,
         submitDialogComponent,
+        
     ],
     imports: [
         RouterModule.forChild(saleorderRoute),

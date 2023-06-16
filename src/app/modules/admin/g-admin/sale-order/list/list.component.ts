@@ -5,7 +5,9 @@ import {
     Component,
     OnDestroy,
     OnInit,
+    QueryList,
     ViewChild,
+    ViewChildren,
     ViewEncapsulation,
 } from '@angular/core';
 import {
@@ -40,6 +42,8 @@ import {
 } from '../sale-order.types';
 import { SaleOrderService } from '../sale-order.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { DataTableDirective } from 'angular-datatables';
+import { type } from 'jquery';
 // import { ImportOSMComponent } from '../card/import-osm/import-osm.component';
 
 @Component({
@@ -100,6 +104,9 @@ export class SaleOrderListComponent
     public dtOptionsPacking: DataTables.Settings = {};
     public dtOptionsFinish: DataTables.Settings = {};
     public dtOptionsReject: DataTables.Settings = {};
+
+    public dtOptionsAll: DataTables.Settings[] = [];
+   
     products$: Observable<any>;
     asset_types: AssetType[];
     flashMessage: 'success' | 'error' | null = null;
@@ -135,8 +142,8 @@ export class SaleOrderListComponent
 
     flashErrorMessage: string;
 
-    @ViewChild(DataTableDirective)
-    dtElement!: DataTableDirective;
+    @ViewChildren(DataTableDirective)
+    dtElement!: QueryList<DataTableDirective>;
 
     /**
      * Constructor
@@ -325,16 +332,80 @@ export class SaleOrderListComponent
             this.flashMessage = null;
             this.flashErrorMessage = null;
 
+            const confirmation = this._fuseConfirmationService.open({
+                title: 'ยืนยันคำสั่งซื้อ',
+                message: 'คุณต้องการยืนยันคำสั่งซื้อใช่หรือไม่ ?',
+                icon: {
+                    show: true,
+                    name: 'heroicons_outline:plus-circle',
+                    color: 'info',
+                },
+                actions: {
+                    confirm: {
+                        show: true,
+                        label: 'ยืนยัน',
+                        color: 'primary',
+                    },
+                    cancel: {
+                        show: true,
+                        label: 'ยกเลิก',
+                    },
+                },
+                dismissible: true,
+            });
+
+            // Subscribe to the confirmation dialog closed action
+            confirmation.afterClosed().subscribe((result) => {
+                // If the confirm button pressed...
+                if (result === 'confirmed') {
+                    const formData = new FormData();
+
+                    this._Service
+                        .postConfirmOrder(data)
+                        .subscribe({
+                            next: (resp: any) => {
+                                // this.dialogRef.close();
+                                this.rerender();
+                                this._changeDetectorRef.markForCheck();
+                            },
+                            error: (err: any) => {
+                                this._fuseConfirmationService.open({
+                                    title: 'กรุณาระบุข้อมูล',
+                                    message: err.error.message,
+                                    icon: {
+                                        show: true,
+                                        name: 'heroicons_outline:exclamation',
+                                        color: 'warning',
+                                    },
+                                    actions: {
+                                        confirm: {
+                                            show: false,
+                                            label: 'ยืนยัน',
+                                            color: 'primary',
+                                        },
+                                        cancel: {
+                                            show: false,
+                                            label: 'ยกเลิก',
+                                        },
+                                    },
+                                    dismissible: true,
+                                });
+                                console.log(err.error.message);
+                            },
+                        });
+                }
+            });
+        }
     }
 
     DelMulOrder() {
         if (this.DelOrder !== null) {
-            this._Service
-                .postDelMulOrder(this.DelOrder, this.delivered_by)
-                .subscribe((res) => {
-                    // console.log('pack', res);
-                });
-            this._changeDetectorRef.markForCheck();
+            // this._Service
+            //     .postDelMulOrder(this.DelOrder, this.delivered_by)
+            //     .subscribe((res) => {
+            //         // console.log('pack', res);
+            //     });
+            // this._changeDetectorRef.markForCheck();
 
             this.flashMessage = null;
             this.flashErrorMessage = null;
@@ -404,16 +475,10 @@ export class SaleOrderListComponent
             });
         }
         // dialogRef.afterClosed().subscribe((item) => {
-        this.rerender();
-        this._changeDetectorRef.markForCheck();
         // });
     }
 
-    rerender(): void {
-        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-            dtInstance.ajax.reload();
-        });
-    }
+
 
     ngOnInit(): void {
         this.loadTableTotal();
@@ -421,10 +486,11 @@ export class SaleOrderListComponent
         this.loadTablePaid();
         this.loadTableCondition();
         this.loadTableConfirm();
-        this.loadTablePacking();
-        this.loadTableDelivery();
-        this.loadTableFinish();
-        this.loadTableReject();
+
+        // this.loadTablePacking();
+        // this.loadTableDelivery();
+        // this.loadTableFinish();
+        // this.loadTableReject();
         this.line = 'assets/images/line.png';
         this.tiktok = 'assets/images/tiktok.png';
         this.facebook = 'assets/images/facebook.png';
@@ -443,14 +509,68 @@ export class SaleOrderListComponent
         });
 
         this._changeDetectorRef.markForCheck();
-
     }
 
     pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 };
 
     loadTableTotal(): void {
         const that = this;
-        this.dtOptionsTotal = {
+        this.dtOptionsAll[0] = {
+            pagingType: 'full_numbers',
+            pageLength: 10,
+            serverSide: true,
+            processing: true,
+            // order: [[4, 'desc']],
+            language: {
+                "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
+            },
+            ajax: (dataTablesParameters: any, callback) => {
+                // dataTablesParameters.status = 1;
+                dataTablesParameters.status = '';
+                console.log('respppp resp.totalresp.totalresp.total9845632189465123')
+                that._Service.getsaleorderPage(dataTablesParameters).subscribe((resp) => {
+                    console.log(resp.total, 'respppp resp.totalresp.totalresp.total')
+                    this.dataRow_t = resp.data
+                    this.total_t = resp.total
+                    console.log(this.dataRow_t, 'respppp')
+                    this.pages.current_page = resp.current_page;
+                    this.pages.last_page = resp.last_page;
+                    this.pages.per_page = resp.per_page;
+                    if (resp.current_page > 1) {
+                        this.pages.begin = resp.per_page * resp.current_page - 1;
+                    } else {
+                        this.pages.begin = 0;
+                    }
+                    callback({
+                        recordsTotal: resp.total,
+                        recordsFiltered: resp.total,
+                        data: []
+                    });
+                    this._changeDetectorRef.markForCheck();
+                })
+                console.log('respppp resp.totalresp.totalresp.total9845632189465123')
+            },
+            columns: [
+                { data: 'actice', orderable: false },
+                { data: 'id' },
+                { data: 'channal' },
+                { data: 'date_time' },
+                { data: 'order_id' },
+                { data: 'name' },
+                { data: 'status' },
+                // { data: 'delivery_by_id' },
+                { data: 'payment_type' },
+                
+                { data: 'payment_qty' },
+                { data: 'payment_qty' },
+            ]
+        };
+        
+    }
+
+    loadTableOrder(): void {
+        const that = this;
+        this.dtOptionsAll[1] = {
             pagingType: 'full_numbers',
             pageLength: 10,
             serverSide: true,
@@ -461,70 +581,26 @@ export class SaleOrderListComponent
             },
             ajax: (dataTablesParameters: any, callback) => {
                 // dataTablesParameters.status = 1;
-                that._Service
-                    .getsaleorderPage(dataTablesParameters)
-                    .subscribe((resp) => {
-                        this.dataRow_t = resp.data;
-                        this.total_t = resp.total;
-                        console.log(this.dataRow_t, 'resp');
-                        this.pages.current_page = resp.current_page;
-                        this.pages.last_page = resp.last_page;
-                        this.pages.per_page = resp.per_page;
-                        if (resp.current_page > 1) {
-                            this.pages.begin =
-                                resp.per_page * resp.current_page - 1;
-                        } else {
-                            this.pages.begin = 0;
-                        }
-                        callback({
-                            recordsTotal: resp.total,
-                            recordsFiltered: resp.total,
-                            data: [],
-                        });
-                        this._changeDetectorRef.markForCheck();
-                    });
-            },
-            columns: [
-                { data: 'actice', orderable: false },
-                { data: 'id' },
-                { data: 'channal' },
-                { data: 'date_time' },
-                { data: 'order_id' },
-                { data: 'name' },
-                { data: 'status' },
-                // { data: 'delivery_by_id' },
-                { data: 'payment_type' },
-
-                { data: 'payment_qty' },
-                { data: 'payment_qty' },
-            ],
-        };
-    }
-
-    loadTableOrder(): void {
-        const that = this;
-        this.dtOptionsOrder = {
-            pagingType: 'full_numbers',
-            pageLength: 10,
-            serverSide: true,
-            processing: true,
-            order: [[4, 'desc']],
-
-            language: {
-                url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
-            },
-            ajax: (dataTablesParameters: any, callback) => {
                 dataTablesParameters.status = 'order';
+
                 that._Service
                     .getsaleorderPage(dataTablesParameters)
                     .subscribe((resp) => {
                         this.dataRow_o = resp.data;
                         this.total_o = resp.total;
-                        console.log(this.dataRow_o, 'resp');
-                        console.log(resp.total, 'resp.total');
+                        console.log(this.dataRow_o, 'resp o');
+                        console.log(resp.total, 'resp.totalo');
                         this.pages.current_page = resp.current_page;
                         this.pages.last_page = resp.last_page;
                         this.pages.per_page = resp.per_page;
+
+
+                        // this.dataRow_o = resp.data;
+                        // this.total_o = resp.total;
+                        // console.log(this.dataRow_o, 'resp');
+                        // this.pages.current_page = resp.current_page;
+                        // this.pages.last_page = resp.last_page;
+                        // this.pages.per_page = resp.per_page;
                         if (resp.current_page > 1) {
                             this.pages.begin =
                                 resp.per_page * resp.current_page - 1;
@@ -549,16 +625,76 @@ export class SaleOrderListComponent
                 { data: 'status' },
                 // { data: 'delivery_by_id' },
                 { data: 'payment_type' },
-                { data: 'total' },
-                { data: 'actice', orderable: false },
+
+                { data: 'payment_qty' },
+                { data: 'payment_qty' },
             ],
         };
     }
+
+    // loadTableOrder(): void {
+    //     console.log("9845623198456231")
+    //     const that = this;
+    //     this.dtOptionsOrder = {
+    //         pagingType: 'full_numbers',
+    //         pageLength: 10,
+    //         serverSide: true,
+    //         processing: true,
+    //         order: [[4, 'desc']],
+
+    //         language: {
+    //             url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json',
+    //         },
+    //         ajax: (dataTablesParameters: any, callback) => {
+    //             dataTablesParameters.status = 'order';
+    //             console.log("22222222222222222222222222222222")
+
+    //             that._Service
+    //                 .getsaleorderPage(dataTablesParameters)
+    //                 .subscribe((resp) => {
+    //                     this.dataRow_o = resp.data;
+    //                     this.total_o = resp.total;
+    //                     console.log(this.dataRow_o, 'resp o');
+    //                     console.log(resp.total, 'resp.total');
+    //                     this.pages.current_page = resp.current_page;
+    //                     this.pages.last_page = resp.last_page;
+    //                     this.pages.per_page = resp.per_page;
+    //                     if (resp.current_page > 1) {
+    //                         this.pages.begin =
+    //                             resp.per_page * resp.current_page - 1;
+    //                     } else {
+    //                         this.pages.begin = 0;
+    //                     }
+    //                     callback({
+    //                         recordsTotal: resp.total,
+    //                         recordsFiltered: resp.total,
+    //                         data: [],
+    //                     });
+    //                     this._changeDetectorRef.markForCheck();
+    //                 });
+    //                 console.log("111111111111111111111111111")
+
+    //         },
+    //         columns: [
+    //             { data: 'actice', orderable: false },
+    //             { data: 'id' },
+    //             { data: 'channal' },
+    //             { data: 'date_time' },
+    //             { data: 'order_id' },
+    //             { data: 'name' },
+    //             { data: 'status' },
+    //             // { data: 'delivery_by_id' },
+    //             { data: 'payment_type' },
+    //             { data: 'total' },
+    //             { data: 'actice', orderable: false },
+    //         ],
+    //     };
+    // }
     // pagespaid = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
 
     loadTablePaid(): void {
         const that = this;
-        this.dtOptionsPaid = {
+        this.dtOptionsAll[2] = {
             pagingType: 'full_numbers',
             pageLength: 10,
             serverSide: true,
@@ -575,7 +711,7 @@ export class SaleOrderListComponent
                     .subscribe((resp) => {
                         this.dataRow_p = resp.data;
                         this.total_p = resp.total;
-                        // console.log(resp.total, 'resp_paid')
+                        console.log(resp.total, 'resp_paid p')
                         this.pages.current_page = resp.current_page;
                         this.pages.last_page = resp.last_page;
                         this.pages.per_page = resp.per_page;
@@ -612,7 +748,7 @@ export class SaleOrderListComponent
 
     loadTableCondition(): void {
         const that = this;
-        this.dtOptionsCondition = {
+        this.dtOptionsAll[3] = {
             pagingType: 'full_numbers',
             pageLength: 10,
             serverSide: true,
@@ -629,7 +765,7 @@ export class SaleOrderListComponent
                     .subscribe((resp) => {
                         this.dataRow_p = resp.data;
                         this.total_p = resp.total;
-                        // console.log(resp.total, 'resp_paid')
+                        console.log(resp.total, 'resp_paid condition paid')
                         this.pages.current_page = resp.current_page;
                         this.pages.last_page = resp.last_page;
                         this.pages.per_page = resp.per_page;
@@ -665,7 +801,7 @@ export class SaleOrderListComponent
 
     loadTableConfirm(): void {
         const that = this;
-        this.dtOptionsConfirm = {
+        this.dtOptionsAll[4] = {
             pagingType: 'full_numbers',
             pageLength: 10,
             serverSide: true,
@@ -682,7 +818,7 @@ export class SaleOrderListComponent
                     .subscribe((resp) => {
                         this.dataRow_c = resp.data;
                         this.total_c = resp.total;
-                        // console.log(resp.total, 'resp')
+                        console.log(resp.total, 'resp c')
                         this.pages.current_page = resp.current_page;
                         this.pages.last_page = resp.last_page;
                         this.pages.per_page = resp.per_page;
@@ -697,6 +833,7 @@ export class SaleOrderListComponent
                             recordsFiltered: resp.total,
                             data: [],
                         });
+                        
                         this._changeDetectorRef.markForCheck();
                     });
             },
@@ -874,6 +1011,7 @@ export class SaleOrderListComponent
             ],
         };
     }
+
     loadTableReject(): void {
         const that = this;
         this.dtOptionsReject = {
@@ -1081,5 +1219,19 @@ export class SaleOrderListComponent
     }
     setsubmit(completed: boolean) {
         this.allComplete_submit = completed;
+    }
+
+
+    rerender(): void {
+        console.log(this.dtElement,"111")
+        this.dtElement.forEach((dtel:DataTableDirective, index:number) => {
+            dtel.dtInstance.then((dtInstance: DataTables.Api) => {
+                dtInstance.ajax.reload();
+            });
+        });
+        // this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        //     dtInstance.ajax.reload();
+        // });
+        
     }
 }
