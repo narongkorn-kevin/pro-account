@@ -140,6 +140,7 @@ export class NewWalletComponent implements OnInit, AfterViewInit, OnDestroy {
 
         // Subscribe to the confirmation dialog closed action
         confirmation.afterClosed().subscribe((result) => {
+            
 
             // If the confirm button pressed...
             if (result === 'confirmed') {

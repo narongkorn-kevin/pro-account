@@ -23,6 +23,7 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadTable();
+    
     // alert(1);
   }
   pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 };
@@ -49,6 +50,7 @@ export class TableComponent implements OnInit {
           .subscribe((resp) => {
             console.log(resp.data,'resp');
             this.dataRow = resp.data;
+            console.log('Row',this.dataRow);
             this.pages.current_page = resp.current_page;
             this.pages.last_page = resp.last_page;
             this.pages.per_page = resp.per_page;
@@ -94,7 +96,7 @@ export class TableComponent implements OnInit {
       .open(ProductControlComponent, {
         disableClose: false,
         autoFocus: false,
-        height: "50%",
+        height: "60%",
         //recive brandId
         data: { Id: id },
       })

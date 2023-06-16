@@ -40,6 +40,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { NewComponent } from './new/new.component';
+import { FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 export const routes: Route[] = [
   {
       path: '',
@@ -112,6 +113,25 @@ export const routes: Route[] = [
         FuseCardModule,
         BsDropdownModule.forRoot(),
         NgxMatTimepickerModule.setLocale('en-GB'),
-  ]
+        SocialLoginModule,
+  ],
+  providers: [
+    {
+        provide: 'SocialAuthServiceConfig',
+        useValue: {
+            autoLogin: false,
+            providers: [
+
+                {
+                    id: FacebookLoginProvider.PROVIDER_ID,
+                    provider: new FacebookLoginProvider('170313182614211')
+                }
+            ],
+            onError: (err) => {
+                console.error(err);
+            }
+        } as SocialAuthServiceConfig,
+    }
+],
 })
 export class FbPageModule { }

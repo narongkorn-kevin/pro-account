@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DataTablesResponse } from 'app/shared/datatable.types';
 import { environment } from 'environments/environment';
-import { Observable, switchMap, of, BehaviorSubject, tap } from 'rxjs';
+import { Observable, switchMap, of, BehaviorSubject, tap, catchError, map } from 'rxjs';
 import { AssetType } from '../permission/permission.types';
 const token = localStorage.getItem('accessToken') || null;
 @Injectable({
@@ -56,5 +56,30 @@ export class FbPageService {
         return of(response);
       })
     );
+  }
+  newPage(data: any): Observable<any> {
+    // Throw error, if the user is already logged in
+    //  if (this._authenticated) {
+    //     return throwError('User is already logged in.');
+    // }
+    return this._httpClient.post(environment.API_URL + 'api/users_page', data, this.httpOptionsFormdata).pipe(
+      switchMap((response: any) => {
+        // Return a new observable with the response
+        return of(response);
+      })
+    );
+  }
+  deletePage(itemId: number): Observable<any> {
+    return this._httpClient
+        .delete<any>(`${environment.API_URL}api/user_page/${itemId}`)
+        .pipe(
+            map((mtplan) => {
+                return mtplan;
+            }),
+            catchError((err) => this.handlerError(err))
+        );
+}
+  handlerError(err: any): any {
+    throw new Error('Method not implemented.');
   }
 }

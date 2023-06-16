@@ -1,0 +1,17 @@
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+//   <label id="example-radio-group-label">เลือกวิธีการชำระเงิน</label>
+//             <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group flex flex-col"
+//               >
+//               <mat-radio-button class="example-radio-button" *ngFor="let item of delivery" [value]="item.value">
+//                 {{item.name}}
+//               </mat-radio-button>
+//             </mat-radio-group> 

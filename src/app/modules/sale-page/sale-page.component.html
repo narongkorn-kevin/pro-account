@@ -1,110 +1,128 @@
-<div class="flex flex-col text-center w-full h-full shadow-xl bg-[##EAFAF1] justify-center items-center ml-100 rounded-3xl">
-    <ng-container *ngIf="order$ | async as order">
-        <mat-vertical-stepper linear #stepper>
-            <mat-step>
-                <ng-template matStepLabel>
-                  <span class="text-xl font-semibold text-gray-600">ตรวจสอบคำสั่งซื้อ</span>
-                </ng-template>
-                <div class="bg-white rounded-lg p-6 text-center text-xl shadow-lg m-6">
-                  <h1 class="font-extrabold text-3xl text-gray-800">รายละเอียดสินค้า</h1>
-                  <ng-container *ngFor="let sale_order_line of order.sale_order_lines">
-                    <div class="flex flex-col items-center justify-center my-4">
-                      <img class="mx-auto w-1/2 h-48 rounded-xl object-cover" [src]="sale_order_line.item.image">
-                      <p class="text-gray-600 mt-6 font-semibold text-lg">ชื่อสินค้า: {{sale_order_line.item.name}}</p>
-                      <p class="text-gray-600 font-semibold text-lg pt-4">จำนวนสินค้า: {{sale_order_line.qty}}</p>
-                      <p class="text-gray-600 font-semibold text-lg pt-4">น้ำหนักสินค้า: {{sale_order_line.item.weight}} กก./ชิ้น</p>
-                    </div>
-                  </ng-container>
-                  <p class="text-red-600 font-bold text-xl mt-2">รวมยอดชำระ: {{order.total | currency:'฿'}} บาท</p>
-                  <button mat-button matStepperNext
-                    class="mx-auto bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 mt-4 rounded-xl transition duration-500 ease-in-out transform hover:scale-105">
-                    ถัดไป
-                  </button>
-                </div>
-              </mat-step>
-
-          <!-- Shipping Details -->
-          <mat-step [stepControl]="stepOneForm">
-            <form [formGroup]="stepOneForm">
-              <ng-template matStepLabel>
-                <span class="text-xl font-bold">รายละเอียดการจัดส่ง</span>
-              </ng-template>
-              <div class="bg-white rounded-lg p-6 text-lg shadow-lg border border-gray-300">
-                <h1 class="p-4 font-extrabold text-2xl">ที่อยู่ในการจัดส่ง</h1>
-                <mat-form-field class="w-full">
-                  <input matInput placeholder="ชื่อผู้รับสินค้า" [formControlName]="'name'" required
-                    class="w-full">
-                  <mat-error *ngIf="stepOneForm.controls.name.hasError('required')">
-                    กรุณาระบุ
-                  </mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="w-full">
-                  <input matInput placeholder="เบอร์โทรศัพท์มือถือ" [formControlName]="'telephone'" required
-                    class="w-full">
-                  <mat-error *ngIf="stepOneForm.controls.telephone.hasError('required')">
-                    กรุณาระบุ
-                  </mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="w-full">
-                  <textarea matInput placeholder="ที่อยู่" [formControlName]="'address'"
-                    class="w-full" required></textarea>
-                  <mat-error *ngIf="stepOneForm.controls.address.hasError('required')">
-                    กรุณาระบุ
-                  </mat-error>
-                </mat-form-field>
-
-                <button mat-button matStepperNext
-                class="mx-auto bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 mt-4 rounded-xl transition duration-500 ease-in-out transform hover:scale-105">
-                ถัดไป
-                </button>
-              </div>
-            </form>
-          </mat-step>
-
-          <mat-step [stepControl]="stepTwoForm">
-            <form [formGroup]="stepTwoForm">
-              <ng-template matStepLabel>
-                <span class="text-xl font-bold">การชำระเงิน</span>
-              </ng-template>
-              <div class="bg-white rounded-lg p-6 text-xl shadow-lg border border-gray-300">
-                <label class="flex items-center mb-4">
-                  <input type="checkbox" name="ชำระผ่าน QR-CODE" value="QR-CODE" class="mr-2 form-checkbox">
-                  <span class="text-gray-700">ค่าขนส่ง</span>
-                </label>
-                <label class="flex items-center mb-4">
-                  <input type="checkbox" formControlName="paymentMethod" value="COD" class="mr-2 form-checkbox">
-                  <span class="text-gray-700">COD</span>
-                </label>
-                <button mat-button matStepperNext class="mx-auto bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 mt-4 rounded-xl transition duration-500 ease-in-out transform hover:scale-105">
-
-                  ถัดไป
-                </button>
-              </div>
-            </form>
-          </mat-step>
-
-
-          <mat-step>
-            <ng-template matStepLabel>
-              <span class="text-xl font-bold">ยืนยันข้อมูล</span>
-            </ng-template>
-            <div class="bg-white rounded-lg shadow-md p-6">
-              <p class="text-gray-600">หมายเลขคำสั่งซื้อ: #{{order.order_id}}</p>
-              <h1 class="text-xl font-bold mt-4">ที่อยู่ในการจัดส่งสินค้า</h1>
-              <h2 class="text-lg mt-2">ชื่อ: {{stepOneForm.value.name}}</h2>
-              <h2 class="text-lg">เบอร์โทรศัพท์มือถือ: {{stepOneForm.value.telephone}}</h2>
-              <h2 class="text-lg">ที่อยู่: {{stepOneForm.value.address}}</h2>
-              
-              <button mat-button (click)="update()" class="mt-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-xl transition duration-300 ease-in-out transform hover:scale-105">
-                ยืนยัน
-            </button>
-            
+<div
+  class="flex flex-col text-center w-full h-full shadow-xl bg-[##EAFAF1] justify-center items-center ml-100 rounded-3xl">
+  <ng-container *ngIf="order$ | async as order">
+    <mat-vertical-stepper linear #stepper>
+      <mat-step>
+        <ng-template matStepLabel>
+          <span class="text-xl font-semibold text-gray-600">ตรวจสอบคำสั่งซื้อ</span>
+        </ng-template>
+        <div class="bg-white rounded-lg p-6 text-center text-xl shadow-lg m-6">
+          <h1 class="font-extrabold text-3xl text-gray-800">รายละเอียดสินค้า</h1>
+          <ng-container *ngFor="let sale_order_line of order.sale_order_lines">
+            <div class="flex flex-col items-center justify-center my-4">
+              <img class="mx-auto w-1/2 h-48 rounded-xl object-cover" [src]="sale_order_line.item.image">
+              <p class="text-gray-600 mt-6 font-semibold text-lg">ชื่อสินค้า: {{sale_order_line.item.name}}</p>
+              <p class="text-gray-600 font-semibold text-lg pt-4">จำนวนสินค้า: {{sale_order_line.qty}}</p>
+              <p class="text-gray-600 font-semibold text-lg pt-4">น้ำหนักสินค้า: {{sale_order_line.item.weight}}
+                กก./ชิ้น</p>
             </div>
-          </mat-step>
+          </ng-container>
+          <p class="text-red-600 font-bold text-xl mt-2">รวมยอดชำระ: {{order.total | currency:'฿'}} บาท</p>
+          <button mat-button matStepperNext
+            class="mx-auto bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 mt-4 rounded-xl transition duration-500 ease-in-out transform hover:scale-105">
+            ถัดไป
+          </button>
+        </div>
+      </mat-step>
+
+      <!-- Shipping Details -->
+      <mat-step [stepControl]="stepOneForm">
+        <form [formGroup]="stepOneForm">
+          <ng-template matStepLabel>
+            <span class="text-xl font-bold">รายละเอียดการจัดส่ง</span>
+          </ng-template>
+          <div class="bg-white rounded-lg p-6 text-lg shadow-lg border border-gray-300">
+            <h1 class="p-4 font-extrabold text-2xl">ที่อยู่ในการจัดส่ง</h1>
+            <mat-form-field class="w-full">
+              <input matInput placeholder="ชื่อผู้รับสินค้า" [formControlName]="'name'" required class="w-full">
+              <mat-error *ngIf="stepOneForm.controls.name.hasError('required')">
+                กรุณาระบุ
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="w-full">
+              <input matInput placeholder="เบอร์โทรศัพท์มือถือ" [formControlName]="'telephone'" required class="w-full">
+              <mat-error *ngIf="stepOneForm.controls.telephone.hasError('required')">
+                กรุณาระบุ
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="w-full">
+              <textarea matInput placeholder="ที่อยู่" [formControlName]="'address'" class="w-full" required></textarea>
+              <mat-error *ngIf="stepOneForm.controls.address.hasError('required')">
+                กรุณาระบุ
+              </mat-error>
+            </mat-form-field>
+
+            <button mat-button matStepperNext
+              class="mx-auto bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 mt-4 rounded-xl transition duration-500 ease-in-out transform hover:scale-105">
+              ถัดไป
+            </button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="stepTwoForm">
+        <form [formGroup]="stepTwoForm">
+          <ng-template matStepLabel>
+            <span class="text-xl font-bold">การชำระเงิน</span>
+          </ng-template>
+          <div class="bg-white rounded-lg p-6 text-xl shadow-lg border border-gray-300">
+            <label class="flex items-center mb-4">
+              <input type="checkbox"  formControlName="payment_step" value="1" class="mr-2 form-checkbox" (change)="actionChange(1)">
+              <span class="text-gray-700">จ่ายเฉพาะค่าขนส่ง 15บาทต่อ กก.</span>
+            </label>
+
+            <label class="flex items-center mb-4">
+              <input type="checkbox" formControlName="payment_step" value="2" class="mr-2 form-checkbox" (change)="actionChange(2)">
+              <span class="text-gray-700">จ่ายเฉพาะค่าสินค้า</span>
+            </label>
+            <label class="flex items-center mb-4">
+              <input type="checkbox" formControlName="payment_step" value="3" class="mr-2 form-checkbox" (change)="actionChange(3)">
+              <span class="text-gray-700">จ่ายค่าสินค้าและค่าขนส่ง</span>
+            </label>
+            <label class="flex items-center mb-4">
+              <input type="checkbox" formControlName="payment_step" value="4" class="mr-2 form-checkbox" (change)="actionChange(4)">
+              <span class="text-gray-700">ไม่จ่ายค่าสินค้าและค่าขนส่ง</span>
+            </label>
+            <!-- <label id="example-radio-group-label">เลือกวิธีการชำระเงิน</label>
+            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group flex flex-col"
+              >
+              <mat-radio-button class="example-radio-button" *ngFor="let item of delivery" [value]="item.value">
+                {{item.name}}
+             </mat-radio-button>
+             </mat-radio-group>  -->
+
+            <button mat-button matStepperNext
+              class="mx-auto bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 mt-4 rounded-xl transition duration-500 ease-in-out transform hover:scale-105">
+
+              ถัดไป
+            </button>
+          </div>
+        </form>
+      </mat-step>
 
 
-        </mat-vertical-stepper>
-      </ng-container>
-    </div>
+      <mat-step>
+        <ng-template matStepLabel>
+          <span class="text-xl font-bold">ยืนยันข้อมูล</span>
+        </ng-template>
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <p class="text-gray-600">หมายเลขคำสั่งซื้อ: #{{order.order_id}}</p>
+          <h1 class="text-xl font-bold mt-4">ที่อยู่ในการจัดส่งสินค้า</h1>
+          <h2 class="text-lg mt-2">ชื่อ: {{stepOneForm.value.name}}</h2>
+          <h2 class="text-lg">เบอร์โทรศัพท์มือถือ: {{stepOneForm.value.telephone}}</h2>
+          <h2 class="text-lg">ที่อยู่: {{stepOneForm.value.address}}</h2>
+
+          <button mat-button (click)="update()"
+            class="mt-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-xl transition duration-300 ease-in-out transform hover:scale-105">
+            ยืนยัน
+          </button>
+
+        </div>
+      </mat-step>
+
+
+    </mat-vertical-stepper>
+  </ng-container>
+</div>

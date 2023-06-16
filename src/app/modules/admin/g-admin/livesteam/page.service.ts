@@ -358,4 +358,26 @@ export class PageService {
     create(data: any) {
         return this._httpClient.post(environment.API_URL + "api/product_live", data);
       }
+      deleteProduct(itemId: number): Observable<{}> {
+        return this._httpClient
+            .delete<any>(`${environment.API_URL}api/product_live/${itemId}`)
+            .pipe(
+                map((mtplan) => {
+                    return mtplan;
+                }),
+                catchError((err) => this.handlerError(err))
+            );
+    }
+    newPage(data: any): Observable<any> {
+        // Throw error, if the user is already logged in
+        //  if (this._authenticated) {
+        //     return throwError('User is already logged in.');
+        // }
+        return this._httpClient.post(environment.API_URL + 'api/users_page', data, this.httpOptionsFormdata).pipe(
+          switchMap((response: any) => {
+            // Return a new observable with the response
+            return of(response);
+          })
+        );
+      }
 }

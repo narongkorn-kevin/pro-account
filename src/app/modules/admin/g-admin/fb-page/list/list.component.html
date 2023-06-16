@@ -8,7 +8,7 @@
             <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
         </div>
         <!-- Title -->
-        
+
         <div class="text-4xl font-extrabold tracking-tight">ข้อมูลเพจ</div>
         <!-- Actions -->
         <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
@@ -26,38 +26,56 @@
 
     <!-- Main -->
     <div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
-    
-        <button mat-flat-button (click)="openPage()" class="px-6 ml-3 mat-primary btn btn-success btn-rounded">จัดการเพจ</button>
-        
+        <div class="flex flex-row justify-center w-full mt-5 ">
+
+            <div >
+                <button mat-flat-button (click)="signInWithFB()"
+                    class="px-6 ml-3 mat-primary btn btn-success btn-rounded">1.ล็อคอินเฟสบุ๊ค</button>
+            </div>
+            <div >
+                <button mat-flat-button (click)="openPage()" 
+                    class="px-6 ml-3 mat-primary btn btn-success btn-rounded">2.จัดการเพจ</button>
+            </div>
+        </div>
+
         <div class="flex flex-col p-3 sm:p-10">
             <div class="overflow-auto  bg-white shadow sm:rounded-lg">
                 <!-- Products list -->
 
                 <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll">
-                    <table datatable [dtOptions]="dtOptions" class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400" style="width: 100%">
+                    <table datatable [dtOptions]="dtOptions"
+                        class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                        style="width: 100%">
                         <thead>
                             <tr>
                                 <!-- <th>จัดการ</th> -->
                                 <th>ลำดับ</th>
-                                <th>ไอดีเพจ</th>                              
+                                <th>ไอดีเพจ</th>
                                 <th>ชื่อเพจ</th>
                                 <th>รูปปก</th>
-                                
+                                <th>ลบ</th>
+
                             </tr>
                         </thead>
                         <tbody *ngIf="dataRow?.length != 0">
-                            <tr *ngFor="let item of dataRow; let i = index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md">
+                            <tr *ngFor="let item of dataRow; let i = index"
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md">
                                 <!-- <td style="width: 80px; min-width: 80px;">
                                     <button mat-icon-button (click)="edit(item.id)">
                                         <mat-icon>edit</mat-icon>
                                     </button>
                                 </td> -->
-                                <td style="width: 20px; ">{{  i+1 }}</td>
+                                <td style="width: 20px; ">{{ i+1 }}</td>
                                 <!-- <td style="width: 20px">{{ item?.user_id??"-" }}</td>                              -->
                                 <td style="width: 100px; min-width: 100px;">{{ item?.page_id??"-" }}</td>
                                 <td style="width: 100px; min-width: 100px;">{{ item?.name??"-" }}</td>
                                 <td>
                                     <img [src]="item.image" class="h-20 w-20" />
+                                </td>
+                                <td>
+                                    <button mat-button (click)="delete(item.id)">
+                                        <mat-icon svgIcon="heroicons_solid:trash"></mat-icon>
+                                    </button>
                                 </td>
                                 <!-- <td style="width: 100px; min-width: 100px;">{{ item?.last_name??"-" }}</td>
                                 <td style="width: 100px; min-width: 100px;">{{ item?.email??"-" }}</td>
@@ -81,7 +99,7 @@
                             </tr>
                         </tbody>
 
-                        
+
                         <tbody *ngIf="dataRow?.length == 0">
                             <tr>
                                 <td colspan="4" class="no-data-available text-center">ไม่มีข้อมูล !</td>
