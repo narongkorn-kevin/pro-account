@@ -494,6 +494,7 @@ export class SaleOrderListComponent
                 // { data: 'delivery_by_id' },
                 { data: 'payment_type' },
                 { data: 'total' },
+                { data: 'actice', orderable: false },
             ],
         };
     }
