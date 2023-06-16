@@ -1,74 +1,81 @@
 <div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-auto bg-card dark:bg-transparent">
 
-    <!-- Header -->
-    <div
-        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
-        <!-- Loader -->
-        <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
-            <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
-        </div>
-        <!-- Title -->
-        <div class="text-4xl font-extrabold tracking-tight">กระเป๋าเงินของฉัน</div>
-        <!-- Actions -->
-        <div *ngIf="roleType == 'marketing'" class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+  <!-- Header -->
+  <div class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+    <!-- Loader -->
+    <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+      <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+    </div>
+    <!-- Title -->
+    <div class="text-4xl font-extrabold tracking-tight">กระเป๋าเงินของฉัน</div>
+    <!-- Actions -->
+    <div *ngIf="roleType == 'marketing'" class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
 
-            <!-- Add product button -->
-            <!--<a (click)="New()" class="ml-4" mat-flat-button [color]="'primary'">
+      <!-- Add product button -->
+      <!--<a (click)="New()" class="ml-4" mat-flat-button [color]="'primary'">
                 <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
                 <span class="ml-2 mr-1">เติมเงินเข้ากระเป๋า</span>
             </a>
 
                         <!-- Add product button -->
-                        <!--<a (click)="New2()" class="ml-4" mat-flat-button [color]="'primary'">
+      <!--<a (click)="New2()" class="ml-4" mat-flat-button [color]="'primary'">
                             <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
                             <span class="ml-2 mr-1">ประวัติการทำรายการ</span>
                         </a>-->
 
-        </div>
     </div>
+  </div>
 
-    <!-- search -->
-    <!-- <div class="search-box relative flex flex-col flex-0 px-6 md:px-8 border-b mt-4">
+  <!-- search -->
+  <!-- <div class="search-box relative flex flex-col flex-0 px-6 md:px-8 border-b mt-4">
 
     </div> -->
 
-    <!-- Main -->
-    <div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
+  <!-- Main -->
+  <div class="flex flex-col flex-auto min-w-0 bg-gray-100 dark:bg-transparent">
 
-        <div class="flex flex-col p-3 sm:p-10">
-            <div class="overflow-auto  bg-white shadow sm:rounded-lg">
-                <!-- Products list -->
-                <div class="shadow-sm text-center font-bold text-2xl p-12 pt-6">
-                    <span></span>
-                    <span></span>
-                    <div class="flex flex-col mx-auto pl-6 text-center justify-center bg-gray-100 rounded-xl p-8 grow-0">
-                        <section class="text-left">
-                            <div class="bg-white shadow-md rounded-lg p-6">
-                              <h1 class="text-3xl font-bold  mb-4">ID : Admin1</h1>
-                                <h1 class="text-3xl font-bold text-blue-600 mb-4">เลือกวิธีชำระเงิน</h1>
-                                <h3 class="text-xl mb-2 font-bold">ชำระเงินอัตโนมัติ</h3>
-                                <p class="text-lg mb-4">รายการเรียกก็บจะถูกหักอัตโนมัติในวันครบกำหนดชำระ ตั้งแต่เวลา 00.01 - 02.59 น.</p>
-                                <p class="text-lg mb-4">คุณจำเป็นต้องเติมเงินเพียงพอสำหรับการใช้งาน</p>
-                                <p class="text-lg mb-4">ตัวอย่าง: วันครบกำหนดชำระ 01/01/2022 ระบบหักเงินอัตโนมัติวันที่ 02/01/2022 เวลา 00.01 - 02.59 น.</p>
-                                <div class="flex items-center">
-                                  <h1 class="text-3xl font-bold text-green-600 mr-2">ยอดเงินคงเหลือ:</h1>
-                                  <p class="text-3xl font-bold text-black">1,000,000 ฿</p>
-                                </div>
-                              </div>
-                            <ul>
-                                <a (click)="New()" class="flex items-center px-4 py-2 text-lg text-black  rounded">
-                                    <span class="material-symbols-outlined py-2">
-                                        credit_card
-                                        </span>
-                                    <span class="ml-2 mr-1 cursor-pointer hover:text-blue-600">เติมเงินเข้ากระเป๋า</span>
-                                </a>
-                                <p>
-                                <a (click)="New2()" class="flex items-center px-4 py-2 text-lg text-black rounded">
-                                    <span class="material-symbols-outlined"> history
-                                    </span>
-                                    <span class="ml-2 mr-1 cursor-pointer hover:text-blue-600">ประวัติการทำรายการ</span>
-                                </a>
-                                <!-- <a (click)="Update()" class="flex items-center px-4 py-2 text-lg text-black rounded">
+    <div class="flex flex-col p-3 sm:p-10">
+      <div class="overflow-auto  bg-white shadow sm:rounded-lg">
+        <!-- Products list -->
+        <div class="shadow-sm text-center font-bold text-2xl p-12 pt-6">
+          <span></span>
+          <span></span>
+          <div class="flex flex-col mx-auto pl-6 text-center justify-center bg-gray-100 rounded-xl p-8 grow-0">
+            <section class="text-left">
+              <div class="bg-white shadow-md rounded-lg p-6">
+                <h1 class="text-3xl font-bold  mb-4">ID : Admin1</h1>
+                <h1 class="text-3xl font-bold text-blue-600 mb-4">เลือกวิธีชำระเงิน</h1>
+                <h3 class="text-xl mb-2 font-bold">ชำระเงินอัตโนมัติ</h3>
+                <p class="text-lg mb-4">รายการเรียกก็บจะถูกหักอัตโนมัติในวันครบกำหนดชำระ ตั้งแต่เวลา 00.01 - 02.59 น.
+                </p>
+                <p class="text-lg mb-4">คุณจำเป็นต้องเติมเงินเพียงพอสำหรับการใช้งาน</p>
+                <p class="text-lg mb-4">ตัวอย่าง: วันครบกำหนดชำระ 01/01/2022 ระบบหักเงินอัตโนมัติวันที่ 02/01/2022 เวลา
+                  00.01 - 02.59 น.</p>
+                <div class="flex items-center">
+                  <h1 class="text-3xl font-bold text-green-600 mr-2">ยอดเงินคงเหลือ:</h1>
+                  <p class="text-3xl font-bold text-black">1,000,000 ฿</p>
+                </div>
+              </div>
+              <ul>
+                <a (click)="New()" class="flex items-center px-4 py-2 text-lg text-black  rounded">
+                  <span class="material-symbols-outlined py-2">
+                    credit_card
+                  </span>
+                  <span class="ml-2 mr-1 cursor-pointer hover:text-blue-600">เติมเงินเข้ากระเป๋า</span>
+                </a>
+                <p>
+                  <a (click)="New2()" class="flex items-center px-4 py-2 text-lg text-black rounded">
+                    <span class="material-symbols-outlined"> history
+                    </span>
+                    <span class="ml-2 mr-1 cursor-pointer hover:text-blue-600">ประวัติการทำรายการ</span>
+                  </a>
+
+                  <a (click)="Withdraw()" class="flex items-center px-4 py-2 text-lg text-black rounded">
+                    <span class="material-symbols-outlined"> payments
+                    </span>
+                    <span class="ml-2 mr-1 cursor-pointer hover:text-blue-600">ถอนเงิน</span>
+                  </a>
+                  <!-- <a (click)="Update()" class="flex items-center px-4 py-2 text-lg text-black rounded">
                                     <span class="material-symbols-outlined"> paid
                                     </span>
                                     <span class="ml-2 mr-1 cursor-pointer hover:text-blue-600">ขอเงินคืน</span>
@@ -78,66 +85,67 @@
                                     </span>
                                     <span class="ml-2 mr-1 cursor-pointer hover:text-blue-600">รอจ่าย COD</span>
                                 </a> -->
-                            </ul>
+              </ul>
 
-                        </section>
-
-
-                </div>
-
-                <div class="flex shadow-sm text-center font-bold text-2xl p-12 pt-6">
-                  <span></span>
-                  <span></span>
-
-                  <div class="text-left flex-col pl-6  bg-gray-100 rounded-full p-8 grow-0 text-lg w-1/2 ml-5">     
-                          <label class="text-red-600 text-left text-3xl mr-5">ค่าขนส่ง : 100</label>
-                          <button (click)="Update()" mat-flat-button="'primary'">ขอคืนเงิน</button>
-                  </div>
-                  <div class="text-left flex-col pl-6  bg-gray-100 rounded-full p-8 grow-0 text-lg w-1/2">
-                 
-                     
-                          <label class="text-red-600 text-right text-3xl mr-5">  ยอดค่าขนส่งปลายทาง ( COD ) : 5,000</label>
-                          <button (click)="Update()" mat-flat-button="'primary'">ขอคืนเงิน</button>
-                  </div>
+            </section>
 
 
+          </div>
 
-              </div>
+          <div class="flex shadow-sm text-center font-bold text-2xl p-12 pt-6">
+            <span></span>
+            <span></span>
+
+            <div class="text-left flex-col pl-6  bg-gray-100 rounded-full p-8 grow-0 text-lg w-1/2 ml-5">
+              <label class="text-red-600 text-left text-3xl mr-5">ค่าขนส่ง : 100</label>
+              <button (click)="Update()" mat-flat-button="'primary'">ขอคืนเงิน</button>
+            </div>
+            <div class="text-left flex-col pl-6  bg-gray-100 rounded-full p-8 grow-0 text-lg w-1/2">
+
+
+              <label class="text-red-600 text-right text-3xl mr-5"> ยอดค่าขนส่งปลายทาง ( COD ) : 5,000</label>
+              <button (click)="Update()" mat-flat-button="'primary'">ขอคืนเงิน</button>
+            </div>
 
 
 
-                </div>
-                <div class="flex flex-auto text-center justify-center items-center text-xl font-bold pt-6">
-                    <span class="material-symbols-outlined">
-                      local_shipping
-                    </span>
-                    <h1 class="pl-4">รอเก็บเงินปลายทาง</h1>
-                  </div>
+          </div>
 
-                  <div class="flex flex-col p-5 sm:overflow-auto overflow-x-scroll">
-                    <table datatable [dtOptions]="dtOptions" class="table-auto w-full text-gray-800">
-                      <thead>
-                        <tr class="bg-gray-300 text-gray-600 uppercase text-sm leading-normal">
-                          <th class="py-3 px-4 text-left">#</th>
-                          <th class="py-3 px-4 text-left">วันที่และเวลา</th>
-                          <th class="py-3 px-4 text-left">รายการชำระ</th>
-                          <th class="py-3 px-4 text-right">ยอดสุทธิ ( บาท )</th>
-                          <th class="py-3 px-4 text-right">วันครบกำหนดชำระ</th>
-                          <th class="py-3 px-4 text-center">สถานะ</th>
-                        </tr>
-                      </thead>
-                      <tbody class="text-sm font-normal">
-                        <tr *ngFor="let detail of details" class="hover:bg-gray-100">
-                          <td class="py-3 px-4">{{detail.id}}</td>
-                          <td class="py-3 px-4">{{detail.date}}</td>
-                          <td class="py-3 px-4">{{detail.name_list}}</td>
-                          <td class="py-3 px-4 text-right">{{detail.amount_m}}</td>
-                          <td class="py-3 px-4 text-right">{{detail.date_line}}</td>
-                          <td class="py-3 px-4 text-center">
-                            <span class="px-2 py-1 rounded-md {{detail.status_s === 'Paid' ? 'bg-green-500' : 'bg-yellow-500'}} text-white">{{detail.status_s}}</span>
-                          </td>
-                        </tr>
-                        <!--<tbody *ngIf="dataRow?.length != 0">
+
+
+        </div>
+        <div class="flex flex-auto text-center justify-center items-center text-xl font-bold pt-6">
+          <span class="material-symbols-outlined">
+            local_shipping
+          </span>
+          <h1 class="pl-4">รอเก็บเงินปลายทาง</h1>
+        </div>
+
+        <div class="flex flex-col p-5 sm:overflow-auto overflow-x-scroll">
+          <table datatable [dtOptions]="dtOptions" class="table-auto w-full text-gray-800">
+            <thead>
+              <tr class="bg-gray-300 text-gray-600 uppercase text-sm leading-normal">
+                <th class="py-3 px-4 text-left">#</th>
+                <th class="py-3 px-4 text-left">วันที่และเวลา</th>
+                <th class="py-3 px-4 text-left">รายการชำระ</th>
+                <th class="py-3 px-4 text-right">ยอดสุทธิ ( บาท )</th>
+                <th class="py-3 px-4 text-right">วันครบกำหนดชำระ</th>
+                <th class="py-3 px-4 text-center">สถานะ</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm font-normal">
+              <tr *ngFor="let detail of details" class="hover:bg-gray-100">
+                <td class="py-3 px-4">{{detail.id}}</td>
+                <td class="py-3 px-4">{{detail.date}}</td>
+                <td class="py-3 px-4">{{detail.name_list}}</td>
+                <td class="py-3 px-4 text-right">{{detail.amount_m}}</td>
+                <td class="py-3 px-4 text-right">{{detail.date_line}}</td>
+                <td class="py-3 px-4 text-center">
+                  <span
+                    class="px-2 py-1 rounded-md {{detail.status_s === 'Paid' ? 'bg-green-500' : 'bg-yellow-500'}} text-white">{{detail.status_s}}</span>
+                </td>
+              </tr>
+              <!--<tbody *ngIf="dataRow?.length != 0">
                             <tr *ngFor="let item of dataRow; let i = index"
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md py-15">
                                 <td style="min-width: 80px;">
@@ -152,41 +160,42 @@
                             <td colspan="7" class="no-data-available text-center">ไม่มีข้อมูล !</td>
                         </tr>
                     </tbody> -->
-                    </table>
-                </div>
+          </table>
+        </div>
 
-                <!-- หมวดรอจ่ายเก็บเงินปลายทาง -->
-                <div class="flex flex-auto text-center justify-center items-center text-xl font-bold pt-6">
-                    <span class="material-symbols-outlined">
-                      car_crash
-                    </span>
-                    <h1 class="pl-4">รอจ่ายค่าส่งปลายทาง</h1>
-                  </div>
+        <!-- หมวดรอจ่ายเก็บเงินปลายทาง -->
+        <div class="flex flex-auto text-center justify-center items-center text-xl font-bold pt-6">
+          <span class="material-symbols-outlined">
+            car_crash
+          </span>
+          <h1 class="pl-4">รอจ่ายค่าส่งปลายทาง</h1>
+        </div>
 
-                  <div class="flex flex-col p-5 sm:overflow-auto overflow-x-scroll">
-                    <table datatable [dtOptions]="dtOptions" class="table-auto w-full text-gray-800">
-                      <thead>
-                        <tr class="bg-gray-300 text-gray-600 uppercase text-sm leading-normal">
-                          <th class="py-3 px-4 text-left">#</th>
-                          <th class="py-3 px-4 text-left">วันที่และเวลา</th>
-                          <th class="py-3 px-4 text-left">รายการชำระ</th>
-                          <th class="py-3 px-4 text-right">ยอดสุทธิ ( บาท )</th>
-                          <th class="py-3 px-4 text-right">วันครบกำหนดชำระ</th>
-                          <th class="py-3 px-4 text-center">สถานะ</th>
-                        </tr>
-                      </thead>
-                      <tbody class="text-sm font-normal">
-                        <tr *ngFor="let detail of details2" class="hover:bg-gray-100">
-                          <td class="py-3 px-4">{{detail.id}}</td>
-                          <td class="py-3 px-4">{{detail.date}}</td>
-                          <td class="py-3 px-4">{{detail.name_list}}</td>
-                          <td class="py-3 px-4 text-right">{{detail.amount_m}}</td>
-                          <td class="py-3 px-4 text-right">{{detail.date_line}}</td>
-                          <td class="py-3 px-4 text-center">
-                            <span class="px-2 py-1 rounded-md {{detail.status_s === 'Paid' ? 'bg-green-500' : 'bg-yellow-500'}} text-white">{{detail.status_s}}</span>
-                          </td>
-                        </tr>
-                        <!--<tbody *ngIf="dataRow?.length != 0">
+        <div class="flex flex-col p-5 sm:overflow-auto overflow-x-scroll">
+          <table datatable [dtOptions]="dtOptions" class="table-auto w-full text-gray-800">
+            <thead>
+              <tr class="bg-gray-300 text-gray-600 uppercase text-sm leading-normal">
+                <th class="py-3 px-4 text-left">#</th>
+                <th class="py-3 px-4 text-left">วันที่และเวลา</th>
+                <th class="py-3 px-4 text-left">รายการชำระ</th>
+                <th class="py-3 px-4 text-right">ยอดสุทธิ ( บาท )</th>
+                <th class="py-3 px-4 text-right">วันครบกำหนดชำระ</th>
+                <th class="py-3 px-4 text-center">สถานะ</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm font-normal">
+              <tr *ngFor="let detail of details2" class="hover:bg-gray-100">
+                <td class="py-3 px-4">{{detail.id}}</td>
+                <td class="py-3 px-4">{{detail.date}}</td>
+                <td class="py-3 px-4">{{detail.name_list}}</td>
+                <td class="py-3 px-4 text-right">{{detail.amount_m}}</td>
+                <td class="py-3 px-4 text-right">{{detail.date_line}}</td>
+                <td class="py-3 px-4 text-center">
+                  <span
+                    class="px-2 py-1 rounded-md {{detail.status_s === 'Paid' ? 'bg-green-500' : 'bg-yellow-500'}} text-white">{{detail.status_s}}</span>
+                </td>
+              </tr>
+              <!--<tbody *ngIf="dataRow?.length != 0">
                             <tr *ngFor="let item of dataRow; let i = index"
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md py-15">
                                 <td style="min-width: 80px;">
@@ -201,14 +210,14 @@
                             <td colspan="7" class="no-data-available text-center">ไม่มีข้อมูล !</td>
                         </tr>
                     </tbody> -->
-                    </table>
-                </div>
+          </table>
+        </div>
 
 
-                </div>
-                </div>
+      </div>
+    </div>
 
-                <!--<section>
+    <!--<section>
                 <div class="flex flex-auto text-center justify-center items-center text-xl font-bold pt-6">
                     <span class="material-symbols-outlined">
                       pending_actions
@@ -298,26 +307,26 @@
                                     <!--<button mat-icon-button (click)="Delete(item.id)" title="ลบข้อมูล">
                                         <mat-icon>delete</mat-icon>
                                     </button>-->
-                                <!--</td>
+    <!--</td>
                                 <!--<td style="width: 5%; min-width: 80px;">{{ pages.begin + (i + 1) }}</td>
                                 <!--<td style="min-width: 80px;" *ngIf="item.image === null || ''"> </td>
                                 <td style="min-width: 80px;" *ngIf="item.image !== null || ''"><img src="{{item.image}}"
                                         class="h-10 w-10"> </td>-->
-                                <!--<td style="min-width: 100px;">{{ item.name }}</td>
+    <!--<td style="min-width: 100px;">{{ item.name }}</td>
                                 <td style="min-width: 120px;">{{ item.account_number }}</td>
                                 <td style="min-width: 120px;">{{ item.first_name }}</td>
                                 <td style="min-width: 120px;">-->
-                                    <!--<td style="min-width: 120px;">{{ item.account_number }}</td>
+    <!--<td style="min-width: 120px;">{{ item.account_number }}</td>
                                     <td style="min-width: 120px;">{{ item.account_number }}</td>
                                     <td style="min-width: 120px;">{{ item.first_name }}</td>
                                     <div class="p-2" *ngIf="item.status == 1">
                                         <!-- เปิดการใช้งาน -->
-                                        <!--<span
+    <!--<span
                                             class="bg-green-100 text-green-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">สำเร็จ</span>
                                     </div>
                                     <div class="p-2" *ngIf="item.status == 0">
                                         <!-- ปิดการใช้งาน -->
-                                        <!--<span
+    <!--<span
                                             class="bg-red-100 text-red-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ล้มเหลว</span>
                                     </div>
                                 <!--</td>
@@ -325,7 +334,7 @@
                                     item.user_create.last_name: '' }}
                                 </td>
                                 <!-- <td>{{ item.created_at | thaiDate }}</td> -->
-                                <!--<td style="min-width: 120px;">{{ item.created_at  }}</td>
+    <!--<td style="min-width: 120px;">{{ item.created_at  }}</td>
                             </tr>
                         </tbody>
                          <tbody *ngIf="dataRow?.length == 0">
@@ -335,8 +344,5 @@
                     </tbody>
                     </table>
                 </div>-->
-            </div>
-        </div>
-
-
-
+  </div>
+</div>

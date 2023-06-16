@@ -22,6 +22,7 @@ import { TopupHistoryComponent } from '../topup-history/topup-history.component'
 import { HttpClient } from '@angular/common/http';
 import { RefundComponent } from '../refund/refund.component';
 import { TimepickerComponent } from '../timepicker/timepicker.component';
+import { WithdrawComponent } from '../../../user/withdraw/withdraw.component';
 
 
 interface Detail {
@@ -281,6 +282,17 @@ export class ListWalletComponent implements OnInit, AfterViewInit, OnDestroy {
         const dialogRef = this._matDialog.open(NewWalletComponent, {
             width: '900px',
             height: '750px'
+        });
+
+        dialogRef.afterClosed().subscribe(item => {
+            this.rerender();
+            this._changeDetectorRef.markForCheck();
+        });
+    }
+    Withdraw() {
+        const dialogRef = this._matDialog.open(WithdrawComponent, {
+            width: '900px',
+            height: '600px'
         });
 
         dialogRef.afterClosed().subscribe(item => {
