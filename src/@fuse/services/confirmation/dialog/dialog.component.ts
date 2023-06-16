@@ -9,12 +9,14 @@ import { FuseConfirmationConfig } from '@fuse/services/confirmation/confirmation
         /* language=SCSS */
         `
             .fuse-confirmation-dialog-panel {
+                
                 @screen md {
                     @apply w-128;
                 }
 
                 .mat-dialog-container {
                     padding: 0 !important;
+                    
                 }
             }
 

@@ -117,13 +117,13 @@ export class SalePageComponent implements OnInit {
           icon: {
             show: false,
             name: "heroicons_outline:exclamation",
-            color: "warning",
+            color: "primary",
           },
           actions: {
             confirm: {
               show: true,
               label: "ยืนยัน",
-              color: "warn",
+              color: "primary",
             },
             cancel: {
               show: true,
