@@ -93,7 +93,7 @@ export class BankListShopComponent implements OnInit, AfterViewInit, OnDestroy {
   //     status: ['',]
   // })
   }
-
+ 
   // -----------------------------------------------------------------------------------------------------
   // @ Lifecycle hooks
   // -----------------------------------------------------------------------------------------------------
@@ -330,6 +330,7 @@ export class BankListShopComponent implements OnInit, AfterViewInit, OnDestroy {
             this._changeDetectorRef.markForCheck();
         });
     }
+    
     @ViewChild(DataTableDirective)
     dtElement!: DataTableDirective;
     rerender(): void {

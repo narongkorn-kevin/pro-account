@@ -167,7 +167,7 @@ export class SaleOrderListComponent
             case 1:
                 if (event.checked === true) {
                     this.ConfirmOrder1.push(id);
-                    console.log(event, 'test');
+                    //console.log(event, 'test');
                     console.log(id, 'test');
                     console.log(this.ConfirmOrder1, 'test1');
                 } else {
@@ -532,7 +532,7 @@ export class SaleOrderListComponent
                 dataTablesParameters.status = '';
                 console.log('respppp resp.totalresp.totalresp.total9845632189465123')
                 that._Service.getsaleorderPage(dataTablesParameters).subscribe((resp) => {
-                    console.log(resp.total, 'respppp resp.totalresp.totalresp.total')
+                    console.log(resp, 'respppp resp.totalresp.totalresp.total')
                     this.dataRow_t = resp.data
                     this.total_t = resp.total
                     console.log(this.dataRow_t, 'respppp')

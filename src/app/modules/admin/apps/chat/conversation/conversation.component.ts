@@ -7,6 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
 
 @Component({
     selector: 'chat-conversation',
@@ -25,14 +27,15 @@ export class ConversationComponent implements OnInit, OnDestroy {
     drawerOpened: boolean = true;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
+    formData: FormGroup;
     page: any;
-
     messages: any[] = [];
-
+    ConfirmOrder: any = [];
     message = {
         // ...
         sender: 'user', // or 'admin'
     };
+    
     observableRef: any;
 
     // chats = {
@@ -49,6 +52,8 @@ export class ConversationComponent implements OnInit, OnDestroy {
     /**
      * Constructor
      */
+     flashErrorMessage: string;
+     flashMessage: "success" | "error" | null = null;
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _chatService: ChatService,
@@ -59,9 +64,16 @@ export class ConversationComponent implements OnInit, OnDestroy {
         private sanitizer: DomSanitizer,
         private datePipe: DatePipe,
         private matDialog: MatDialog,
+        private _formBuilder: FormBuilder,
+        private _Service: ChatService,
+        private _fuseConfirmationService: FuseConfirmationService,
 
     ) {
         this.page = JSON.parse(localStorage.getItem('fb_page'));
+        this.formData = this._formBuilder.group(
+            {
+                code: ['']
+            })
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -241,5 +253,97 @@ export class ConversationComponent implements OnInit, OnDestroy {
                 }
             );
         }
+    }
+    confirmOrder() {
+        // switch (No) {
+        //     case 1:
+        //         var data = this.ConfirmOrder1;
+        //         break;
+        //     case 2:
+        //         var data = this.ConfirmOrder2;
+        //         break;
+        //     case 3:
+        //         var data = this.ConfirmOrder3;
+        //         break;
+
+        //     default:
+        //         break;
+        // }
+        // this.ConfirmOrder.push(this.formData.value.code);
+        if (this.formData.value !== null) {
+            this.flashMessage = null;
+            this.flashErrorMessage = null;
+
+            const confirmation = this._fuseConfirmationService.open({
+                title: 'ยืนยันคำสั่งซื้อ',
+                message: 'คุณต้องการยืนยันคำสั่งซื้อใช่หรือไม่ ?',
+                icon: {
+                    show: true,
+                    name: 'heroicons_outline:plus-circle',
+                    color: 'info',
+                },
+                actions: {
+                    confirm: {
+                        show: true,
+                        label: 'ยืนยัน',
+                        color: 'primary',
+                    },
+                    cancel: {
+                        show: true,
+                        label: 'ยกเลิก',
+                    },
+                },
+                dismissible: true,
+            });
+
+            // Subscribe to the confirmation dialog closed action
+            confirmation.afterClosed().subscribe((result) => {
+                // If the confirm button pressed...
+                if (result === 'confirmed') {
+                    const formData = new FormData();
+                    if(this.formData.value.code !== null ){
+                        this._Service
+                        .postConfirmOrder(this.formData.value.code)
+                        .subscribe({
+                            next: (resp: any) => {
+                                // this.dialogRef.close();
+                                this.clearTable();
+                                this.rerender();
+                                this._changeDetectorRef.markForCheck();
+                            },
+                            error: (err: any) => {
+                                this._fuseConfirmationService.open({
+                                    title: 'กรุณาระบุข้อมูล',
+                                    message: err.error.message,
+                                    icon: {
+                                        show: true,
+                                        name: 'heroicons_outline:exclamation',
+                                        color: 'warning',
+                                    },
+                                    actions: {
+                                        confirm: {
+                                            show: false,
+                                            label: 'ยืนยัน',
+                                            color: 'primary',
+                                        },
+                                        cancel: {
+                                            show: false,
+                                            label: 'ยกเลิก',
+                                        },
+                                    },
+                                    dismissible: true,
+                                });
+                                console.log(err.error.message);
+                            },
+                        });
+                    }
+                    
+                }
+            });
+        }
+    }
+    clearTable() {
+        this.ConfirmOrder = [];
+        this.formData.reset();
     }
 }

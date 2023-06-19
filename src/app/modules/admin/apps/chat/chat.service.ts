@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, filter, map, Observable, of, switchMap, take, tap, throwError } from 'rxjs';
 import { Chat, Contact, Profile } from 'app/modules/admin/apps/chat/chat.types';
 import { environment } from 'environments/environment';
+import { DataTablesResponse } from 'app/shared/datatable.types';
+const token = localStorage.getItem('accessToken') || null;
 @Injectable({
     providedIn: 'root'
 })
+
 export class ChatService {
 
     //ข้อมูลเพจที่เลือก
@@ -234,6 +237,22 @@ export class ChatService {
             }
         })
     }
+    postConfirmOrder(data: any): Observable<DataTablesResponse> {
+        const formdata =
+            {
+                sale_order_code : data,
+                status : "confirm"
+            }
+        
+        return this._httpClient.post(environment.API_URL + 'api/confirm_order_by_code', formdata, this.httpOptionsFormdata).pipe(
+            switchMap((response: any) => {
+                return of(response.data);
+            })
+        );
+    }
+    httpOptionsFormdata = {
+        headers: new HttpHeaders({ Authorization: `Bearer ${token}` })
+    };
 
 }
 

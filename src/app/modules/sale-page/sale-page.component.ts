@@ -24,6 +24,11 @@ export class SalePageComponent implements OnInit {
       { value: '3', name: "จ่ายค่าสินค้าและค่าขนส่ง" },
       { value: '4', name: "ไม่จ่ายค่าสินค้าและค่าขนส่ง" },
     ];
+    DritrictData: any = [
+      { value: "ແຂວງວຽງຈັນ", name: 'ແຂວງວຽງຈັນ', date: '05/2023' },
+      { value: "ແຂວງສະຫວັນນະເຂດ", name: 'ແຂວງສະຫວັນນະເຂດ', date: '06/2023' },
+      { value: "ແຂວງຫຼວງພະບາງ", name: 'ແຂວງຫຼວງພະບາງ', date: '07/2023' },
+  ];
     saleOrderId: any;
     check:any =0;
     order$: Observable<any>;

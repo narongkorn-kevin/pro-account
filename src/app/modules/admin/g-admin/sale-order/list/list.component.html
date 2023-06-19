@@ -626,7 +626,8 @@
                                         <mat-form-field class="w-30">
                                             <mat-select [(ngModel)]="delivered_by" placeholder="- กรุณาเลือกขนส่ง -">
                                                 <mat-option *ngFor="let item of delivered" [value]="item.id"
-                                                    class="flex flex-row items-center justify-center h-16" style="border-bottom: 2px solid #c6c6c655 !important;">
+                                                    class="flex flex-row items-center justify-center h-16"
+                                                    style="border-bottom: 2px solid #c6c6c655 !important;">
                                                     <img src='{{item.image}}' class="w-1/3">
                                                     <span class="w-2/3 text-lg">{{item.name}}</span>
                                                 </mat-option>
@@ -659,7 +660,8 @@
                                             <th>ลูกค้า</th>
                                             <!-- <th>สถานะ</th> -->
                                             <!-- <th>บริการขนส่ง</th> -->
-                                            <th>การชำระเงิน</th>
+                                            <th>ค่าสินค้า</th>
+                                            <th>ค่าขนส่ง</th>
                                             <th>ยอดรวม</th>
                                             <th>จ่ายแล้ว</th>
                                             <th>แก้ไข</th>
@@ -734,15 +736,98 @@
                                                 <span
                                                     class="bg-red-100 text-red-800 text-md font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ไม่สำเร็จ</span>
                                             </td> -->
-                                            <td style="width: 100px; min-width: 100px;"
+                                            <!-- <td style="width: 100px; min-width: 100px;"
                                                 *ngIf="item.payment_type === 'COD'">
                                                 COD</td>
                                             <td style="width: 100px; min-width: 100px;"
                                                 *ngIf="item.payment_type === 'transfer'"> โอนเงิน</td>
                                             <td style="width: 100px; min-width: 100px;"
                                                 *ngIf="item.payment_type !== 'COD' && item.payment_type !== 'transfer'">
-                                                -</td>
+                                                -</td> -->
 
+                                            
+                                            <td style="width: 100px; min-width: 100px;">
+                                                <div
+                                                    *ngIf="item.payment_type === '1' ">
+                                                    <span
+                                                        class="inline-flex items-center font-bold text-xs px-2.5 py-0.5 rounded-full tracking-wide uppercase bg-red-200 text-red-800 dark:bg-red-600 dark:text-red-50">
+                                                        <span class="leading-relaxed whitespace-nowrap">
+                                                            COD
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <div
+                                                    *ngIf="item.payment_type === '2' ">
+                                                    <span
+                                                        class="inline-flex items-center font-bold text-xs px-2.5 py-0.5 rounded-full tracking-wide uppercase bg-green-200 text-green-800 dark:bg-green-600 dark:text-green-50">
+                                                        <span class="leading-relaxed whitespace-nowrap">
+                                                            ชำระแล้ว
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <div
+                                                    *ngIf="item.payment_type === '4' ">
+                                                    <span
+                                                        class="inline-flex items-center font-bold text-xs px-2.5 py-0.5 rounded-full tracking-wide uppercase bg-red-200 text-red-800 dark:bg-red-600 dark:text-red-50">
+                                                        <span class="leading-relaxed whitespace-nowrap">
+                                                            COD
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <div
+                                                    *ngIf="item.payment_type === '3' ">
+                                                    <span
+                                                        class="inline-flex items-center font-bold text-xs px-2.5 py-0.5 rounded-full tracking-wide uppercase bg-green-200 text-green-800 dark:bg-green-600 dark:text-green-50">
+                                                        <span class="leading-relaxed whitespace-nowrap">
+                                                            ชำระแล้ว
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <div
+                                                    *ngIf="item.payment_type === '' || item.payment_type === null "> <span>-</span>
+                                                </div>
+                                            </td>
+                                            <td style="width: 100px; min-width: 100px;">
+                                                <div
+                                                    *ngIf="item.payment_type === '1' ">
+                                                    <span
+                                                        class="inline-flex items-center font-bold text-xs px-2.5 py-0.5 rounded-full tracking-wide uppercase bg-green-200 text-green-800 dark:bg-green-600 dark:text-green-50">
+                                                        <span class="leading-relaxed whitespace-nowrap">
+                                                            ชำระแล้ว
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <div
+                                                    *ngIf="item.payment_type === '2' ">
+                                                    <span
+                                                        class="inline-flex items-center font-bold text-xs px-2.5 py-0.5 rounded-full tracking-wide uppercase bg-red-200 text-red-800 dark:bg-red-600 dark:text-red-50">
+                                                        <span class="leading-relaxed whitespace-nowrap">
+                                                            CDC
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <div
+                                                    *ngIf="item.payment_type === '3' ">
+                                                    <span
+                                                        class="inline-flex items-center font-bold text-xs px-2.5 py-0.5 rounded-full tracking-wide uppercase bg-green-200 text-green-800 dark:bg-green-600 dark:text-green-50">
+                                                        <span class="leading-relaxed whitespace-nowrap">
+                                                            ชำระแล้ว
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <div
+                                                    *ngIf="item.payment_type === '4' ">
+                                                    <span
+                                                        class="inline-flex items-center font-bold text-xs px-2.5 py-0.5 rounded-full tracking-wide uppercase bg-red-200 text-red-800 dark:bg-red-600 dark:text-red-50">
+                                                        <span class="leading-relaxed whitespace-nowrap">
+                                                            CDC
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <div
+                                                    *ngIf="item.payment_type === '' || item.payment_type === null "> <span>-</span>
+                                                </div>
+                                            </td>
                                             <td style="width: 100px; min-width: 100px;">{{ item.total | number : '1.2-2'
                                                 }}</td>
                                             <td style="width: 100px; min-width: 100px;">{{ item.payment_qty | number :

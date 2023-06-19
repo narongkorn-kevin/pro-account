@@ -91,7 +91,7 @@ export class ContactInfoComponent implements OnInit {
     }
 
     totalPrice(weight: number, shippingCost: number, discount: number): number {
-        const total = weight + shippingCost + discount
+        const total = (weight * shippingCost) - discount
 
         return total + +this.newSelectProducts.reduce((sum, curr) => sum + (curr.quantity * curr.unit_price), 0);
     }
@@ -154,10 +154,12 @@ export class ContactInfoComponent implements OnInit {
     searchOrder() {
         this.itemService.searchOrder(this.searchOrderField.value).subscribe({
             next: (resp) => {
+                console.log('respppp',resp);
                 this.formData.patchValue({
                     customerName: [resp.name],
                     phone: [resp.telephone],
                     address: [resp.address],
+                    weight: [resp.sale_order_lines[0].item.weight],
                 });
 
                 resp.sale_order_lines[0].item.quantity = resp.sale_order_lines[0].qty
