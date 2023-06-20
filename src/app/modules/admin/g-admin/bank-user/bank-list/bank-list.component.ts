@@ -320,7 +320,7 @@ export class BankListComponent implements OnInit, AfterViewInit, OnDestroy {
     New() {
         const dialogRef = this._matDialog.open(BankNewComponent, {
             width: '900px',
-            height: '750px',
+            height: '550px',
 
         });
 

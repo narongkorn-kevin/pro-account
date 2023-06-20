@@ -71,7 +71,7 @@ export class FbPageService {
   }
   deletePage(itemId: number): Observable<any> {
     return this._httpClient
-        .delete<any>(`${environment.API_URL}api/user_page/${itemId}`)
+        .delete<any>(`${environment.API_URL}api/users_page/${itemId}`)
         .pipe(
             map((mtplan) => {
                 return mtplan;
