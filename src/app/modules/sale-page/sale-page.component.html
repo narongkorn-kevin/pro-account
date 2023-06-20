@@ -57,7 +57,7 @@
                   <mat-option [value]="''">
                       <span>เลือกแขวง</span>
                   </mat-option>
-                  <mat-option *ngFor="let item of DritrictData" [value]="item">
+                  <mat-option *ngFor="let item of DritrictData" [value]="item.value">
                       {{item.name}}
                   </mat-option>
               </mat-select>
