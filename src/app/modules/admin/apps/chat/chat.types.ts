@@ -51,5 +51,6 @@ export interface Chat
         isMine?: boolean;
         value?: string;
         createdAt?: string;
+        image?: any;
     }[];
 }

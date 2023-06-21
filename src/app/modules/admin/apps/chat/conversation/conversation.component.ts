@@ -127,6 +127,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
                 // Mark for check
                 this._changeDetectorRef.markForCheck();
             });
+        console.log('Chat',this.chat);
 
         // Subscribe to media changes
         this._fuseMediaWatcherService.onMediaChange$
