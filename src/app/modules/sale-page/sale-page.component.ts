@@ -18,12 +18,13 @@ export class SalePageComponent implements OnInit {
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
     favoriteSeason: string;
     
-    delivery: any = [
-      { value: '1', name: "จ่ายเฉพาะค่าขนส่ง 15บาทต่อ กก." },
-      { value: '2', name: "จ่ายเฉพาะค่าสินค้า" },
-      { value: '3', name: "จ่ายค่าสินค้าและค่าขนส่ง" },
-      { value: '4', name: "ไม่จ่ายค่าสินค้าและค่าขนส่ง" },
+    deliveryOptions : any = [
+      { value: "pay_only_del", name: "จ่ายเฉพาะค่าขนส่ง" },
+      { value: "pay_only_item", name: "จ่ายเฉพาะค่าสินค้า" },
+      { value: "pay_all", name: "จ่ายค่าสินค้าและค่าขนส่ง" },
+      { value: "not_pay", name: "ไม่จ่ายค่าสินค้าและค่าขนส่ง" },
     ];
+    selectedOption: number;
     DritrictData: any = [
       { value: "ແຂວງວຽງຈັນ", name: 'ແຂວງວຽງຈັນ' },
       { value: "ແຂວງສະຫວັນນະເຂດ", name: 'ແຂວງສະຫວັນນະເຂດ'},
@@ -50,12 +51,12 @@ export class SalePageComponent implements OnInit {
             telephone: ['', Validators.required],
             address: ['', Validators.required],
             shipping_price: ['20'],
-            payment_step: [''],
+            payment_type: [''],
             
         });
 
         this.stepTwoForm = this.fb.group({
-          payment_step: ['', Validators.required],
+          payment_type: ['', Validators.required],
         });
 
 
@@ -80,7 +81,7 @@ export class SalePageComponent implements OnInit {
     actionChange(id: number) {
       this.check = id;
       this.stepOneForm.patchValue({
-        payment_step: this.check
+        payment_type: this.check
     })
     }
     // actionChange(event, bankId, action): void {
