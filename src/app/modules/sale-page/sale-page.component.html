@@ -114,9 +114,9 @@
               <input type="radio" formControlName="payment_type" value="4" class="mr-2 " (change)="actionChange(4)">
               <span class="text-gray-700">ไม่จ่ายค่าสินค้าและค่าขนส่ง</span>
             </label> -->
-            <div *ngFor="let option of deliveryOptions" class="flex justify-start items-start">
-              <input type="radio" name="deliveryOption" [formControlName]="'payment_type'" [value]="option.value" [(ngModel)]="selectedOption">
-              {{ option.name }}
+            <div *ngFor="let option of deliveryOptions" class="flex flex-row">
+              <div class="flex flex-row justify-center items-center mr-5"><input type="radio"  name="deliveryOption" [formControlName]="'payment_type'" [value]="option.value" [(ngModel)]="selectedOption"></div>
+              <div class="flex flex-row justify-center items-center">{{ option.name }}</div>
             </div>
             <!-- <label id="example-radio-group-label">เลือกวิธีการชำระเงิน</label>
             <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group flex flex-col"
