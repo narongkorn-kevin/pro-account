@@ -9,6 +9,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { SaleOrderService } from 'app/modules/admin/g-admin/sale-order/sale-order.service';
 import { ChatService } from '../chat.service';
 import { MatStepper } from '@angular/material/stepper';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
 
 @Component({
     selector: 'chat-contact-info',
@@ -26,6 +27,7 @@ export class ContactInfoComponent implements OnInit {
 
     rawDataFilter: any[] = [];
     formData: FormGroup;
+    formData1: FormGroup;
 
     newSelectProducts: any[] = [];
 
@@ -51,6 +53,9 @@ export class ContactInfoComponent implements OnInit {
         { name: 'Product 2', price: 20 },
         { name: 'Product 3', price: 15 }
     ];
+    flashErrorMessage: string;
+    flashMessage: "success" | "error" | null = null;
+    ConfirmOrder: any = [];
 
     /**
      * Constructor
@@ -62,6 +67,8 @@ export class ContactInfoComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private ngZone: NgZone,
         private _chatService: ChatService,
+        private _Service: ChatService,
+        private _fuseConfirmationService: FuseConfirmationService,
     ) {
         this.formData = this._formBuilder.group({
             customerName: [null],
@@ -72,6 +79,10 @@ export class ContactInfoComponent implements OnInit {
             discount: [0],
             total: [0],
         });
+        this.formData1 = this._formBuilder.group(
+            {
+                code: ['']
+            })
     }
 
     ngOnInit(): void {
@@ -222,6 +233,102 @@ export class ContactInfoComponent implements OnInit {
             }
         );
 
+    }
+    rerender() {
+        throw new Error('Method not implemented.');
+    }
+    confirmOrder() {
+        // switch (No) {
+        //     case 1:
+        //         var data = this.ConfirmOrder1;
+        //         break;
+        //     case 2:
+        //         var data = this.ConfirmOrder2;
+        //         break;
+        //     case 3:
+        //         var data = this.ConfirmOrder3;
+        //         break;
+
+        //     default:
+        //         break;
+        // }
+        // this.ConfirmOrder.push(this.formData.value.code);
+        if (this.formData.value !== null) {
+            this.flashMessage = null;
+            this.flashErrorMessage = null;
+
+            const confirmation = this._fuseConfirmationService.open({
+                title: 'ยืนยันคำสั่งซื้อ',
+                message: 'คุณต้องการยืนยันคำสั่งซื้อใช่หรือไม่ ?',
+                icon: {
+                    show: true,
+                    name: 'heroicons_outline:plus-circle',
+                    color: 'info',
+                },
+                actions: {
+                    confirm: {
+                        show: true,
+                        label: 'ยืนยัน',
+                        color: 'primary',
+                    },
+                    cancel: {
+                        show: true,
+                        label: 'ยกเลิก',
+                    },
+                },
+                dismissible: true,
+            });
+
+            // Subscribe to the confirmation dialog closed action
+            confirmation.afterClosed().subscribe((result) => {
+                // If the confirm button pressed...
+                if (result === 'confirmed') {
+                    const formData = new FormData();
+                    if(this.formData1.value.code !== null ){
+                        console.log('Code',this.formData1.value.code);
+                        this._Service
+                        .postConfirmOrder(this.formData1.value.code)
+                        .subscribe({
+                            next: (resp: any) => {
+                                // this.dialogRef.close();
+                                this.clearTable();
+                                this.rerender();
+                                this._changeDetectorRef.markForCheck();
+                            },
+                            error: (err: any) => {
+                                this._fuseConfirmationService.open({
+                                    title: 'กรุณาระบุข้อมูล',
+                                    message: err.error.message,
+                                    icon: {
+                                        show: true,
+                                        name: 'heroicons_outline:exclamation',
+                                        color: 'warning',
+                                    },
+                                    actions: {
+                                        confirm: {
+                                            show: false,
+                                            label: 'ยืนยัน',
+                                            color: 'primary',
+                                        },
+                                        cancel: {
+                                            show: false,
+                                            label: 'ยกเลิก',
+                                        },
+                                    },
+                                    dismissible: true,
+                                });
+                                console.log(err.error.message);
+                            },
+                        });
+                    }
+                    
+                }
+            });
+        }
+    }
+    clearTable() {
+        this.ConfirmOrder = [];
+        this.formData1.reset();
     }
 
     // sendMessage() {
