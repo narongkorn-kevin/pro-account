@@ -30,6 +30,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
     formData: FormGroup;
     page: any;
     messages: any[] = [];
+    pic: any[] = [];
     ConfirmOrder: any = [];
     message = {
         // ...
@@ -125,6 +126,8 @@ export class ConversationComponent implements OnInit, OnDestroy {
                 console.log('Test Chat',chat);
                 chat.messages.data = chat.messages.data.reverse();
                 this.chat = chat;
+                this.pic = chat.attachments.data[0].image_data.url;
+                
                 // Mark for check
                 this._changeDetectorRef.markForCheck();
             });

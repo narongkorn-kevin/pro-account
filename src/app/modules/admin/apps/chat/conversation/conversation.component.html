@@ -102,16 +102,39 @@
                                 }">
                                     <!-- Speech bubble tail -->
                                     <!-- <ng-container *ngIf="last || chat.messages[i + 1].isMine !== true || chat.messages[i + 1].isMine === false"> -->
-                                    <ng-container *ngIf="message?.from?.id == page.id">
-                                        <div class="absolute bottom-0 w-3 text-blue-500 -right-1 -mr-px mb-px">
-                                            <ng-container *ngTemplateOutlet="speechBubbleExtension"></ng-container>
+                                    <ng-container *ngIf="message?.from?.id == page.id ">
+                                        
+                                        <div *ngIf="message?.attachments ">
+                                            <div *ngFor="let picture of message?.attachments?.data;">
+                                            <img src="{{picture?.image_data?.url}}">
+                                            </div>
+                                        </div>
+                                        <div *ngIf="!message?.attachments">
+                                            <div class="absolute bottom-0 w-3 text-blue-500 -right-1 -mr-px mb-px">
+                                                <ng-container *ngTemplateOutlet="speechBubbleExtension"></ng-container>
+                                            </div>
                                         </div>
                                     </ng-container>
                                     <ng-container *ngIf="message?.from?.id != page.id">
-                                        <div class="absolute bottom-0 w-3 text-green-500 -left-1 -ml-px mb-px">
-                                            <ng-container *ngTemplateOutlet="speechBubbleExtension"></ng-container>
+                                        <div *ngIf="message?.attachments ">
+                                            <div *ngFor="let picture of message?.attachments?.data;">
+                                                <!-- การดูว่าข้อมูลก้อนนี้มีอะไรบ้าง -->
+                                                <!-- <pre>{{picture | json}}</pre> -->
+                                                
+                                            <img class="object-contain m-3 w-96" src="{{picture?.image_data?.url}}">
+                                            </div>
+                                        </div>
+                                        <div *ngIf="!message?.attachments ">
+                                            <div class="absolute bottom-0 w-3 text-green-500 -left-1 -ml-px mb-px">
+                                                <ng-container *ngTemplateOutlet="speechBubbleExtension"></ng-container>
+                                            </div>
                                         </div>
                                     </ng-container>
+                                    <!-- เอาตัวนี้ไว้วนลูป -->
+                                    <!-- message?.attachments?.data[0] -->
+                                    <!-- <pre>{{message?.attachments?.data[0]?.image_data?.url | json}}</pre> -->
+                                    <!-- <img src="{{message?.attachments?.data[0]?.image_data?.url}}"> -->
+
 
                                     <!-- <pre>{{message | json}}</pre> -->
 
@@ -134,6 +157,10 @@
                                 </ng-container> -->
                             </div>
                         </ng-container>
+                        <!-- <div *ngFor="let picture of pic;">
+                            
+                            <pre>{{picture | json}}</pre>
+                        </div> -->
                     </div>
                 </div>
 
