@@ -242,6 +242,11 @@ item: any;
 
         //     })
         // });
+        this._Service.get_delivered_by().subscribe((res) => {
+            console.log('del data', res);
+            this.delivered = res;
+            console.log('delivered data', this.delivered);
+        });
     }
 
     productCodeChange(product: any) {
@@ -410,5 +415,90 @@ item: any;
             dtInstance.ajax.reload();
         });
     }
+    /** เลือกขนส่ง */
+    delivered_by: any;
+    delivered: any = [];
+    /** เก็บค่า id ของออเดอร์ */
+    DelOrder: any = [];
+    DelMulOrder() {
+        if (this.DelOrder !== null) {
+            // this._Service
+            //     .postDelMulOrder(this.DelOrder, this.delivered_by)
+            //     .subscribe((res) => {
+            //         // console.log('pack', res);
+            //     });
+            // this._changeDetectorRef.markForCheck();
+
+            this.flashMessage = null;
+            this.flashErrorMessage = null;
+
+            const confirmation = this._fuseConfirmationService.open({
+                title: 'ยืนยันคำสั่งซื้อ',
+                message: 'คุณต้องการยืนยันคำสั่งซื้อใช่หรือไม่ ?',
+                icon: {
+                    show: true,
+                    name: 'heroicons_outline:plus-circle',
+                    color: 'info',
+                },
+                actions: {
+                    confirm: {
+                        show: true,
+                        label: 'ยืนยัน',
+                        color: 'primary',
+                    },
+                    cancel: {
+                        show: true,
+                        label: 'ยกเลิก',
+                    },
+                },
+                dismissible: true,
+            });
+
+            // Subscribe to the confirmation dialog closed action
+            confirmation.afterClosed().subscribe((result) => {
+                // If the confirm button pressed...
+                if (result === 'confirmed') {
+                    const formData = new FormData();
+
+                    this._Service
+                        .postDelMulOrder(this.DelOrder, this.delivered_by)
+                        .subscribe({
+                            next: (resp: any) => {
+                                // this.dialogRef.close();
+                                this.rerender();
+                                this._changeDetectorRef.markForCheck();
+                            },
+                            error: (err: any) => {
+                                this._fuseConfirmationService.open({
+                                    title: 'กรุณาระบุข้อมูล',
+                                    message: err.error.message,
+                                    icon: {
+                                        show: true,
+                                        name: 'heroicons_outline:exclamation',
+                                        color: 'warning',
+                                    },
+                                    actions: {
+                                        confirm: {
+                                            show: false,
+                                            label: 'ยืนยัน',
+                                            color: 'primary',
+                                        },
+                                        cancel: {
+                                            show: false,
+                                            label: 'ยกเลิก',
+                                        },
+                                    },
+                                    dismissible: true,
+                                });
+                                console.log(err.error.message);
+                            },
+                        });
+                }
+            });
+        }
+        // dialogRef.afterClosed().subscribe((item) => {
+        // });
+    }
+    
 
 }

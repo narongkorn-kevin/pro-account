@@ -57,3 +57,35 @@ table {
     height: 1920px;
     width: 980px;
   }
+
+
+  ::ng-deep .mat-tab-labels {
+    justify-content: center !important;
+    background-color: #f1f5f9;
+    border-radius: 25px;
+    gap: 15px;
+}
+
+
+
+::ng-deep .mat-form-field.mat-form-field-appearance-fill .mat-form-field-wrapper {
+    margin-bottom: 0px !important;
+}
+
+::ng-deep .mat-form-field.mat-form-field-appearance-fill .mat-form-field-wrapper .mat-form-field-flex {
+    width: 320px !important;
+    border-radius: 25px !important;
+}
+
+::ng-deep .mat-option-text {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+::ng-deep .mat-select-panel {
+    border-radius: 25px !important;
+    max-height: none !important;
+    border: 1px solid #8a8a8a46;
+}

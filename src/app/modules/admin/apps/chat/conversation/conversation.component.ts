@@ -122,6 +122,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
         this._chatService.chat$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((chat: any) => {
+                console.log('Test Chat',chat);
                 chat.messages.data = chat.messages.data.reverse();
                 this.chat = chat;
                 // Mark for check
@@ -217,6 +218,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
         // Update the chat on the server
         this._chatService.updateChat(this.chat.id, this.chat).subscribe();
     }
+    
 
     /**
      * Track by function for ngFor loops
