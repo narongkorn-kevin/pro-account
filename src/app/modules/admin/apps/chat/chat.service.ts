@@ -86,7 +86,7 @@ export class ChatService {
      * Get chats
      */
     getChats(): Observable<any> {
-        return this._httpClient.get<Chat[]>('https://graph.facebook.com/v16.0/t_6187365231324644?fields=participants,messages{from,to,message}&access_token=EAACa5iDAEsMBAAZB33Kn17TkGrH11lX5WyulorcsAva4QtybvvZBOLKE4bSfHZAgrSwjV9DgQAnWakm2DjLP3t1Lk1ZCfdnGBm3Jg9TRiIChgba4RT9Q28eG6nMq1qXsdMeZAVgZBQXdjTZC92c3Ej4VFvNh7t7fAwCiYRg16u77VCYFjGqgIJ5').pipe(
+        return this._httpClient.get<Chat[]>('https://graph.facebook.com/v16.0/t_6187365231324644?fields=participants,messages{from,to,message,attachments}&access_token=EAACa5iDAEsMBAAZB33Kn17TkGrH11lX5WyulorcsAva4QtybvvZBOLKE4bSfHZAgrSwjV9DgQAnWakm2DjLP3t1Lk1ZCfdnGBm3Jg9TRiIChgba4RT9Q28eG6nMq1qXsdMeZAVgZBQXdjTZC92c3Ej4VFvNh7t7fAwCiYRg16u77VCYFjGqgIJ5').pipe(
             tap((response: Chat[]) => {
                 this._chats.next(response);
             })
