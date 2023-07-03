@@ -649,6 +649,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 type: 'basic',
                 link: '/fb-page/list',
             },
+            {
+                id: 'setting-shop',
+                title: 'ตั้งค่าขนส่ง',
+                icon: 'mat_outline:account_balance_wallet',
+                type: 'basic',
+                link: '/setting-shop/home',
+            },
             // {
             //     id: 'position',
             //     title: 'ตั้งค่า live สดสินค้า',

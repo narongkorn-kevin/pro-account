@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FbPageComponent } from './fb-page.component';
-import { ListComponent } from './list/list.component';
+import { SettingShopComponent } from './setting-shop.component';
+import { HomeComponent } from './home/home.component';
+import { TranListComponent } from './tran-list/tran-list.component';
+import { TranChangeComponent } from './tran-change/tran-change.component';
+import { OriginComponent } from './origin/origin.component';
 import { Route, RouterModule } from '@angular/router';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -35,108 +38,86 @@ import { FuseCardModule } from '@fuse/components/card';
 import { FuseFindByKeyPipeModule } from '@fuse/pipes/find-by-key';
 import { DataTablesModule } from 'angular-datatables';
 import { SharedModule } from 'app/shared/shared.module';
+import { NgDragDropModule } from 'ng-drag-drop';
 import { NgImageSliderModule } from 'ng-image-slider';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
-import { NewComponent } from './new/new.component';
-import { FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+
 export const routes: Route[] = [
   {
       path: '',
-      component: FbPageComponent,
+      component: SettingShopComponent,
 
       children: [
           {
-              path: 'list',
-              component: ListComponent,
+              path: 'home',
+              component: HomeComponent,
           },
-          // {
-          //     path: 'new',
-          //     component: NewComponent,
-          // },
-          // {
-          //     path: 'edit/:id',
-          //     component: EditComponent,
-          // },
+          {
+              path: 'list',
+              component: TranListComponent,
+          },
+          {
+              path: 'change',
+              component: TranChangeComponent,
+          },
+          {
+              path: 'origin',
+              component: OriginComponent,
+          },
       ],
   },
 ];
 
-
 @NgModule({
   declarations: [
-    FbPageComponent,
-    ListComponent,
-    NewComponent
+    SettingShopComponent,
+    HomeComponent,
+    TranListComponent,
+    TranChangeComponent,
+    OriginComponent
   ],
   imports: [
-        RouterModule.forChild(routes),
-        CommonModule,
-        NgxDropzoneModule,
-        MatButtonModule,
-        MatCheckboxModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatAutocompleteModule,
-        DataTablesModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatMenuModule,
-        MatPaginatorModule,
-        MatProgressBarModule,
-        MatRippleModule,
-        MatSortModule,
-        MatSelectModule,
-        MatSlideToggleModule,
-        MatTooltipModule,
-        SharedModule,
-        DragDropModule,
-        MatDialogModule,
-        MatDatepickerModule,
-        MatMomentDateModule,
-        MatTableModule,
-        MatTabsModule,
-        FuseFindByKeyPipeModule,
-        MatSidenavModule,
-        MatButtonToggleModule,
-        MatChipsModule,
-        MatDividerModule,
-        MatTabsModule,
-        MatBadgeModule,
-        FormsModule,
-        MatIconModule,
-        NgImageSliderModule,
-        NgxDropzoneModule,
-        MatRadioModule,
-        MatExpansionModule,
-        FuseCardModule,
-        BsDropdownModule.forRoot(),
-        NgxMatTimepickerModule.setLocale('en-GB'),
-        SocialLoginModule,
-  ],
-  providers: [
-    {
-        provide: 'SocialAuthServiceConfig',
-        useValue: {
-            autoLogin: false,
-            providers: [
-
-                {
-                    id: FacebookLoginProvider.PROVIDER_ID,
-                    provider: new FacebookLoginProvider('170313182614211')
-                }
-            ],
-
-
-
-
-            
-            onError: (err) => {
-                console.error(err);
-            }
-        } as SocialAuthServiceConfig,
-    }
-],
+    RouterModule.forChild(routes),
+    CommonModule,
+    NgxDropzoneModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    DataTablesModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatMenuModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatRippleModule,
+    MatSortModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatTooltipModule,
+    SharedModule,
+    DragDropModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
+    MatTableModule,
+    MatTabsModule,
+    FuseFindByKeyPipeModule,
+    MatSidenavModule,
+    MatButtonToggleModule,
+    MatChipsModule,
+    MatDividerModule,
+    MatTabsModule,
+    MatBadgeModule,
+    NgImageSliderModule,
+    NgxDropzoneModule,
+    MatRadioModule,
+    MatExpansionModule,
+    FuseCardModule,
+    NgDragDropModule.forRoot(),
+    NgxMatTimepickerModule.setLocale('th-TH'),
+  ]
 })
-export class FbPageModule { }
+export class SettingShopModule { }
