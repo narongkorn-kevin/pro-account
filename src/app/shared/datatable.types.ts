@@ -1,4 +1,5 @@
 export interface DataTablesResponse {
+    
     current_page: number,
     data: any[],
     first_page_url: string,

@@ -1,1 +1,51 @@
-<p>tran-list works!</p>
+<div class="flex flex-col p-3 sm:p-10">
+    <div class="flex flex-col justify-end w-1/6">
+    <button mat-flat-button (click)=" updateTran()" class="m-5  ">ตั้งค่าขนส่ง</button>
+    </div>
+    <!-- Products list -->
+
+    <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll">
+        <table datatable [dtOptions]="dtOptions"
+            class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+            style="width: 100%">
+            <thead>
+                <tr>
+                    <!-- <th>จัดการ</th> -->
+                    <th>ลำดับ</th>
+                    <th>ชื่อขนส่ง</th>
+                    <th>รูปปก</th>
+                    <th>ราคาปัจจุบัน</th>
+                    
+
+                </tr>
+            </thead>
+            <tbody *ngIf="dataRow?.length != 0 ">
+                <tr *ngFor="let item of dataRow; let i = index"
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md">
+                    <!-- <td style="width: 80px; min-width: 80px;">
+                        <button mat-icon-button (click)="edit(item.id)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </td> -->
+                    <td style="width: 20px; ">{{ i+1 }}</td>
+                    <!-- <td style="width: 20px">{{ item?.user_id??"-" }}</td>                              -->
+                    <td style="width: 100px; min-width: 100px;">{{ item?.name??"-" }}</td>
+                    <td>
+                        <img [src]="item.image" class="object-contain h-20 w-20" />
+                    </td>
+                    <td style="width: 100px; min-width: 100px;">{{ item?.fee??"-" }}</td>
+                    
+                    
+                </tr>
+            </tbody>
+
+
+            <tbody *ngIf="dataRow?.length == 0">
+                <tr>
+                    <td colspan="4" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

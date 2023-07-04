@@ -3,34 +3,27 @@
         <div class="flex w-full  bg-card items-center justify-start">
             <span class="header">ตั้งค่าขนส่ง</span>
         </div>
-        <div class="flex flex-wrap w-full">
-            <button mat-flat-button class="m-5 w-1/6  ">ขนส่ง</button>
-            <div class="flex flex-col bg-card h-50 m-10 w-full  rounded-2xl shadow-2xl">
-                <div class="flex justify-center text-2xl w-full m-2">
-                    ขนส่งที่เลือก
+        <div class="flex flex-wrap justify-end w-full">
+            <button mat-flat-button (click)=" listTran()" class="m-5 w-1/6  ">ขนส่ง</button>
+            <div class="flex flex-col bg-card  m-10 w-full  rounded-2xl shadow-2xl">
+                <div class="flex justify-center items-center text-2xl h-15 bg-green-200 ">
+                   <div class=""></div> ขนส่งที่เลือก
                 </div>
-                <div class="flex w-full">
-                    <table>
-                        <thead >
-                            <tr>
-                                <th>จัดการ</th>
-                                <th>ลำดับ</th>
-                                <th>รูปโลโก้</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-
-                                
-                            </tr>
-                            
-                        </tbody>
-                    </table>
+                <div class="flex flex-col w-full p-10">
+                    <div class="flex flex-row">
+                        <span>ขนส่ง: </span>
+                        <img src="{{this?.Userdata?.image}}">
+                    </div>
+                    <!-- <div class="flex flex-row">
+                        <span>ชื่อขนส่ง: {{this.Userdata.image}}</span>
+                    </div> -->
+                    <div class="flex flex-row">
+                        <span>ราคาปัจจุบัน: {{this?.Userdata?.delivered_fee??"-"|number}} </span>
+                    </div>
                 </div>
+                
             </div>
+            
 
         </div>
         
