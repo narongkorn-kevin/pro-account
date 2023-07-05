@@ -124,7 +124,7 @@ export const routes: Route[] = [
 
                 {
                     id: FacebookLoginProvider.PROVIDER_ID,
-                    provider: new FacebookLoginProvider('228534906688199')
+                    provider: new FacebookLoginProvider('170313182614211')
                 }
             ],
 

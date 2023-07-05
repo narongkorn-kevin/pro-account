@@ -16,7 +16,7 @@ export class FbLiveComponent implements OnInit {
 
     constructor(private http: HttpClient) {
       FB.init({
-        appId: '228534906688199',
+        appId: '170313182614211',
         cookie: true,
         xfbml: true,
         version: 'v11.0'
