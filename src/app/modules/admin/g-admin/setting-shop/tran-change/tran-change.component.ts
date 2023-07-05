@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { Observable } from 'rxjs';
@@ -28,7 +28,7 @@ export class TranChangeComponent implements OnInit {
   ngOnInit(): void {
     this.formData = this._formBuilder.group({
       delivered_by_id: '',
-      delivered_fee: '',
+      delivered_fee: ['', Validators.required],
       qty: '',
 
     })
@@ -77,10 +77,10 @@ export class TranChangeComponent implements OnInit {
 
         const formData = this.formData.value;
 
-        this._Service.update(formData).subscribe({
+        this._Service.updatedeliver(formData).subscribe({
           next: (resp) => {
             console.log('resp',resp);
-            this._dialogRef.close();
+            this._dialogRef.close(resp);
           },
           error: (err) => {
             this._fuseConfirmationService.open({

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { SettingShopService } from '../setting-shop.service';
 import { TranChangeComponent } from '../tran-change/tran-change.component';
@@ -21,6 +21,7 @@ export class TranListComponent implements OnInit {
     private _matDialog: MatDialog,
     //private authService: SocialAuthService,
     private _fuseConfirmationService: FuseConfirmationService,
+    private _dialogRef: MatDialogRef<TranListComponent>,
   ) { }
 
   ngOnInit(): void {
@@ -42,7 +43,7 @@ export class TranListComponent implements OnInit {
         console.log('Test');
         // dataTablesParameters.item_type_id = 1;
         // dataTablesParameters.user_id = this.User.id;
-        that._Service.getAddress(dataTablesParameters).subscribe((resp) => {
+        that._Service.getlistDeliver(dataTablesParameters).subscribe((resp) => {
           this.dataRow = resp.data
           console.log('Resp', this.dataRow)
           this.pages.current_page = resp.current_page;
@@ -80,8 +81,8 @@ export class TranListComponent implements OnInit {
 
     })
     dialogRef.afterClosed().subscribe(res => {
-      this.deliverData = res;
-      console.log('Deliver',this.deliverData);
+      this._dialogRef.close(res);
+      
     })
   }
 

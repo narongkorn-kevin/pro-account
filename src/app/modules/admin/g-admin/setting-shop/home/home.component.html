@@ -1,31 +1,92 @@
 <div class="w-full">
     <div class="flex flex-col w-full ">
-        <div class="flex w-full  bg-card items-center justify-start">
+        <div class="flex w-full  bg-card items-center justify-start py-8 pl-6">
             <span class="header">ตั้งค่าขนส่ง</span>
         </div>
-        <div class="flex flex-wrap justify-end w-full">
-            <button mat-flat-button (click)=" listTran()" class="m-5 w-1/6  ">ขนส่ง</button>
-            <div class="flex flex-col bg-card  m-10 w-full  rounded-2xl shadow-2xl">
-                <div class="flex justify-center items-center text-2xl h-15 bg-green-200 ">
-                   <div class=""></div> ขนส่งที่เลือก
+        <div class="flex flex-row">
+        <div class="flex flex-wrap justify-end w-1/2">
+            
+            
+            <div class="flex flex-col bg-card  m-10 w-full h-80   rounded-2xl shadow-2xl">
+                <div class="flex justify-between items-center text-2xl h-15 bg-green-200 ">
+                   <div class="ml-5">ขนส่งที่เลือก</div> 
+                   <button  (click)=" listTran()" class="m-5 w-1/6  button">ขนส่ง</button>
                 </div>
-                <div class="flex flex-col w-full p-10">
+                <div class="flex flex-col items-center justify-center w-full p-10">
+                    
+                    
                     <div class="flex flex-row">
-                        <span>ขนส่ง: </span>
-                        <img src="{{this?.Userdata?.image}}">
+                        
+                        <img [src]="this?.Userdata?.delivered_by?.image"class="object-contain h-30 w-30" />
                     </div>
-                    <!-- <div class="flex flex-row">
-                        <span>ชื่อขนส่ง: {{this.Userdata.image}}</span>
-                    </div> -->
-                    <div class="flex flex-row">
-                        <span>ราคาปัจจุบัน: {{this?.Userdata?.delivered_fee??"-"|number}} </span>
+                    <div class="flex flex-row text-2xl">
+                        <span >ชื่อขนส่ง: {{this?.Userdata?.delivered_by?.name??"-"}} </span>
                     </div>
+                    <div class="flex flex-row text-2xl">
+                        <span>ราคาปัจจุบัน: {{this?.Userdata?.delivered_fee??0|number}} </span>
+                    </div>
+                    
+                    
+                </div>
+                
+            </div>
+        </div>
+        <div class="flex flex-wrap justify-end w-1/2">
+            
+            
+            <div class="flex flex-col bg-card  m-10 w-full  rounded-2xl shadow-2xl">
+                <div class="flex justify-between items-center text-2xl h-15 bg-green-200 ">
+                   <div class="ml-5">ที่อยู่</div> 
+                   <button  (click)=" Address()" class="m-5 w-1/6 button">จัดการที่อยู่</button>
+                </div>
+                
+                <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll">
+                    <table datatable [dtOptions]="dtOptions"
+                        class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                        style="width: 100%">
+                        <thead>
+                            <tr>
+                                <!-- <th>จัดการ</th> -->
+                                <th>ลำดับ</th>
+                                <th>ชื่อ</th>
+                                <th>ที่อยู่</th>
+                                <th>เพจ</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="dataRow?.length != 0 ">
+                            <tr *ngFor="let item of dataRow; let i = index"
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md">
+                                <!-- <td style="width: 80px; min-width: 80px;">
+                                    <button mat-icon-button (click)="edit(item.id)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </td> -->
+                                <td style="width: 20px; ">{{ i+1 }}</td>
+                                <!-- <td style="width: 20px">{{ item?.user_id??"-" }}</td>-->
+                                <td style="width: 100px; min-width: 100px;">{{ item?.name??"-" }}</td>
+                                
+                                <td style="width: 100px; min-width: 100px;">{{ item?.address??"-" }}</td>
+                                <td>
+                                    <img [src]="item.user_page.image" class="object-contain h-20 w-20" />
+                                </td>
+                                
+                                
+                            </tr>
+                        </tbody>
+            
+            
+                        <tbody *ngIf="dataRow?.length == 0">
+                            <tr>
+                                <td colspan="4" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 
             </div>
             
-
         </div>
+    </div>
         
     </div>
 </div>
