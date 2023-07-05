@@ -645,14 +645,14 @@ export const defaultNavigation: FuseNavigationItem[] = [
             {
                 id: 'fb-page',
                 title: 'จัดการเพจ',
-                icon: 'mat_outline:account_balance_wallet',
+                icon: 'feather:edit',
                 type: 'basic',
                 link: '/fb-page/list',
             },
             {
                 id: 'setting-shop',
                 title: 'ตั้งค่าขนส่ง',
-                icon: 'mat_outline:account_balance_wallet',
+                icon: 'heroicons_outline:truck',
                 type: 'basic',
                 link: '/setting-shop/home',
             },
