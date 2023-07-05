@@ -4,11 +4,15 @@
             <span class="header">ตั้งค่าขนส่ง</span>
         </div>
         <div class="flex flex-row">
-        <div class="flex flex-wrap justify-end w-1/2">
-            
-            
-            <div class="flex flex-col bg-card  m-10 w-full h-80   rounded-2xl shadow-2xl">
-                <div class="flex justify-between items-center text-2xl h-15 bg-green-200 ">
+            <div class="flex flex-wrap justify-end w-1/2">
+
+
+                <div class="flex flex-col bg-card  m-10 w-full    rounded-2xl shadow-2xl">
+                    <div class="flex justify-between items-center text-2xl h-15 bg-green-200 ">
+                        <div class="ml-5">ขนส่ง</div>
+                        <button (click)=" updateTran()" class="m-5 w-1/6 button">ตั้งค่า</button>
+                    </div>
+                    <!-- <div class="flex justify-between items-center text-2xl h-15 bg-green-200 ">
                    <div class="ml-5">ขนส่งที่เลือก</div> 
                    <button  (click)=" listTran()" class="m-5 w-1/6  button">ขนส่ง</button>
                 </div>
@@ -27,66 +31,143 @@
                     </div>
                     
                     
+                </div> -->
+
+                    <!-- <div class="flex  w-full justify-end">
+                            <div class="flex flex-col  w-1/6">
+                                <button (click)=" updateTran()" class="m-5 button">ตั้งค่าขนส่ง</button>
+                            </div>
+                        </div> -->
+                    <!-- <div class="flex justify-end items-center text-2xl h-15 bg-green-200 ">
+                            
+                            <button (click)=" updateTran()" class=" w-1/6  button">ขนส่ง</button>
+                        </div> -->
+                    <!-- Products list -->
+
+                    <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll">
+                        <table datatable [dtOptions]="dtOptions1"
+                            class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                            style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <!-- <th>จัดการ</th> -->
+                                    <th>ลำดับ</th>
+                                    <th>ชื่อขนส่ง</th>
+                                    <th>รูปปก</th>
+                                    <th>ราคา</th>
+                                    <th>ค่าธรรมเนียม</th>
+                                    <th>กำไร</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="dataRow1?.length != 0 ">
+                                <tr *ngFor="let item of dataRow1; let i = index"
+                                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md">
+                                    <!-- <td style="width: 80px; min-width: 80px;">
+                                        <button mat-icon-button (click)="edit(item.id)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                    </td> -->
+                                    <td style="width: 20px; ">{{ i+1 }}</td>
+                                    <!-- <td style="width: 20px">{{ item?.user_id??"-" }}</td>                              -->
+                                    <td style="width: 100px; min-width: 100px;">{{ item?.name??"-" }}</td>
+                                    <td>
+                                        <img [src]="item.image" class="object-contain h-20 w-20" />
+                                    </td>
+                                    <td>{{ item?.fee??"-" }}</td>
+                                    <td>
+                                        {{this?.Userdata?.delivered_fee??0|number}}</td>
+                                    <td>{{this?.Userdata?.delivered_fee -
+                                        item?.fee}}</td>
+
+
+                                </tr>
+                            </tbody>
+
+
+                            <tbody *ngIf="dataRow1?.length == 0">
+                                <tr>
+                                    <td colspan="4" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
                 </div>
-                
             </div>
-        </div>
-        <div class="flex flex-wrap justify-end w-1/2">
-            
-            
-            <div class="flex flex-col bg-card  m-10 w-full  rounded-2xl shadow-2xl">
-                <div class="flex justify-between items-center text-2xl h-15 bg-green-200 ">
-                   <div class="ml-5">ที่อยู่</div> 
-                   <button  (click)=" Address()" class="m-5 w-1/6 button">จัดการที่อยู่</button>
-                </div>
-                
-                <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll">
-                    <table datatable [dtOptions]="dtOptions"
-                        class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
-                        style="width: 100%">
-                        <thead>
-                            <tr>
-                                <!-- <th>จัดการ</th> -->
-                                <th>ลำดับ</th>
-                                <th>ชื่อ</th>
-                                <th>ที่อยู่</th>
-                                <th>เพจ</th>
-                            </tr>
-                        </thead>
-                        <tbody *ngIf="dataRow?.length != 0 ">
-                            <tr *ngFor="let item of dataRow; let i = index"
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md">
-                                <!-- <td style="width: 80px; min-width: 80px;">
+            <div class="flex flex-wrap justify-end w-1/2">
+
+
+                <div class="flex flex-col bg-card  m-10 w-full  rounded-2xl shadow-2xl">
+                    <div class="flex justify-between items-center text-2xl h-15 bg-green-200 ">
+                        <div class="ml-5">ที่อยู่</div>
+                        <button (click)=" Address()" class="m-5 w-1/6 button">จัดการที่อยู่</button>
+                    </div>
+
+                    <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll">
+                        <table datatable [dtOptions]="dtOptions2"
+                            class="table row-border hover w-full text-lg text-left text-gray-500 dark:text-gray-400"
+                            style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <!-- <th>จัดการ</th> -->
+                                    <th>ลำดับ</th>
+                                    <th>ชื่อ</th>
+                                    <th>ที่อยู่</th>
+                                    <th>เพจ</th>
+                                    <th>แก้ไข</th>
+                                    <th>ลบ</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="dataRow2?.length != 0 ">
+                                <tr *ngFor="let item of dataRow2; let i = index"
+                                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md">
+                                    <!-- <td style="width: 80px; min-width: 80px;">
                                     <button mat-icon-button (click)="edit(item.id)">
                                         <mat-icon>edit</mat-icon>
                                     </button>
                                 </td> -->
-                                <td style="width: 20px; ">{{ i+1 }}</td>
-                                <!-- <td style="width: 20px">{{ item?.user_id??"-" }}</td>-->
-                                <td style="width: 100px; min-width: 100px;">{{ item?.name??"-" }}</td>
-                                
-                                <td style="width: 100px; min-width: 100px;">{{ item?.address??"-" }}</td>
-                                <td>
-                                    <img [src]="item.user_page.image" class="object-contain h-20 w-20" />
-                                </td>
-                                
-                                
-                            </tr>
-                        </tbody>
-            
-            
-                        <tbody *ngIf="dataRow?.length == 0">
-                            <tr>
-                                <td colspan="4" class="no-data-available text-center">ไม่มีข้อมูล !</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                    <td style="width: 20px; ">{{ i+1 }}</td>
+                                    <!-- <td style="width: 20px">{{ item?.user_id??"-" }}</td>-->
+                                    <td >{{ item?.name??"-" }}</td>
+
+                                    <td >{{ item?.address??"-" }}</td>
+                                    <td>
+                                        <img [src]="item.user_page.image" class="object-contain h-20 w-20" />
+                                    </td>
+                                    <td>
+                                        <button mat-button (click)=" openUpdateDialog(item.id)">
+                                        <mat-icon>edit</mat-icon>
+                                        </button>
+                                                        
+                                    </td>
+                                    <td>
+                                        <button mat-button (click)="delete(item.id)">
+                                            <mat-icon>delete</mat-icon>
+                                            </button>
+                                                        
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+
+
+                            <tbody *ngIf="dataRow2?.length == 0">
+                                <tr>
+                                    <td colspan="6" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
-                
+
             </div>
-            
         </div>
-    </div>
-        
+
     </div>
 </div>

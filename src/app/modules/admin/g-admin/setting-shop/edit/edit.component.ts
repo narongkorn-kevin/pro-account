@@ -1,46 +1,111 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { DataTableDirective } from 'angular-datatables';
 import { Observable } from 'rxjs';
+import { OriginComponent } from '../origin/origin.component';
 import { SettingShopService } from '../setting-shop.service';
 
 @Component({
-  selector: 'app-tran-change',
-  templateUrl: './tran-change.component.html',
-  styleUrls: ['./tran-change.component.scss']
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.scss']
 })
-export class TranChangeComponent implements OnInit {
+export class EditComponent implements OnInit {
 
   formData: FormGroup;
-  delivery_Id:Observable<any[]>;
+  delivery_Id: Observable<any[]>;
+  UserId: Observable<any[]>;
+  databyid:any
+  // socialUser!: SocialUser;
+  //   isLoggedin?: boolean = undefined;
+  //   userData: any;
+
   constructor(
     private _formBuilder: FormBuilder,
     // @Inject(MAT_DIALOG_DATA) private _data: { Id?: any },
+    @Inject(MAT_DIALOG_DATA) private data: { pageId?: any },
     private _matDialog: MatDialog,
     private _fuseConfirmationService: FuseConfirmationService,
     private _Service: SettingShopService,
-    private _dialogRef: MatDialogRef<TranChangeComponent>,
-  ) { 
-    
-  }
-
-  ngOnInit(): void {
+    private _dialogRef: MatDialogRef<EditComponent>,
+    private _activatedRoute: ActivatedRoute,
+    // private authService: SocialAuthService,
+  ) {
     this.formData = this._formBuilder.group({
-      // delivered_by_id: '',
-      delivered_fee: ['', Validators.required],
-      qty: '',
+      user_id: '',
+      name: ['', Validators.required],
+      address: ['', Validators.required],
+      tel: ['', Validators.required],
+      remark: ['', Validators.required],
+      // user_page_id: '',
+      // user_page_id: this._formBuilder.array([]),
+
 
     })
+
+  }
+
+  pageId: string;
+  User: any;
+  ngOnInit(): void {
     this.delivery_Id = this._Service.getDelivery();
+    this.User = JSON.parse(localStorage.getItem('user'));
+    this._Service.getFacebookPage(this.User.id).subscribe((resp) => {
+      this.UserId = resp.data;
+      console.log('UserId', this.UserId);
+    })
+    this._Service.getById(this.data.pageId).subscribe((ress: any)=>{
+      
+      this.databyid = ress;
+      console.log('ress',this.databyid);
+      this.formData.patchValue({
+        user_id: this.User.id,
+        name: this.databyid?.name,
+        address: this.databyid?.address,
+        tel: this.databyid?.tel,
+        remark: this.databyid?.remark
+      })
+    })
+    
+    
+
+    console.log('this.formData', this.formData.value);
+
+
+    // this.pageId = this._activatedRoute.snapshot.paramMap.get('id');
+    // this.User = JSON.parse(localStorage.getItem('user'));
+    // console.log('Thissssss',this.User);
+    // this.authService.authState.subscribe((user) => {
+    //     this.socialUser = user;
+    //     this.isLoggedin = user != null;
+    //     console.log(user,'User');
+    //     this._Service.getTokenUser(this.socialUser.authToken).subscribe((resp: any) => {
+    //         console.log(resp,'tessssss');
+
+    //         this.userData = resp.data
+    //         console.log('userData',this.userData);
+
+    //     });
+    // });
   }
   flashErrorMessage: string;
   flashMessage: "success" | "error" | null = null;
+  toppings = new FormControl('');
+  page_id = []
+
   update(): void {
     if (this.formData.invalid) {
       return;
     }
+    // this.page_id.push(this.toppings.value)
+    this.formData.value.user_page_id = this.toppings.value
+    // this.formData.patchValue({
+    //   user_page_id: this.page_id
+    // })
+
     this.flashMessage = null;
     this.flashErrorMessage = null;
     // Return if the form is invalid
@@ -78,12 +143,10 @@ export class TranChangeComponent implements OnInit {
 
         const formData = this.formData.value;
 
-        this._Service.updatedeliver(formData).subscribe({
+        this._Service.updateAddress(formData,this.data.pageId).subscribe({
           next: (resp) => {
-            console.log('resp',resp);
-            
+            console.log('resp', resp);
             this._dialogRef.close(resp);
-            
           },
           error: (err) => {
             this._fuseConfirmationService.open({
@@ -118,7 +181,9 @@ export class TranChangeComponent implements OnInit {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
         dtInstance.ajax.reload();
     });
-  
-
 }
+
+
+
+
 }

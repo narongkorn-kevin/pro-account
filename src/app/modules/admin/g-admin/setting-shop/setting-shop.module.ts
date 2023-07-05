@@ -42,6 +42,7 @@ import { NgDragDropModule } from 'ng-drag-drop';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import { EditComponent } from './edit/edit.component';
 
 export const routes: Route[] = [
   {
@@ -75,7 +76,8 @@ export const routes: Route[] = [
     HomeComponent,
     TranListComponent,
     TranChangeComponent,
-    OriginComponent
+    OriginComponent,
+    EditComponent
   ],
   imports: [
     RouterModule.forChild(routes),

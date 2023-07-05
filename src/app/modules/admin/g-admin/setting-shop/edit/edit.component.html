@@ -7,7 +7,7 @@
             <!-- Title -->
             <div class="mt-2">
                 <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
-                    จัดการขนส่ง </h2>
+                    จัดการที่อยู่ </h2>
             </div>
 
         </div>
@@ -44,28 +44,56 @@
 
                         <div class="flex flex-col">
                             <mat-form-field class="w-full">
-                                <mat-label>ค่าธรรมเนียม
+                                <mat-label>ชื่อ
                                 </mat-label>
-                                <input matInput [formControlName]="'delivered_fee'">
+                                <input matInput [formControlName]="'name'">
                                 <mat-error>
-                                    กรุณากรอกค่าธรรมเนียม
+                                    กรุณากรอกชื่อ
                                 </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
-                    <!-- <div class="flex flex-col w-full lg:w-4/4 sm:pl-6">
+                    <div class="flex flex-col w-full lg:w-4/4 sm:pl-6">
 
                         <div class="flex flex-col">
                             <mat-form-field class="w-full">
-                                <mat-label>จำนวน
+                                <mat-label>ที่อยู่
                                 </mat-label>
-                                <input matInput [formControlName]="'qty'">
+                                <input matInput [formControlName]="'address'">
                                 <mat-error>
-                                    กรุณากรอกจำนวน
+                                    กรุณากรอกที่อยู่
                                 </mat-error>
                             </mat-form-field>
                         </div>
-                    </div> -->
+                    </div>
+                    <div class="flex flex-col w-full lg:w-4/4 sm:pl-6">
+
+                        <div class="flex flex-col">
+                            <mat-form-field class="w-full">
+                                <mat-label>เบอร์โทร
+                                </mat-label>
+                                <input matInput [formControlName]="'tel'">
+                                <mat-error>
+                                    กรุณากรอกเบอร์โทร
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-full lg:w-4/4 sm:pl-6">
+
+                        <div class="flex flex-col">
+                            <mat-form-field class="w-full">
+                                <mat-label>หมายเหตุ
+                                </mat-label>
+                                <input matInput [formControlName]="'remark'">
+                                <mat-error>
+                                    กรุณากรอกหมายเหตุ
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    
+                    
 
 
                 </div>
@@ -78,7 +106,7 @@
                             <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
                             ยกเลิก
                         </button>
-                        <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="update()">
+                        <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="update()" >
                             <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
                             ยืนยัน
                         </button>
