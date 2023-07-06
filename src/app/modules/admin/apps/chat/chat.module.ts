@@ -59,7 +59,7 @@ import { FuseCardModule } from '@fuse/components/card';
             providers: [
               {
                 id: FacebookLoginProvider.PROVIDER_ID,
-                provider: new FacebookLoginProvider('650927013587268')
+                provider: new FacebookLoginProvider('170313182614211')
               }
             ],
             onError: (err) => {
