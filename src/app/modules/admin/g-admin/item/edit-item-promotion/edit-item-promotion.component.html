@@ -81,6 +81,42 @@
                                         </mat-form-field>
                                     </dd>
                                 </div>
+                                <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">น้ำหนัก</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input matInput [formControlName]="'weight'"
+                                                placeholder="กรุณาระบุน้ำหนัก">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ความกว้าง</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input matInput [formControlName]="'width'"
+                                                placeholder="กรุณาระบุความกว้าง">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ความสูง</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input matInput [formControlName]="'hight'"
+                                                placeholder="กรุณาระบุความสูง">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">จำนวน</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input matInput [formControlName]="'qty'"
+                                                placeholder="กรุณาระบุจำนวน">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
                             </dl>
                         </div>
                     </div>
@@ -93,7 +129,7 @@
                                         <div class="flex justify-center items-center w-full">
                                             <label>
                                                 <input (change)='onChangeSignature($event)' type="file" id="file">
-                                                <img class="object-cover h-48 w-96" [src]="this.url_sig"
+                                                <img class="object-cover h-50 w-50" [src]="this.url_sig"
                                                     style="cursor: pointer;">
                                             </label>
                                         </div>
@@ -112,6 +148,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="flex">
                     <div class="flex-none h-12 w-32">
                         <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="addItem()">
@@ -203,6 +240,322 @@
                         </div>
                     </div>
                 </div>
+                <div class="flex flex-row items-center my-2 m-5">
+                    <!-- <div class="font-medium">เพิ่มรายละเอียด</div> -->
+                    <button mat-flat-button [color]="'primary'" type="button" class="m-5" (click)="addAttribute()">เพิ่มรายละเอียด
+                        <!-- <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon> -->
+                    </button>
+                </div>
+                <!-- <div class="flex flex-col bg-green-50 w-full" [formArrayName]="'item_attribute'">
+                    <ng-container *ngFor="let item of item_attribute.controls; let i = index" [formGroupName]="i">
+                        <div class="grid grid-cols-5 gap-4 pt-5 border-b-2 border-green-500">
+                            <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 ">
+                                <dt class="text-l font-extrabold text-gray-500   mt-4">รูปภาพ</dt>
+                                <dd class="mt-1 mb-5 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    <ngx-dropzone style="width: 100px; height: 100px; justify-content: center;"
+                                        (change)="onSelect1($event,i)">
+                                        <ngx-dropzone-label>เลือกรูปสินค้า </ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview *ngFor="let f of files1" [removable]="true"
+                                            [file]="f" (removed)="onRemove1(f)">
+                                        </ngx-dropzone-image-preview>
+                                    </ngx-dropzone>
+                                </dd>
+                            </div>
+                            <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-l font-extrabold text-gray-500  mt-4">ลักษณะ {{i+1}}</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    <input
+                                        class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                        placeholder="กรุณาระบุลักษณะเพิ่มเติม" formControlName="name" />
+                                </dd>
+                            </div>
+                            <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-l font-extrabold text-gray-500  mt-4">ต้นทุน</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    <input
+                                        class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                        placeholder="กรุณาระบุต้นทุน" formControlName="unit_cost" />
+                                </dd>
+                            </div>
+                            <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-l font-extrabold text-gray-500  mt-4">ราคาขาย</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    <input
+                                        class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                        placeholder="กรุณาระบุราคาขาย" formControlName="unit_price" />
+                                </dd>
+                            </div>
+                            <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 ">
+                                <dt class="text-l font-extrabold text-gray-500  mt-4">จำนวน</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    <input
+                                        class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                        placeholder="กรุณาระบุจำนวน" formControlName="qty" />
+                                </dd>
+                            </div>
+                            
+
+
+                           
+                        </div>
+                        <div class="flex flex-row items-center my-2 m-5">
+                            <button mat-flat-button [color]="'primary'" type="button" class="m-5"
+                                (click)="addAttribute_sec(i)">เพิ่มรายละเอียดย่อย
+                            </button>
+                        </div>
+                        <div class="flex flex-col bg-red-50" [formArrayName]="'item_attribute_second'">
+                            <ng-container *ngFor="let items of getItem_attribute_second(item); let j = index"
+                                [formGroupName]="j">
+                                <div class="grid grid-cols-5 gap-4 pt-5 border-b-2 border-red-500">
+                                    <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 ">
+                                        <dt class="text-l font-extrabold text-gray-500  mt-4">รูปภาพ</dt>
+                                        <dd class="mt-1 mb-5 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <ngx-dropzone style="width: 100px; height: 100px; justify-content: center; "
+                                                (change)="onSelect2($event,i,j)">
+                                                <ngx-dropzone-label>เลือกรูปสินค้า </ngx-dropzone-label>
+                                                <ngx-dropzone-image-preview *ngFor="let f of files2" [removable]="true"
+                                                    [file]="f" (removed)="onRemove2(f)">
+                                                </ngx-dropzone-image-preview>
+                                            </ngx-dropzone>
+                                        </dd>
+                                    </div>
+                                    <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt class="text-l font-extrabold text-gray-500  mt-4">ลักษณะย่อย {{j+1}}</dt>
+                                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <input
+                                                class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                                placeholder="กรุณาระบุลักษณะเพิ่มเติม" formControlName="name" />
+                                        </dd>
+                                    </div>
+                                    <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt class="text-l font-extrabold text-gray-500  mt-4">ต้นทุน</dt>
+                                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <input
+                                                class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                                placeholder="กรุณาระบุต้นทุน" formControlName="unit_cost" />
+                                        </dd>
+                                    </div>
+                                    <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt class="text-l font-extrabold text-gray-500  mt-4">ราคาขาย </dt>
+                                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <input
+                                                class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                                placeholder="กรุณาระบุราคาขาย" formControlName="unit_price" />
+                                        </dd>
+                                    </div>
+                                    <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt class="text-l font-extrabold text-gray-500  mt-4">จำนวน</dt>
+                                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <input
+                                                class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                                placeholder="กรุณาระบุจำนวน" formControlName="qty" />
+                                        </dd>
+                                    </div>
+                                    
+                                </div>
+
+
+                            </ng-container>
+
+                        </div>
+
+                    </ng-container>
+                    <div class="flex items-center mt-4 sm:mt-0">
+
+                    </div>
+                </div> -->
+                <div>
+                    <div class="flex flex-col" formArrayName="item_attribute">
+                        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8" *ngFor="let item of item_attribute.controls; let i = index" [formGroupName]="i">
+                            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                                <div class="overflow-hidden">
+                                    <table class="min-w-full">
+                                        <thead class=" border-b bg-green-100">
+                                            <tr>
+                                                <th scope="col"
+                                                    class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    ลำดับ
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    #
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    ลักษณะ
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    ต้นทุน
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    ราคาขาย
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    จำนวน
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-l font-extraboldtext-gray-900 px-6 py-4 text-left">
+                                                    จัดการ
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody >
+                                            <tr class="border-b" >
+                                                <td
+                                                    class="px-4 py-4 whitespace-nowrap text-l font-medium text-gray-900">
+                                                    {{i +1}}</td>
+                                                    
+                                                    <td
+                                                    class="px-4 py-4 whitespace-nowrap text-l font-medium text-gray-900">
+                                                    <!-- {{i +1}} -->
+                                                    <ngx-dropzone
+                                                        style="width: 100px; height: 100px; justify-content: center;"
+                                                        (change)="onSelectMullti($event,i)">
+                                                        <ngx-dropzone-label>เลือกรูปสินค้า </ngx-dropzone-label>
+                                                        <ngx-dropzone-image-preview *ngFor="let f of files2"
+                                                            [removable]="true" [file]="f" (removed)="onRemove1(f)">
+                                                        </ngx-dropzone-image-preview>
+                                                    </ngx-dropzone>
+                                                </td>
+                                                <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <mat-form-field class="w-60 pr-2">
+                                                        <input matInput [formControlName]="'name'">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <mat-form-field class="w-60 pr-2">
+                                                        <input matInput [formControlName]="'unit_cost'">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <mat-form-field class="w-60 pr-2">
+                                                        <input matInput [formControlName]="'unit_price'">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <mat-form-field class="w-60 pr-2">
+                                                        <input matInput [formControlName]="'qty'">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <button class="px-6 ml-3" mat-flat-button (click)="removeItemAt(i)">
+                                                        <mat-icon svgIcon="heroicons_solid:trash"> </mat-icon>&nbsp;
+                                                        ลบ
+                                                    </button>
+                                                </td>
+                                                
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="flex flex-row items-center my-2 m-5">
+                                    <!-- <div class="font-medium">เพิ่มรายละเอียดย่อย</div> -->
+                                    <button mat-flat-button [color]="'primary'" type="button" class="m-5"
+                                        (click)="addAttribute_sec(i)">เพิ่มรายละเอียดย่อย
+                                        <!-- <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon> -->
+                                    </button>
+                                </div>
+                                <div  class="flex flex-col" formArrayName="item_attribute_second">
+                                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                                        <div class="overflow-hidden">
+                                            <table class="min-w-full">
+                                                <thead class=" border-b bg-lime-100">
+                                                    <tr>
+                                                        <th scope="col"
+                                                            class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                            ลำดับ
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                            #
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                            ลักษณะย่อย
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                            ต้นทุน
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                            ราคาขาย
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                            จำนวน
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="text-l font-extraboldtext-gray-900 px-6 py-4 text-left">
+                                                            จัดการ
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="border-b" *ngFor="let items of getItem_attribute_second(item); let j = index"
+                                                    [formGroupName]="j">
+                                                        <td
+                                                            class="px-4 py-4 whitespace-nowrap text-l font-medium text-gray-900">
+                                                            {{j +1}}</td>
+                                                            <td
+                                                    class="px-4 py-4 whitespace-nowrap text-l font-medium text-gray-900">
+                                                    <!-- {{i +1}} -->
+                                                    <ngx-dropzone
+                                                        style="width: 100px; height: 100px; justify-content: center;"
+                                                        (change)="onSelectMullti($event,i)">
+                                                        <ngx-dropzone-label>เลือกรูปสินค้า </ngx-dropzone-label>
+                                                        <ngx-dropzone-image-preview *ngFor="let f of files2"
+                                                            [removable]="true" [file]="f" (removed)="onRemove1(f)">
+                                                        </ngx-dropzone-image-preview>
+                                                    </ngx-dropzone>
+                                                </td>
+                                                        
+                                                        <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            <mat-form-field class="w-60 pr-2">
+                                                                <input matInput [formControlName]="'name'">
+                                                            </mat-form-field>
+                                                        </td>
+                                                        <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            <mat-form-field class="w-60 pr-2">
+                                                                <input matInput [formControlName]="'unit_cost'">
+                                                            </mat-form-field>
+                                                        </td>
+                                                        <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            <mat-form-field class="w-60 pr-2">
+                                                                <input matInput [formControlName]="'unit_price'">
+                                                            </mat-form-field>
+                                                        </td>
+                                                        <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            <mat-form-field class="w-60 pr-2">
+                                                                <input matInput [formControlName]="'qty'">
+                                                            </mat-form-field>
+                                                        </td>
+                                                        <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            <button class="px-6 ml-3" mat-flat-button (click)="removeItemSec(i,j)">
+                                                                <mat-icon svgIcon="heroicons_solid:trash"> </mat-icon>&nbsp;
+                                                                ลบ
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
                 <div class="flex items-center justify-end w-ful px-8 py-4">
                     <div class="flex items-center justify-end">
                         <a class="ml-4" mat-flat-button href="item/list">
@@ -215,6 +568,7 @@
                         </button>
                     </div>
                 </div>
+                
             </form>
 
         </div>

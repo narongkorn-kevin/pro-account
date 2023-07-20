@@ -93,11 +93,20 @@
                                     </dd>
                                 </div>
                                 <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ขนาด</dt>
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ความกว้าง</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input matInput [formControlName]="'width'"
+                                                placeholder="กรุณาระบุความกว้าง">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ความสูง</dt>
                                     <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
                                         <mat-form-field class="w-full">
                                             <input matInput [formControlName]="'hight'"
-                                                placeholder="กรุณาระบุขนาดสินค้า">
+                                                placeholder="กรุณาระบุความสูง">
                                         </mat-form-field>
                                     </dd>
                                 </div>
@@ -190,14 +199,99 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-row items-center my-2 m-3">
+                
+                <div class="flex my-2 m-5">
+                    <div class="flex-none h-12 w-32">
+                        <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="addItem()">
+                            <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
+                            เพิ่มสินค้า
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex flex-col" formArrayName="item_line">
+                        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                                <div class="overflow-hidden">
+                                    <table class="min-w-full">
+                                        <thead class=" border-b bg-gray-100">
+                                            <tr>
+                                                <th scope="col"
+                                                    class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    #
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    สินค้า
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    ราคา
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    จำนวน
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    ราคารวม
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-l font-extraboldtext-gray-900 px-6 py-4 text-left">
+                                                    จัดการ
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="border-b" *ngFor="let depo; of: item().controls; let i = index"
+                                                [formGroupName]="i">
+                                                <td
+                                                    class="px-4 py-4 whitespace-nowrap text-l font-medium text-gray-900">
+                                                    {{i +1}}</td>
+                                                <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <input matInput [formControlName]="'item_id'"
+                                                        placeholder="คลิกเพื่อเลือกสินค้า" (click)="openDialog(i)"
+                                                        hidden>
+                                                    <input matInput [formControlName]="'item_name'"
+                                                        placeholder="คลิกเพื่อเลือกสินค้า" (click)="openDialog(i)"
+                                                        readonly>
+                                                </td>
+                                                <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <input matInput [formControlName]="'price'" readonly
+                                                        (keypr)="OnchangeQty($event.value)">
+                                                </td>
+                                                <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <mat-form-field class="w-60 pr-2">
+                                                        <input matInput [formControlName]="'qty'"
+                                                            (keyup)="onchangeTotal($event, i)">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <mat-form-field class="w-60 pr-2">
+                                                        <input matInput [formControlName]="'total'">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <button class="px-6 ml-3" mat-flat-button (click)="removeItem(i)">
+                                                        <mat-icon svgIcon="heroicons_solid:trash"> </mat-icon>&nbsp;
+                                                        ลบ
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-row items-center my-2 m-5">
                     <!-- <div class="font-medium">เพิ่มรายละเอียด</div> -->
-                    <button mat-flat-button [color]="'primary'" type="button" class="m-5"
-                        (click)="addAttribute()">เพิ่มรายละเอียด
+                    <button mat-flat-button [color]="'primary'" type="button" class="m-5" (click)="addAttribute()">เพิ่มรายละเอียด
                         <!-- <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon> -->
                     </button>
                 </div>
-                <div class="flex flex-col bg-green-50 w-full" [formArrayName]="'item_attribute'">
+                <!-- <div class="flex flex-col bg-green-50 w-full" [formArrayName]="'item_attribute'">
                     <ng-container *ngFor="let item of item_attribute.controls; let i = index" [formGroupName]="i">
                         <div class="grid grid-cols-5 gap-4 pt-5 border-b-2 border-green-500">
                             <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 ">
@@ -244,24 +338,14 @@
                                         placeholder="กรุณาระบุจำนวน" formControlName="qty" />
                                 </dd>
                             </div>
+                            
 
 
-
-                            <!-- <mat-form-field class="w-full col-span-2">
-                                <textarea matInput [formControlName]="'description'" cols="35" rows="8"
-                                    placeholder="รายละเอียด" required></textarea>
-                            </mat-form-field> -->
-
-                            <!-- <button mat-icon-button [color]="'warn'" type="button"
-                                class="mx-2 self-center" (click)="deleteOnsiteRooms(i)">
-                                <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
-                            </button> -->
+                           
                         </div>
                         <div class="flex flex-row items-center my-2 m-5">
-                            <!-- <div class="font-medium">เพิ่มรายละเอียดย่อย</div> -->
                             <button mat-flat-button [color]="'primary'" type="button" class="m-5"
                                 (click)="addAttribute_sec(i)">เพิ่มรายละเอียดย่อย
-                                <!-- <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon> -->
                             </button>
                         </div>
                         <div class="flex flex-col bg-red-50" [formArrayName]="'item_attribute_second'">
@@ -312,7 +396,7 @@
                                                 placeholder="กรุณาระบุจำนวน" formControlName="qty" />
                                         </dd>
                                     </div>
-
+                                    
                                 </div>
 
 
@@ -323,47 +407,40 @@
                     </ng-container>
                     <div class="flex items-center mt-4 sm:mt-0">
 
-                        <!-- Send -->
-                        <!-- <button class="sm:ml-3 order-first sm:order-last" mat-flat-button [color]="'primary'" (click)="submit()">
-                    บันทึก
-                    </button> -->
                     </div>
-                </div>
-                <div class="flex my-2 m-5">
-                    <div class="flex-none h-12 w-32">
-                        <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="addItem()">
-                            <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
-                            เพิ่มสินค้า
-                        </button>
-                    </div>
-                </div>
+                </div> -->
                 <div>
-                    <div class="flex flex-col" formArrayName="item_line">
-                        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="flex flex-col" formArrayName="item_attribute">
+                        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8" *ngFor="let item of item_attribute.controls; let i = index" [formGroupName]="i">
                             <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                                 <div class="overflow-hidden">
                                     <table class="min-w-full">
-                                        <thead class=" border-b bg-gray-100">
+                                        <thead class=" border-b bg-green-100">
                                             <tr>
+                                                <th scope="col"
+                                                    class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    ลำดับ
+                                                </th>
                                                 <th scope="col"
                                                     class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
                                                     #
                                                 </th>
+                                                
                                                 <th scope="col"
                                                     class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
-                                                    สินค้า
+                                                    ลักษณะ
                                                 </th>
                                                 <th scope="col"
                                                     class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
-                                                    ราคา
+                                                    ต้นทุน
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    ราคาขาย
                                                 </th>
                                                 <th scope="col"
                                                     class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
                                                     จำนวน
-                                                </th>
-                                                <th scope="col"
-                                                    class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
-                                                    ราคารวม
                                                 </th>
                                                 <th scope="col"
                                                     class="text-l font-extraboldtext-gray-900 px-6 py-4 text-left">
@@ -371,48 +448,156 @@
                                                 </th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr class="border-b" *ngFor="let depo; of: item().controls; let i = index"
-                                                [formGroupName]="i">
+                                        <tbody >
+                                            <tr class="border-b" >
                                                 <td
-                                                    class="px-6 py-4 whitespace-nowrap text-l font-medium text-gray-900">
-                                                    {{i +1}}</td>
-                                                <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                    <input matInput [formControlName]="'item_id'"
-                                                        placeholder="คลิกเพื่อเลือกสินค้า" (click)="openDialog(i)"
-                                                        hidden>
-                                                    <input matInput [formControlName]="'item_name'"
-                                                        placeholder="คลิกเพื่อเลือกสินค้า" (click)="openDialog(i)"
-                                                        readonly>
-                                                </td>
-                                                <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                    <input matInput [formControlName]="'price'" readonly
-                                                        (keypr)="OnchangeQty($event.value)">
-                                                </td>
+                                                            class="px-4 py-4 whitespace-nowrap text-l font-medium text-gray-900">
+                                                            {{i +1}}</td>
+                                                <td
+                                                    class="px-4 py-4 whitespace-nowrap text-l font-medium text-gray-900">
+                                                    <ngx-dropzone
+                                                        style="width: 100px; height: 100px; justify-content: center;"
+                                                        (change)="onSelectMullti($event,i)">
+                                                        <ngx-dropzone-label>เลือกรูปสินค้า </ngx-dropzone-label>
+                                                        <ngx-dropzone-image-preview *ngFor="let f of files2"
+                                                            [removable]="true" [file]="f" (removed)="onRemove1(f)">
+                                                        </ngx-dropzone-image-preview>
+                                                    </ngx-dropzone></td>
+                                                    
+                                                
                                                 <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                     <mat-form-field class="w-60 pr-2">
-                                                        <input matInput [formControlName]="'qty'"
-                                                            (keyup)="onchangeTotal($event, i)">
+                                                        <input matInput [formControlName]="'name'">
                                                     </mat-form-field>
                                                 </td>
                                                 <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                     <mat-form-field class="w-60 pr-2">
-                                                        <input matInput [formControlName]="'total'">
+                                                        <input matInput [formControlName]="'unit_cost'">
                                                     </mat-form-field>
                                                 </td>
                                                 <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                    <button class="px-6 ml-3" mat-flat-button (click)="removeItem(i)">
+                                                    <mat-form-field class="w-60 pr-2">
+                                                        <input matInput [formControlName]="'unit_price'">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <mat-form-field class="w-60 pr-2">
+                                                        <input matInput [formControlName]="'qty'">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <button class="px-6 ml-3" mat-flat-button (click)="removeItemAt(i)">
                                                         <mat-icon svgIcon="heroicons_solid:trash"> </mat-icon>&nbsp;
                                                         ลบ
                                                     </button>
                                                 </td>
+                                                
                                             </tr>
+                                            
                                         </tbody>
                                     </table>
                                 </div>
+                                <div class="flex flex-row items-center my-2 m-5">
+                                    <!-- <div class="font-medium">เพิ่มรายละเอียดย่อย</div> -->
+                                    <button mat-flat-button [color]="'primary'" type="button" class="m-5"
+                                        (click)="addAttribute_sec(i)">เพิ่มรายละเอียดย่อย
+                                        <!-- <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon> -->
+                                    </button>
+                                </div>
+                                <div *ngIf="this.click2 === 1" class="flex flex-col" formArrayName="item_attribute_second">
+                                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                                        <div class="overflow-hidden">
+                                            <table class="min-w-full">
+                                                <thead class=" border-b bg-lime-100">
+                                                    <tr>
+                                                        <th scope="col"
+                                                    class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                    ลำดับ
+                                                </th>
+                                                        <th scope="col"
+                                                            class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                            #
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                            ลักษณะย่อย
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                            ต้นทุน
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                            ราคาขาย
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="text-l font-extrabold text-gray-900 px-6 py-4 text-left">
+                                                            จำนวน
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="text-l font-extraboldtext-gray-900 px-6 py-4 text-left">
+                                                            จัดการ
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="border-b" *ngFor="let items of getItem_attribute_second(item); let j = index"
+                                                    [formGroupName]="j">
+                                                    <td
+                                                            class="px-4 py-4 whitespace-nowrap text-l font-medium text-gray-900">
+                                                            {{j +1}}</td>
+                                                        <td
+                                                            class="px-4 py-4 whitespace-nowrap text-l font-medium text-gray-900">
+                                                            <ngx-dropzone
+                                                        style="width: 100px; height: 100px; justify-content: center;"
+                                                        (change)="onSelectMullti($event,i)">
+                                                        <ngx-dropzone-label>เลือกรูปสินค้า </ngx-dropzone-label>
+                                                        <ngx-dropzone-image-preview *ngFor="let f of files2"
+                                                            [removable]="true" [file]="f" (removed)="onRemove1(f)">
+                                                        </ngx-dropzone-image-preview>
+                                                    </ngx-dropzone></td>
+                                                        
+                                                        <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            <mat-form-field class="w-60 pr-2">
+                                                                <input matInput [formControlName]="'name'">
+                                                            </mat-form-field>
+                                                        </td>
+                                                        <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            <mat-form-field class="w-60 pr-2">
+                                                                <input matInput [formControlName]="'unit_cost'">
+                                                            </mat-form-field>
+                                                        </td>
+                                                        <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            <mat-form-field class="w-60 pr-2">
+                                                                <input matInput [formControlName]="'unit_price'">
+                                                            </mat-form-field>
+                                                        </td>
+                                                        <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            <mat-form-field class="w-60 pr-2">
+                                                                <input matInput [formControlName]="'qty'">
+                                                            </mat-form-field>
+                                                        </td>
+                                                        <td class="text-l text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                            <button class="px-6 ml-3" mat-flat-button (click)="removeItemSec(i,j)">
+                                                                <mat-icon svgIcon="heroicons_solid:trash"> </mat-icon>&nbsp;
+                                                                ลบ
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
                             </div>
+                            
+                            
                         </div>
+                        
                     </div>
+                    
                 </div>
                 <div class="flex items-center justify-end w-ful px-8 py-4">
                     <div class="flex items-center justify-end">

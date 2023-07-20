@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -88,9 +88,14 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
             unit_price: ['', Validators.required],
             unit_cost: ['', Validators.required],
             vendor_id: '',
+            weight: '',
+            width: '',
+            hight: '',
             description: ['', Validators.required],
             brand: ['', Validators.required],
             set_type: 'normal',
+            item_attribute: this._formBuilder.array([]),
+            item_image: this._formBuilder.array([]),
         })
 
 
@@ -122,20 +127,47 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
             this.dataRow = resp.data
             this.formData.reset();
             // console.log(resp.data)
-            console.log(resp.data)
+            console.log('Data', resp.data)
             this.formData.patchValue({
                 item_type_id: resp.data.item_type_id,
-                
                 item_id: resp.data.item_id,
                 name: resp.data.name,
                 unit_price: resp.data.unit_price,
                 unit_cost: resp.data.unit_cost,
+                weight: resp.data.weight,
+                width: resp.data.width,
+                hight: resp.data.hight,
                 vendor_id: resp.data.vendor_id,
                 brand: resp.data.brand,
                 set_type: 'normal',
                 description: resp.data.description,
             })
             this.url_sig = resp.data.image
+            for (const Images of resp.data.item_images) {
+                this.pushImage(Images);
+            }
+            for (const DataAttribute of resp.data.item_attributes) {
+                this.pushAttribute(DataAttribute);
+            }
+            if (resp.data.item_attributes.length > 0) {
+                for (let i = 0; i < resp.data.item_attributes.length; i++) {
+                    resp.data.item_attributes[i].item_attribute_seconds.map(b => {
+                        const control = this.formData.get('item_attribute')['controls'][i].get('item_attribute_second')
+                        control.push(this._formBuilder.group({
+                            image: b.image,
+                            name: b.name,
+                            unit_cost: b.unit_cost,
+                            unit_price: b.unit_price,
+                            qty: b.qty
+                        }
+                        )
+                        );
+
+                    })
+
+                }
+            }
+
         })
 
         this.uploadPic = this._formBuilder.group({
@@ -328,6 +360,91 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
             // Mark for check
             this._changeDetectorRef.markForCheck();
         }, 3000);
+    }
+    get item_attribute(): FormArray {
+        return this.formData.get('item_attribute') as FormArray
+    }
+     item_attribute1(): FormArray {
+        return this.formData.get('item_attribute') as FormArray
+    }
+    get item_image(): FormArray {
+        return this.formData.get('item_image') as FormArray
+    }
+    newAttribute(): FormGroup {
+        return this._formBuilder.group({
+            image: '',
+            name: '',
+            unit_cost: '',
+            unit_price: '',
+            qty: '',
+            item_attribute_second: this._formBuilder.array([]),
+        });
+    }
+    newImage(): FormGroup {
+        return this._formBuilder.group({
+            image: '',
+
+
+        });
+    }
+    addAttribute(): void {
+        this.item_attribute.push(this.newAttribute());
+        console.log('formData', this.formData.value.item_attribute);
+    }
+    addImage(): void {
+        this.item_image.push(this.newImage());
+        console.log('formData', this.formData.value.item_image);
+    }
+    item_attribute_sec(): FormGroup {
+        return this._formBuilder.group({
+            image: '',
+            name: "",
+            unit_cost: '',
+            unit_price: '',
+            qty: ''
+        });
+    }
+    addAttribute_sec(i): void {
+        const control = this.formData.get('item_attribute')['controls'][i].get('item_attribute_second')
+        // console.log(control)
+        control.push(this.item_attribute_sec());
+        console.log('control', this.formData.value);
+    }
+    getItem_attribute_second(form) {
+        return form.controls.item_attribute_second.controls;
+    }
+    removeAttribute(i, j: number): void {
+        // alert(1)
+        const control = this.formData.get('item_attribute')['controls'][i].get('item_attribute_second')
+        control.removeAt(j);
+
+    }
+    pushAttribute(attribute: any) {
+        const show = this._formBuilder.group({
+            ...attribute,
+            item_attribute_second: this._formBuilder.array([])
+        });
+        this.item_attribute.push(show);
+
+        console.log('this.item_attribute', this.formData.value);
+    }
+    pushImage(img: any) {
+        const show = this._formBuilder.group({
+            ...img,
+            // item_attribute_second: this._formBuilder.array([])
+        });
+        this.item_image.push(show);
+
+        // console.log('this.item_attribute', this.formData.value);
+    }
+    removeItemAt(i: number): void {
+        this.item_attribute1().removeAt(i);
+        // this.sumPrice()
+    }
+    removeItemSec(i: number,j: number): void {
+        const control = this.formData.get('item_attribute')['controls'][i].get('item_attribute_second')
+        control.removeAt(j);
+        // this.sumPrice()
     }
 
 

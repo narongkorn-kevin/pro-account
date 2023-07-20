@@ -126,6 +126,7 @@ export class NewItemPromotion implements OnInit, AfterViewInit, OnDestroy {
             item_type_id: ['', Validators.required],
             weight: ['', Validators.required],
             hight: ['', Validators.required],
+            width: ['', Validators.required],
             qty: ['', Validators.required],
             set_type: 'set_products',
             item_line: this._formBuilder.array([
@@ -145,6 +146,9 @@ export class NewItemPromotion implements OnInit, AfterViewInit, OnDestroy {
     item(): FormArray {
         return this.formData.get('item_line') as FormArray
 
+    }
+     item_attribute1(): FormArray {
+        return this.formData.get('item_attribute') as FormArray
     }
     get item_attribute(): FormArray {
         return this.formData.get('item_attribute') as FormArray
@@ -205,11 +209,13 @@ export class NewItemPromotion implements OnInit, AfterViewInit, OnDestroy {
                 qty: ''
             });
         }
+        click2 = 0
         addAttribute_sec(i): void {
             const control = this.formData.get('item_attribute')['controls'][i].get('item_attribute_second')
             // console.log(control)
             control.push(this.item_attribute_sec());
             console.log('control',this.formData.value);
+            this.click2=1
         }
         getItem_attribute_second(form) {
             return form.controls.item_attribute_second.controls;
@@ -225,6 +231,15 @@ export class NewItemPromotion implements OnInit, AfterViewInit, OnDestroy {
     removeItem(i: number): void {
         this.item().removeAt(i);
         this.sumPrice()
+    }
+    removeItemAt(i: number): void {
+        this.item_attribute1().removeAt(i);
+        // this.sumPrice()
+    }
+    removeItemSec(i: number,j: number): void {
+        const control = this.formData.get('item_attribute')['controls'][i].get('item_attribute_second')
+        control.removeAt(j);
+        // this.sumPrice()
     }
 
     OnchangeQty(event: any) {
