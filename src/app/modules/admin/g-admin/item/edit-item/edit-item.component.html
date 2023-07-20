@@ -81,21 +81,7 @@
                                         </mat-form-field>
                                     </dd>
                                 </div>
-                                <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-l font-extrabold text-gray-500  mt-4">จุดเก็บหมู่สินค้า</dt>
-                                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                        <mat-form-field class="w-full pr-2">
-                                            <mat-select [formControlName]="'location_id'">
-                                                <mat-option [value]="''">
-                                                    กรุณาเลือกจุดเก็บสินค้า
-                                                </mat-option>
-                                                <mat-option *ngFor="let loc of locationData" [value]="loc.id">
-                                                    {{loc.name}}
-                                                </mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </dd>
-                                </div>
+                                
                                 <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                     <dt class="text-l font-extrabold text-gray-500  mt-4">ซัพพลายเออร์</dt>
                                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">

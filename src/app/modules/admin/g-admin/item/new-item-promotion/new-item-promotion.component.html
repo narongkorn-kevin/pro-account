@@ -66,11 +66,47 @@
                                     </dd>
                                 </div>
                                 <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ต้นทุน</dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input matInput [formControlName]="'unit_cost'"
+                                                placeholder="กรุณาระบุต้นทุนสินค้า">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                     <dt class="text-l font-extrabold text-gray-500  mt-4">ราคาขาย</dt>
                                     <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
                                         <mat-form-field class="w-full">
-                                            <input matInput [formControlName]="'total_price'"
+                                            <input matInput [formControlName]="'unit_price'"
                                                 placeholder="กรุณาระบุราคาขายสินค้า">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">น้ำหนัก</dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input matInput [formControlName]="'weight'"
+                                                placeholder="กรุณาระบุน้ำหนักสินค้า">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ขนาด</dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input matInput [formControlName]="'hight'"
+                                                placeholder="กรุณาระบุขนาดสินค้า">
+                                        </mat-form-field>
+                                    </dd>
+                                </div>
+                                <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">จำนวน</dt>
+                                    <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <mat-form-field class="w-full">
+                                            <input matInput [formControlName]="'qty'"
+                                                placeholder="กรุณาระบุจำนวนสินค้า">
                                         </mat-form-field>
                                     </dd>
                                 </div>
@@ -94,6 +130,53 @@
                                         </div>
                                     </dd>
                                 </div>
+                                <div class="flex flex-row items-center my-2 m-5">
+                                    <div class="font-medium">เพิ่มรูป</div>
+                                    <button mat-mini-fab [color]="'primary'" type="button" class="mx-2"
+                                        (click)="addImage()">
+                                        <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                                    </button>
+                                </div>
+                                <div class="flex flex-row w-180 overflow-x-auto overflow-hidden " [formArrayName]="'item_image'">
+                                    <ng-container *ngFor="let Rooms of item_image.controls; let i = index"
+                                        [formGroupName]="i">
+                                        <div class="flex flex-row  m-5 pt-5 border-b-2">
+                                            <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                                <!-- <dt class="text-l font-extrabold text-gray-500  mt-4">ลักษณะ {{i+1}} 
+                                                </dt>-->
+                                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                                    <ngx-dropzone
+                                                        style="width: 100px; height: 100px; justify-content: center;"
+                                                        (change)="onSelectMullti($event,i)">
+                                                        <ngx-dropzone-label>เลือกรูปสินค้า </ngx-dropzone-label>
+                                                        <ngx-dropzone-image-preview *ngFor="let f of files2"
+                                                            [removable]="true" [file]="f" (removed)="onRemove1(f)">
+                                                        </ngx-dropzone-image-preview>
+                                                    </ngx-dropzone>
+                                                </dd>
+                                            </div>
+
+
+                                            <!-- <mat-form-field class="w-full col-span-2">
+                                                <textarea matInput [formControlName]="'description'" cols="35" rows="8"
+                                                    placeholder="รายละเอียด" required></textarea>
+                                            </mat-form-field> -->
+
+                                            <!-- <button mat-icon-button [color]="'warn'" type="button"
+                                                class="mx-2 self-center" (click)="deleteOnsiteRooms(i)">
+                                                <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                                            </button> -->
+                                        </div>
+
+                                    </ng-container>
+                                    <div class="flex items-center mt-4 sm:mt-0">
+
+                                        <!-- Send -->
+                                        <!-- <button class="sm:ml-3 order-first sm:order-last" mat-flat-button [color]="'primary'" (click)="submit()">
+                                    บันทึก
+                                    </button> -->
+                                    </div>
+                                </div>
                                 <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                     <dt class="text-l font-extrabold text-gray-500  mt-4">รายละเอียด</dt>
                                     <dd class="mt-1 text-l text-gray-900 sm:col-span-2 sm:mt-0">
@@ -107,7 +190,146 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex mx-4">
+                <div class="flex flex-row items-center my-2 m-3">
+                    <!-- <div class="font-medium">เพิ่มรายละเอียด</div> -->
+                    <button mat-flat-button [color]="'primary'" type="button" class="m-5"
+                        (click)="addAttribute()">เพิ่มรายละเอียด
+                        <!-- <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon> -->
+                    </button>
+                </div>
+                <div class="flex flex-col bg-green-50 w-full" [formArrayName]="'item_attribute'">
+                    <ng-container *ngFor="let item of item_attribute.controls; let i = index" [formGroupName]="i">
+                        <div class="grid grid-cols-5 gap-4 pt-5 border-b-2 border-green-500">
+                            <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 ">
+                                <dt class="text-l font-extrabold text-gray-500   mt-4">รูปภาพ</dt>
+                                <dd class="mt-1 mb-5 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    <ngx-dropzone style="width: 100px; height: 100px; justify-content: center;"
+                                        (change)="onSelect1($event,i)">
+                                        <ngx-dropzone-label>เลือกรูปสินค้า </ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview *ngFor="let f of files1" [removable]="true"
+                                            [file]="f" (removed)="onRemove1(f)">
+                                        </ngx-dropzone-image-preview>
+                                    </ngx-dropzone>
+                                </dd>
+                            </div>
+                            <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-l font-extrabold text-gray-500  mt-4">ลักษณะ {{i+1}}</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    <input
+                                        class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                        placeholder="กรุณาระบุลักษณะเพิ่มเติม" formControlName="name" />
+                                </dd>
+                            </div>
+                            <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-l font-extrabold text-gray-500  mt-4">ต้นทุน</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    <input
+                                        class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                        placeholder="กรุณาระบุต้นทุน" formControlName="unit_cost" />
+                                </dd>
+                            </div>
+                            <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-l font-extrabold text-gray-500  mt-4">ราคาขาย</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    <input
+                                        class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                        placeholder="กรุณาระบุราคาขาย" formControlName="unit_price" />
+                                </dd>
+                            </div>
+                            <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 ">
+                                <dt class="text-l font-extrabold text-gray-500  mt-4">จำนวน</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    <input
+                                        class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                        placeholder="กรุณาระบุจำนวน" formControlName="qty" />
+                                </dd>
+                            </div>
+
+
+
+                            <!-- <mat-form-field class="w-full col-span-2">
+                                <textarea matInput [formControlName]="'description'" cols="35" rows="8"
+                                    placeholder="รายละเอียด" required></textarea>
+                            </mat-form-field> -->
+
+                            <!-- <button mat-icon-button [color]="'warn'" type="button"
+                                class="mx-2 self-center" (click)="deleteOnsiteRooms(i)">
+                                <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                            </button> -->
+                        </div>
+                        <div class="flex flex-row items-center my-2 m-5">
+                            <!-- <div class="font-medium">เพิ่มรายละเอียดย่อย</div> -->
+                            <button mat-flat-button [color]="'primary'" type="button" class="m-5"
+                                (click)="addAttribute_sec(i)">เพิ่มรายละเอียดย่อย
+                                <!-- <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon> -->
+                            </button>
+                        </div>
+                        <div class="flex flex-col bg-red-50" [formArrayName]="'item_attribute_second'">
+                            <ng-container *ngFor="let items of getItem_attribute_second(item); let j = index"
+                                [formGroupName]="j">
+                                <div class="grid grid-cols-5 gap-4 pt-5 border-b-2 border-red-500">
+                                    <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 ">
+                                        <dt class="text-l font-extrabold text-gray-500  mt-4">รูปภาพ</dt>
+                                        <dd class="mt-1 mb-5 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <ngx-dropzone style="width: 100px; height: 100px; justify-content: center; "
+                                                (change)="onSelect2($event,i,j)">
+                                                <ngx-dropzone-label>เลือกรูปสินค้า </ngx-dropzone-label>
+                                                <ngx-dropzone-image-preview *ngFor="let f of files2" [removable]="true"
+                                                    [file]="f" (removed)="onRemove2(f)">
+                                                </ngx-dropzone-image-preview>
+                                            </ngx-dropzone>
+                                        </dd>
+                                    </div>
+                                    <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt class="text-l font-extrabold text-gray-500  mt-4">ลักษณะย่อย {{j+1}}</dt>
+                                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <input
+                                                class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                                placeholder="กรุณาระบุลักษณะเพิ่มเติม" formControlName="name" />
+                                        </dd>
+                                    </div>
+                                    <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt class="text-l font-extrabold text-gray-500  mt-4">ต้นทุน</dt>
+                                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <input
+                                                class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                                placeholder="กรุณาระบุต้นทุน" formControlName="unit_cost" />
+                                        </dd>
+                                    </div>
+                                    <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt class="text-l font-extrabold text-gray-500  mt-4">ราคาขาย </dt>
+                                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <input
+                                                class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                                placeholder="กรุณาระบุราคาขาย" formControlName="unit_price" />
+                                        </dd>
+                                    </div>
+                                    <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt class="text-l font-extrabold text-gray-500  mt-4">จำนวน</dt>
+                                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <input
+                                                class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                                placeholder="กรุณาระบุจำนวน" formControlName="qty" />
+                                        </dd>
+                                    </div>
+
+                                </div>
+
+
+                            </ng-container>
+
+                        </div>
+
+                    </ng-container>
+                    <div class="flex items-center mt-4 sm:mt-0">
+
+                        <!-- Send -->
+                        <!-- <button class="sm:ml-3 order-first sm:order-last" mat-flat-button [color]="'primary'" (click)="submit()">
+                    บันทึก
+                    </button> -->
+                    </div>
+                </div>
+                <div class="flex my-2 m-5">
                     <div class="flex-none h-12 w-32">
                         <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="addItem()">
                             <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>

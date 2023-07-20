@@ -114,7 +114,7 @@ export class EditItemPromotionComponent implements OnInit, AfterViewInit, OnDest
         this.itemId = this._activatedRoute.snapshot.paramMap.get('id');
         this._Service.getItemById(this.itemId).subscribe((resp: any) => {
             this.dataRow = resp.data
-            console.log(this.dataRow)
+            console.log('DataByid',this.dataRow)
             this.formData.patchValue({
                 item_type_id: resp.data.item_type_id,
                 location_id: null,

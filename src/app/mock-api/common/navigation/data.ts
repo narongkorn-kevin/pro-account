@@ -535,34 +535,36 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 type: 'basic',
                 link: '/livesteam/list',
             },
+            // {
+            //     id: 'g-Admin',
+            //     title: 'จัดการเพจ',
+            //     type: 'collapsable',
+            //     icon: 'heroicons_outline:home',
+            //     children: [
+                   
+                    
+            //         // {
+            //         //     id: 'sale-page-order',
+            //         //     title: 'หน้าสั่งซื้อ',
+            //         //     icon: 'heroicons_outline:chat',
+            //         //     type: 'basic',
+            //         //     link: '/sale-page-order',
+            //         // },
+            //     ],
+            // },
             {
-                id: 'g-Admin',
-                title: 'จัดการเพจ',
-                type: 'collapsable',
-                icon: 'heroicons_outline:home',
-                children: [
-                    {
-                        id: 'chat',
-                        title: 'กล่องข้อความ',
-                        icon: 'heroicons_outline:chat',
-                        type: 'basic',
-                        link: '/chat',
-                    },
-                    {
-                        id: 'livemag',
-                        title: 'จัดการไลฟ์สด',
-                        icon: 'heroicons_outline:video-camera',
-                        type: 'basic',
-                        link: '/livesteam/livemag',
-                    },
-                    // {
-                    //     id: 'sale-page-order',
-                    //     title: 'หน้าสั่งซื้อ',
-                    //     icon: 'heroicons_outline:chat',
-                    //     type: 'basic',
-                    //     link: '/sale-page-order',
-                    // },
-                ],
+                id: 'chat',
+                title: 'กล่องข้อความ',
+                icon: 'heroicons_outline:chat',
+                type: 'basic',
+                link: '/chat',
+            },
+            {
+                id: 'livemag',
+                title: 'จัดการไลฟ์สด',
+                icon: 'heroicons_outline:video-camera',
+                type: 'basic',
+                link: '/livesteam/livemag',
             },
 
             {

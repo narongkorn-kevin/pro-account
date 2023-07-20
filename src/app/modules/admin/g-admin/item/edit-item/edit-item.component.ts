@@ -82,7 +82,6 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.formData = this._formBuilder.group({
             item_type_id: ['', Validators.required],
-            location_id: ['', Validators.required],
             item_id: ['', Validators.required],
             name: ['', Validators.required],
             image: ['', Validators.required],
@@ -109,8 +108,8 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
         const itemtype = await lastValueFrom(this._ServiceItemtemType.getItemType())
         this.itemtypeData = itemtype.data;
 
-        const locationdata = await lastValueFrom(this._ServiceLocation.getLocation())
-        this.locationData = locationdata.data;
+        // const locationdata = await lastValueFrom(this._ServiceLocation.getLocation())
+        // this.locationData = locationdata.data;
 
         const vendordata = await lastValueFrom(this._ServiceVendor.getVendor())
         this.vendorData = vendordata.data;
@@ -126,7 +125,7 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
             console.log(resp.data)
             this.formData.patchValue({
                 item_type_id: resp.data.item_type_id,
-                location_id: resp.data.location_id,
+                
                 item_id: resp.data.item_id,
                 name: resp.data.name,
                 unit_price: resp.data.unit_price,

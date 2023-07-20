@@ -248,6 +248,9 @@ export class ItemListComponent implements OnInit, OnDestroy {
     edit(customerId: string): void {
         this._router.navigate(['/item/edit/' + customerId]);
     }
+    edit1(customerId: string): void {
+        this._router.navigate(['/item/edit-item-promotion/' + customerId]);
+    }
 
     openNewBrief(): void {
         this._router.navigateByUrl('marketing/brief-plan/brief/create');

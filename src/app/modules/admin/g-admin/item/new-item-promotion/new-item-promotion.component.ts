@@ -80,11 +80,19 @@ export class NewItemPromotion implements OnInit, AfterViewInit, OnDestroy {
             name: ['', Validators.required],
             brand: ['', Validators.required],
             image: ['', Validators.required],
-            total_price: ['', Validators.required],
+            unit_cost: ['', Validators.required],
+            unit_price: ['', Validators.required],
             description: ['', Validators.required],
             item_type_id: ['', Validators.required],
             set_type: ['', Validators.required],
+            weight: ['', Validators.required],
+            hight: ['', Validators.required],
+            qty: ['', Validators.required],
             item_line: this._formBuilder.array([
+            ]),
+            item_image: this._formBuilder.array([
+            ]),
+            item_attribute: this._formBuilder.array([
             ])
         })
         this.uploadPic = this._formBuilder.group({
@@ -112,18 +120,25 @@ export class NewItemPromotion implements OnInit, AfterViewInit, OnDestroy {
             name: ['', Validators.required],
             brand: ['', Validators.required],
             image: ['', Validators.required],
-            total_price: [0, Validators.required],
+            unit_cost: [0, Validators.required],
+            unit_price: [0, Validators.required],
             description: ['', Validators.required],
             item_type_id: ['', Validators.required],
+            weight: ['', Validators.required],
+            hight: ['', Validators.required],
+            qty: ['', Validators.required],
             set_type: 'set_products',
             item_line: this._formBuilder.array([
+            ]),item_image: this._formBuilder.array([
+            ]),
+            item_attribute: this._formBuilder.array([
             ])
         })
         const itemtype = await lastValueFrom(this._ServiceItemtemType.getItemType())
         this.itemtypeData = itemtype.data;
 
-        const locationdata = await lastValueFrom(this._ServiceLocation.getLocation())
-        this.locationData = locationdata.data;
+        // const locationdata = await lastValueFrom(this._ServiceLocation.getLocation())
+        // this.locationData = locationdata.data;
 
     }
 
@@ -131,7 +146,30 @@ export class NewItemPromotion implements OnInit, AfterViewInit, OnDestroy {
         return this.formData.get('item_line') as FormArray
 
     }
-
+    get item_attribute(): FormArray {
+        return this.formData.get('item_attribute') as FormArray
+    }
+    get item_image(): FormArray {
+        return this.formData.get('item_image') as FormArray
+    }
+    newAttribute(): FormGroup {
+        return this._formBuilder.group({
+            image: '',
+            name: '',
+            unit_cost: '',
+            unit_price: '',
+            qty: '',
+            item_attribute_second: this._formBuilder.array([]),
+        });
+    }
+    newImage(): FormGroup {
+        return this._formBuilder.group({
+            image: '',
+            
+            
+        });
+    }
+    
     NewItem(): FormGroup {
 
         return this._formBuilder.group({
@@ -150,6 +188,39 @@ export class NewItemPromotion implements OnInit, AfterViewInit, OnDestroy {
         console.log(this.formData.value)
         // alert(1)
     }
+    addAttribute(): void {
+        this.item_attribute.push(this.newAttribute());
+        console.log('formData',this.formData.value.item_attribute);
+        }
+    addImage(): void {
+        this.item_image.push(this.newImage());
+        console.log('formData',this.formData.value.item_image);
+        }
+        item_attribute_sec(): FormGroup {
+            return this._formBuilder.group({
+                image: '',
+                name: "",
+                unit_cost: '',
+                unit_price: '',
+                qty: ''
+            });
+        }
+        addAttribute_sec(i): void {
+            const control = this.formData.get('item_attribute')['controls'][i].get('item_attribute_second')
+            // console.log(control)
+            control.push(this.item_attribute_sec());
+            console.log('control',this.formData.value);
+        }
+        getItem_attribute_second(form) {
+            return form.controls.item_attribute_second.controls;
+        }
+        removeAttribute(i, j: number): void {
+            // alert(1)
+            const control = this.formData.get('item_attribute')['controls'][i].get('item_attribute_second')
+            control.removeAt(j);
+            
+        }
+
 
     removeItem(i: number): void {
         this.item().removeAt(i);
@@ -171,9 +242,10 @@ export class NewItemPromotion implements OnInit, AfterViewInit, OnDestroy {
             price2 = price2 + element.total
         });
         this.formData.patchValue({
-            total_price: price2
+            unit_cost: price2
         })
     }
+
 
 
 

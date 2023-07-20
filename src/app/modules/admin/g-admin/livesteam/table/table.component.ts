@@ -31,7 +31,7 @@ export class TableComponent implements OnInit {
     const that = this;
 
     this.dtOptions = {
-      order: [[0, 'desc']],
+      order: [[3, 'desc']],
       pagingType: 'full_numbers',
       pageLength: 100,
       serverSide: true,

@@ -43,6 +43,8 @@ import { DataTablesModule } from 'angular-datatables';
 import { ItemListPromotionComponent } from './list-promotion/list-promotion.component';
 import { EditItemPromotionComponent } from './edit-item-promotion/edit-item-promotion.component';
 import { ItemListStockComponent } from './list-stock/list-stock.component';
+import { ItemSetComponent } from './item-set/item-set.component';
+import { ItemMoneyComponent } from './item-money/item-money.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { ItemListStockComponent } from './list-stock/list-stock.component';
     ModalItem,
     ItemListPromotionComponent,
     EditItemPromotionComponent,
-    ItemListStockComponent
+    ItemListStockComponent,
+    ItemSetComponent,
+    ItemMoneyComponent
   ],
   imports: [
     RouterModule.forChild(itemRoute),

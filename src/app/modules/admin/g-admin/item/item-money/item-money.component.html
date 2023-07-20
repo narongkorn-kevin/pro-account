@@ -1,0 +1,87 @@
+<!-- <div
+    class="flex flex-0 flex-grow items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bgButton text-on-warn mb-5">
+    <div class="text-lg font-medium text-center">งานบริการ </div>
+
+    <button mat-icon-button [tabIndex]="-1" mat-dialog-close>
+        <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+    </button>
+</div> -->
+<div class="flex flex-col w-full justify-center items-center ">
+    <span style="font-size: 30px;font: width 500px;" class="mb-5">คำนวณราคาสินค้า</span>
+    <!-- <span style="font-size: 20px;font: width 300px;">ชื่อสินค้า: {{this.formData.value.name}}</span> -->
+</div>
+<div class="flex flex-auto p-3 overflow-hidden overflow-x-auto  w-full justify-center items-center">
+    <form class="flex flex-col   bg-card shadow  ng-valid" [formGroup]="formData">
+        <div class="flex flex-col sm:flex-row ">
+
+            <div class="flex flex-auto flex-wrap">
+
+                <!-- <div class="flex flex-col w-full  sm:pl-8 justify-center">
+                    <div class="flex w-100 h-100 ">
+                        <img src="{{product.image}}" imageNotFound>
+                    </div>
+                </div> -->
+                
+                    <!-- <div class="flex flex-col w-full sm:pl-8 items-center justify-center ">
+                        <div class="flex flex-row items-center">
+                            <label>จำนวนสินค้า</label>
+                            <mat-form-field class="w-100 text-right">
+                                <input matInput [formControl]="sumProduct" (keyup)="SumProduct($event.key)">
+                            </mat-form-field>
+                            <span class="Span">หน่วย</span>
+                        </div>
+                    </div> -->
+                    <div class="grid grid-cols-1 gap-4 w-full">
+                    <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-l font-extrabold text-gray-500  mt-4">จำนวน</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            <input
+                                class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                placeholder="กรุณาระบุจำนวน" formControlName="qty" />
+                        </dd>
+                    </div>
+                    <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-l font-extrabold text-gray-500  mt-4">ราคาขาย</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            <input
+                                class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                placeholder="กรุณาระบุราคาขาย" formControlName="price" />
+                        </dd>
+                    </div>
+                    <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-l font-extrabold text-gray-500  mt-4">รวม</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            <input
+                                class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                placeholder="กรุณาระบุราคารวม" formControlName="total" />
+                        </dd>
+                    </div>
+                </div>
+
+                
+
+
+                <div class="flex items-center justify-end w-full border-t px-8 py-4">
+                    <div class="flex items-center justify-end ">
+                        <button class="ml-4" mat-flat-button mat-dialog-close>
+                            <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                            ยกเลิก
+                        </button>
+                        <button class="px-6 ml-3 mat-primary " mat-flat-button (click)="addOrder()">
+                            <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                            เพิ่มรายการ
+                        </button>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+        <!-- button -->
+
+    </form>
+
+</div>
