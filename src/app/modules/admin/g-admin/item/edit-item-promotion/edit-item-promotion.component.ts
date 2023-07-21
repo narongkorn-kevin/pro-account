@@ -96,7 +96,7 @@ export class EditItemPromotionComponent implements OnInit, AfterViewInit, OnDest
             width: ['', Validators.required],
             hight: ['', Validators.required],
             qty: ['', Validators.required],
-            set_type: ['', Validators.required],
+            set_type: 'set_products',
             item_line: this._formBuilder.array([
             ]),
             item_image: this._formBuilder.array([
@@ -140,8 +140,8 @@ export class EditItemPromotionComponent implements OnInit, AfterViewInit, OnDest
                 qty: resp.data.qty,
 
             })
-            if (this.dataRow.main_item_line) {
-                this.dataRow.main_item_line.map(s =>
+            if (this.dataRow.item_lines) {
+                this.dataRow.item_lines.map(s =>
                     this.item().push(this._formBuilder.group({
                         item_line_id: s.id,
                         item_name: s.item.name,
@@ -289,6 +289,7 @@ export class EditItemPromotionComponent implements OnInit, AfterViewInit, OnDest
         });
 
         // Subscribe to the confirmation dialog closed action
+        console.log('FormBefore',formValue);
         confirmation.afterClosed().subscribe((result) => {
             if (result === 'confirmed') {
                 this._Service.updateItem(formValue, this.itemId).subscribe(
@@ -565,18 +566,20 @@ export class EditItemPromotionComponent implements OnInit, AfterViewInit, OnDest
 
     }
     pushAttribute(attribute: any) {
+        console.log('attribute',attribute);
+        console.log('this.item_attribute before', this.formData.value);
         const show = this._formBuilder.group({
             ...attribute,
-            item_attribute_second: this._formBuilder.array([])
+            item_attribute_second: this._formBuilder.array([]),
         });
         this.item_attribute.push(show);
 
-        console.log('this.item_attribute', this.formData.value);
+        console.log('this.item_attribute affter', this.formData.value);
     }
     pushImage(img: any) {
         const show = this._formBuilder.group({
             ...img,
-            // item_attribute_second: this._formBuilder.array([])
+            item_attribute_second: this._formBuilder.array([])
         });
         this.item_image.push(show);
 

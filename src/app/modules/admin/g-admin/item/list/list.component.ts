@@ -79,7 +79,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
             pageLength: 10,
             serverSide: true,
             processing: true,
-            order: [[3, 'desc']],
+            order: [[0, 'asc']],
             language: {
                 "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
             },
@@ -113,8 +113,8 @@ export class ItemListComponent implements OnInit, OnDestroy {
                 { data: 'item_id' },
                 { data: 'name' },
                 { data: 'qty' },
-                { data: 'booking' },
-                { data: 'balance' },
+                // { data: 'booking' },
+                // { data: 'balance' },
                 { data: 'status' },
                 { data: 'create_by' },
                 { data: 'created_at' },
@@ -129,14 +129,14 @@ export class ItemListComponent implements OnInit, OnDestroy {
             pageLength: 10,
             serverSide: true,
             processing: true,
-            order: [[3, 'desc']],
+            order: [[0, 'asc']],
             language: {
                 "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
             },
             ajax: (dataTablesParameters: any, callback) => {
                 dataTablesParameters.item_type_id = null;
                 dataTablesParameters.set_type = 'set_products';
-                dataTablesParameters.user_id = this.user.id;
+                // dataTablesParameters.user_id = this.user.id;
                 that._Service.getItem(dataTablesParameters).subscribe((resp) => {
                     this.itemsPromotion = resp.data
                     console.log(this.itemsPromotion)
@@ -163,11 +163,11 @@ export class ItemListComponent implements OnInit, OnDestroy {
                 { data: 'item_id' },
                 { data: 'name' },
                 { data: 'qty' },
-                { data: 'booking' },
-                { data: 'balance' },
+                // { data: 'booking' },
+                // { data: 'balance' },
                 { data: 'status' },
                 { data: 'create_by' },
-                { data: 'created_at' },
+                // { data: 'created_at' },
             ]
         };
     }

@@ -1023,13 +1023,14 @@ export class ItemService {
   }
 
   updateItem(itemData, itemId: any): Observable<any> {
-    return this._httpClient.put(environment.API_URL + 'api/update2_item/' + itemId, itemData, this.httpOptionsFormdata).pipe(
+    return this._httpClient.put(environment.API_URL + 'api/update_item/' + itemId, itemData, this.httpOptionsFormdata).pipe(
       switchMap((response: any) => {
         // Return a new observable with the response
         return of(response);
       })
     );
   }
+ 
 
   getByItemType(itemTypeId: number): Observable<any> {
     return this._httpClient.post(environment.API_URL + 'api/get_item', { item_type_id: itemTypeId }, this.httpOptionsFormdata).pipe(

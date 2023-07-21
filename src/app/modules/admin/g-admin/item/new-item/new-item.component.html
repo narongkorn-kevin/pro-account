@@ -69,7 +69,7 @@
                                     </dd>
                                 </div>
                                 <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-l font-extrabold text-gray-500  mt-4">น้ำหนัก</dt>
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">น้ำหนัก (kg.)</dt>
                                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                                         <input type="number" min="0"
                                             class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
@@ -77,7 +77,7 @@
                                     </dd>
                                 </div>
                                 <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ความกว้าง</dt>
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ความกว้าง (cm.)</dt>
                                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                                         <input type="number" min="0"
                                             class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
@@ -85,7 +85,7 @@
                                     </dd>
                                 </div>
                                 <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ความสูง</dt>
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ความสูง (cm.)</dt>
                                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                                         <input type="number" min="0"
                                             class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
@@ -182,7 +182,7 @@
                                                 <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                                                     <ngx-dropzone
                                                         style="width: 100px; height: 100px; justify-content: center;"
-                                                        (change)="onSelectMullti($event,i)">
+                                                        (change)="onSelectMullti($event,i)" >
                                                         <ngx-dropzone-label>เลือกรูปสินค้า </ngx-dropzone-label>
                                                         <ngx-dropzone-image-preview *ngFor="let f of files2"
                                                             [removable]="true" [file]="f" (removed)="onRemove1(f)">
@@ -212,6 +212,29 @@
                                     </button> -->
                                     </div>
                                 </div>
+                                <!-- <div class="flex flex-row items-center my-2 m-5">
+                                    <div class="font-medium">เพิ่มรูป</div>
+                                    <button mat-mini-fab [color]="'primary'" type="button" class="mx-2" (click)="AddImage()">
+                                      <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                                    </button>
+                                  </div>
+                                  
+                                  <div class="flex flex-row w-180 overflow-x-auto overflow-hidden " [formArrayName]="'item_image'">
+                                    <ng-container *ngFor="let roomControl of item_image.controls; let i = index" [formGroupName]="i">
+                                      <div class="flex flex-row m-5 pt-5 border-b-2">
+                                        <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <ngx-dropzone style="width: 100px; height: 100px; justify-content: center;" [formControlName]="'images_' + i">
+                                              <ngx-dropzone-label>เลือกรูปสินค้า </ngx-dropzone-label>
+                                              <ngx-dropzone-image-preview *ngFor="let f of getFiles(i)" [removable]="true" [file]="f" (removed)="OnRemove1(f, i)">
+                                              </ngx-dropzone-image-preview>
+                                            </ngx-dropzone>
+                                          </dd>
+                                        </div>
+                                      </div>
+                                    </ng-container>
+                                  </div> -->
+                                  
 
                                 <div class="bg-white px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                     <dt class="text-l font-extrabold text-gray-500  mt-4">รายละเอียด</dt>
@@ -401,9 +424,9 @@
                                                     <!-- {{i +1}} -->
                                                     <ngx-dropzone
                                                         style="width: 100px; height: 100px; justify-content: center;"
-                                                        (change)="onSelectMullti($event,i)">
+                                                        (change)="onSelect1($event,i)">
                                                         <ngx-dropzone-label>เลือกรูปสินค้า </ngx-dropzone-label>
-                                                        <ngx-dropzone-image-preview *ngFor="let f of files2"
+                                                        <ngx-dropzone-image-preview *ngFor="let f of files1"
                                                             [removable]="true" [file]="f" (removed)="onRemove1(f)">
                                                         </ngx-dropzone-image-preview>
                                                     </ngx-dropzone>
@@ -495,9 +518,9 @@
                                                             class="px-4 py-4 whitespace-nowrap text-l font-medium text-gray-900">
                                                             <ngx-dropzone
                                                         style="width: 100px; height: 100px; justify-content: center;"
-                                                        (change)="onSelectMullti($event,i)">
+                                                        (change)="onSelect2($event,i)">
                                                         <ngx-dropzone-label>เลือกรูปสินค้า </ngx-dropzone-label>
-                                                        <ngx-dropzone-image-preview *ngFor="let f of files2"
+                                                        <ngx-dropzone-image-preview *ngFor="let f of files3"
                                                             [removable]="true" [file]="f" (removed)="onRemove1(f)">
                                                         </ngx-dropzone-image-preview>
                                                     </ngx-dropzone></td>

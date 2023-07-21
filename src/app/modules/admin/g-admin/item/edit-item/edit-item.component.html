@@ -98,30 +98,27 @@
                                     </dd>
                                 </div>
                                 <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-l font-extrabold text-gray-500  mt-4">น้ำหนัก</dt>
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">น้ำหนัก (kg.)</dt>
                                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                        <mat-form-field class="w-full">
-                                            <input matInput [formControlName]="'weight'"
-                                                placeholder="กรุณาระบุน้ำหนัก">
-                                        </mat-form-field>
+                                        <input type="number" min="0"
+                                            class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                            placeholder="กรุณาระบุน้ำหนัก" formControlName="weight" />
                                     </dd>
                                 </div>
                                 <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ความกว้าง</dt>
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ความกว้าง (cm.)</dt>
                                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                        <mat-form-field class="w-full">
-                                            <input matInput [formControlName]="'width'"
-                                                placeholder="กรุณาระบุความกว้าง">
-                                        </mat-form-field>
+                                        <input type="number" min="0"
+                                            class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                            placeholder="กรุณาระบุความกว้าง" formControlName="width" />
                                     </dd>
                                 </div>
                                 <div class="bg-white-50 px-4 mt-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ความสูง</dt>
+                                    <dt class="text-l font-extrabold text-gray-500  mt-4">ความสูง (cm.)</dt>
                                     <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                        <mat-form-field class="w-full">
-                                            <input matInput [formControlName]="'hight'"
-                                                placeholder="กรุณาระบุความสูง">
-                                        </mat-form-field>
+                                        <input type="number" min="0"
+                                            class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-yellow-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                            placeholder="กรุณาระบุความสูง" formControlName="hight" />
                                     </dd>
                                 </div>
                             </dl>
@@ -378,7 +375,7 @@
                                                         style="width: 100px; height: 100px; justify-content: center;"
                                                         (change)="onSelectMullti($event,i)">
                                                         <ngx-dropzone-label>เลือกรูปสินค้า </ngx-dropzone-label>
-                                                        <ngx-dropzone-image-preview *ngFor="let f of files2"
+                                                        <ngx-dropzone-image-preview *ngFor="let f of files1"
                                                             [removable]="true" [file]="f" (removed)="onRemove1(f)">
                                                         </ngx-dropzone-image-preview>
                                                     </ngx-dropzone>
@@ -473,7 +470,7 @@
                                                         style="width: 100px; height: 100px; justify-content: center;"
                                                         (change)="onSelectMullti($event,i)">
                                                         <ngx-dropzone-label>เลือกรูปสินค้า </ngx-dropzone-label>
-                                                        <ngx-dropzone-image-preview *ngFor="let f of files2"
+                                                        <ngx-dropzone-image-preview *ngFor="let f of files3"
                                                             [removable]="true" [file]="f" (removed)="onRemove1(f)">
                                                         </ngx-dropzone-image-preview>
                                                     </ngx-dropzone>

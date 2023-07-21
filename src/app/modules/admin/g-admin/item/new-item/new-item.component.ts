@@ -55,6 +55,7 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
     files: File[] = [];
     files1: File[] = [];
     files2: File[] = [];
+    files3: File[] = [];
     supplierId: string | null;
     pagination: CustomerPagination;
 
@@ -154,16 +155,24 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
     newImage(): FormGroup {
         return this._formBuilder.group({
             image: '',
+            // ['images_' + this.imageFieldIndex]: new FormControl(null, Validators.required)
             
             
         });
     }
     addAttribute(): void {
         this.item_attribute.push(this.newAttribute());
+        //const control = this.formData.controls.item_image as FormArray;
+        
         console.log('formData',this.formData.value.item_attribute);
         }
     addImage(): void {
         this.item_image.push(this.newImage());
+        // this.item_image.push(this._formBuilder.group({
+        //     ['images_' + this.imageFieldIndex]: new FormControl(null, Validators.required)
+        //   }));
+        //   this.imageFieldIndex++;
+        // this.imageFieldIndex++;
         console.log('formData',this.formData.value.item_image);
         }
     item_attribute_sec(): FormGroup {
@@ -222,7 +231,7 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
         this.vendorData = vendor.data;
         console.log('this.vendorData', this.vendorData);
 
-
+        
         // this.formData = this._formBuilder.group({
         //     vendor_id: '',
         //     // location_id: '',
@@ -277,10 +286,19 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
             "dismissible": true
         });
 
-        confirmation.afterClosed().subscribe((result) => {
+        confirmation.afterClosed().subscribe(async (result) => {
 
             // If the confirm button pressed...
             if (result === 'confirmed') {
+                const ImgPath = new FormData()
+                ImgPath.append('image',this.files2[0])
+                ImgPath.append('path','/images/item/')
+                const img = await lastValueFrom( this._Service.uploadImg(ImgPath))
+                this.formData.patchValue({
+                    item_image: [img]
+                })
+                // console.log('Image',this.formData.value);
+                
                 const formValue = this.formData.value
                 this._Service.NewItemSet(formValue).subscribe(
                     {
@@ -349,7 +367,14 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     onSelect1(event,i) {
         console.log(event);
-        this.files1.push(...event.addedFiles);
+        // const imageData:any = this._formBuilder.group({
+        //     ...event.addedFiles,
+        //     images: this._formBuilder.array([])
+        // })
+        
+         this.files1.push(...event.addedFiles);
+        // this.files1.push(imageData);
+        // console.log('file1',this.files1);
         // Trigger Image Preview
         setTimeout(() => {
             this._changeDetectorRef.detectChanges()
@@ -373,7 +398,76 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
         })
         
         
+        
+        
+        
     }
+    
+    onSelect2(event,i,j) {
+        console.log(event);
+        this.files3.push(...event.addedFiles);
+        // Trigger Image Preview
+        setTimeout(() => {
+            this._changeDetectorRef.detectChanges()
+        }, 150)
+
+        for (let index = 0; index < this.files3.length; index++) {
+            const element = this.files3[index];
+            this.uploadPic.patchValue({
+                image: this.files3[index],
+            });
+            
+        }
+        // this.uploadPic.patchValue({
+        //     image: this.files3[i],
+        // });
+        
+        const formData = new FormData();
+        Object.entries(this.uploadPic?.value).forEach(
+            ([key, value]: any[]) => {
+                formData.append(key, value);
+            }
+        );
+        
+        // const control = this.formData.value.item_attribute[i].item_attribute_second
+        const control = this.formData.get('item_attribute').value[i].item_attribute_second as FormArray;
+        this._Service.uploadImg(formData).subscribe((resp) => {
+            control[i] = {image:resp}
+            // control.at(j)?.patchValue({ image: resp });
+            // this.formData.controls.item_attribute[i].controls.item_attribute_second.patchValue(control);
+            console.log('Hello',this.formData.value.item_attribute[i].item_attribute_second)
+            // const newControl = this._formBuilder.group({
+            //     image: resp,
+            //     });
+                
+            //     // เปลี่ยนค่าใน FormArray ด้วย setControl โดยให้ newControl แทนที่ control ของ Index j
+            //     control.insert(j, newControl);
+                
+            //     console.log('Hello', this.formData.value.item_attribute[i].item_attribute_second);
+        })
+        
+        
+    }
+    imageFieldIndex = 0;
+    // AddImage() {
+    //     const control = this.formData.controls.item_image as FormArray;
+    //     control.push(this._formBuilder.group({
+    //       ['images_' + this.imageFieldIndex]: new FormControl(null, Validators.required)
+    //     }));
+    //     this.imageFieldIndex++;
+    //   }
+    getFiles(index: number): File[] {
+        const control = this.formData.controls.item_image as FormArray;
+        const fieldName = 'images_' + index;
+        return control.controls[index].get(fieldName)?.value;
+      }
+    // OnRemove1(file: File, index: number) {
+    //     const control = this.formData.controls.item_image as FormArray;
+    //     const fieldName = 'images_' + index;
+    //     const files = control.controls[index].get(fieldName).value as File[];
+    //     const filteredFiles = files.filter((f) => f !== file);
+    //     control.controls[index].get(fieldName).setValue(filteredFiles);
+    //   }
     onSelectMullti(event,i) {
         console.log(event);
         this.files2.push(...event.addedFiles);
@@ -386,6 +480,7 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
         this.uploadPic.patchValue({
             image: this.files2[0],
         });
+        
         const formData = new FormData();
         Object.entries(this.uploadPic.value).forEach(
             ([key, value]: any[]) => {
@@ -395,46 +490,9 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
         const control = this.formData.value.item_image
         this._Service.uploadImg(formData).subscribe((resp) => {
             control[i] = {image:resp}
+            
             this.formData.controls.item_image.patchValue(control);
             console.log(this.formData.value.item_image)
-        })
-        
-        
-    }
-    onSelect2(event,i,j) {
-        console.log(event);
-        this.files2.push(...event.addedFiles);
-        // Trigger Image Preview
-        setTimeout(() => {
-            this._changeDetectorRef.detectChanges()
-        }, 150)
-
-
-        this.uploadPic.patchValue({
-            image: this.files2[0],
-        });
-        const formData = new FormData();
-        Object.entries(this.uploadPic.value).forEach(
-            ([key, value]: any[]) => {
-                formData.append(key, value);
-            }
-        );
-        
-        // const control = this.formData.value.item_attribute[i].item_attribute_second
-        const control = this.formData.get('item_attribute').value[i].item_attribute_second as FormArray;
-        this._Service.uploadImg(formData).subscribe((resp) => {
-            // control[j] = {image:resp}
-            control.at(j)?.patchValue({ image: resp });
-            // this.formData.controls.item_attribute[i].controls.item_attribute_second.patchValue(control);
-            console.log('Hello',this.formData.value.item_attribute[i].item_attribute_second)
-            // const newControl = this._formBuilder.group({
-            //     image: resp,
-            //     });
-                
-            //     // เปลี่ยนค่าใน FormArray ด้วย setControl โดยให้ newControl แทนที่ control ของ Index j
-            //     control.insert(j, newControl);
-                
-            //     console.log('Hello', this.formData.value.item_attribute[i].item_attribute_second);
         })
         
         

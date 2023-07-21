@@ -305,6 +305,7 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
                                 },
                                 "dismissible": true
                             }).afterClosed().subscribe((res) => {
+                                this._router.navigateByUrl('item/list').then(() => { })
 
                                 this.ngOnInit();
                             })

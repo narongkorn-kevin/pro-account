@@ -50,8 +50,8 @@
                                             <th>ชื่อ</th>
                                             <th>จำนวนทั้งหมด</th>
                                             <th>น้ำหนัก (กก.)</th>
-                                            <th>สินค้าถูกจอง</th>
-                                            <th>พร้อมขาย</th>
+                                            <!-- <th>สินค้าถูกจอง</th>
+                                            <th>พร้อมขาย</th> -->
                                             <th>สถานะ</th>
                                             <th>สร้างโดย</th>
                                             <th>วันที่สร้าง</th>
@@ -75,8 +75,8 @@
                                             <td style="width: 200px; min-width: 200px;">{{ item.name }}</td>
                                             <td style="width: 100px; min-width: 100px;">{{ item.qty }}</td>
                                             <td style="width: 100px; min-width: 100px;">{{ item.weight }}</td>
-                                            <td style="width: 100px; min-width: 100px;">{{ item.booking }}</td>
-                                            <td style="width: 100px; min-width: 100px;">{{ item.balance }}</td>
+                                            <!-- <td style="width: 100px; min-width: 100px;">{{ item.booking }}</td>
+                                            <td style="width: 100px; min-width: 100px;">{{ item.balance }}</td> -->
                                             <td style="width: 130px; min-width: 130px;">
                                                 <div *ngIf="item.status == 1">
                                                     <!-- เปิดการใช้งาน -->
@@ -116,11 +116,11 @@
                                             <th>รหัสสินค้า</th>
                                             <th>ชื่อ</th>
                                             <th>จำนวนทั้งหมด</th>
-                                            <th>สินค้าถูกจอง</th>
-                                            <th>พร้อมขาย</th>
+                                            <!-- <th>สินค้าถูกจอง</th>
+                                            <th>พร้อมขาย</th> -->
                                             <th>สถานะ</th>
                                             <th>สร้างโดย</th>
-                                            <th>วันที่สร้าง</th>
+                                            <!-- <th>วันที่สร้าง</th> -->
                                         </tr>
                                     </thead>
                                     <tbody *ngIf="itemsPromotion?.length != 0">
@@ -140,8 +140,8 @@
                                             <td style="width: 120px; min-width: 120px;">{{ item.item_id }}</td>
                                             <td style="width: 200px; min-width: 200px;">{{ item.name }}</td>
                                             <td style="width: 100px; min-width: 100px;">{{ item.qty }}</td>
-                                            <td style="width: 100px; min-width: 100px;">{{ item.booking }}</td>
-                                            <td style="width: 100px; min-width: 100px;">{{ item.balance }}</td>
+                                            <!-- <td style="width: 100px; min-width: 100px;">{{ item.booking }}</td>
+                                            <td style="width: 100px; min-width: 100px;">{{ item.balance }}</td> -->
                                             <td style="width: 130px; min-width: 130px;">
                                                 <div *ngIf="item.status == 1">
                                                 
@@ -159,7 +159,7 @@
                                                 item.user_create.last_name: '' }}
                                             </td>
                                     
-                                            <td style="width: 100px; min-width: 100px;">{{ item.created_at | date: 'dd/MM/yyyy hh:mm' }}</td>
+                                            <!-- <td style="width: 100px; min-width: 100px;">{{ item.created_at | date: 'dd/MM/yyyy hh:mm' }}</td> -->
                                         </tr>
                                     </tbody>
                                     <tbody *ngIf="itemsPromotion?.length == 0">

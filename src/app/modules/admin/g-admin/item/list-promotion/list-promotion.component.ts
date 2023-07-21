@@ -67,7 +67,7 @@ export class ItemListPromotionComponent implements OnInit, OnDestroy {
             pageLength: 10,
             serverSide: true,
             processing: true,
-            order: [[5, 'desc']],
+            order: [[0, 'asc']],
             language: {
                 "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
             },
