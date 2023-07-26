@@ -72,7 +72,7 @@ export class BankNewComponent implements OnInit, AfterViewInit, OnDestroy {
       this.user = JSON.parse(localStorage.getItem("user"));
 
       this.formData = this._formBuilder.group({
-        user_id: this.user.user_id,
+        user_id: this.user.id,
         bank_id: '',
         first_name: '',
         last_name: '',

@@ -448,7 +448,7 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
         
         
     }
-    imageFieldIndex = 0;
+    // imageFieldIndex = 0;
     // AddImage() {
     //     const control = this.formData.controls.item_image as FormArray;
     //     control.push(this._formBuilder.group({
@@ -456,11 +456,11 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
     //     }));
     //     this.imageFieldIndex++;
     //   }
-    getFiles(index: number): File[] {
-        const control = this.formData.controls.item_image as FormArray;
-        const fieldName = 'images_' + index;
-        return control.controls[index].get(fieldName)?.value;
-      }
+    // getFiles(index: number): File[] {
+    //     const control = this.formData.controls.item_image as FormArray;
+    //     const fieldName = 'images_' + index;
+    //     return control.controls[index].get(fieldName)?.value;
+    //   }
     // OnRemove1(file: File, index: number) {
     //     const control = this.formData.controls.item_image as FormArray;
     //     const fieldName = 'images_' + index;

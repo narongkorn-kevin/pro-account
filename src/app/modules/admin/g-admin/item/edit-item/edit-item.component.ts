@@ -41,6 +41,7 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
     vendorData: any = [];
     files: File[] = [];
     url_sig: any = []
+    url_sig1: any = []
     formData: FormGroup
     uploadPic: FormGroup;
     flashErrorMessage: string;
@@ -143,7 +144,9 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
                 description: resp.data.description,
             })
             this.url_sig = resp.data.image
+            // console.log('resp.data.item_images',resp.data.item_images);
             for (const Images of resp.data.item_images) {
+                // this.url_sig1 = Images
                 this.pushImage(Images);
             }
             for (const DataAttribute of resp.data.item_attributes) {
@@ -427,7 +430,7 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
         });
         this.item_attribute.push(show);
 
-        console.log('this.item_attribute', this.formData.value);
+        console.log('this.item_attribute', this.formData.value.item_attribute[0].image);
     }
     pushImage(img: any) {
         const show = this._formBuilder.group({
@@ -436,6 +439,7 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
         });
         this.item_image.push(show);
 
+        console.log('this.item_image', this.formData.value.item_image);
         // console.log('this.item_attribute', this.formData.value);
     }
     removeItemAt(i: number): void {

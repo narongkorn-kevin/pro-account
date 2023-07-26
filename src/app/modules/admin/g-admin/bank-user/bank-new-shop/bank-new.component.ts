@@ -54,7 +54,13 @@ export class BankNewShopComponent implements OnInit, AfterViewInit, OnDestroy {
       private _activatedRoute: ActivatedRoute,
       private _authService: AuthService,
   ) {
-
+    this.formData = this._formBuilder.group({
+        user_id: '',
+        bank_id: '',
+        first_name: '',
+        last_name: '',
+        account_number: ['',]
+      })
       
 
   }
@@ -72,13 +78,19 @@ export class BankNewShopComponent implements OnInit, AfterViewInit, OnDestroy {
       this.Bank$ = this._Service.getBank();
       this.user = JSON.parse(localStorage.getItem("user"));
       console.log(this.user.id,'Id');
-      this.formData = this._formBuilder.group({
+    //   this.formData = this._formBuilder.group({
+    //     user_id: this.user.id,
+    //     bank_id: '',
+    //     first_name: '',
+    //     last_name: '',
+    //     account_number: ['',]
+    //   })
+      this.formData.patchValue({
         user_id: this.user.id,
-        bank_id: '',
-        first_name: '',
-        last_name: '',
-        account_number: ['',]
       })
+      console.log('User_id',this.formData.value);
+
+      
       // this.formData = this._formBuilder.group({
       //     first_name: '',
       //     name: '',
@@ -140,14 +152,14 @@ export class BankNewShopComponent implements OnInit, AfterViewInit, OnDestroy {
           if (result === 'confirmed') {
 
               console.log('formdata', this.formData.value);
-
+return
               const formData = new FormData();
               Object.entries(this.formData.value).forEach(
                   ([key, value]: any[]) => {
                       formData.append(key, value);
                   }
               );
-              this._Service.create(formData).subscribe({
+              this._Service.create(this.formData.value).subscribe({
                   next: (resp: any) => {
                       this.showFlashMessage('success');
                       this.dialogRef.close();

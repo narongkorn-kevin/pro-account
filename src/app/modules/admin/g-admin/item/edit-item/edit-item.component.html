@@ -156,10 +156,12 @@
                                                 <!-- <dt class="text-l font-extrabold text-gray-500  mt-4">ลักษณะ {{i+1}} 
                                                 </dt>-->
                                                 <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                                    
                                                     <ngx-dropzone
                                                         style="width: 100px; height: 100px; justify-content: center;"
                                                         (change)="onSelectMullti($event,i)">
                                                         <ngx-dropzone-label>เลือกรูปสินค้า </ngx-dropzone-label>
+                                                        
                                                         <ngx-dropzone-image-preview *ngFor="let f of files2"
                                                             [removable]="true" [file]="f" (removed)="onRemove1(f)">
                                                         </ngx-dropzone-image-preview>
@@ -370,6 +372,8 @@
                                                     {{i +1}}</td>
                                                     <td
                                                     class="px-4 py-4 whitespace-nowrap text-l font-medium text-gray-900">
+                                                    <img class="object-fill h-25 w-25" [src]="this.formData.value.item_attribute[0].image"
+                                                        style="cursor: pointer;">
                                                     <!-- {{i +1}} -->
                                                     <ngx-dropzone
                                                         style="width: 100px; height: 100px; justify-content: center;"
