@@ -51,7 +51,7 @@ export class SalePageComponent implements OnInit {
             telephone: ['', Validators.required],
             address: ['', Validators.required],
             shipping_price: ['20'],
-            payment_type: [''],
+            payment_type: [false],
             
         });
 
@@ -59,8 +59,6 @@ export class SalePageComponent implements OnInit {
           payment_type: ['', Validators.required],
         });
 
-
-        
         this.order$ = this._saleOrderService.getSaleOrder(this.saleOrderId).pipe(
             map((resp: any) => { return resp.data }),
             tap((resp: any) => {
@@ -68,7 +66,6 @@ export class SalePageComponent implements OnInit {
                     name: resp.name,
                     telephone: resp.telephone,
                     address: resp.address,
-                    
                 })
             })
         );

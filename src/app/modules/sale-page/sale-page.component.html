@@ -10,7 +10,7 @@
           <h1 class="font-extrabold text-3xl text-gray-800">รายละเอียดสินค้า</h1>
           <ng-container *ngFor="let sale_order_line of order.sale_order_lines">
             <div class="flex flex-col items-center justify-center my-4">
-              <img class="mx-auto w-1/2 h-48 rounded-xl object-cover" [src]="sale_order_line.item.image">
+              <img class="mx-auto w-1/2 h-48 rounded-xl object-cover" [src]="sale_order_line.item?.image">
               <p class="text-gray-600 mt-6 font-semibold text-lg">ชื่อสินค้า: {{sale_order_line.item.name}}</p>
               <p class="text-gray-600 font-semibold text-lg pt-4">จำนวนสินค้า: {{sale_order_line.qty}}</p>
               <p class="text-gray-600 font-semibold text-lg pt-4">น้ำหนักสินค้า: {{sale_order_line.item.weight}}
@@ -115,7 +115,9 @@
               <span class="text-gray-700">ไม่จ่ายค่าสินค้าและค่าขนส่ง</span>
             </label> -->
             <div *ngFor="let option of deliveryOptions" class="flex flex-row">
-              <div class="flex flex-row justify-center items-center mr-5"><input type="radio"  name="deliveryOption" [formControlName]="'payment_type'" [value]="option.value" [(ngModel)]="selectedOption"></div>
+              <div class="flex flex-row justify-center items-center mr-5">
+                <input type="radio" name="payment_type" [value]="option.value" [formControlName]="'payment_type'">
+              </div>
               <div class="flex flex-row justify-center items-center">{{ option.name }}</div>
             </div>
             <!-- <label id="example-radio-group-label">เลือกวิธีการชำระเงิน</label>
