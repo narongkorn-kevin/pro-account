@@ -34,13 +34,13 @@ import { FuseConfirmationConfig } from '@fuse/services/confirmation/confirmation
 
                 :host::ng-deep  .mat-stroked-button.mat-primary{
                     border-radius: 0px !important;
-                    background: #10b120 !important;
+                    background: #010f20 !important;
                     color: white !important;
                 }
 
                 :host::ng-deep  .mat-stroked-button.mat-accent{
                     border-radius: 0px !important;
-                    background: #4DB433 !important;
+                    background: #010f20 !important;
                     color: white !important;
                 }
         `
