@@ -118,7 +118,7 @@ import { TableComponent } from './table/table.component';
 
                     {
                         id: FacebookLoginProvider.PROVIDER_ID,
-                        provider: new FacebookLoginProvider('170313182614211')
+                        provider: new FacebookLoginProvider('692223572245452')
                     }
                 ],
                 onError: (err) => {
