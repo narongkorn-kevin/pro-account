@@ -22,7 +22,7 @@ import { FuseConfirmationConfig } from '@fuse/services/confirmation/confirmation
 
             :host::ng-deep  .mat-flat-button{
                 border-radius: 0px !important;
-                background:#4DB433 !important;
+                background:#010f20 !important;
                 color:#ffffff !important;
                 }
 
