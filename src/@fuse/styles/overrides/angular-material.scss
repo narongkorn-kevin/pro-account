@@ -1339,13 +1339,13 @@
                         @apply text-secondary;
 
                         &.mat-tab-label-active {
-                            border: #10b120 2px solid;
-                            @apply bg-[#bbffddab] bg-opacity-10 dark:bg-gray-50 dark:bg-opacity-10 #{'!important'};
+                            border: #010f20 2px solid;
+                            @apply bg-[#37565c] bg-opacity-10 dark:bg-gray-50 dark:bg-opacity-10 #{'!important'};
                             @apply text-default #{'!important'};
                             
                         }
                         &.mat-tab-label-active .pop-up {
-                            background-color: #10b120 !important;
+                            background-color: #010f20 !important;
 
                         }
 
