@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 import { WorktelesaleComponent } from './worktelesale.component';
 import { ListComponent } from './list/list.component';
-
+import { HistoryCustomerOrderComponent } from './history-customer-order/history-customer-order.component';
 
 export const WorktelesaleRoute: Route[] = [
 
@@ -12,14 +12,11 @@ export const WorktelesaleRoute: Route[] = [
             {
                 path: 'list',
                 component: ListComponent,
-                // resolve: {
-                //     products: PermissionProductsResolver,
-
-                // }
             },
-
-
-
+            {
+                path: 'history-customer-order/:id',
+                component: HistoryCustomerOrderComponent,
+            },
         ]
     }
 ];

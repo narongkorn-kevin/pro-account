@@ -336,6 +336,19 @@ export const appRoutes: Route[] = [
                     },
                 ],
             },
+            {
+                path: 'worktelesale',
+                canActivate: [],
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () =>
+                            import(
+                                'app/modules/admin/g-admin/worktelesale/worktelesale.module'
+                            ).then((m) => m.Module),
+                    },
+                ],
+            },
 
             {
                 path: 'workads',
@@ -347,6 +360,19 @@ export const appRoutes: Route[] = [
                             import(
                                 'app/modules/admin/g-admin/workads/workads.module'
                             ).then((m) => m.Module),
+                    },
+                ],
+            },
+            {
+                path: 'chief',
+                canActivate: [],
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () =>
+                            import(
+                                'app/modules/admin/g-admin/chief-telesale/chief-telesale.module'
+                            ).then((m) => m.ChiefTelesaleModule),
                     },
                 ],
             },

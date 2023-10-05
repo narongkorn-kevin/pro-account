@@ -439,21 +439,6 @@ export class WorktelesaleService {
             }
         }
 
-        // if (assetType != '' && assetType != null) {
-        //     searchParams = {
-        //         ...searchParams,
-        //         'filters[$and][0][asset_type]': assetType,
-        //     }
-        // }
-
-        // if (supplierId != '' && supplierId != null) {
-        //     searchParams = {
-        //         ...searchParams,
-        //         'filters[$or][1][translation_supplier_id]': supplierId,
-        //         'filters[$or][2][artwork_supplier_id]': supplierId,
-        //         'filters[$or][3][production_supplier_id]': supplierId,
-        //     }
-        // }
 
         if (search) {
             searchParams = {
@@ -516,23 +501,6 @@ export class WorktelesaleService {
         ).pipe(
             take(1),
             map((products) => {
-
-                // Find the product
-                // const product = this._products_prod/.;
-                // products[0].data;
-                // var thumbnail = "";
-                // var images = [];
-
-                // thumbnail = 'assets/images/artworks/artwork-1.png';
-                // images = [
-                //     'assets/images/artworks/artwork-1.png',
-                //     'assets/images/artworks/artwork-1.png',
-                //     'assets/images/artworks/artwork-1.png'
-                // ];
-
-                // products.data.attributes.thumbnail = thumbnail;
-                // products.data.attributes.images = images;
-
                 // // // Update the product
                 this._product.next(products.data);
 
@@ -540,23 +508,12 @@ export class WorktelesaleService {
                 return products.data;
             }),
             switchMap((product) => {
-
-                // if (!product) {
-                //     return throwError('Could not found product with id of ' + id + '!');
-                // }
-
                 return of(product);
             })
         );
     }
 
-    /**
-    * Get product by id
-    */
 
-    /**
-     * Create product
-     */
     createProduct(): Observable<BranchProduct> {
         return this.products$.pipe(
             take(1),
@@ -627,13 +584,6 @@ export class WorktelesaleService {
         );
     }
 
-    // getSuppliers(): Observable<any[]> {
-    //     return this._httpClient.get<any[]>(environment.API_URL + 'api/users').pipe(
-    //         tap((suppliers) => {
-    //             this._suppliers.next(suppliers);
-    //         })
-    //     );
-    // }
 
     comment(data: any): Observable<any> {
         return this._httpClient.post(environment.API_URL + 'api/asset-comments', data, this.httpOptionsFormdata).pipe(
@@ -762,11 +712,6 @@ export class WorktelesaleService {
     * Create product
     */
     createProductOSM(brief: any): Observable<any> {
-        // Throw error, if the user is already logged in
-        //  if (this._authenticated) {
-        //     return throwError('User is already logged in.');
-        // }
-
         return this._httpClient.post(environment.API_URL + 'api/briefs-osm/create', brief, this.httpOptionsFormdata).pipe(
             switchMap((response: any) => {
                 // Return a new observable with the response
@@ -1034,7 +979,7 @@ export class WorktelesaleService {
     }
 
     getCustomerTelePage(dataTablesParameters: any): Observable<DataTablesResponse> {
-        return this._httpClient.post(environment.API_URL + 'api/customer_telesale_page', dataTablesParameters, this.httpOptionsFormdata).pipe(
+        return this._httpClient.post(environment.API_URL + 'api/work_telesale_page', dataTablesParameters, this.httpOptionsFormdata).pipe(
           switchMap((response: any) => {
             return of(response.data);
           })
@@ -1060,12 +1005,22 @@ export class WorktelesaleService {
     }
     
     getWorkTelePage(dataTablesParameters: any): Observable<DataTablesResponse> {
-        return this._httpClient.post(environment.API_URL + 'api/work_telesale_page', dataTablesParameters, this.httpOptionsFormdata).pipe(
+        return this._httpClient.post(environment.API_URL + 'api/get_page_log_telesale_file', dataTablesParameters, this.httpOptionsFormdata).pipe(
           switchMap((response: any) => {
             return of(response.data);
           })
         );
       }
+
+      
+    getSaleOrderPage(dataTablesParameters: any): Observable<DataTablesResponse> {
+        return this._httpClient.post(environment.API_URL + 'api/sale_order_page', dataTablesParameters, this.httpOptionsFormdata).pipe(
+          switchMap((response: any) => {
+            return of(response.data);
+          })
+        );
+      }
+
 
 
     getWorkTeleById(data: any): Observable<any> {
@@ -1085,5 +1040,14 @@ export class WorktelesaleService {
                 }),
                 catchError((err) => this.handlerError(err))
             );
+    }
+
+
+    getOrderByCutomerId(data: any): Observable<any> {
+        return this._httpClient.get<any[]>(environment.API_URL + 'api/get_sale_order_by_customer/' + data).pipe(
+            switchMap((response: any) => {
+                return of(response.data);
+            })
+        );
     }
 }

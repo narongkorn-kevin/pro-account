@@ -40,13 +40,19 @@ import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import { DataTablesModule } from 'angular-datatables';
 import { MatBadgeModule } from '@angular/material/badge';
+import { HistoryCustomerOrderComponent } from './history-customer-order/history-customer-order.component';
+import { DialogAddItemComponent } from './dialog-add-item/dialog-add-item.component';
+
 
 @NgModule({
     declarations: [
         WorktelesaleComponent,
         NewComponent,
         ListComponent,
-        EditComponent
+        EditComponent,
+        HistoryCustomerOrderComponent,
+        DialogAddItemComponent,
+      
 
     ],
     imports: [

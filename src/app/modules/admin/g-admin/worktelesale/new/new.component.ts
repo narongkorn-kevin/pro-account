@@ -68,7 +68,8 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
         this.formData = this._formBuilder.group({
-            user_id: ['', Validators.required],
+            // user_id: ['', Validators.required],
+            id: ['',], 
             customer_id: ['',],
             remark: ['',],
             file: ['',],
@@ -80,7 +81,8 @@ export class NewComponent implements OnInit, AfterViewInit, OnDestroy {
         const user = (JSON.parse(localStorage.getItem("user")));
   
         this.formData.patchValue({
-            user_id: user.id,
+            // user_id: user.id,
+            id: user.id,
             customer_id: this._data.itemId
         });
 

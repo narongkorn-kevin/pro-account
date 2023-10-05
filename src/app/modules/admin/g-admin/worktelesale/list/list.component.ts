@@ -41,6 +41,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(MatPaginator) _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
     displayedColumns: string[] = ['id', 'name', 'code', 'status', 'create_by', 'created_at', 'actions'];
+    status: string[] = ['open','share','finish','cancel'];
+    nowStatus: string
     dataSource: MatTableDataSource<DataWarehouse>;
 
     products$: Observable<any>;
@@ -60,6 +62,9 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     totalCustomerTelesale = 0;
     totalTel = 0;
     totalNotTel = 0;
+    itemtypeId:any;
+
+    userData:any;
 
     constructor(
 
@@ -72,11 +77,32 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
         private _activatedRoute: ActivatedRoute,
         private _authService: AuthService,
     ) {
+        const storedData = localStorage.getItem('user');
+        this.userData = JSON.parse(storedData);
     }
 
     ngOnInit(): void {
+           
+        this.itemtypeId = this._activatedRoute.snapshot.paramMap.get('id');
         this.loadTable();
         this.loadTeleTable();
+        console.log(this.itemtypeId,"itemId");
+        console.log(this.dataRow2,"datarow2");
+        
+    }
+
+    gotoHistoryOrder(item){
+       this._router.navigate(['worktelesale/history-customer-order/' + item.id]); 
+    }
+
+    checkpage(event){
+        // console.log("this.nowStatus", event);
+        this.nowStatus = event;
+        // console.log("this.nowStatus", this.nowStatus);
+        this.loadTable();
+        this.rerender();
+        
+        this._changeDetectorRef.markForCheck();
     }
 
     pages = { current_page: 1, last_page: 1, per_page: 10, begin: 0 }
@@ -92,6 +118,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
                 "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
             },
             ajax: (dataTablesParameters: any, callback) => {
+                dataTablesParameters.user_id = this.itemtypeId,
+                dataTablesParameters.status = this.nowStatus
                 that._Service.getCustomerTelePage(dataTablesParameters).subscribe((resp) => {
                     this.dataRow = resp.data;
                     this.totalCustomerTelesale = resp.total;
@@ -139,9 +167,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
                 "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
             },
             ajax: (dataTablesParameters: any, callback) => {
+                dataTablesParameters.user_id=this.userData.id
                 that._Service.getWorkTelePage(dataTablesParameters).subscribe((resp) => {
                     this.dataRow2 = resp.data;
-                    console.log(resp.data)
+                    console.log(resp.data,"resp2")
+                    console.log(this.dataRow2,"this.dataRow2")
                     this.pages.current_page = resp.current_page;
                     this.pages.last_page = resp.last_page;
                     this.pages.per_page = resp.per_page;

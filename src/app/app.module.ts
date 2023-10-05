@@ -23,6 +23,7 @@ import {MatCardModule} from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmdialogeComponent } from './modules/admin/g-admin/livesteam/confirmdialoge/confirmdialoge.component';
 import { FbPageComponent } from './modules/admin/g-admin/fb-page/fb-page.component';
+import { ChiefTelesaleModule } from './modules/admin/g-admin/chief-telesale/chief-telesale.module';
 
 
 const routerConfig: ExtraOptions = {
@@ -36,9 +37,8 @@ const routerConfig: ExtraOptions = {
     declarations: [
         AppComponent,
         SaleOrderComponent,
-
         SalePageComponent,
-          
+
 
     ],
 

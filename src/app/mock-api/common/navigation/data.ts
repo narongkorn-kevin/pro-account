@@ -518,6 +518,39 @@ export const defaultNavigation: FuseNavigationItem[] = [
             // },
         ],
     },
+    {
+        title: 'ทีมเทเลเซล',
+        subtitle: 'เมนูการใช้งานทีมเทเลเซล',
+        type: 'group',
+        icon: 'heroicons_outline:user-group',
+        hidden: function () {
+            return AuthService._Telesale;
+        },
+        children: [
+            {
+                id: 'worktelesale',
+                title: 'บันทึกการทำงาน',
+                type: 'basic',
+                icon: 'mat_outline:contact_phone',
+                link: '/worktelesale/list',
+            },
+            {
+                id: 'chief',
+                title: 'มอบหมายงาน',
+                type: 'basic',
+                icon: 'heroicons_outline:user',
+                link: '/chief/list',
+            },
+
+            // {
+            //     id: 'work',
+            //     title: 'รายการคำสั่งซื้อ',
+            //     type: 'basic',
+            //     icon: 'heroicons_outline:shopping-cart',
+            //     link: '/user/profile-firstpage',
+            // },
+        ],
+    },
 
     {
         title: 'แม่ค้า',
@@ -541,8 +574,8 @@ export const defaultNavigation: FuseNavigationItem[] = [
             //     type: 'collapsable',
             //     icon: 'heroicons_outline:home',
             //     children: [
-                   
-                    
+
+
             //         // {
             //         //     id: 'sale-page-order',
             //         //     title: 'หน้าสั่งซื้อ',
@@ -788,7 +821,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 icon: 'feather:log-out',
                 link: '/sign-out',
             },
-            
+
         ],
     },
 ];

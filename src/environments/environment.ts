@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    API_URL: 'https://deeshipp-api.dev-asha.com/',
+    API_URL: 'https://pro-account-api.dev-asha.com/',
 };
 
 /*
