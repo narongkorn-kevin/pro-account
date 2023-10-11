@@ -36,7 +36,7 @@
                     </svg>
                 </div>
                 <div>
-                    <span class="block text-2xl font-bold">{{ totalCustomerTelesale }}</span>
+                    <span class="block text-2xl font-bold">{{ this.formValue.value.all }}</span>
                     <span class="block text-gray-500">งานทั้งหมด</span>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                     </svg>
                 </div>
                 <div>
-                    <span class="block text-2xl font-bold">10</span>
+                    <span class="block text-2xl font-bold">{{callTrue}}</span>
                     <span class="block text-gray-500">ติตต่อสำเร็จ</span>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                     </svg>
                 </div>
                 <div>
-                    <span class="inline-block text-2xl font-bold">5</span>
+                    <span class="inline-block text-2xl font-bold">{{callFalse}}</span>
                     <!-- <span class="inline-block text-xl text-gray-500 font-semibold">บาท</span> -->
                     <span class="block text-gray-500">ติตต่อไม่สำเร็จ</span>
                 </div>
@@ -143,11 +143,9 @@
                                     <tbody *ngIf="dataRow?.length != 0">
                                         <tr *ngFor="let item of dataRow; let i = index">
                                             <td style="min-width: 60px;">
-                                                <button *ngIf="item.call_status == 'true'" mat-mini-fab (click)="onTelCustomer(item)" title="เปลี่ยนสถานะติดต่อ" disabled>
-                                                    <mat-icon>phone</mat-icon>
-                                                </button>
 
-                                                <button *ngIf="item.call_status == 'false'" mat-icon-button color="warn" (click)="onTelCustomer(item)" title="เปลี่ยนสถานะติดต่อ">
+
+                                                <button mat-icon-button color="warn" (click)="onTelCustomer(item)" title="เปลี่ยนสถานะติดต่อ">
                                                     <mat-icon>phone</mat-icon>
                                                 </button>
                                             </td>
@@ -181,7 +179,7 @@
                                     </tbody>
                                     <tbody *ngIf="dataRow?.length == 0">
                                         <tr>
-                                            <td colspan="6" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                            <td colspan="8" class="no-data-available text-center">ไม่มีข้อมูล !</td>
                                         </tr>
                                     </tbody>
                                 </table>

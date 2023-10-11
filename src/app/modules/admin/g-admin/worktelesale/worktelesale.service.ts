@@ -1003,7 +1003,7 @@ export class WorktelesaleService {
             })
         );
     }
-    
+
     getWorkTelePage(dataTablesParameters: any): Observable<DataTablesResponse> {
         return this._httpClient.post(environment.API_URL + 'api/get_page_log_telesale_file', dataTablesParameters, this.httpOptionsFormdata).pipe(
           switchMap((response: any) => {
@@ -1012,7 +1012,7 @@ export class WorktelesaleService {
         );
       }
 
-      
+
     getSaleOrderPage(dataTablesParameters: any): Observable<DataTablesResponse> {
         return this._httpClient.post(environment.API_URL + 'api/sale_order_page', dataTablesParameters, this.httpOptionsFormdata).pipe(
           switchMap((response: any) => {
@@ -1030,7 +1030,7 @@ export class WorktelesaleService {
             })
         );
     }
-    
+
     deleteWorkTele(itemId: number): Observable<{}> {
         return this._httpClient
             .delete<any>(`${environment.API_URL}api/work_telesale/${itemId}`, this.httpOptionsFormdata)

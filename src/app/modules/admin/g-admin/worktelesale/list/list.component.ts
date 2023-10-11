@@ -23,7 +23,6 @@ import { EditComponent } from '../edit/edit.component';
     selector: 'worktelesale',
     templateUrl: './list.component.html',
     styleUrls: ['./list.component.scss'],
-
     animations: fuseAnimations
 })
 
@@ -31,7 +30,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     private destroy$ = new Subject<any>();
     @ViewChild(DataTableDirective)
     dtElement!: DataTableDirective;
-    
+
     dtOptions: DataTables.Settings = {};
     dtOptionsList: DataTables.Settings = {};
 
@@ -64,6 +63,11 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     totalNotTel = 0;
     itemtypeId:any;
 
+    formValue: FormGroup
+
+    callTrue = 0
+    callFalse = 0
+
     userData:any;
 
     constructor(
@@ -79,20 +83,25 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     ) {
         const storedData = localStorage.getItem('user');
         this.userData = JSON.parse(storedData);
+        this.formValue = this._formBuilder.group({
+            all: '',
+            call_true: '',
+            call_false: ''
+        })
     }
 
     ngOnInit(): void {
-           
+
         this.itemtypeId = this._activatedRoute.snapshot.paramMap.get('id');
         this.loadTable();
         this.loadTeleTable();
         console.log(this.itemtypeId,"itemId");
         console.log(this.dataRow2,"datarow2");
-        
+
     }
 
     gotoHistoryOrder(item){
-       this._router.navigate(['worktelesale/history-customer-order/' + item.id]); 
+       this._router.navigate(['worktelesale/history-customer-order/' + item.id]);
     }
 
     checkpage(event){
@@ -101,7 +110,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
         // console.log("this.nowStatus", this.nowStatus);
         this.loadTable();
         this.rerender();
-        
+
         this._changeDetectorRef.markForCheck();
     }
 
@@ -118,12 +127,17 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
                 "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
             },
             ajax: (dataTablesParameters: any, callback) => {
-                dataTablesParameters.user_id = this.itemtypeId,
-                dataTablesParameters.status = this.nowStatus
-                that._Service.getCustomerTelePage(dataTablesParameters).subscribe((resp) => {
+                dataTablesParameters.user_id = this.userData.id;
+                dataTablesParameters.status = 'share'
+                that._Service.getCustomerTelePage(dataTablesParameters).subscribe((resp: any) => {
                     this.dataRow = resp.data;
-                    this.totalCustomerTelesale = resp.total;
-                    console.log(resp.data)
+                    this.totalCustomerTelesale = resp.all;
+                    this.callFalse = resp.call_false;
+                    this.callTrue = resp.call_true;
+                    this.formValue.patchValue({
+                        all: resp.all,
+
+                    })
                     this.pages.current_page = resp.current_page;
                     this.pages.last_page = resp.last_page;
                     this.pages.per_page = resp.per_page;
@@ -142,7 +156,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
             },
             columns: [
                 { data: 'action', orderable: false },
-         
+
                 { data: 'id' },
                 { data: 'name' },
                 { data: 'email' },
@@ -167,7 +181,8 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
                 "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/th.json"
             },
             ajax: (dataTablesParameters: any, callback) => {
-                dataTablesParameters.user_id=this.userData.id
+                dataTablesParameters.user_id=this.userData.id;
+
                 that._Service.getWorkTelePage(dataTablesParameters).subscribe((resp) => {
                     this.dataRow2 = resp.data;
                     console.log(resp.data,"resp2")
@@ -225,9 +240,10 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
     onTelCustomer(cusId : any): void {
+        console.log(cusId)
         const confirmation = this._fuseConfirmationService.open({
             "title": "คุณโทรสำเร็จแล้ว ใช่หรือไม่ ?",
-            "message": "ติดต่อลูกค้า : " + cusId.name + '<br /> เบอร์โทร : ' + cusId.phone,
+            "message": "ติดต่อลูกค้า : " + cusId.customer.name + '<br /> เบอร์โทร : ' + cusId.customer.phone,
 
             "icon": {
                 "show": true,
@@ -244,7 +260,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
                 "cancel": {
                     "show": true,
                     "label": "ปิด",
-                    
+
                 }
             },
             "dismissible": true
@@ -292,7 +308,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
         });
     }
 
-  
+
 
     /**
      * After view init
@@ -326,7 +342,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
     //     setTimeout(() => {
 
     //         this.flashMessage = null;
-     
+
     //         // Mark for check
     //         this._changeDetectorRef.markForCheck();
     //     }, 3000);
@@ -348,7 +364,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
                         show: true,
                         label: 'ตกลง',
                         color: 'primary',
-                    }, 
+                    },
                     cancel: {
                         show: false,
                         label: 'ยกเลิก',
@@ -390,7 +406,7 @@ export class ListComponent implements OnInit, AfterViewInit, OnDestroy {
             width: '600px',
             height: 'auto',
             data: {
-                itemId: itemId 
+                itemId: itemId
             }
         });
 
