@@ -11,6 +11,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         hidden: function () {
             return AuthService._Manager;
         },
+
         children: [
             {
                 id: 'g-Admin',
