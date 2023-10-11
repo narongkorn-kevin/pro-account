@@ -35,7 +35,7 @@
     "@material/card": "^14.0.0",
     "@ng-bootstrap/ng-bootstrap": "^15.0.0",
     "@ngneat/transloco": "4.1.1",
-    "@types/facebook-js-sdk": "^3.3.6",
+    "@types/facebook-js-sdk": "^3.3.7",
     "@types/fetch-jsonp": "^1.1.0",
     "@zxcvbn-ts/core": "^2.0.5",
     "@zxcvbn-ts/language-en": "^2.1.0",
