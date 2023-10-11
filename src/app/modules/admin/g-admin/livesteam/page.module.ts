@@ -114,11 +114,13 @@ import { TableComponent } from './table/table.component';
             provide: 'SocialAuthServiceConfig',
             useValue: {
                 autoLogin: false,
+                scope: 'publish_video,pages_show_list,pages_messaging,pages_read_engagement,pages_read_user_content,pages_manage_posts,public_profile,email',
+
                 providers: [
 
                     {
                         id: FacebookLoginProvider.PROVIDER_ID,
-                        provider: new FacebookLoginProvider('692223572245452')
+                        provider: new FacebookLoginProvider('170313182614211')
                     }
                 ],
                 onError: (err) => {
