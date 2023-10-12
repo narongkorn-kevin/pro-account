@@ -3,7 +3,7 @@
         <ng-container *ngIf="order$ | async as order">
             <mat-vertical-stepper linear #stepper class="bg-gray-200 rounded-md p-6 w-3/4">
                 <mat-step>
-                    <ng-template matStepLabel>ตรวจสอบคำสั่งซื้อ</ng-template>
+                    <ng-template matStepLabel>ตรวจสอบคำสั่งซื้อ1</ng-template>
                     <div class="bg-white rounded-md p-6 text-center text-xl shadow-lg">
                         <h1 class="font-extrabold">รายละเอียดสินค้า</h1>
                         <ng-container *ngFor="let sale_order_line of order.sale_order_lines">
