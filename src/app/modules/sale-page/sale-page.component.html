@@ -6,7 +6,7 @@
             <mat-vertical-stepper linear #stepper>
               <mat-step>
                 <ng-template matStepLabel>
-                  <span class="text-xl font-semibold text-gray-600">ตรวจสอบคำสั่งซื้อ1111</span>
+                  <span class="text-xl font-semibold text-gray-600">ตรวจสอบคำสั่งซื้อ</span>
                 </ng-template>
                 <div class="bg-white rounded-lg p-6 text-center text-xl shadow-lg m-6">
                   <h1 class="font-extrabold text-3xl text-gray-800">รายละเอียดสินค้า</h1>
@@ -30,10 +30,10 @@
               <mat-step [stepControl]="stepOneForm">
                 <form [formGroup]="stepOneForm">
                   <ng-template matStepLabel>
-                    <span class="text-xl font-bold">รายละเอียดการจัดส่ง11111</span>
+                    <span class="text-xl font-bold">รายละเอียดการจัดส่ง</span>
                   </ng-template>
                   <div class="bg-white rounded-lg p-6 text-lg shadow-lg border border-gray-300">
-                    <h1 class="p-4 font-extrabold text-2xl">ที่อยู่ในการจัดส่งๅๅๅ</h1>
+                    <h1 class="p-4 font-extrabold text-2xl">ที่อยู่ในการจัดส่ง</h1>
                     <mat-form-field class="w-full">
                       <input matInput placeholder="ชื่อผู้รับสินค้า" [formControlName]="'name'" required class="w-full">
                       <mat-error *ngIf="stepOneForm.controls.name.hasError('required')">
