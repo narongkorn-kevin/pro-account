@@ -25,6 +25,13 @@ export const appRoutes: Route[] = [
                 (m) => m.SalePageModule
             ),
     },
+    {
+        path: 'sale-page-test',
+        loadChildren: () =>
+            import('app/modules/sale-page/sale-page.module').then(
+                (m) => m.SalePageModule
+            ),
+    },
 
     // Auth routes for guests
     {
