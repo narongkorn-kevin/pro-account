@@ -960,22 +960,19 @@ export class ItemService {
     );
   }
 
-  importOsm(data: any): Observable<any> {
-    return this._httpClient.post<any>(environment.API_URL + 'api/import-osm', data, { headers: this.httpOptionsFormdata.headers });
-  }
-
-  setSchedule(data: any): Observable<any> {
-    return this._httpClient.post<any>(environment.API_URL + 'api/set-job-schedule', data, { headers: this.httpOptionsFormdata.headers });
-  }
-
-  deleteOsm(id: string): Observable<any> {
-    return this._httpClient.delete<any>(`${environment.API_URL}api/brief-osms/` + id, { headers: this.httpOptionsFormdata.headers });
-  }
-
-
 
   createItem(itemData: FormData): Observable<any> {
     return this._httpClient.post(environment.API_URL + 'api/item', itemData, this.httpOptionsFormdata).pipe(
+      switchMap((response: any) => {
+        // Return a new observable with the response
+        return of(response);
+      }),
+    );
+  }
+
+  ///ทดสอบ
+  createItem_g(itemData: FormData): Observable<any> {
+    return this._httpClient.post(environment.API_URL_G + 'api/item', itemData, this.httpOptionsFormdata).pipe(
       switchMap((response: any) => {
         // Return a new observable with the response
         return of(response);
@@ -1030,7 +1027,7 @@ export class ItemService {
       })
     );
   }
- 
+
 
   getByItemType(itemTypeId: number): Observable<any> {
     return this._httpClient.post(environment.API_URL + 'api/get_item', { item_type_id: itemTypeId }, this.httpOptionsFormdata).pipe(
