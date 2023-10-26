@@ -5,7 +5,7 @@
         <div class="flex flex-auto flex-wrap">
             <div class="flex flex-col w-full lg:w-1/2 ">
                 <div class="flex flex-col flex-auto p-5 sm:overflow-auto overflow-x-scroll">
-    
+
                     <!-- <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)" >
                         <mat-tab *ngFor="let tab of tabs; let index = index"> -->
                             <ng-template mat-tab-label>
@@ -17,17 +17,11 @@
                                     <thead>
                                         <tr>
                                             <th>จัดการ</th>
-                                            <!-- <th>ลำดับ</th> -->
                                             <th>รูป</th>
                                             <th>รหัสสินค้า</th>
                                             <th>ชื่อ</th>
                                             <th>จำนวนทั้งหมด</th>
                                             <th>น้ำหนัก (กก.)</th>
-                                            <!-- <th>สินค้าถูกจอง</th>
-                                            <th>พร้อมขาย</th> -->
-                                            <!-- <th>สถานะ</th>
-                                            <th>สร้างโดย</th>
-                                            <th>วันที่สร้าง</th> -->
                                         </tr>
                                     </thead>
                                     <tbody *ngIf="items?.length != 0">
@@ -48,25 +42,7 @@
                                             <td style="width: 100px; min-width: 100px;">{{ item.name }}</td>
                                             <td style="width: 100px; min-width: 100px;">{{ item.qty }}</td>
                                             <td style="width: 100px; min-width: 100px;">{{ item.weight }}</td>
-                                            <!-- <td style="width: 100px; min-width: 100px;">{{ item.booking }}</td>
-                                            <td style="width: 100px; min-width: 100px;">{{ item.balance }}</td> -->
-                                            <!-- <td style="width: 130px; min-width: 130px;">
-                                                <div *ngIf="item.status == 1">
-                                                    <span
-                                                        class="bg-green-100 text-green-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">เปิดการใช้งาน</span>
-                                                </div>
-                                                <div *ngIf="item.status == 0">
-                                                    <span
-                                                        class="bg-red-100 text-red-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ปิดการใช้งาน</span>
-                                                </div>
-                                            </td> -->
-                                            <!-- <td style="width: 120px; min-width: 120px;">{{ item.user_create ? item.user_create.first_name : 'No data' }} {{
-                                                item.user_create ?
-                                                item.user_create.last_name: '' }}
-                                            </td> -->
-                                            <!-- <td>{{ item.created_at | thaiDate }}</td> -->
-                                            <!-- <td style="width: 100px; min-width: 100px;">{{ item.created_at  }}</td> -->
-                                        </tr>
+                                    </tr>
                                     </tbody>
                                     <tbody *ngIf="items?.length == 0">
                                         <tr>
@@ -115,12 +91,12 @@
                                             <td style="width: 100px; min-width: 100px;">{{ item.balance }}</td>
                                             <td style="width: 130px; min-width: 130px;">
                                                 <div *ngIf="item.status == 1">
-                                                
+
                                                     <span
                                                         class="bg-green-100 text-green-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">เปิดการใช้งาน</span>
                                                 </div>
                                                 <div *ngIf="item.status == 0">
-                                            
+
                                                     <span
                                                         class="bg-red-100 text-red-800 text-md font-extrabold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">ปิดการใช้งาน</span>
                                                 </div>
@@ -129,7 +105,7 @@
                                                 item.user_create ?
                                                 item.user_create.last_name: '' }}
                                             </td>
-                                    
+
                                             <td style="width: 100px; min-width: 100px;">{{ item.created_at | date: 'dd/MM/yyyy hh:mm' }}</td>
                                         </tr>
                                     </tbody>
@@ -142,7 +118,7 @@
                             </div> -->
                         <!-- </mat-tab>
                     </mat-tab-group> -->
-    
+
                 </div>
             </div>
             <div class="flex flex-col w-full lg:w-1/2 ">
@@ -155,16 +131,16 @@
                                 <th>จำนวน</th>
                                 <th>ราคาปลีก</th>
                                 <th>ยอดรวม</th>
-    
+
                             </tr>
                         </thead>
                         <tbody *ngIf="myArray?.length != 0">
                             <tr *ngFor="let item of myArray; let i = index"
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-md">
-                                
+
                                 <td style="width: 120px; min-width: 120px;">{{ i+1 }}</td>
                                 <td style="width: 120px; min-width: 120px;">{{ item.item_id }}</td>
-                                
+
                                 <td style="width: 100px; min-width: 100px;">{{ item.qty }}</td>
                                 <td style="width: 100px; min-width: 100px;">{{ item.price }}</td>
                                 <td style="width: 100px; min-width: 100px;">{{ item.total }}</td>
@@ -189,7 +165,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    
+
                 </div>
 
             </div>

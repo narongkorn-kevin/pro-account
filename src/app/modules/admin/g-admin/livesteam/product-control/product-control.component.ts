@@ -75,6 +75,7 @@ export class ProductControlComponent implements OnInit {
 
         this._Service.create(formData).subscribe({
           next: (resp) => {
+            return;
             this._dialogRef.close();
           },
           error: (err) => {

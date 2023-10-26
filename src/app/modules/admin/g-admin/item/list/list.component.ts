@@ -15,8 +15,6 @@ import { ItemService } from '../item.service';
     selector: 'item-list',
     templateUrl: './list.component.html',
     styleUrls: ['./list.component.scss'],
-    // encapsulation: ViewEncapsulation.None,
-    // changeDetection: ChangeDetectionStrategy.OnPush,
     animations: fuseAnimations
 })
 
@@ -29,26 +27,10 @@ export class ItemListComponent implements OnInit, OnDestroy {
     dtOptions: DataTables.Settings = {};
     dtOptionsNormal: DataTables.Settings = {};
     dtOptionsPromotion: DataTables.Settings = {};
-    // items: Item[] = [];
-    // itemsPromotion: Item[] = [];
-
     items: any = []
     itemsPromotion: any = []
     user: any;
-    // flashMessage: 'success' | 'error' | null = null;
-    // searchInputControl: FormControl = new FormControl();
-    // selectedProduct: any | null = null;
-    // filterForm: FormGroup;
-    // tagsEditMode: boolean = false;
 
-    // me: any | null;
-
-    // supplierId: string | null;
-    // pagination: CustomerPagination;
-
-    /**
-     * Constructor
-     */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _Service: ItemService,
@@ -56,13 +38,6 @@ export class ItemListComponent implements OnInit, OnDestroy {
     ) {
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * On init
-     */
 
     ngOnInit() {
         this.user = JSON.parse(localStorage.getItem("user"));
@@ -107,14 +82,13 @@ export class ItemListComponent implements OnInit, OnDestroy {
                 })
             },
             columns: [
-                { data: 'actice', orderable: false },
-                { data: 'id' },
+                { data: 'action', orderable: false },
+                { data: 'no' },
                 { data: 'image' },
                 { data: 'item_id' },
                 { data: 'name' },
                 { data: 'qty' },
-                // { data: 'booking' },
-                // { data: 'balance' },
+                { data: 'weight' },
                 { data: 'status' },
                 { data: 'create_by' },
                 { data: 'created_at' },

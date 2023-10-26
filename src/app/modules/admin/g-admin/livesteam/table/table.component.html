@@ -36,16 +36,12 @@
                                 <mat-icon style="color: black;">remove_shopping_cart</mat-icon>
                             </button>
                         </div>
-                        <div *ngIf="item.balance > '0'">
+                        <div >
                             <button mat-button (click)="Addproduct(item.id)" class="bg-green-300">
                                 <mat-icon style="color: black;">shopping_cart</mat-icon>
                             </button>
                         </div>
-                        <!-- <button mat-button (click)="Delete(item.id)">
-                            <mat-icon svgIcon="heroicons_solid:trash"></mat-icon>
-                        </button> -->
                     </td>
-
                 </tr>
             </tbody>
             <tbody *ngIf="dataRow?.length == 0">

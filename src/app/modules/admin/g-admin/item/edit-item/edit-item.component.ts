@@ -92,6 +92,7 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
             weight: '',
             width: '',
             hight: '',
+            qty: '',
             description: ['', Validators.required],
             brand: ['', Validators.required],
             set_type: 'normal',
@@ -136,6 +137,7 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
                 unit_price: resp.data.unit_price,
                 unit_cost: resp.data.unit_cost,
                 weight: resp.data.weight,
+                qty: resp.data.qty,
                 width: resp.data.width,
                 hight: resp.data.hight,
                 vendor_id: resp.data.vendor_id,
@@ -145,31 +147,31 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
             })
             this.url_sig = resp.data.image
             // console.log('resp.data.item_images',resp.data.item_images);
-            for (const Images of resp.data.item_images) {
-                // this.url_sig1 = Images
-                this.pushImage(Images);
-            }
-            for (const DataAttribute of resp.data.item_attributes) {
-                this.pushAttribute(DataAttribute);
-            }
-            if (resp.data.item_attributes.length > 0) {
-                for (let i = 0; i < resp.data.item_attributes.length; i++) {
-                    resp.data.item_attributes[i].item_attribute_seconds.map(b => {
-                        const control = this.formData.get('item_attribute')['controls'][i].get('item_attribute_second')
-                        control.push(this._formBuilder.group({
-                            image: b.image,
-                            name: b.name,
-                            unit_cost: b.unit_cost,
-                            unit_price: b.unit_price,
-                            qty: b.qty
-                        }
-                        )
-                        );
+            // for (const Images of resp.data.item_images) {
+            //     // this.url_sig1 = Images
+            //     this.pushImage(Images);
+            // }
+            // for (const DataAttribute of resp.data.item_attributes) {
+            //     this.pushAttribute(DataAttribute);
+            // }
+            // if (resp.data.item_attributes.length > 0) {
+            //     for (let i = 0; i < resp.data.item_attributes.length; i++) {
+            //         resp.data.item_attributes[i].item_attribute_seconds.map(b => {
+            //             const control = this.formData.get('item_attribute')['controls'][i].get('item_attribute_second')
+            //             control.push(this._formBuilder.group({
+            //                 image: b.image,
+            //                 name: b.name,
+            //                 unit_cost: b.unit_cost,
+            //                 unit_price: b.unit_price,
+            //                 qty: b.qty
+            //             }
+            //             )
+            //             );
 
-                    })
+            //         })
 
-                }
-            }
+            //     }
+            // }
 
         })
 
@@ -209,7 +211,7 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
             this.formData.patchValue({
                 image: resp
             })
-            this.url_sig = resp
+            this.url_sig = environment.API_URL + resp
             console.log(this.formData.value.image)
             this._changeDetectorRef.markForCheck();
         })
@@ -308,6 +310,7 @@ export class EditItemComponent implements OnInit, AfterViewInit, OnDestroy {
                                 },
                                 "dismissible": true
                             }).afterClosed().subscribe((res) => {
+                                return;
                                 this._router.navigateByUrl('item/list').then(() => { })
 
                                 this.ngOnInit();

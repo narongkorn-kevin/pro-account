@@ -40,6 +40,8 @@ export class NewItemTypeComponent implements OnInit, AfterViewInit, OnDestroy {
             code: '',
         });
 
+
+
     }
 
     // -----------------------------------------------------------------------------------------------------

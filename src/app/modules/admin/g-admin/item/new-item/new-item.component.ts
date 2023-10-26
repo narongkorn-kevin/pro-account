@@ -117,7 +117,7 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
                 item_type_id: '',
                 set_type: 'set_products',
             }),
-           
+
             this.uploadPic = this._formBuilder.group({
                 image: '',
                 path: ''
@@ -156,14 +156,14 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
         return this._formBuilder.group({
             image: '',
             // ['images_' + this.imageFieldIndex]: new FormControl(null, Validators.required)
-            
-            
+
+
         });
     }
     addAttribute(): void {
         this.item_attribute.push(this.newAttribute());
         //const control = this.formData.controls.item_image as FormArray;
-        
+
         console.log('formData',this.formData.value.item_attribute);
         }
     addImage(): void {
@@ -199,7 +199,7 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
         // alert(1)
         const control = this.formData.get('item_attribute')['controls'][i].get('item_attribute_second')
         control.removeAt(j);
-        
+
     }
     removeItemAt(i: number): void {
         this.item_attribute1().removeAt(i);
@@ -210,9 +210,9 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
         control.removeAt(j);
         // this.sumPrice()
     }
-        
-        
-    
+
+
+
 
     async ngOnInit(): Promise<void> {
         this.uploadPic = this._formBuilder.group({
@@ -231,7 +231,7 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
         this.vendorData = vendor.data;
         console.log('this.vendorData', this.vendorData);
 
-        
+
         // this.formData = this._formBuilder.group({
         //     vendor_id: '',
         //     // location_id: '',
@@ -290,15 +290,8 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
 
             // If the confirm button pressed...
             if (result === 'confirmed') {
-                const ImgPath = new FormData()
-                ImgPath.append('image',this.files2[0])
-                ImgPath.append('path','/images/item/')
-                const img = await lastValueFrom( this._Service.uploadImg(ImgPath))
-                this.formData.patchValue({
-                    item_image: [img]
-                })
-                // console.log('Image',this.formData.value);
-                
+
+
                 const formValue = this.formData.value
                 this._Service.NewItemSet(formValue).subscribe(
                     {
@@ -371,7 +364,7 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
         //     ...event.addedFiles,
         //     images: this._formBuilder.array([])
         // })
-        
+
          this.files1.push(...event.addedFiles);
         // this.files1.push(imageData);
         // console.log('file1',this.files1);
@@ -396,13 +389,13 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
             this.formData.controls.item_attribute.patchValue(control);
             console.log(this.formData.value.item_attribute)
         })
-        
-        
-        
-        
-        
+
+
+
+
+
     }
-    
+
     onSelect2(event,i,j) {
         console.log(event);
         this.files3.push(...event.addedFiles);
@@ -416,19 +409,19 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
             this.uploadPic.patchValue({
                 image: this.files3[index],
             });
-            
+
         }
         // this.uploadPic.patchValue({
         //     image: this.files3[i],
         // });
-        
+
         const formData = new FormData();
         Object.entries(this.uploadPic?.value).forEach(
             ([key, value]: any[]) => {
                 formData.append(key, value);
             }
         );
-        
+
         // const control = this.formData.value.item_attribute[i].item_attribute_second
         const control = this.formData.get('item_attribute').value[i].item_attribute_second as FormArray;
         this._Service.uploadImg(formData).subscribe((resp) => {
@@ -439,14 +432,14 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
             // const newControl = this._formBuilder.group({
             //     image: resp,
             //     });
-                
+
             //     // เปลี่ยนค่าใน FormArray ด้วย setControl โดยให้ newControl แทนที่ control ของ Index j
             //     control.insert(j, newControl);
-                
+
             //     console.log('Hello', this.formData.value.item_attribute[i].item_attribute_second);
         })
-        
-        
+
+
     }
     // imageFieldIndex = 0;
     // AddImage() {
@@ -480,7 +473,7 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
         this.uploadPic.patchValue({
             image: this.files2[0],
         });
-        
+
         const formData = new FormData();
         Object.entries(this.uploadPic.value).forEach(
             ([key, value]: any[]) => {
@@ -490,12 +483,12 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
         const control = this.formData.value.item_image
         this._Service.uploadImg(formData).subscribe((resp) => {
             control[i] = {image:resp}
-            
+
             this.formData.controls.item_image.patchValue(control);
             console.log(this.formData.value.item_image)
         })
-        
-        
+
+
     }
 
     onRemove(event) {
@@ -542,11 +535,11 @@ export class NewItemComponent implements OnInit, AfterViewInit, OnDestroy {
           })
           .afterClosed()
           .subscribe((res) => {
-            
+
             this.itemset=(res);
             console.log('this.itemset',this.itemset);
             /**ถ้าส่ง successfull มาจะทำการรีโหลดตาราง */
-            
+
           });
       }
 
